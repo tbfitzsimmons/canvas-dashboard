@@ -178,6 +178,12 @@ def classify_assignment(a: dict) -> str:
     return "assignment"
 
 
+SECTION_DIVIDER_RE = re.compile(
+    r"^(week|module|unit)\s*\d+\s*[:\-—]?\s*(assignments?|overview|index|home|materials?|resources?)?$",
+    re.IGNORECASE,
+)
+
+
 def classify_module_item(item: dict, content: dict | None = None) -> str | None:
     """Decide what a ModuleItem (page/file/external_url) represents. Returns None to skip."""
     item_type = item.get("type", "")
@@ -188,6 +194,9 @@ def classify_module_item(item: dict, content: dict | None = None) -> str | None:
         return None  # handled by their own endpoints, skip to avoid duplicates
 
     if item_type == "SubHeader":
+        return None
+
+    if SECTION_DIVIDER_RE.match((item.get("title") or "").strip()):
         return None
 
     # Video detection — strongest signal first
@@ -362,7 +371,9 @@ def fetch_course_items(canvas: Canvas, course: Course, cfg: dict) -> list[Item]:
                 source="quiz",
             ))
     except requests.HTTPError as e:
-        if getattr(e.response, "status_code", None) != 404:
+        if getattr(e.response, "status_code", None) == 404:
+            print(f"  ℹ {course.code}: quizzes endpoint disabled (404)")
+        else:
             print(f"  ⚠ {course.code} quizzes: {e}")
 
     # 3. Discussions (only ungradeable ones — gradeable already counted as assignments)
@@ -373,12 +384,16 @@ def fetch_course_items(canvas: Canvas, course: Course, cfg: dict) -> list[Item]:
             if d.get("assignment_id") and int(d["assignment_id"]) in seen_assignment_ids:
                 continue
             due = parse_iso((d.get("assignment") or {}).get("due_at") or d.get("delayed_post_at"))
+            d_title = d.get("title", "Untitled discussion")
+            d_title_lc = lower(d_title)
+            video_hints = ("recording", "video", "zoom recording", "lecture video", "recorded session")
+            d_type = "video" if any(h in d_title_lc for h in video_hints) else "discussion"
             items.append(Item(
                 week=week_number(due, semester_start, total_weeks),
                 courseId=course.id,
-                type="discussion",
-                title=d.get("title", "Untitled discussion"),
-                detail="Ungraded discussion",
+                type=d_type,
+                title=d_title,
+                detail="" if d_type == "video" else "Ungraded discussion",
                 due=due_day_short(due),
                 due_date=due.isoformat() if due else None,
                 link=d.get("html_url", ""),
@@ -386,7 +401,9 @@ def fetch_course_items(canvas: Canvas, course: Course, cfg: dict) -> list[Item]:
                 source="discussion",
             ))
     except requests.HTTPError as e:
-        if getattr(e.response, "status_code", None) != 404:
+        if getattr(e.response, "status_code", None) == 404:
+            print(f"  ℹ {course.code}: discussions endpoint disabled (404)")
+        else:
             print(f"  ⚠ {course.code} discussions: {e}")
 
     # 4. Module items (pages, files, external URLs — these become readings/videos)
@@ -411,7 +428,9 @@ def fetch_course_items(canvas: Canvas, course: Course, cfg: dict) -> list[Item]:
                     source="module_item",
                 ))
     except requests.HTTPError as e:
-        if getattr(e.response, "status_code", None) != 404:
+        if getattr(e.response, "status_code", None) == 404:
+            print(f"  ℹ {course.code}: modules endpoint disabled (404)")
+        else:
             print(f"  ⚠ {course.code} modules: {e}")
 
     print(f"  ✓ {course.code}: {len(items)} items")
