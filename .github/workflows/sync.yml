@@ -1,0 +1,63 @@
+name: Sync Canvas Data
+
+on:
+  # Every Monday at 00:00 America/Denver = 06:00 UTC (MDT) / 07:00 UTC (MST)
+  # Using 06:00 UTC year-round means it runs at midnight during DST (May-Oct)
+  # and 11pm Sunday during standard time. That's fine — still a "fresh Monday" view.
+  schedule:
+    - cron: '0 6 * * 1'
+
+  # Manual run — click "Run workflow" in the Actions tab, or click "Refresh now"
+  # in the dashboard (which triggers this via the GitHub API).
+  workflow_dispatch:
+
+  # Re-run on pushes to main that touch the sync script or config — useful while
+  # iterating on classification rules.
+  push:
+    branches: [main]
+    paths:
+      - 'sync.py'
+      - 'config.json'
+
+# Required so the workflow can commit dashboard/data.json back to the repo,
+# which is what triggers Pages to redeploy.
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-canvas
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run Canvas sync
+        env:
+          CANVAS_TOKEN: ${{ secrets.CANVAS_TOKEN }}
+        run: python3 sync.py
+
+      - name: Commit refreshed data.json
+        run: |
+          git config user.name  "canvas-sync[bot]"
+          git config user.email "canvas-sync@users.noreply.github.com"
+          git add dashboard/data.json
+          if git diff --cached --quiet; then
+            echo "No changes — Canvas data is unchanged since last sync."
+          else
+            git commit -m "Sync Canvas data — $(date -u +'%Y-%m-%d %H:%M UTC')"
+            git push
+          fi

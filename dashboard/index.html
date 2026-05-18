@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Semester Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FFFFFF;
+    --panel: #FAFAFA;
+    --line: #E5E7EB;
+    --line-soft: #F1F3F5;
+    --ink: #111827;
+    --ink-soft: #4B5563;
+    --muted: #9CA3AF;
+    --accent: #B85C00;
+    --link: #2563EB;
+    --link-hover: #1D4ED8;
+
+    --type-reading-bg: #C7D2FE;     --type-reading-fg: #3730A3;
+    --type-video-bg: #BAE6FD;       --type-video-fg: #0369A1;
+    --type-discussion-bg: #BBF7D0;  --type-discussion-fg: #166534;
+    --type-paper-bg: #FED7AA;       --type-paper-fg: #9A3412;
+    --type-assignment-bg: #BBF7D0;  --type-assignment-fg: #166534;
+    --type-quiz-bg: #DDD6FE;        --type-quiz-fg: #5B21B6;
+    --type-exam-bg: #FBCFE8;        --type-exam-fg: #9D174D;
+
+    --font: "Inter", system-ui, -apple-system, sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 14px; line-height: 1.45; -webkit-font-smoothing: antialiased; }
+
+  .wrap { max-width: 1480px; margin: 0 auto; padding: 28px 24px 60px; }
+
+  /* ───── Masthead ───── */
+  .masthead { display: flex; flex-direction: column; gap: 4px; margin-bottom: 22px; }
+  .masthead h1 { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; }
+  .masthead h1 .emoji { margin-right: 6px; }
+  .masthead .sub { font-size: 13px; color: var(--ink-soft); }
+  .masthead .sub strong { color: var(--accent); font-weight: 600; }
+  .stale-warn { color: #B91C1C; font-weight: 500; }
+
+  /* ───── Course header cards ───── */
+  .course-strip {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .course-card {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-height: 110px;
+  }
+  .course-card .code {
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: -0.01em;
+  }
+  .course-card .name {
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.3;
+    flex: 1;
+  }
+  .course-card .instructor {
+    font-size: 12px;
+    color: var(--muted);
+    font-style: italic;
+  }
+  .course-card .links {
+    display: flex;
+    gap: 6px;
+    margin-top: 2px;
+  }
+  .course-card .links a {
+    font-size: 11px;
+    padding: 4px 8px;
+    border-radius: 5px;
+    text-decoration: none;
+    border: 1px solid var(--line);
+    color: var(--ink-soft);
+  }
+  .course-card .links a:hover { border-color: var(--ink-soft); color: var(--ink); }
+
+  /* ───── Nav row ───── */
+  .nav-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 14px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 18px;
+  }
+  .nav-row button {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 7px;
+    padding: 7px 12px;
+    font-family: inherit;
+    font-size: 13px;
+    color: var(--ink);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .nav-row button:hover:not(:disabled) { border-color: var(--ink); }
+  .nav-row button:disabled { opacity: 0.4; cursor: not-allowed; }
+  .nav-row button.toggle-on { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .nav-row .week-label {
+    font-weight: 700;
+    font-size: 15px;
+    padding: 0 6px;
+  }
+  .nav-row .week-dates {
+    color: var(--ink-soft);
+    font-size: 13px;
+    font-weight: 400;
+    margin-left: 6px;
+  }
+
+  /* ───── Filter chips ───── */
+  .filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+    margin-bottom: 14px;
+  }
+  .filter-row .label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-right: 6px;
+  }
+  .chip {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink);
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.15s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .chip:hover { filter: brightness(0.96); }
+  .chip.off { opacity: 0.35; }
+  .chip.type-reading { background: var(--type-reading-bg); color: var(--type-reading-fg); border-color: transparent; }
+  .chip.type-video { background: var(--type-video-bg); color: var(--type-video-fg); border-color: transparent; }
+  .chip.type-discussion { background: var(--type-discussion-bg); color: var(--type-discussion-fg); border-color: transparent; }
+  .chip.type-paper { background: var(--type-paper-bg); color: var(--type-paper-fg); border-color: transparent; }
+  .chip.type-assignment { background: var(--type-assignment-bg); color: var(--type-assignment-fg); border-color: transparent; }
+  .chip.type-quiz { background: var(--type-quiz-bg); color: var(--type-quiz-fg); border-color: transparent; }
+  .chip.type-exam { background: var(--type-exam-bg); color: var(--type-exam-fg); border-color: transparent; }
+  .chip.course-chip { border-color: transparent; color: var(--bg); }
+
+  /* ───── Progress ───── */
+  .progress-section { margin-bottom: 22px; }
+  .progress-section .top-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 8px;
+  }
+  .progress-section .top-line .label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .progress-section .top-line .count {
+    font-size: 12px;
+    color: var(--ink-soft);
+    font-variant-numeric: tabular-nums;
+  }
+  .progress-bar {
+    height: 6px;
+    background: var(--line-soft);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+  .progress-bar .fill {
+    height: 100%;
+    background: linear-gradient(90deg, #6366F1, #8B5CF6);
+    transition: width 0.4s ease;
+  }
+  .progress-breakdown {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 12px;
+    color: var(--ink-soft);
+    font-variant-numeric: tabular-nums;
+  }
+  .progress-breakdown .ico {
+    display: inline-block;
+    margin-right: 4px;
+  }
+
+  /* ───── Course columns ───── */
+  .columns {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 14px;
+  }
+  .col {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+  }
+  .col-head {
+    color: white;
+    padding: 10px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-weight: 600;
+  }
+  .col-head .col-title { font-size: 14px; line-height: 1.2; }
+  .col-head .col-code-tag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    opacity: 0.9;
+    margin-left: 8px;
+  }
+  .col-head .col-progress {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    opacity: 0.95;
+    font-weight: 500;
+  }
+  .col-body { padding: 10px 8px; flex: 1; display: flex; flex-direction: column; gap: 4px; }
+  .col-empty { padding: 24px 8px; text-align: center; color: var(--muted); font-style: italic; font-size: 12.5px; }
+
+  .item {
+    display: flex;
+    gap: 9px;
+    padding: 8px 8px 9px;
+    border-radius: 6px;
+    transition: background 0.12s ease;
+    align-items: flex-start;
+  }
+  .item:hover { background: var(--line-soft); }
+  .item.done .item-title-link { text-decoration: line-through; color: var(--muted); }
+  .item.done .item-detail { color: var(--muted); }
+
+  .item input[type=checkbox] {
+    margin-top: 3px;
+    width: 14px;
+    height: 14px;
+    accent-color: var(--ink);
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .item-body { flex: 1; min-width: 0; }
+  .item-title { font-size: 13.5px; font-weight: 600; line-height: 1.3; word-break: break-word; }
+  .item-title-link { color: var(--link); text-decoration: none; }
+  .item-title-link:hover { text-decoration: underline; }
+  .item-detail { font-size: 12px; color: var(--ink-soft); margin-top: 2px; line-height: 1.4; word-break: break-word; }
+  .item-meta { display: flex; gap: 6px; margin-top: 4px; align-items: center; flex-wrap: wrap; }
+  .item-type {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+  .item-due {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  /* ───── All weeks view ───── */
+  .all-weeks { display: flex; flex-direction: column; gap: 14px; }
+  .week-block {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--bg);
+  }
+  .week-block.current { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+  .week-block-head {
+    padding: 12px 16px;
+    background: var(--panel);
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    gap: 14px;
+  }
+  .week-block-head:hover { background: #F3F4F6; }
+  .week-block-head .wn { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .week-block-head h3 { font-size: 16px; font-weight: 700; }
+  .week-block-head .dates { font-size: 12.5px; color: var(--ink-soft); font-weight: 400; }
+  .week-block-head .badge-now {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    background: var(--accent);
+    color: white;
+    padding: 2px 7px;
+    border-radius: 4px;
+    text-transform: uppercase;
+  }
+  .week-block-head .counts {
+    font-size: 12px;
+    font-family: var(--font-mono);
+    color: var(--ink-soft);
+  }
+  .week-block-head .chevron {
+    color: var(--muted);
+    transition: transform 0.2s ease;
+    display: inline-block;
+    margin-left: 6px;
+  }
+  .week-block.open .chevron { transform: rotate(90deg); }
+
+  .week-block-body { display: none; padding: 12px 16px 16px; }
+  .week-block.open .week-block-body { display: block; }
+  .week-block-body .columns {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 12px;
+  }
+
+  /* ───── Footer ───── */
+  footer.foot {
+    margin-top: 40px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+    font-size: 11.5px;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  footer.foot a { color: var(--ink-soft); text-decoration: none; border-bottom: 1px dotted var(--muted); }
+
+  /* ───── Loading / errors ───── */
+  .loading, .error {
+    padding: 80px 40px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 14px;
+  }
+  .error { color: #B91C1C; }
+  .error code {
+    display: inline-block;
+    background: #FEF2F2;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+  }
+
+  .hidden { display: none !important; }
+
+  @media (max-width: 700px) {
+    .wrap { padding: 16px 12px 40px; }
+    .nav-row .week-label { font-size: 14px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap" id="root">
+  <div class="loading">Loading dashboard…</div>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════════════════
+   DASHBOARD APP
+   - Fetches dashboard/data.json (written by sync.py)
+   - Renders week / all-weeks views
+   - Persists check-off state per item canvas_id in localStorage
+   - Auto-detects current week from semester.start_date + today
+   - Re-renders at midnight if left open across a day boundary
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+const STATE = {
+  data: null,
+  view: 'week',                     // 'week' | 'all'
+  viewedWeek: 1,                    // current week being shown
+  typeFilters: new Set(),           // empty = show all
+  courseFilters: new Set(),         // empty = show all
+};
+
+const TYPE_META = {
+  reading:    { ico: '📖', label: 'READING' },
+  video:      { ico: '🎬', label: 'VIDEO' },
+  discussion: { ico: '💬', label: 'DISCUSSION' },
+  paper:      { ico: '📝', label: 'PAPER' },
+  assignment: { ico: '✅', label: 'ASSIGNMENT' },
+  quiz:       { ico: '🧩', label: 'QUIZ' },
+  exam:       { ico: '🎓', label: 'EXAM' },
+};
+const TYPE_ORDER = ['reading', 'video', 'discussion', 'paper', 'assignment', 'quiz', 'exam'];
+
+const root = document.getElementById('root');
+
+// ───────────────────────────────────────────────────────────── persistence ──
+
+const STORAGE_KEY = 'canvas-dashboard.checked-v1';
+
+function loadChecked() {
+  try { return new Set(JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]')); }
+  catch { return new Set(); }
+}
+function saveChecked(set) {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify([...set])); } catch {}
+}
+const CHECKED = loadChecked();
+
+// ─────────────────────────────────────────────────────────────── date math ──
+
+function parseDate(s) { return s ? new Date(s) : null; }
+
+function startOfWeek1() {
+  return parseDate(STATE.data.semester.start_date + 'T00:00:00');
+}
+
+function currentWeekNumber() {
+  const start = startOfWeek1();
+  const today = new Date();
+  const days = Math.floor((today - start) / 86400000);
+  if (days < 0) return 1;
+  const wk = Math.floor(days / 7) + 1;
+  return Math.min(Math.max(wk, 1), STATE.data.semester.weeks);
+}
+
+function weekDateRange(weekNum) {
+  const start = startOfWeek1();
+  const ws = new Date(start);
+  ws.setDate(ws.getDate() + (weekNum - 1) * 7);
+  const we = new Date(ws);
+  we.setDate(we.getDate() + 6);
+  const fmt = d => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  return `${fmt(ws)} – ${fmt(we)}`;
+}
+
+function formatRefreshTime(iso) {
+  const d = parseDate(iso);
+  if (!d) return '—';
+  return d.toLocaleString('en-US', {
+    weekday: 'short', month: 'short', day: 'numeric',
+    hour: 'numeric', minute: '2-digit', hour12: true,
+    timeZoneName: 'short',
+  });
+}
+
+function hoursSince(iso) {
+  return (new Date() - parseDate(iso)) / 3600000;
+}
+
+// ───────────────────────────────────────────────────────────────── filtering ──
+
+function filteredItems() {
+  return STATE.data.items.filter(it => {
+    if (STATE.typeFilters.size && !STATE.typeFilters.has(it.type)) return false;
+    if (STATE.courseFilters.size && !STATE.courseFilters.has(it.courseId)) return false;
+    return true;
+  });
+}
+
+function itemsForWeek(weekNum) {
+  return filteredItems().filter(it => it.week === weekNum);
+}
+
+// ─────────────────────────────────────────────────────────────── rendering ──
+
+function render() {
+  const d = STATE.data;
+  const generated = formatRefreshTime(d.generated_at);
+  const stale = hoursSince(d.generated_at) > 24 * 8; // warn if >8 days old
+
+  root.innerHTML = `
+    <div class="masthead">
+      <h1><span class="emoji">🎓</span>${escapeHtml(d.semester.name)} Semester Dashboard</h1>
+      <div class="sub">
+        Last refreshed: <strong>${generated}</strong>
+        ${stale ? '&nbsp;<span class="stale-warn">⚠ data is more than a week old — check sync</span>' : ''}
+      </div>
+    </div>
+
+    ${renderCourseStrip()}
+
+    <div class="nav-row" id="nav-row"></div>
+
+    <div class="filter-row" id="type-filter"></div>
+    <div class="filter-row" id="course-filter"></div>
+
+    ${renderProgressSection()}
+
+    <div id="view-container"></div>
+
+    <footer class="foot">
+      <div>Synced automatically every Monday at 00:00 MDT · Check-offs save in this browser</div>
+      <div>Manual refresh: <a href="https://github.com/${repoSlug()}/actions/workflows/sync.yml" target="_blank">GitHub Actions → Run workflow</a></div>
+    </footer>
+  `;
+
+  renderNavRow();
+  renderTypeFilter();
+  renderCourseFilter();
+  renderView();
+}
+
+function renderCourseStrip() {
+  return `<div class="course-strip">${
+    STATE.data.courses.map(c => `
+      <div class="course-card" style="border-top: 3px solid ${c.color_bar};">
+        <div class="code" style="color: ${c.color_bar};">${escapeHtml(c.code)}</div>
+        <div class="name">${escapeHtml(c.name)}</div>
+        <div class="instructor">${escapeHtml(c.instructor || '—')}</div>
+        <div class="links">
+          <a href="${escapeAttr(c.canvas_url)}" target="_blank">Canvas ↗</a>
+        </div>
+      </div>
+    `).join('')
+  }</div>`;
+}
+
+function renderNavRow() {
+  const cur = currentWeekNumber();
+  const el = document.getElementById('nav-row');
+  if (STATE.view === 'week') {
+    el.innerHTML = `
+      <button id="prev-week" ${STATE.viewedWeek <= 1 ? 'disabled' : ''}>← Prev</button>
+      <span class="week-label">Week ${STATE.viewedWeek}<span class="week-dates">${weekDateRange(STATE.viewedWeek)}</span></span>
+      <button id="next-week" ${STATE.viewedWeek >= STATE.data.semester.weeks ? 'disabled' : ''}>Next →</button>
+      <button id="jump-current" ${STATE.viewedWeek === cur ? 'disabled' : ''}>Jump to current week (${cur})</button>
+      <span style="flex:1"></span>
+      <button class="toggle-on">Week View</button>
+      <button id="goto-all">All Weeks</button>
+    `;
+    document.getElementById('prev-week').onclick = () => { STATE.viewedWeek--; renderNavRow(); renderView(); };
+    document.getElementById('next-week').onclick = () => { STATE.viewedWeek++; renderNavRow(); renderView(); };
+    document.getElementById('jump-current').onclick = () => { STATE.viewedWeek = cur; renderNavRow(); renderView(); };
+    document.getElementById('goto-all').onclick = () => { STATE.view = 'all'; renderNavRow(); renderView(); };
+  } else {
+    el.innerHTML = `
+      <span class="week-label">All Weeks</span>
+      <span style="flex:1"></span>
+      <button id="goto-week">Week View</button>
+      <button class="toggle-on">All Weeks</button>
+    `;
+    document.getElementById('goto-week').onclick = () => { STATE.view = 'week'; renderNavRow(); renderView(); };
+  }
+}
+
+function renderTypeFilter() {
+  const el = document.getElementById('type-filter');
+  el.innerHTML = `<span class="label">Type:</span>` + TYPE_ORDER.map(t => {
+    const off = STATE.typeFilters.size > 0 && !STATE.typeFilters.has(t);
+    return `<button class="chip type-${t} ${off ? 'off' : ''}" data-type="${t}">
+      ${TYPE_META[t].ico} ${TYPE_META[t].label.toLowerCase()}
+    </button>`;
+  }).join('');
+  el.querySelectorAll('[data-type]').forEach(btn => {
+    btn.onclick = () => {
+      const t = btn.dataset.type;
+      if (STATE.typeFilters.has(t)) STATE.typeFilters.delete(t);
+      else STATE.typeFilters.add(t);
+      // If all filters on, treat as none
+      if (STATE.typeFilters.size === TYPE_ORDER.length) STATE.typeFilters.clear();
+      renderTypeFilter();
+      renderProgressSection_update();
+      renderView();
+    };
+  });
+}
+
+function renderCourseFilter() {
+  const el = document.getElementById('course-filter');
+  el.innerHTML = `<span class="label">Course:</span>` + STATE.data.courses.map(c => {
+    const off = STATE.courseFilters.size > 0 && !STATE.courseFilters.has(c.id);
+    return `<button class="chip course-chip ${off ? 'off' : ''}" data-course="${c.id}"
+              style="background:${c.color_bar};color:white;">
+      ${escapeHtml(c.code)}
+    </button>`;
+  }).join('');
+  el.querySelectorAll('[data-course]').forEach(btn => {
+    btn.onclick = () => {
+      const id = btn.dataset.course;
+      if (STATE.courseFilters.has(id)) STATE.courseFilters.delete(id);
+      else STATE.courseFilters.add(id);
+      if (STATE.courseFilters.size === STATE.data.courses.length) STATE.courseFilters.clear();
+      renderCourseFilter();
+      renderProgressSection_update();
+      renderView();
+    };
+  });
+}
+
+function renderProgressSection() {
+  const items = filteredItems();
+  const total = items.length;
+  const done = items.filter(it => CHECKED.has(it.canvas_id)).length;
+  const pct = total ? Math.round((done / total) * 100) : 0;
+
+  const breakdown = TYPE_ORDER.map(t => {
+    const ts = items.filter(it => it.type === t);
+    if (!ts.length) return '';
+    const td = ts.filter(it => CHECKED.has(it.canvas_id)).length;
+    return `<span><span class="ico">${TYPE_META[t].ico}</span>${t}: ${td}/${ts.length}</span>`;
+  }).filter(Boolean).join('');
+
+  return `
+    <div class="progress-section" id="progress-section">
+      <div class="top-line">
+        <span class="label">Overall Progress</span>
+        <span class="count">${done}/${total} (${pct}%)</span>
+      </div>
+      <div class="progress-bar"><div class="fill" style="width: ${pct}%"></div></div>
+      <div class="progress-breakdown">${breakdown}</div>
+    </div>
+  `;
+}
+
+function renderProgressSection_update() {
+  const el = document.getElementById('progress-section');
+  if (el) el.outerHTML = renderProgressSection();
+}
+
+function renderView() {
+  const container = document.getElementById('view-container');
+  if (STATE.view === 'week') {
+    container.innerHTML = renderWeekColumns(STATE.viewedWeek);
+  } else {
+    container.innerHTML = renderAllWeeks();
+  }
+  wireCheckboxes();
+  wireAccordions();
+}
+
+function renderWeekColumns(weekNum) {
+  const items = itemsForWeek(weekNum);
+  const courses = STATE.data.courses;
+
+  if (!items.length) {
+    return `<div class="col-empty" style="margin: 40px 0;">No items in Week ${weekNum} match your filters.</div>`;
+  }
+
+  return `<div class="columns">${
+    courses.map(course => {
+      const courseItems = items.filter(it => it.courseId === course.id);
+      if (!courseItems.length) return '';
+      const done = courseItems.filter(it => CHECKED.has(it.canvas_id)).length;
+      return `
+        <div class="col">
+          <div class="col-head" style="background:${course.color_bar};">
+            <div><span class="col-title">${escapeHtml(course.name)}</span>
+                 <span class="col-code-tag">${escapeHtml(course.code)}</span></div>
+            <div class="col-progress">${done}/${courseItems.length}</div>
+          </div>
+          <div class="col-body">${courseItems.map(renderItem).join('')}</div>
+        </div>
+      `;
+    }).join('')
+  }</div>`;
+}
+
+function renderAllWeeks() {
+  const cur = currentWeekNumber();
+  const weeks = STATE.data.semester.weeks;
+  return `<div class="all-weeks">${
+    Array.from({length: weeks}, (_, i) => i + 1).map(wn => {
+      const items = itemsForWeek(wn);
+      const done = items.filter(it => CHECKED.has(it.canvas_id)).length;
+      const isCurrent = wn === cur;
+      return `
+        <div class="week-block ${isCurrent ? 'current open' : ''}" data-week="${wn}">
+          <div class="week-block-head">
+            <div class="wn">
+              <h3>Week ${wn}</h3>
+              <span class="dates">${weekDateRange(wn)}</span>
+              ${isCurrent ? '<span class="badge-now">current</span>' : ''}
+            </div>
+            <div>
+              <span class="counts">${done}/${items.length}</span>
+              <span class="chevron">▸</span>
+            </div>
+          </div>
+          <div class="week-block-body">
+            ${items.length ? renderWeekColumns(wn) : '<div class="col-empty">No items this week.</div>'}
+          </div>
+        </div>
+      `;
+    }).join('')
+  }</div>`;
+}
+
+function renderItem(it) {
+  const isDone = CHECKED.has(it.canvas_id);
+  const t = TYPE_META[it.type] || { ico: '•', label: it.type.toUpperCase() };
+  return `
+    <div class="item ${isDone ? 'done' : ''}" data-id="${escapeAttr(it.canvas_id)}">
+      <input type="checkbox" ${isDone ? 'checked' : ''} />
+      <div class="item-body">
+        <div class="item-title">
+          ${it.link
+            ? `<a class="item-title-link" href="${escapeAttr(it.link)}" target="_blank">${escapeHtml(it.title)}</a>`
+            : escapeHtml(it.title)}
+        </div>
+        ${it.detail ? `<div class="item-detail">${escapeHtml(it.detail)}</div>` : ''}
+        <div class="item-meta">
+          <span class="item-type" style="background:var(--type-${it.type}-bg);color:var(--type-${it.type}-fg);">
+            ${t.ico} ${t.label}
+          </span>
+          <span class="item-due">due ${escapeHtml(it.due)}</span>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function wireCheckboxes() {
+  document.querySelectorAll('.item input[type=checkbox]').forEach(box => {
+    box.onchange = (e) => {
+      const id = e.target.closest('.item').dataset.id;
+      if (e.target.checked) CHECKED.add(id); else CHECKED.delete(id);
+      saveChecked(CHECKED);
+      // Update row appearance + column count without full re-render
+      e.target.closest('.item').classList.toggle('done', e.target.checked);
+      renderProgressSection_update();
+      // Update column count
+      const col = e.target.closest('.col');
+      if (col) updateColProgress(col);
+    };
+  });
+}
+
+function updateColProgress(colEl) {
+  const items = colEl.querySelectorAll('.item');
+  const done = colEl.querySelectorAll('.item input:checked').length;
+  const progEl = colEl.querySelector('.col-progress');
+  if (progEl) progEl.textContent = `${done}/${items.length}`;
+}
+
+function wireAccordions() {
+  document.querySelectorAll('.week-block-head').forEach(head => {
+    head.onclick = () => head.parentElement.classList.toggle('open');
+  });
+}
+
+// ─────────────────────────────────────────────────────────────────── utils ──
+
+function escapeHtml(s) {
+  return String(s ?? '').replace(/[&<>"']/g, c => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+  }[c]));
+}
+function escapeAttr(s) { return escapeHtml(s); }
+
+function repoSlug() {
+  // Pulls the GitHub user/repo from the current URL when hosted on Pages.
+  // https://<user>.github.io/<repo>/ → "<user>/<repo>"
+  try {
+    const host = location.host.replace('.github.io', '');
+    const path = location.pathname.split('/').filter(Boolean)[0] || '';
+    return `${host}/${path}`;
+  } catch { return 'tbfitzsimmons/canvas-dashboard'; }
+}
+
+// ─────────────────────────────────────────────────────────────── boot ──
+
+async function boot() {
+  try {
+    // Cache-bust so we always see the latest committed data.json
+    const res = await fetch('data.json?t=' + Date.now(), { cache: 'no-store' });
+    if (!res.ok) throw new Error(`Couldn't load data.json (HTTP ${res.status})`);
+    STATE.data = await res.json();
+    STATE.viewedWeek = currentWeekNumber();
+    render();
+
+    // Re-render every 5 minutes so the "current week" rolls over automatically.
+    setInterval(() => {
+      const newCur = currentWeekNumber();
+      if (STATE.view === 'week' && STATE.viewedWeek !== newCur) {
+        // Only auto-jump if we're not the user has navigated elsewhere; safest
+        // is to leave them where they are. Just re-render nav so the
+        // "Jump to current week" button updates.
+        renderNavRow();
+      }
+    }, 5 * 60 * 1000);
+
+  } catch (e) {
+    root.innerHTML = `
+      <div class="error">
+        <h2 style="margin-bottom:12px;">Couldn't load dashboard data</h2>
+        <p>${escapeHtml(e.message)}</p>
+        <p style="margin-top:14px;">
+          If this is the first run: go to the
+          <a href="https://github.com/${repoSlug()}/actions/workflows/sync.yml" target="_blank" style="color:var(--link)">Actions tab</a>
+          and click <strong>Run workflow</strong> to generate <code>data.json</code>.
+        </p>
+      </div>
+    `;
+  }
+}
+
+boot();
+</script>
+</body>
+</html>

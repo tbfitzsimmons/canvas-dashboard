@@ -1,0 +1,19 @@
+{
+  "canvas_url": "https://naropa.instructure.com",
+  "canvas_token": "<paste-locally-only-do-not-commit>",
+  "semester": {
+    "name": "Summer 2026",
+    "start_date": "2026-05-18",
+    "weeks": 12,
+    "canvas_term_name": "Summer 2026 Semester"
+  },
+  "excluded_course_ids": [5334, 5337],
+  "included_course_ids": null,
+  "_notes": {
+    "canvas_token": "On GitHub Actions, comes from the CANVAS_TOKEN secret — leave this placeholder. For local runs, paste your token here (config.json is gitignored).",
+    "canvas_term_name": "Must exactly match the term name Canvas returns. View /api/v1/courses?include[]=term to verify.",
+    "excluded_course_ids": "Canvas course IDs to skip — e.g. Student Center pseudo-courses that show up as enrolled but aren't real classes.",
+    "included_course_ids": "If set (e.g. [8851, 8868, 8857, 8897, 8908]), ONLY these courses are synced. Use this if term filtering isn't enough.",
+    "start_date": "The MONDAY of Week 1. Used to compute which week each due date falls into."
+  }
+}

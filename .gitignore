@@ -1,0 +1,26 @@
+# Local secrets — NEVER commit
+.env
+.env.local
+secrets.json
+*token*.txt
+
+# Local-only config (uncomment if you put the token directly in config.json for local testing)
+# config.json
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.venv/
+venv/
+.python-version
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+*.swp

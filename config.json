@@ -1,0 +1,11 @@
+{
+  "canvas_url": "https://naropa.instructure.com",
+  "semester": {
+    "name": "Summer 2026",
+    "start_date": "2026-05-18",
+    "weeks": 12,
+    "canvas_term_name": "Summer 2026 Semester"
+  },
+  "excluded_course_ids": [5334, 5337],
+  "included_course_ids": null
+}
