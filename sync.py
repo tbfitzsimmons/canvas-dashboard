@@ -404,7 +404,7 @@ def fetch_course_items(canvas: Canvas, course: Course, cfg: dict) -> list[Item]:
                     courseId=course.id,
                     type=kind,
                     title=it.get("title", "Untitled"),
-                    detail=f"Module: {module.get('name', '')}".strip(),
+                    detail="",
                     due="—",
                     link=it.get("html_url") or it.get("external_url") or "",
                     canvas_id=f"module_item:{it.get('id')}",
