@@ -44,6 +44,13 @@
   .masthead .sub { font-size: 13px; color: var(--ink-soft); }
   .masthead .sub strong { color: var(--accent); font-weight: 600; }
   .stale-warn { color: #B91C1C; font-weight: 500; }
+  .token-warn {
+    background: #FEF3C7; border: 1px solid #F59E0B; color: #78350F;
+    padding: 10px 14px; border-radius: 8px; margin-bottom: 16px;
+    font-size: 13px; line-height: 1.4;
+  }
+  .token-warn.expired { background: #FEE2E2; border-color: #DC2626; color: #7F1D1D; }
+  .token-warn a { color: inherit; text-decoration: underline; }
 
   /* ───── Course header cards ───── */
   .course-strip {
@@ -497,12 +504,28 @@ function itemsForWeek(weekNum) {
 
 // ─────────────────────────────────────────────────────────────── rendering ──
 
+function renderTokenWarning(expiresStr) {
+  if (!expiresStr) return '';
+  const exp = new Date(expiresStr + 'T00:00:00');
+  if (isNaN(exp)) return '';
+  const days = Math.ceil((exp - Date.now()) / 86400000);
+  if (days > 14) return '';
+  const tokensUrl = 'https://naropa.instructure.com/profile/settings';
+  const niceDate = exp.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
+  const expired = days < 0;
+  const msg = expired
+    ? `⚠ Canvas token <strong>expired ${niceDate}</strong> — sync is broken until you regenerate it`
+    : `⚠ Canvas token expires <strong>${niceDate}</strong> (${days === 0 ? 'today' : days + ' day' + (days === 1 ? '' : 's')}) — regenerate soon`;
+  return `<div class="token-warn${expired ? ' expired' : ''}">${msg} at <a href="${tokensUrl}" target="_blank">Canvas → Settings → Approved Integrations</a>.</div>`;
+}
+
 function render() {
   const d = STATE.data;
   const generated = formatRefreshTime(d.generated_at);
   const stale = hoursSince(d.generated_at) > 24 * 8; // warn if >8 days old
 
   root.innerHTML = `
+    ${renderTokenWarning(d.token_expires)}
     <div class="masthead">
       <h1><span class="emoji">🎓</span>${escapeHtml(d.semester.name)} Semester Dashboard</h1>
       <div class="sub">

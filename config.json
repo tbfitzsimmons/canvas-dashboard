@@ -7,5 +7,6 @@
     "canvas_term_name": "Summer 2026 Semester"
   },
   "excluded_course_ids": [5334, 5337],
-  "included_course_ids": null
+  "included_course_ids": null,
+  "token_expires": "2026-09-05"
 }

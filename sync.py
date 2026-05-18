@@ -468,6 +468,7 @@ def write_data(courses: list[Course], items: list[Item], cfg: dict) -> None:
     payload = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "semester": cfg["semester"],
+        "token_expires": cfg.get("token_expires"),
         "courses": [course_dict(c) for c in courses],
         "items": [asdict(i) for i in items],
         "totals": summarize(items),
