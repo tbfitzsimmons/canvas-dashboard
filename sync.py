@@ -362,7 +362,8 @@ def fetch_course_items(canvas: Canvas, course: Course, cfg: dict) -> list[Item]:
                 source="quiz",
             ))
     except requests.HTTPError as e:
-        print(f"  ⚠ {course.code} quizzes: {e}")
+        if getattr(e.response, "status_code", None) != 404:
+            print(f"  ⚠ {course.code} quizzes: {e}")
 
     # 3. Discussions (only ungradeable ones — gradeable already counted as assignments)
     try:
@@ -385,7 +386,8 @@ def fetch_course_items(canvas: Canvas, course: Course, cfg: dict) -> list[Item]:
                 source="discussion",
             ))
     except requests.HTTPError as e:
-        print(f"  ⚠ {course.code} discussions: {e}")
+        if getattr(e.response, "status_code", None) != 404:
+            print(f"  ⚠ {course.code} discussions: {e}")
 
     # 4. Module items (pages, files, external URLs — these become readings/videos)
     try:
@@ -409,7 +411,8 @@ def fetch_course_items(canvas: Canvas, course: Course, cfg: dict) -> list[Item]:
                     source="module_item",
                 ))
     except requests.HTTPError as e:
-        print(f"  ⚠ {course.code} modules: {e}")
+        if getattr(e.response, "status_code", None) != 404:
+            print(f"  ⚠ {course.code} modules: {e}")
 
     print(f"  ✓ {course.code}: {len(items)} items")
     return items
