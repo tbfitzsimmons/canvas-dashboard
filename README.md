@@ -83,15 +83,37 @@ Visit the Pages URL from step 2. You should see Jennifer's Summer 2026 courses. 
 - Go to the Actions tab → Sync Canvas Data → Run workflow. Takes 30 seconds.
 - Or, just wait until Monday.
 
-**Once per semester (Sept / Jan / May):**
-- Regenerate the Canvas token (Naropa's 120-day cap forces this).
-- Update the `CANVAS_TOKEN` repo secret with the new value.
-- Edit `config.json`:
-  - `semester.name` (e.g., `"Fall 2026"`)
-  - `semester.start_date` (Monday of Week 1)
-  - `semester.weeks` (typically 16 for fall/spring, 12 for summer)
-  - `semester.canvas_term_name` (e.g., `"Fall 2026 Semester"` — must match Canvas exactly)
-- Commit. The push triggers an immediate sync.
+**Once per semester (Sept / Jan / May)** — ~5 minute checklist:
+
+1. **Regenerate the Canvas token** (Naropa's 120-day cap forces this).
+   - Go to https://naropa.instructure.com/profile/settings
+   - Scroll to **Approved Integrations** → click **+ New Access Token**
+   - Purpose: `Canvas Dashboard`. Leave expiry blank or set ~110 days out.
+   - **Copy the token now** — Canvas only shows it once.
+
+2. **Update the GitHub secret** with the new token.
+   - Open https://github.com/tbfitzsimmons/canvas-dashboard/settings/secrets/actions
+   - Click **CANVAS_TOKEN** → **Update** → paste the new value → **Update secret**.
+
+3. **Update `token_expires` in `config.json`** so the dashboard banner reflects the new expiry.
+   - Open https://github.com/tbfitzsimmons/canvas-dashboard/edit/main/config.json
+   - Set `"token_expires"` to ~110 days from today, format `YYYY-MM-DD`.
+
+4. **Edit `config.json` for the new semester** (same file, same edit page):
+   - `semester.name` — e.g. `"Fall 2026"` (display name on the dashboard).
+   - `semester.start_date` — **must be a Monday**, format `YYYY-MM-DD` (e.g. `"2026-08-31"`). All week math derives from this; if it's not a Monday the weeks will be off.
+   - `semester.weeks` — `16` for fall/spring, `12` for summer.
+   - `semester.canvas_term_name` — **must match Canvas letter-for-letter**, e.g. `"Fall 2026 Semester"` (not `"Fall 2026"`). The sync filters courses by this string; a typo here means zero courses sync.
+   - Commit on the GitHub edit page. The push auto-triggers a sync run.
+
+5. **Trigger the workflow manually** (in case the push didn't, or to re-run after fixes).
+   - Open https://github.com/tbfitzsimmons/canvas-dashboard/actions/workflows/sync.yml
+   - Click **Run workflow** → **Run workflow** (green button). Takes ~30 seconds.
+
+6. **Verify the right courses showed up.**
+   - Open https://tbfitzsimmons.github.io/canvas-dashboard/dashboard/
+   - Hard refresh (⌘⇧R) once.
+   - Check the course filter / sidebar: every class for the new semester should be listed, no leftovers from last term. If a course is missing, `canvas_term_name` is wrong. If an admin pseudo-course shows up, add its course ID to `excluded_course_ids` in `config.json`.
 
 **If something looks wrong** (missing items, wrong classification):
 - Open Claude Code in this folder.
