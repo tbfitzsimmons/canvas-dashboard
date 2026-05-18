@@ -57,7 +57,18 @@ jobs:
           git add dashboard/data.json
           if git diff --cached --quiet; then
             echo "No changes — Canvas data is unchanged since last sync."
-          else
-            git commit -m "Sync Canvas data — $(date -u +'%Y-%m-%d %H:%M UTC')"
-            git push
+            exit 0
           fi
+          # Retry on race conditions — rebase on top of any new commits, then push
+          for i in 1 2 3; do
+            git pull --rebase origin main || true
+            git commit -m "Sync Canvas data — $(date -u +'%Y-%m-%d %H:%M UTC')" --allow-empty
+            if git push; then
+              echo "✓ Pushed data.json"
+              exit 0
+            fi
+            echo "Push rejected, retrying ($i/3)…"
+            sleep 2
+          done
+          echo "❌ Failed to push after 3 retries"
+          exit 1
