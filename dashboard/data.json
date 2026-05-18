@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-18T23:45:44.547871+00:00",
+  "generated_at": "2026-05-18T23:49:41.066225+00:00",
   "semester": {
     "name": "Summer 2026",
     "start_date": "2026-05-18",
@@ -105,9 +105,9 @@
     {
       "week": 1,
       "courseId": "course3",
-      "type": "discussion",
+      "type": "video",
       "title": "Introduction Video",
-      "detail": "Ungraded discussion",
+      "detail": "",
       "due": "Mon",
       "due_date": "2026-05-18T07:00:00+00:00",
       "link": "https://naropa.instructure.com/courses/9306/discussion_topics/105277",
@@ -223,19 +223,6 @@
       "week": 1,
       "courseId": "course2",
       "type": "reading",
-      "title": "Week 1 ",
-      "detail": "",
-      "due": "—",
-      "due_date": null,
-      "link": "https://naropa.instructure.com/courses/8868/modules/items/404692",
-      "points": null,
-      "canvas_id": "module_item:404692",
-      "source": "module_item"
-    },
-    {
-      "week": 1,
-      "courseId": "course2",
-      "type": "reading",
       "title": "Week 1 - Optional Learning and Resources",
       "detail": "",
       "due": "—",
@@ -243,19 +230,6 @@
       "link": "https://naropa.instructure.com/courses/8868/modules/items/404698",
       "points": null,
       "canvas_id": "module_item:404698",
-      "source": "module_item"
-    },
-    {
-      "week": 1,
-      "courseId": "course2",
-      "type": "reading",
-      "title": "Week 1: Assignments",
-      "detail": "",
-      "due": "—",
-      "due_date": null,
-      "link": "https://naropa.instructure.com/courses/8868/modules/items/404694",
-      "points": null,
-      "canvas_id": "module_item:404694",
       "source": "module_item"
     },
     {
@@ -646,19 +620,6 @@
       "link": "https://naropa.instructure.com/courses/8868/modules/items/404716",
       "points": null,
       "canvas_id": "module_item:404716",
-      "source": "module_item"
-    },
-    {
-      "week": 4,
-      "courseId": "course2",
-      "type": "reading",
-      "title": "Week 4 - Assignments",
-      "detail": "",
-      "due": "—",
-      "due_date": null,
-      "link": "https://naropa.instructure.com/courses/8868/modules/items/404718",
-      "points": null,
-      "canvas_id": "module_item:404718",
       "source": "module_item"
     },
     {
@@ -1260,19 +1221,6 @@
       "source": "module_item"
     },
     {
-      "week": 8,
-      "courseId": "course2",
-      "type": "reading",
-      "title": "Week 8 -Assignments",
-      "detail": "",
-      "due": "—",
-      "due_date": null,
-      "link": "https://naropa.instructure.com/courses/8868/modules/items/404761",
-      "points": null,
-      "canvas_id": "module_item:404761",
-      "source": "module_item"
-    },
-    {
       "week": 9,
       "courseId": "course3",
       "type": "assignment",
@@ -1335,19 +1283,6 @@
       "link": "https://naropa.instructure.com/courses/8851/modules/items/408664",
       "points": null,
       "canvas_id": "module_item:408664",
-      "source": "module_item"
-    },
-    {
-      "week": 9,
-      "courseId": "course2",
-      "type": "reading",
-      "title": "Week 9 - Assignments",
-      "detail": "",
-      "due": "—",
-      "due_date": null,
-      "link": "https://naropa.instructure.com/courses/8868/modules/items/404774",
-      "points": null,
-      "canvas_id": "module_item:404774",
       "source": "module_item"
     },
     {
@@ -1731,19 +1666,6 @@
       "week": 12,
       "courseId": "course2",
       "type": "reading",
-      "title": "Week 12 - Assignments",
-      "detail": "",
-      "due": "—",
-      "due_date": null,
-      "link": "https://naropa.instructure.com/courses/8868/modules/items/404811",
-      "points": null,
-      "canvas_id": "module_item:404811",
-      "source": "module_item"
-    },
-    {
-      "week": 12,
-      "courseId": "course2",
-      "type": "reading",
       "title": "Week 12 - Lecture",
       "detail": "",
       "due": "—",
@@ -1751,19 +1673,6 @@
       "link": "https://naropa.instructure.com/courses/8868/modules/items/404806",
       "points": null,
       "canvas_id": "module_item:404806",
-      "source": "module_item"
-    },
-    {
-      "week": 12,
-      "courseId": "course2",
-      "type": "reading",
-      "title": "Week 13 - Assignments",
-      "detail": "",
-      "due": "—",
-      "due_date": null,
-      "link": "https://naropa.instructure.com/courses/8868/modules/items/404825",
-      "points": null,
-      "canvas_id": "module_item:404825",
       "source": "module_item"
     },
     {
@@ -1809,19 +1718,6 @@
       "week": 12,
       "courseId": "course2",
       "type": "reading",
-      "title": "Week 14 - Assignments",
-      "detail": "",
-      "due": "—",
-      "due_date": null,
-      "link": "https://naropa.instructure.com/courses/8868/modules/items/404842",
-      "points": null,
-      "canvas_id": "module_item:404842",
-      "source": "module_item"
-    },
-    {
-      "week": 12,
-      "courseId": "course2",
-      "type": "reading",
       "title": "Week 14 - Lecture",
       "detail": "",
       "due": "—",
@@ -1842,19 +1738,6 @@
       "link": "https://naropa.instructure.com/courses/8868/modules/items/404850",
       "points": null,
       "canvas_id": "module_item:404850",
-      "source": "module_item"
-    },
-    {
-      "week": 12,
-      "courseId": "course2",
-      "type": "reading",
-      "title": "Week 15 -Assignments",
-      "detail": "",
-      "due": "—",
-      "due_date": null,
-      "link": "https://naropa.instructure.com/courses/8868/modules/items/404855",
-      "points": null,
-      "canvas_id": "module_item:404855",
       "source": "module_item"
     },
     {
@@ -2120,9 +2003,9 @@
     {
       "week": 0,
       "courseId": "course1",
-      "type": "discussion",
+      "type": "video",
       "title": "Video recording of Zoom class during intensive",
-      "detail": "Ungraded discussion",
+      "detail": "",
       "due": "—",
       "due_date": null,
       "link": "https://naropa.instructure.com/courses/8851/discussion_topics/105703",
@@ -2782,9 +2665,9 @@
     }
   ],
   "totals": {
-    "reading": 130,
-    "video": 22,
-    "discussion": 13,
+    "reading": 121,
+    "video": 24,
+    "discussion": 11,
     "paper": 7,
     "assignment": 36,
     "quiz": 0,
