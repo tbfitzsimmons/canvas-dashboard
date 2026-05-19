@@ -22,6 +22,7 @@
 
     --type-reading-bg: #C7D2FE;     --type-reading-fg: #3730A3;
     --type-video-bg: #BAE6FD;       --type-video-fg: #0369A1;
+    --type-lecture-bg: #FDE68A;     --type-lecture-fg: #92400E;
     --type-discussion-bg: #BBF7D0;  --type-discussion-fg: #166534;
     --type-paper-bg: #FED7AA;       --type-paper-fg: #9A3412;
     --type-assignment-bg: #BBF7D0;  --type-assignment-fg: #166534;
@@ -187,6 +188,7 @@
   .chip.off { opacity: 0.35; }
   .chip.type-reading { background: var(--type-reading-bg); color: var(--type-reading-fg); border-color: transparent; }
   .chip.type-video { background: var(--type-video-bg); color: var(--type-video-fg); border-color: transparent; }
+  .chip.type-lecture { background: var(--type-lecture-bg); color: var(--type-lecture-fg); border-color: transparent; }
   .chip.type-discussion { background: var(--type-discussion-bg); color: var(--type-discussion-fg); border-color: transparent; }
   .chip.type-paper { background: var(--type-paper-bg); color: var(--type-paper-fg); border-color: transparent; }
   .chip.type-assignment { background: var(--type-assignment-bg); color: var(--type-assignment-fg); border-color: transparent; }
@@ -437,13 +439,14 @@ const STATE = {
 const TYPE_META = {
   reading:    { ico: '📖', label: 'READING' },
   video:      { ico: '🎬', label: 'VIDEO' },
+  lecture:    { ico: '🎤', label: 'LECTURE' },
   discussion: { ico: '💬', label: 'DISCUSSION' },
   paper:      { ico: '📝', label: 'PAPER' },
   assignment: { ico: '✅', label: 'ASSIGNMENT' },
   quiz:       { ico: '🧩', label: 'QUIZ' },
   exam:       { ico: '🎓', label: 'EXAM' },
 };
-const TYPE_ORDER = ['reading', 'video', 'discussion', 'paper', 'assignment', 'quiz', 'exam'];
+const TYPE_ORDER = ['reading', 'video', 'lecture', 'discussion', 'paper', 'assignment', 'quiz', 'exam'];
 
 const root = document.getElementById('root');
 

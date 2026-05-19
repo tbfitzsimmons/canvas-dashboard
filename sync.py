@@ -72,7 +72,7 @@ PER_PAGE = 100
 class Item:
     week: int
     courseId: str
-    type: str         # reading | video | discussion | paper | assignment | quiz | exam
+    type: str         # reading | video | lecture | discussion | paper | assignment | quiz | exam
     title: str
     detail: str = ""
     due: str = "—"    # short day-of-week e.g. "Thu"
@@ -247,6 +247,12 @@ def classify_module_item(item: dict, content: dict | None = None) -> str | None:
 
 VIDEO_HOSTS = ("youtube.com", "youtu.be", "vimeo.com", "panopto", "kaltura", "zoom.us/rec")
 
+# Slide-deck / lecture-material hints — looked for in titles AND filenames.
+LECTURE_HINTS_RE = re.compile(
+    r"\b(slides?|powerpoint|ppt|pptx|keynote|deck|lecture\s+notes?)\b",
+    re.IGNORECASE,
+)
+
 # Section headings that mean "what follows is a deliverable to track"
 DELIVERABLE_SECTIONS = re.compile(
     r"^(readings?|required reading|assigned reading|recommended|videos?|"
@@ -276,9 +282,14 @@ def _looks_like_heading(p: Tag) -> bool:
     return bool(text) and len(text) <= 80 and text.endswith(":")
 
 
-def _classify_link_type(href: str) -> str:
+def _classify_link_type(href: str, title: str = "") -> str:
     h = (href or "").lower()
-    return "video" if any(host in h for host in VIDEO_HOSTS) else "reading"
+    if any(host in h for host in VIDEO_HOSTS):
+        return "video"
+    # Slide decks / PowerPoint files → lecture (check both filename and visible title)
+    if LECTURE_HINTS_RE.search(h) or LECTURE_HINTS_RE.search(title or ""):
+        return "lecture"
+    return "reading"
 
 
 def _title_from_li_with_link(li: Tag, a: Tag) -> str:
@@ -379,7 +390,7 @@ def expand_page_body(html: str, page_title: str = "") -> list[tuple[str, str, st
                 surround = URL_IN_TEXT_RE.sub("", _normalize_text(li.get_text())).strip(" -–—:•")
                 if surround:
                     title = surround
-        out.append((_classify_link_type(href), title, href))
+        out.append((_classify_link_type(href, title), title, href))
 
     # Iterate top-level children, but also recurse into <ul>/<ol>
     def walk(nodes: Iterable) -> None:
@@ -415,7 +426,8 @@ def expand_page_body(html: str, page_title: str = "") -> list[tuple[str, str, st
                 else:
                     text = _normalize_text(node.get_text())
                     if section_is_deliverable() and not _looks_like_prose(text):
-                        out.append(("reading", text, ""))
+                        kind = "lecture" if LECTURE_HINTS_RE.search(text) else "reading"
+                        out.append((kind, text, ""))
                 continue
 
             if name in ("ul", "ol"):
@@ -432,7 +444,8 @@ def expand_page_body(html: str, page_title: str = "") -> list[tuple[str, str, st
                         if not text or text.endswith(":"):
                             continue
                         if section_is_deliverable() and not _looks_like_prose(text):
-                            out.append(("reading", text, ""))
+                            kind = "lecture" if LECTURE_HINTS_RE.search(text) else "reading"
+                            out.append((kind, text, ""))
                 continue
 
             if name == "a":
