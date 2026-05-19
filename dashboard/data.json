@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-18T23:49:41.066225+00:00",
+  "generated_at": "2026-05-19T03:52:36.742865+00:00",
   "semester": {
     "name": "Summer 2026",
     "start_date": "2026-05-18",
@@ -495,7 +495,7 @@
     {
       "week": 3,
       "courseId": "course4",
-      "type": "assignment",
+      "type": "discussion",
       "title": "Reading Reflection 1",
       "detail": "10 pts · discussion",
       "due": "Mon",
@@ -677,7 +677,7 @@
     {
       "week": 5,
       "courseId": "course4",
-      "type": "assignment",
+      "type": "discussion",
       "title": "Reading Reflection 2",
       "detail": "10 pts · discussion",
       "due": "Mon",
@@ -1106,7 +1106,7 @@
     {
       "week": 8,
       "courseId": "course4",
-      "type": "assignment",
+      "type": "discussion",
       "title": "Reading Reflection 3",
       "detail": "10 pts · discussion",
       "due": "Mon",
@@ -1457,7 +1457,7 @@
     {
       "week": 12,
       "courseId": "course4",
-      "type": "assignment",
+      "type": "discussion",
       "title": "Dyad Discussion",
       "detail": "15 pts · discussion",
       "due": "Mon",
@@ -1561,7 +1561,7 @@
     {
       "week": 12,
       "courseId": "course2",
-      "type": "assignment",
+      "type": "discussion",
       "title": "Participation in discussion prompts, assignments and intensives ",
       "detail": "ungraded",
       "due": "Sat",
@@ -1756,7 +1756,7 @@
     {
       "week": 0,
       "courseId": "course1",
-      "type": "assignment",
+      "type": "discussion",
       "title": " Discussion #5 Suicide Prevention and Bipolar Disorders",
       "detail": "2 pts · discussion",
       "due": "—",
@@ -1808,7 +1808,7 @@
     {
       "week": 0,
       "courseId": "course1",
-      "type": "assignment",
+      "type": "discussion",
       "title": "Discussion #12 Neurodiversity/Conduct Disorder",
       "detail": "2 pts · discussion",
       "due": "—",
@@ -1821,7 +1821,7 @@
     {
       "week": 0,
       "courseId": "course1",
-      "type": "paper",
+      "type": "discussion",
       "title": "Discussion assignment  #3 on Integral Intake",
       "detail": "2 pts · text entry, file upload",
       "due": "—",
@@ -1834,7 +1834,7 @@
     {
       "week": 0,
       "courseId": "course1",
-      "type": "assignment",
+      "type": "discussion",
       "title": "Discussion Question  #6 Anxiety",
       "detail": "2 pts · discussion",
       "due": "—",
@@ -1847,7 +1847,7 @@
     {
       "week": 0,
       "courseId": "course1",
-      "type": "assignment",
+      "type": "discussion",
       "title": "Discussion Question  #7 PTSD",
       "detail": "2 pts · discussion",
       "due": "—",
@@ -1860,7 +1860,7 @@
     {
       "week": 0,
       "courseId": "course1",
-      "type": "assignment",
+      "type": "discussion",
       "title": "Discussion Question  #8 Substances",
       "detail": "2 pts · discussion",
       "due": "—",
@@ -1873,7 +1873,7 @@
     {
       "week": 0,
       "courseId": "course1",
-      "type": "assignment",
+      "type": "discussion",
       "title": "Discussion Question  #9 on Mindful Eating Practice",
       "detail": "2 pts · discussion",
       "due": "—",
@@ -1886,7 +1886,7 @@
     {
       "week": 0,
       "courseId": "course1",
-      "type": "assignment",
+      "type": "discussion",
       "title": "Discussion Question #1 Theory",
       "detail": "2 pts · discussion",
       "due": "—",
@@ -1899,7 +1899,7 @@
     {
       "week": 0,
       "courseId": "course1",
-      "type": "assignment",
+      "type": "discussion",
       "title": "Discussion Question #10 Personality Disorders",
       "detail": "2 pts · discussion",
       "due": "—",
@@ -1912,7 +1912,7 @@
     {
       "week": 0,
       "courseId": "course1",
-      "type": "assignment",
+      "type": "discussion",
       "title": "Discussion Question #2 Psychosis",
       "detail": "2 pts · discussion",
       "due": "—",
@@ -1925,7 +1925,7 @@
     {
       "week": 0,
       "courseId": "course1",
-      "type": "assignment",
+      "type": "discussion",
       "title": "Discussion Question #4 Depressive Disorders",
       "detail": "2 pts · discussion",
       "due": "—",
@@ -2667,9 +2667,9 @@
   "totals": {
     "reading": 121,
     "video": 24,
-    "discussion": 11,
-    "paper": 7,
-    "assignment": 36,
+    "discussion": 27,
+    "paper": 6,
+    "assignment": 21,
     "quiz": 0,
     "exam": 0
   }
