@@ -464,7 +464,9 @@ const root = document.getElementById('root');
 // (cross-device sync). Token comes from URL fragment #t=<token>. Without a
 // token we fall back to localStorage-only and show a notice.
 
-const STORAGE_KEY = 'canvas-dashboard.checked-v1';
+// v2 = per-semester namespacing. Bumping this key forces every device to
+// start with an empty local cache so a remote wipe propagates correctly.
+const STORAGE_KEY = 'canvas-dashboard.checked-v2';
 const SYNC_BASE = 'https://dashboard-sync.brooks-1b9.workers.dev/state';
 
 function readTokenFromHash() {
@@ -540,15 +542,18 @@ async function pullRemote() {
     if (!res.ok) throw new Error('HTTP ' + res.status);
     REMOTE_BLOB = await res.json();
     const remoteItems = extractSemesterItems(REMOTE_BLOB);
-    // Merge: union of local and remote (additive — once checked, stays checked
-    // until explicitly unchecked, which immediately PUTs the new state).
-    let changed = false;
-    for (const id of Object.keys(remoteItems)) {
-      if (remoteItems[id] && !CHECKED.has(id)) { CHECKED.add(id); changed = true; }
+    // Remote is authoritative. Replace CHECKED with the remote bucket so that
+    // a remote wipe propagates to every device. (Pending writes survive: if
+    // SYNC.dirty is true when we pull, we keep the local set instead.)
+    if (!SYNC.dirty) {
+      CHECKED.clear();
+      for (const id of Object.keys(remoteItems)) {
+        if (remoteItems[id]) CHECKED.add(id);
+      }
+      persistLocal(CHECKED);
     }
-    persistLocal(CHECKED);
     setSyncStatus('synced');
-    if (changed && typeof render === 'function' && STATE.data) render();
+    if (typeof render === 'function' && STATE.data) render();
   } catch (e) {
     console.warn('[sync] pull failed:', e);
     setSyncStatus('failed');
@@ -749,6 +754,7 @@ function renderCourseStrip() {
         <div class="instructor">${escapeHtml(c.instructor || '—')}</div>
         <div class="links">
           <a href="${escapeAttr(c.canvas_url)}" target="_blank">Canvas ↗</a>
+          ${c.zoom_url ? `<a href="${escapeAttr(c.zoom_url)}" target="_blank">Zoom ↗</a>` : ''}
         </div>
       </div>
     `).join('')

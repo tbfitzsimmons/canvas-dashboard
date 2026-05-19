@@ -92,6 +92,7 @@ class Course:
     code: str
     name: str
     instructor: str
+    zoom_url: str = ""  # Naropa's "Online Events" tab URL (Zoom integration)
     palette: dict = field(default_factory=dict)
     canvas_url: str = ""
 
@@ -630,6 +631,7 @@ def select_courses(canvas: Canvas, cfg: dict) -> list[Course]:
     for i, c in enumerate(raw):
         teachers = c.get("teachers") or []
         instructor = teachers[0].get("display_name") if teachers else ""
+        zoom_url = _find_zoom_tab_url(canvas, int(c["id"]))
         courses.append(Course(
             id=f"course{i+1}",
             canvas_id=int(c["id"]),
@@ -638,9 +640,28 @@ def select_courses(canvas: Canvas, cfg: dict) -> list[Course]:
             instructor=instructor,
             palette=PALETTE[i % len(PALETTE)],
             canvas_url=f"{canvas.base}/courses/{c['id']}",
+            zoom_url=zoom_url,
         ))
     print(f"  ✓ {len(courses)} active course(s): {', '.join(c.code for c in courses)}")
     return courses
+
+
+def _find_zoom_tab_url(canvas: Canvas, course_id: int) -> str:
+    """Look for Naropa's 'Online Events' tab (their Zoom integration). Returns
+    the absolute URL or '' if none found. Falls back to common alt-labels."""
+    try:
+        tabs = canvas._get(f"/courses/{course_id}/tabs").json() or []
+    except requests.HTTPError:
+        return ""
+    needles = ("online events", "zoom", "conferences", "meetings", "video conferencing")
+    for tab in tabs:
+        label = (tab.get("label") or "").lower()
+        if any(n in label for n in needles):
+            url = tab.get("full_url") or tab.get("html_url") or ""
+            if url and not url.startswith("http"):
+                url = canvas.base + url
+            return url
+    return ""
 
 
 def clean_course_name(name: str) -> str:
@@ -903,6 +924,7 @@ def course_dict(c: Course) -> dict:
         "color_tag_bg": c.palette["tag_bg"],
         "color_tag_fg": c.palette["tag_fg"],
         "canvas_url": c.canvas_url,
+        "zoom_url": c.zoom_url,
     }
 
 
