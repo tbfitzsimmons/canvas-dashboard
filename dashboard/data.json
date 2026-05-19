@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-19T04:47:01.374177+00:00",
+  "generated_at": "2026-05-19T05:00:25.063353+00:00",
   "semester": {
     "name": "Summer 2026",
     "start_date": "2026-05-18",
@@ -17,7 +17,8 @@
       "color_bar": "#3D4A7C",
       "color_tag_bg": "#DDE0EB",
       "color_tag_fg": "#38426C",
-      "canvas_url": "https://naropa.instructure.com/courses/8851"
+      "canvas_url": "https://naropa.instructure.com/courses/8851",
+      "zoom_url": "https://naropa.instructure.com/courses/8851/external_tools/1040"
     },
     {
       "id": "course2",
@@ -28,7 +29,8 @@
       "color_bar": "#1A7F93",
       "color_tag_bg": "#D2E6EA",
       "color_tag_fg": "#0F5763",
-      "canvas_url": "https://naropa.instructure.com/courses/8868"
+      "canvas_url": "https://naropa.instructure.com/courses/8868",
+      "zoom_url": "https://naropa.instructure.com/courses/8868/external_tools/1040"
     },
     {
       "id": "course3",
@@ -39,7 +41,8 @@
       "color_bar": "#4F8045",
       "color_tag_bg": "#DCE9D5",
       "color_tag_fg": "#345A2E",
-      "canvas_url": "https://naropa.instructure.com/courses/9306"
+      "canvas_url": "https://naropa.instructure.com/courses/9306",
+      "zoom_url": "https://naropa.instructure.com/courses/9306/external_tools/1040"
     },
     {
       "id": "course4",
@@ -50,7 +53,8 @@
       "color_bar": "#B0832C",
       "color_tag_bg": "#F1E5C9",
       "color_tag_fg": "#7A5A1C",
-      "canvas_url": "https://naropa.instructure.com/courses/8857"
+      "canvas_url": "https://naropa.instructure.com/courses/8857",
+      "zoom_url": "https://naropa.instructure.com/courses/8857/external_tools/1040"
     },
     {
       "id": "course5",
@@ -61,7 +65,8 @@
       "color_bar": "#CB3F77",
       "color_tag_bg": "#F4D7E3",
       "color_tag_fg": "#8A2A52",
-      "canvas_url": "https://naropa.instructure.com/courses/8897"
+      "canvas_url": "https://naropa.instructure.com/courses/8897",
+      "zoom_url": "https://naropa.instructure.com/courses/8897/external_tools/1040"
     },
     {
       "id": "course6",
@@ -72,7 +77,8 @@
       "color_bar": "#8366B4",
       "color_tag_bg": "#E2D8F0",
       "color_tag_fg": "#5A4683",
-      "canvas_url": "https://naropa.instructure.com/courses/8908"
+      "canvas_url": "https://naropa.instructure.com/courses/8908",
+      "zoom_url": "https://naropa.instructure.com/courses/8908/external_tools/1040"
     }
   ],
   "items": [
