@@ -114,6 +114,7 @@ Visit the Pages URL from step 2. You should see Jennifer's Summer 2026 courses. 
    - Open https://tbfitzsimmons.github.io/canvas-dashboard/dashboard/
    - Hard refresh (⌘⇧R) once.
    - Check the course filter / sidebar: every class for the new semester should be listed, no leftovers from last term. If a course is missing, `canvas_term_name` is wrong. If an admin pseudo-course shows up, add its course ID to `excluded_course_ids` in `config.json`.
+   - Check-offs auto-reset: the dashboard namespaces check-off state by `semester.name`. As soon as you change that field, Jennifer's bookmark loads an empty bucket — no manual KV wipe needed. (Last semester's check-offs stay archived in Cloudflare KV under their own key in case you ever roll back.)
 
 **If something looks wrong** (missing items, wrong classification):
 - Open Claude Code in this folder.

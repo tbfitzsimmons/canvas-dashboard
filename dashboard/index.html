@@ -510,13 +510,36 @@ function setSyncStatus(s) {
   }
 }
 
+// Remote blob cached after pull — preserves other semesters' buckets across
+// our writes (read-modify-write pattern).
+let REMOTE_BLOB = null;
+
+function currentSemesterKey() {
+  return (STATE && STATE.data && STATE.data.semester && STATE.data.semester.name) || 'default';
+}
+
+// Extract the items-object for the current semester from a remote blob.
+// Supports both v2 (semester-scoped) and legacy v1 (flat items at root —
+// migrated by treating them as belonging to the current semester).
+function extractSemesterItems(blob) {
+  if (!blob || typeof blob !== 'object') return {};
+  if (blob.semesters && typeof blob.semesters === 'object') {
+    return blob.semesters[currentSemesterKey()] || {};
+  }
+  // Legacy v1: flat items at root → treat as current-semester
+  if (blob.items && typeof blob.items === 'object') {
+    return blob.items;
+  }
+  return {};
+}
+
 async function pullRemote() {
   if (!SYNC_TOKEN) return;
   try {
     const res = await fetch(`${SYNC_BASE}?t=${encodeURIComponent(SYNC_TOKEN)}`, { cache: 'no-store' });
     if (!res.ok) throw new Error('HTTP ' + res.status);
-    const data = await res.json();
-    const remoteItems = (data && data.items) || {};
+    REMOTE_BLOB = await res.json();
+    const remoteItems = extractSemesterItems(REMOTE_BLOB);
     // Merge: union of local and remote (additive — once checked, stays checked
     // until explicitly unchecked, which immediately PUTs the new state).
     let changed = false;
@@ -544,13 +567,36 @@ async function flushRemote(attempt = 0) {
   if (!SYNC_TOKEN || !SYNC.dirty) return;
   const snapshot = {};
   for (const id of CHECKED) snapshot[id] = true;
+
+  // Build v2 blob: preserve other semesters' buckets, replace only the current one.
+  const existingSemesters = (REMOTE_BLOB && REMOTE_BLOB.semesters && typeof REMOTE_BLOB.semesters === 'object')
+    ? { ...REMOTE_BLOB.semesters }
+    : {};
+  // If we previously pulled a legacy v1 blob, migrate its flat items into the current semester
+  // (only when the current semester bucket is otherwise empty, to avoid clobbering).
+  if (
+    REMOTE_BLOB && REMOTE_BLOB.items && typeof REMOTE_BLOB.items === 'object' &&
+    !existingSemesters[currentSemesterKey()]
+  ) {
+    existingSemesters[currentSemesterKey()] = REMOTE_BLOB.items;
+  }
+  existingSemesters[currentSemesterKey()] = snapshot;
+  // Worker still validates body.items as a sanity check — include it (mirror of current semester).
+  const body = {
+    v: 2,
+    items: snapshot,
+    semesters: existingSemesters,
+  };
+
   try {
     const res = await fetch(`${SYNC_BASE}?t=${encodeURIComponent(SYNC_TOKEN)}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ items: snapshot }),
+      body: JSON.stringify(body),
     });
     if (!res.ok) throw new Error('HTTP ' + res.status);
+    // Update cached blob so subsequent writes preserve cross-semester data correctly
+    REMOTE_BLOB = body;
     SYNC.dirty = false;
     SYNC.retryCount = 0;
     setSyncStatus('synced');
