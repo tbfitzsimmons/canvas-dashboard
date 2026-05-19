@@ -774,10 +774,10 @@ function renderNavRow() {
       <button class="toggle-on">Week View</button>
       <button id="goto-all">All Weeks</button>
     `;
-    document.getElementById('prev-week').onclick = () => { STATE.viewedWeek--; renderNavRow(); renderView(); };
-    document.getElementById('next-week').onclick = () => { STATE.viewedWeek++; renderNavRow(); renderView(); };
-    document.getElementById('jump-current').onclick = () => { STATE.viewedWeek = cur; renderNavRow(); renderView(); };
-    document.getElementById('goto-all').onclick = () => { STATE.view = 'all'; renderNavRow(); renderView(); };
+    document.getElementById('prev-week').onclick = () => { STATE.viewedWeek--; renderNavRow(); renderView(); renderProgressSection_update(); };
+    document.getElementById('next-week').onclick = () => { STATE.viewedWeek++; renderNavRow(); renderView(); renderProgressSection_update(); };
+    document.getElementById('jump-current').onclick = () => { STATE.viewedWeek = cur; renderNavRow(); renderView(); renderProgressSection_update(); };
+    document.getElementById('goto-all').onclick = () => { STATE.view = 'all'; renderNavRow(); renderView(); renderProgressSection_update(); };
   } else {
     el.innerHTML = `
       <span class="week-label">All Weeks</span>
@@ -785,7 +785,7 @@ function renderNavRow() {
       <button id="goto-week">Week View</button>
       <button class="toggle-on">All Weeks</button>
     `;
-    document.getElementById('goto-week').onclick = () => { STATE.view = 'week'; renderNavRow(); renderView(); };
+    document.getElementById('goto-week').onclick = () => { STATE.view = 'week'; renderNavRow(); renderView(); renderProgressSection_update(); };
   }
 }
 
@@ -834,10 +834,17 @@ function renderCourseFilter() {
 }
 
 function renderProgressSection() {
-  const items = filteredItems();
+  // Scope progress to whatever the user is looking at:
+  //  - Week view  → just this week
+  //  - All Weeks  → the whole semester
+  const inWeekView = STATE.view === 'week';
+  const items = inWeekView ? itemsForWeek(STATE.viewedWeek) : filteredItems();
   const total = items.length;
   const done = items.filter(it => CHECKED.has(it.canvas_id)).length;
   const pct = total ? Math.round((done / total) * 100) : 0;
+  const label = inWeekView
+    ? `Week ${STATE.viewedWeek} Progress`
+    : 'Semester Progress';
 
   const breakdown = TYPE_ORDER.map(t => {
     const ts = items.filter(it => it.type === t);
@@ -849,7 +856,7 @@ function renderProgressSection() {
   return `
     <div class="progress-section" id="progress-section">
       <div class="top-line">
-        <span class="label">Overall Progress</span>
+        <span class="label">${label}</span>
         <span class="count">${done}/${total} (${pct}%)</span>
       </div>
       <div class="progress-bar"><div class="fill" style="width: ${pct}%"></div></div>
