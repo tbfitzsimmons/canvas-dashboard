@@ -149,30 +149,52 @@ def lower(s: str | None) -> str:
 
 
 def classify_assignment(a: dict) -> str:
-    """Decide what an Assignment object represents."""
+    """Decide what an Assignment object represents.
+
+    Precedence (most specific → least):
+      1. discussion-typed submission        → discussion
+      2. title says "discussion" + paper keyword IN TITLE + upload type → paper
+         (rare: a paper assignment that happens to be titled "discussion …")
+      3. title says "discussion"            → discussion
+      4. exam hints / high-stakes final     → exam
+      5. quiz submission                    → quiz
+      6. paper hints in title or desc       → paper
+      7. fallback                            → assignment
+    """
     name = lower(a.get("name"))
     desc = lower(a.get("description") or "")
     points = a.get("points_possible") or 0
     submission_types = a.get("submission_types") or []
+    title_has_discussion = "discussion" in name
+    title_has_paper = any(h in name for h in PAPER_HINTS)
 
-    # Discussion-as-assignment: Canvas creates an Assignment row for gradeable discussions.
+    # 1. Canvas-native graded discussion
     if "discussion_topic" in submission_types:
-        return "assignment"  # gradeable discussion → assignment per Jennifer's rule
+        return "discussion"
 
-    # Exam check
+    # 2. Edge case: title says "discussion" but it's actually a paper upload
+    if title_has_discussion and title_has_paper and (
+        "online_upload" in submission_types or "online_text_entry" in submission_types
+    ):
+        return "paper"
+
+    # 3. Title says "discussion" → trust the title
+    if title_has_discussion:
+        return "discussion"
+
+    # 4. Exam check
     if any(h in name for h in EXAM_HINTS):
         return "exam"
     if points >= 100 and ("final" in name or "midterm" in name):
         return "exam"
 
-    # Quiz-as-assignment
+    # 5. Quiz-as-assignment
     if "online_quiz" in submission_types:
-        # Will be picked up by quizzes endpoint too; treat assignment row as quiz.
         return "quiz"
 
-    # Paper check
+    # 6. Paper check
     if "online_upload" in submission_types or "online_text_entry" in submission_types:
-        if any(h in name for h in PAPER_HINTS) or any(h in desc for h in PAPER_HINTS[:3]):
+        if title_has_paper or any(h in desc for h in PAPER_HINTS[:3]):
             return "paper"
 
     return "assignment"
@@ -500,6 +522,9 @@ def write_data(courses: list[Course], items: list[Item], cfg: dict) -> None:
     print(f"\n✓ Wrote {DATA_PATH.relative_to(ROOT)} ({len(items)} items, {len(courses)} courses)")
     for k, v in payload["totals"].items():
         print(f"    {k:12} {v}")
+    # Story 2: how many assignment-source items ended up as discussion
+    reclassified = sum(1 for i in items if i.source == "assignment" and i.type == "discussion")
+    print(f"    (reclassified to discussion from assignment source: {reclassified})")
 
 
 def course_dict(c: Course) -> dict:
