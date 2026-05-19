@@ -44,6 +44,19 @@
   .masthead .sub { font-size: 13px; color: var(--ink-soft); }
   .masthead .sub strong { color: var(--accent); font-weight: 600; }
   .stale-warn { color: #B91C1C; font-weight: 500; }
+  .sync-dot {
+    display: inline-block; width: 9px; height: 9px; border-radius: 50%;
+    margin-left: 8px; vertical-align: middle;
+    transition: background-color 0.2s ease;
+  }
+  .sync-synced  { background: #10B981; }   /* green */
+  .sync-pending { background: #F59E0B; }   /* amber */
+  .sync-failed  { background: #DC2626; }   /* red */
+  .sync-offline { background: #9CA3AF; }   /* grey */
+  .sync-notice {
+    font-size: 12px; color: var(--ink-soft); margin-top: 2px;
+  }
+  .sync-notice a { color: var(--ink-soft); text-decoration: underline; }
   .token-warn {
     background: #FEF3C7; border: 1px solid #F59E0B; color: #78350F;
     padding: 10px 14px; border-radius: 8px; margin-bottom: 16px;
@@ -435,17 +448,125 @@ const TYPE_ORDER = ['reading', 'video', 'discussion', 'paper', 'assignment', 'qu
 const root = document.getElementById('root');
 
 // ───────────────────────────────────────────────────────────── persistence ──
+//
+// Two-tier state: localStorage (instant, offline-safe) + Cloudflare KV
+// (cross-device sync). Token comes from URL fragment #t=<token>. Without a
+// token we fall back to localStorage-only and show a notice.
 
 const STORAGE_KEY = 'canvas-dashboard.checked-v1';
+const SYNC_BASE = 'https://dashboard-sync.brooks-1b9.workers.dev/state';
+
+function readTokenFromHash() {
+  const h = (location.hash || '').replace(/^#/, '');
+  const params = new URLSearchParams(h);
+  const t = params.get('t');
+  return t && t.length >= 16 ? t : null;
+}
+const SYNC_TOKEN = readTokenFromHash();
 
 function loadChecked() {
   try { return new Set(JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]')); }
   catch { return new Set(); }
 }
-function saveChecked(set) {
+function persistLocal(set) {
   try { localStorage.setItem(STORAGE_KEY, JSON.stringify([...set])); } catch {}
 }
 const CHECKED = loadChecked();
+
+// ── Sync state machine ─────────────────────────────────────────────────────
+//   'synced'  green   — local and remote agree (or no token, localStorage only)
+//   'pending' amber   — write in flight or queued
+//   'failed'  red     — gave up after retries; will retry on next change
+//   'offline' grey    — no token, no sync
+const SYNC = {
+  status: SYNC_TOKEN ? 'pending' : 'offline',
+  dirty: false,
+  writeTimer: null,
+  retryCount: 0,
+};
+
+function setSyncStatus(s) {
+  SYNC.status = s;
+  const dot = document.getElementById('sync-dot');
+  if (dot) {
+    dot.className = 'sync-dot sync-' + s;
+    dot.title = ({
+      synced:  'Check-offs synced across devices',
+      pending: 'Saving…',
+      failed:  'Sync failed — will retry on next change',
+      offline: 'Local only (no sync token in URL)',
+    })[s] || s;
+  }
+}
+
+async function pullRemote() {
+  if (!SYNC_TOKEN) return;
+  try {
+    const res = await fetch(`${SYNC_BASE}?t=${encodeURIComponent(SYNC_TOKEN)}`, { cache: 'no-store' });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    const remoteItems = (data && data.items) || {};
+    // Merge: union of local and remote (additive — once checked, stays checked
+    // until explicitly unchecked, which immediately PUTs the new state).
+    let changed = false;
+    for (const id of Object.keys(remoteItems)) {
+      if (remoteItems[id] && !CHECKED.has(id)) { CHECKED.add(id); changed = true; }
+    }
+    persistLocal(CHECKED);
+    setSyncStatus('synced');
+    if (changed && typeof render === 'function' && STATE.data) render();
+  } catch (e) {
+    console.warn('[sync] pull failed:', e);
+    setSyncStatus('failed');
+  }
+}
+
+function scheduleRemoteWrite() {
+  if (!SYNC_TOKEN) return;
+  SYNC.dirty = true;
+  setSyncStatus('pending');
+  if (SYNC.writeTimer) clearTimeout(SYNC.writeTimer);
+  SYNC.writeTimer = setTimeout(flushRemote, 500);
+}
+
+async function flushRemote(attempt = 0) {
+  if (!SYNC_TOKEN || !SYNC.dirty) return;
+  const snapshot = {};
+  for (const id of CHECKED) snapshot[id] = true;
+  try {
+    const res = await fetch(`${SYNC_BASE}?t=${encodeURIComponent(SYNC_TOKEN)}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ items: snapshot }),
+    });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    SYNC.dirty = false;
+    SYNC.retryCount = 0;
+    setSyncStatus('synced');
+  } catch (e) {
+    console.warn('[sync] push failed:', e);
+    if (attempt < 3) {
+      const backoff = 1000 * Math.pow(2, attempt); // 1s, 2s, 4s
+      setTimeout(() => flushRemote(attempt + 1), backoff);
+      setSyncStatus('pending');
+    } else {
+      setSyncStatus('failed');
+    }
+  }
+}
+
+// Public save fn called from checkbox handler
+function saveChecked(set) {
+  persistLocal(set);
+  scheduleRemoteWrite();
+}
+
+// Flush queued writes when network comes back
+window.addEventListener('online', () => { if (SYNC.dirty) flushRemote(); });
+// Pull fresh state when tab refocuses (another device may have updated)
+document.addEventListener('visibilitychange', () => {
+  if (!document.hidden && SYNC_TOKEN && !SYNC.dirty) pullRemote();
+});
 
 // ─────────────────────────────────────────────────────────────── date math ──
 
@@ -527,11 +648,15 @@ function render() {
   root.innerHTML = `
     ${renderTokenWarning(d.token_expires)}
     <div class="masthead">
-      <h1><span class="emoji">🎓</span>${escapeHtml(d.semester.name)} Semester Dashboard</h1>
+      <h1>
+        <span class="emoji">🎓</span>${escapeHtml(d.semester.name)} Semester Dashboard
+        <span id="sync-dot" class="sync-dot sync-${SYNC.status}" title=""></span>
+      </h1>
       <div class="sub">
         Last refreshed: <strong>${generated}</strong>
         ${stale ? '&nbsp;<span class="stale-warn">⚠ data is more than a week old — check sync</span>' : ''}
       </div>
+      ${SYNC_TOKEN ? '' : '<div class="sync-notice">Check-offs save only on this device. Use the shared bookmark URL for cross-device sync.</div>'}
     </div>
 
     ${renderCourseStrip()}
@@ -555,6 +680,7 @@ function render() {
   renderTypeFilter();
   renderCourseFilter();
   renderView();
+  setSyncStatus(SYNC.status); // refresh tooltip after re-render
 }
 
 function renderCourseStrip() {
@@ -824,6 +950,9 @@ async function boot() {
     STATE.data = await res.json();
     STATE.viewedWeek = currentWeekNumber();
     render();
+
+    // Pull remote check-off state and re-render if it added anything
+    pullRemote();
 
     // Re-render every 5 minutes so the "current week" rolls over automatically.
     setInterval(() => {
