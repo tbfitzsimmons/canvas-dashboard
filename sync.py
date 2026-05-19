@@ -273,6 +273,44 @@ def _extract_summary(html: str, limit: int = 180) -> str:
 
 VIDEO_HOSTS = ("youtube.com", "youtu.be", "vimeo.com", "panopto", "kaltura", "zoom.us/rec")
 
+# Cache resolved video titles for the run — many pages link the same video
+_VIDEO_TITLE_CACHE: dict[str, str] = {}
+
+
+def fetch_video_title(url: str) -> str | None:
+    """For YouTube/Vimeo URLs, hit the free oEmbed endpoint to get the real
+    video title. Returns None on failure. ~200ms per call, no auth required."""
+    if not url:
+        return None
+    if url in _VIDEO_TITLE_CACHE:
+        return _VIDEO_TITLE_CACHE[url] or None
+    u = url.lower()
+    try:
+        if "youtube.com" in u or "youtu.be" in u:
+            resp = requests.get(
+                "https://www.youtube.com/oembed",
+                params={"url": url, "format": "json"},
+                timeout=10,
+            )
+        elif "vimeo.com" in u:
+            resp = requests.get(
+                "https://vimeo.com/api/oembed.json",
+                params={"url": url},
+                timeout=10,
+            )
+        else:
+            return None
+        if resp.status_code != 200:
+            _VIDEO_TITLE_CACHE[url] = ""
+            return None
+        title = (resp.json() or {}).get("title")
+        title = _normalize_text(title or "")
+        _VIDEO_TITLE_CACHE[url] = title
+        return title or None
+    except Exception:
+        _VIDEO_TITLE_CACHE[url] = ""
+        return None
+
 # Slide-deck / lecture-material hints — looked for in titles AND filenames.
 LECTURE_HINTS_RE = re.compile(
     r"\b(slides?|powerpoint|ppt|pptx|keynote|deck|lecture\s+notes?)\b",
@@ -416,6 +454,11 @@ def expand_page_body(html: str, page_title: str = "") -> list[tuple[str, str, st
                 surround = URL_IN_TEXT_RE.sub("", _normalize_text(li.get_text())).strip(" -–—:•")
                 if surround:
                     title = surround
+        # Still a bare URL? For YouTube/Vimeo, hit oEmbed for the real title.
+        if title.startswith("http"):
+            resolved = fetch_video_title(href)
+            if resolved:
+                title = resolved
         out.append((_classify_link_type(href, title), title, href))
 
     # Iterate top-level children, but also recurse into <ul>/<ol>
