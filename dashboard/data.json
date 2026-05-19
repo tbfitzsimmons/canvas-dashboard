@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-19T04:33:27.722852+00:00",
+  "generated_at": "2026-05-19T04:40:10.407006+00:00",
   "semester": {
     "name": "Summer 2026",
     "start_date": "2026-05-18",
@@ -157,7 +157,7 @@
     {
       "week": 1,
       "courseId": "course1",
-      "type": "reading",
+      "type": "lecture",
       "title": "Diagnostic psychopathology ppt slides intro lesson2.pptx",
       "detail": "from: Readings and Presentation for Week 1",
       "due": "—",
@@ -365,7 +365,7 @@
     {
       "week": 1,
       "courseId": "course1",
-      "type": "reading",
+      "type": "lecture",
       "title": "Week 1 Summary slides",
       "detail": "from: Readings and Presentation for Week 1",
       "due": "—",
@@ -378,7 +378,7 @@
     {
       "week": 1,
       "courseId": "course1",
-      "type": "reading",
+      "type": "lecture",
       "title": "Week 2 Summary Slides",
       "detail": "from: Readings and Presentation for Week 1",
       "due": "—",
@@ -482,7 +482,7 @@
     {
       "week": 1,
       "courseId": "course4",
-      "type": "reading",
+      "type": "lecture",
       "title": "PDF of Slides: Contact Boundary Disturbances",
       "detail": "from: PDF of Lectures",
       "due": "—",
@@ -495,7 +495,7 @@
     {
       "week": 1,
       "courseId": "course4",
-      "type": "reading",
+      "type": "lecture",
       "title": "PDF of Slides: Intro to Gestalt",
       "detail": "from: PDF of Lectures",
       "due": "—",
@@ -846,7 +846,7 @@
     {
       "week": 2,
       "courseId": "course1",
-      "type": "reading",
+      "type": "lecture",
       "title": "Schizophrenia - double bind hypothesis.pptx",
       "detail": "from: Notes and Resources for Psychosis and Schizophrenia Spectrum",
       "due": "—",
@@ -872,7 +872,7 @@
     {
       "week": 2,
       "courseId": "course1",
-      "type": "reading",
+      "type": "lecture",
       "title": "Schizophrenia.pptx",
       "detail": "from: Notes and Resources for Psychosis and Schizophrenia Spectrum",
       "due": "—",
@@ -1301,7 +1301,7 @@
     {
       "week": 4,
       "courseId": "course1",
-      "type": "reading",
+      "type": "lecture",
       "title": "DEPRESSION-1.pptx",
       "detail": "from: Readings and Resources for Depressive Disorders",
       "due": "—",
@@ -1496,7 +1496,7 @@
     {
       "week": 4,
       "courseId": "course4",
-      "type": "reading",
+      "type": "lecture",
       "title": "Slides for Cycles",
       "detail": "from: PDF of Slides - Language",
       "due": "—",
@@ -1509,7 +1509,7 @@
     {
       "week": 4,
       "courseId": "course4",
-      "type": "reading",
+      "type": "lecture",
       "title": "Slides for Language",
       "detail": "from: PDF of Slides - Language",
       "due": "—",
@@ -2601,7 +2601,7 @@
     {
       "week": 7,
       "courseId": "course1",
-      "type": "reading",
+      "type": "lecture",
       "title": "Trauma Informed Mindfulness poster.pptx",
       "detail": "from: Readings and Resources for Trauma, PTSD and Dissociative Disorders",
       "due": "—",
@@ -3186,7 +3186,7 @@
     {
       "week": 9,
       "courseId": "course1",
-      "type": "reading",
+      "type": "lecture",
       "title": "Primary Spectrums of Mental Illness Diagnostic Psych.pptx",
       "detail": "from: Spectrums of Mental Illness and Case Study Notes",
       "due": "—",
@@ -3992,7 +3992,7 @@
     {
       "week": 12,
       "courseId": "course1",
-      "type": "reading",
+      "type": "lecture",
       "title": "PowerPoint for this week on family therapy for oppositional defiant disorder",
       "detail": "from: Readings and Resources for Neurodiversity, Neurodevelopmental issues",
       "due": "—",
@@ -6748,7 +6748,7 @@
     {
       "week": 0,
       "courseId": "course1",
-      "type": "reading",
+      "type": "lecture",
       "title": "diagnostic psychopathology ppt slides wk1.pdf",
       "detail": "from: Online Sourcebook",
       "due": "—",
@@ -6995,7 +6995,7 @@
     {
       "week": 0,
       "courseId": "course1",
-      "type": "reading",
+      "type": "lecture",
       "title": "integral model week 2 slides.pdf",
       "detail": "from: Online Sourcebook",
       "due": "—",
@@ -9490,12 +9490,13 @@
     }
   ],
   "totals": {
-    "reading": 568,
+    "reading": 553,
     "video": 102,
     "discussion": 27,
     "paper": 6,
     "assignment": 21,
     "quiz": 0,
-    "exam": 0
+    "exam": 0,
+    "lecture": 15
   }
 }
