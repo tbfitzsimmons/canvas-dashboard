@@ -306,22 +306,63 @@ def fetch_page_body(canvas: Canvas, course_canvas_id: int, page_url: str) -> str
         return None
 
 
-def expand_page_body(html: str) -> list[tuple[str, str, str]]:
+def _looks_like_prose(text: str) -> bool:
+    """A reading title is a noun phrase. Reject anything that looks like a
+    sentence fragment, greeting, or instruction."""
+    if not text:
+        return True
+    if len(text) < 4 or len(text) > 200:
+        return True
+    # Reading titles don't end with sentence punctuation
+    if text[-1] in ".!?,;":
+        return True
+    # Greetings, instructions
+    if re.match(
+        r"^(hi|hello|hey|dear|welcome|please|note|reminder|important|"
+        r"if you|when you|you (will|should|can|may)|in studio|"
+        r"based on|why is|how (do|does|can|could)|what (is|are|do|does))\b",
+        text,
+        re.IGNORECASE,
+    ):
+        return True
+    # Multiple sentences (mid-text period followed by space + capital) → prose
+    if re.search(r"[a-z]\. [A-Z]", text):
+        return True
+    return False
+
+
+def _dedupe_key(text: str) -> str:
+    """Normalize a title for dedupe: lowercase, drop all non-alphanumerics."""
+    return re.sub(r"[^a-z0-9]+", "", (text or "").lower())
+
+
+def expand_page_body(html: str, page_title: str = "") -> list[tuple[str, str, str]]:
     """Parse a Canvas page body and return [(type, title, link), ...].
 
     Walks the DOM top-to-bottom, tracking the current section (most recent
-    heading-like text). Inside a section that looks like an "ignore" section
-    (discussion topics, class agenda), no items are emitted. Inside any other
-    section — including pages with no headings — items are emitted liberally.
+    heading-like text). Plain-text items (no <a> link) only emit when we're
+    inside a "deliverable" section heading (Readings, Videos, Resources, etc.)
+    OR when the page title itself is deliverable (e.g. "Readings and
+    Presentation for Week 1" — then the whole page is one big deliverable
+    section). Linked items emit regardless of section context.
     """
     if not html or not html.strip():
         return []
     soup = BeautifulSoup(html, "html.parser")
     out: list[tuple[str, str, str]] = []
-    current_section = ""  # text of the most recent heading
+    # If the page title itself names a deliverable section, treat the whole
+    # page as if it were under that heading (handles "Readings and Presentation
+    # for Week 1" — no internal headings, just paragraphs of readings).
+    page_title_is_deliverable = bool(
+        page_title and DELIVERABLE_SECTIONS.search(page_title)
+    )
+    current_section = page_title if page_title_is_deliverable else ""
 
     def section_is_ignore() -> bool:
         return bool(current_section) and bool(IGNORE_SECTIONS.match(current_section))
+
+    def section_is_deliverable() -> bool:
+        return bool(current_section) and bool(DELIVERABLE_SECTIONS.search(current_section))
 
     def emit_link(a: Tag, fallback_title: str = "") -> None:
         href = a.get("href") or ""
@@ -373,7 +414,7 @@ def expand_page_body(html: str) -> list[tuple[str, str, str]]:
                         emit_link(a)
                 else:
                     text = _normalize_text(node.get_text())
-                    if text and text != " ":
+                    if section_is_deliverable() and not _looks_like_prose(text):
                         out.append(("reading", text, ""))
                 continue
 
@@ -390,8 +431,8 @@ def expand_page_body(html: str) -> list[tuple[str, str, str]]:
                         # Treat li ending in ':' as a sub-heading (skip, but don't reset section)
                         if not text or text.endswith(":"):
                             continue
-                        # Liberal: emit plain-text li under any non-ignore section
-                        out.append(("reading", text, ""))
+                        if section_is_deliverable() and not _looks_like_prose(text):
+                            out.append(("reading", text, ""))
                 continue
 
             if name == "a":
@@ -643,14 +684,14 @@ def fetch_course_items(canvas: Canvas, course: Course, cfg: dict) -> list[Item]:
                 children: list[tuple[str, str, str]] = []
                 if it.get("type") == "Page" and it.get("page_url"):
                     body = fetch_page_body(canvas, course.canvas_id, it["page_url"])
-                    children = expand_page_body(body or "")
+                    children = expand_page_body(body or "", page_title=it.get("title", ""))
 
                 if children:
                     pages_expanded += 1
                     page_id = it.get("id")
                     for c_type, c_title, c_link in children:
-                        key = c_title.lower()
-                        if key in seen_page_child_titles:
+                        key = _dedupe_key(c_title)
+                        if not key or key in seen_page_child_titles:
                             continue
                         seen_page_child_titles.add(key)
                         items.append(Item(
