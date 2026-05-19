@@ -305,6 +305,14 @@
   .item-title-link { color: var(--link); text-decoration: none; }
   .item-title-link:hover { text-decoration: underline; }
   .item-detail { font-size: 12px; color: var(--ink-soft); margin-top: 2px; line-height: 1.4; word-break: break-word; }
+  .item-summary { font-size: 12.5px; color: var(--ink-soft); font-style: italic; margin-top: 3px; line-height: 1.4; }
+  .item.is-overview { background: #FFFBEB; }
+  .badge-overview {
+    display: inline-block; font-size: 10.5px; font-weight: 700;
+    background: #FEF3C7; color: #92400E; border-radius: 4px;
+    padding: 1px 6px; margin-left: 6px; vertical-align: middle;
+    letter-spacing: 0.02em;
+  }
   .item-meta { display: flex; gap: 6px; margin-top: 4px; align-items: center; flex-wrap: wrap; }
   .item-type {
     font-size: 10px;
@@ -824,7 +832,9 @@ function renderWeekColumns(weekNum) {
 
   return `<div class="columns">${
     courses.map(course => {
-      const courseItems = items.filter(it => it.courseId === course.id);
+      const courseItems = items.filter(it => it.courseId === course.id)
+        .slice() // don't mutate original order
+        .sort((a, b) => (b.is_overview ? 1 : 0) - (a.is_overview ? 1 : 0));
       if (!courseItems.length) return '';
       const done = courseItems.filter(it => CHECKED.has(it.canvas_id)).length;
       return `
@@ -874,15 +884,23 @@ function renderAllWeeks() {
 function renderItem(it) {
   const isDone = CHECKED.has(it.canvas_id);
   const t = TYPE_META[it.type] || { ico: '•', label: it.type.toUpperCase() };
+  const overviewBadge = it.is_overview
+    ? `<span class="badge-overview">📌 Overview</span>`
+    : '';
+  const overviewSummary = (it.is_overview && it.summary)
+    ? `<div class="item-summary">${escapeHtml(it.summary)}</div>`
+    : '';
   return `
-    <div class="item ${isDone ? 'done' : ''}" data-id="${escapeAttr(it.canvas_id)}">
+    <div class="item ${isDone ? 'done' : ''} ${it.is_overview ? 'is-overview' : ''}" data-id="${escapeAttr(it.canvas_id)}">
       <input type="checkbox" ${isDone ? 'checked' : ''} />
       <div class="item-body">
         <div class="item-title">
           ${it.link
             ? `<a class="item-title-link" href="${escapeAttr(it.link)}" target="_blank">${escapeHtml(it.title)}</a>`
             : escapeHtml(it.title)}
+          ${overviewBadge}
         </div>
+        ${overviewSummary}
         ${it.detail ? `<div class="item-detail">${escapeHtml(it.detail)}</div>` : ''}
         <div class="item-meta">
           <span class="item-type" style="background:var(--type-${it.type}-bg);color:var(--type-${it.type}-fg);">

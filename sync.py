@@ -81,6 +81,8 @@ class Item:
     points: float | None = None
     canvas_id: str = ""           # stable id from Canvas — used to preserve check-off state
     source: str = ""              # which Canvas object: assignment | quiz | discussion | page | module_item
+    is_overview: bool = False     # weekly-summary page → pinned to top of its week column
+    summary: str = ""             # short excerpt for overview rows (first ~180 chars of body text)
 
 
 @dataclass
@@ -244,6 +246,30 @@ def classify_module_item(item: dict, content: dict | None = None) -> str | None:
 # Canvas Page module items often contain a flat list of readings or a bulleted
 # list of videos. We fetch the page body HTML and extract one Item per
 # reading/video so they each get their own checkbox on the dashboard.
+
+OVERVIEW_TITLE_RE = re.compile(
+    r"(overview|this\s*week.?s?\s*(topics|practice)|introduction\s+to\s+(the\s+)?week|"
+    r"week\s+\d+\s+(overview|intro|introduction)|home|welcome)",
+    re.IGNORECASE,
+)
+
+def _extract_summary(html: str, limit: int = 180) -> str:
+    """Strip tags and return the first ~limit chars of visible text."""
+    if not html:
+        return ""
+    soup = BeautifulSoup(html, "html.parser")
+    text = _normalize_text(soup.get_text(separator=" "))
+    if not text:
+        return ""
+    if len(text) <= limit:
+        return text
+    cut = text[:limit]
+    # Trim back to last word boundary
+    sp = cut.rfind(" ")
+    if sp > 60:
+        cut = cut[:sp]
+    return cut + "…"
+
 
 VIDEO_HOSTS = ("youtube.com", "youtu.be", "vimeo.com", "panopto", "kaltura", "zoom.us/rec")
 
@@ -692,12 +718,22 @@ def fetch_course_items(canvas: Canvas, course: Course, cfg: dict) -> list[Item]:
                     continue
 
                 base_link = it.get("html_url") or it.get("external_url") or ""
+                title = it.get("title", "Untitled")
 
-                # Story 3+5: if this is a Page, fetch its body and try to expand
+                # Story 4: detect weekly-overview pages — keep as single pinned row,
+                # don't expand them into children.
+                is_overview_page = (
+                    it.get("type") == "Page"
+                    and bool(OVERVIEW_TITLE_RE.search(title or ""))
+                )
+
+                # Story 3+5: if this is a Page (and NOT an overview), fetch body and expand
                 children: list[tuple[str, str, str]] = []
+                body_for_summary: str | None = None
                 if it.get("type") == "Page" and it.get("page_url"):
-                    body = fetch_page_body(canvas, course.canvas_id, it["page_url"])
-                    children = expand_page_body(body or "", page_title=it.get("title", ""))
+                    body_for_summary = fetch_page_body(canvas, course.canvas_id, it["page_url"])
+                    if not is_overview_page:
+                        children = expand_page_body(body_for_summary or "", page_title=title)
 
                 if children:
                     pages_expanded += 1
@@ -724,12 +760,14 @@ def fetch_course_items(canvas: Canvas, course: Course, cfg: dict) -> list[Item]:
                         week=mod_week,
                         courseId=course.id,
                         type=kind,
-                        title=it.get("title", "Untitled"),
+                        title=title,
                         detail="",
                         due="—",
                         link=base_link,
                         canvas_id=f"module_item:{it.get('id')}",
                         source="module_item",
+                        is_overview=is_overview_page,
+                        summary=_extract_summary(body_for_summary or "") if is_overview_page else "",
                     ))
         if pages_expanded:
             print(f"  ↳ {course.code}: expanded {pages_expanded} page(s) into {page_children_emitted} child items")
