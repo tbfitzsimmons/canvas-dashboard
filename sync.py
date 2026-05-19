@@ -26,7 +26,10 @@ from pathlib import Path
 from typing import Any, Iterable
 from urllib.parse import urlparse
 
+import hashlib
+
 import requests
+from bs4 import BeautifulSoup, NavigableString, Tag
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Config
@@ -235,6 +238,197 @@ def classify_module_item(item: dict, content: dict | None = None) -> str | None:
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+# Page-body expansion (Story 3+5)
+# ─────────────────────────────────────────────────────────────────────────────
+#
+# Canvas Page module items often contain a flat list of readings or a bulleted
+# list of videos. We fetch the page body HTML and extract one Item per
+# reading/video so they each get their own checkbox on the dashboard.
+
+VIDEO_HOSTS = ("youtube.com", "youtu.be", "vimeo.com", "panopto", "kaltura", "zoom.us/rec")
+
+# Section headings that mean "what follows is a deliverable to track"
+DELIVERABLE_SECTIONS = re.compile(
+    r"^(readings?|required reading|assigned reading|recommended|videos?|"
+    r"lectures?|resources?|files?|slides?|materials?)\b",
+    re.IGNORECASE,
+)
+# Sections to drop — class discussion prompts, agenda, etc.
+IGNORE_SECTIONS = re.compile(
+    r"^(discussion (questions?|topics?|prompts?)|class topics?|agenda|schedule|notes?)\b",
+    re.IGNORECASE,
+)
+
+# Strip URLs out of a text fragment so we can use the surrounding words as title
+URL_IN_TEXT_RE = re.compile(r"https?://\S+")
+
+
+def _normalize_text(s: str) -> str:
+    """Collapse whitespace, strip NBSP, trim."""
+    return re.sub(r"\s+", " ", (s or "").replace(" ", " ")).strip()
+
+
+def _looks_like_heading(p: Tag) -> bool:
+    """A <p> ending in ':', short, with no <a>, behaves like a section heading."""
+    if p.find("a"):
+        return False
+    text = _normalize_text(p.get_text())
+    return bool(text) and len(text) <= 80 and text.endswith(":")
+
+
+def _classify_link_type(href: str) -> str:
+    h = (href or "").lower()
+    return "video" if any(host in h for host in VIDEO_HOSTS) else "reading"
+
+
+def _title_from_li_with_link(li: Tag, a: Tag) -> str:
+    """For an <li> like 'Thomas Szaz <a>https://youtu.be/...</a>',
+    prefer the <li>'s text minus the URL; fall back to <a>'s text."""
+    a_text = _normalize_text(a.get_text())
+    li_text = _normalize_text(li.get_text())
+    # If <a>'s visible text IS the URL, use the surrounding li text
+    if a_text.startswith("http"):
+        without_url = URL_IN_TEXT_RE.sub("", li_text).strip(" -–—:•")
+        if without_url:
+            return _normalize_text(without_url)
+    return a_text or li_text or "Untitled link"
+
+
+def fetch_page_body(canvas: Canvas, course_canvas_id: int, page_url: str) -> str | None:
+    """Fetch a Canvas Page's HTML body. Returns None on 404/error."""
+    try:
+        resp = canvas._get(f"/courses/{course_canvas_id}/pages/{page_url}")
+        return (resp.json() or {}).get("body")
+    except requests.HTTPError as e:
+        if getattr(e.response, "status_code", None) == 404:
+            return None
+        print(f"  ⚠ page fetch {page_url}: {e}")
+        return None
+
+
+def expand_page_body(html: str) -> list[tuple[str, str, str]]:
+    """Parse a Canvas page body and return [(type, title, link), ...].
+
+    Walks the DOM top-to-bottom, tracking the current section (most recent
+    heading-like text). Inside a section that looks like an "ignore" section
+    (discussion topics, class agenda), no items are emitted. Inside any other
+    section — including pages with no headings — items are emitted liberally.
+    """
+    if not html or not html.strip():
+        return []
+    soup = BeautifulSoup(html, "html.parser")
+    out: list[tuple[str, str, str]] = []
+    current_section = ""  # text of the most recent heading
+
+    def section_is_ignore() -> bool:
+        return bool(current_section) and bool(IGNORE_SECTIONS.match(current_section))
+
+    def emit_link(a: Tag, fallback_title: str = "") -> None:
+        href = a.get("href") or ""
+        if not href or href.startswith("#"):
+            return
+        title = _normalize_text(a.get_text()) or fallback_title or href
+        # Use the <a>'s "title" attribute for file links (Canvas puts the filename there)
+        if a.get("title") and (not title or title.startswith("http")):
+            title = _normalize_text(a["title"])
+        if title.startswith("http"):
+            # raw URL as text — try the surrounding <li> text
+            li = a.find_parent("li")
+            if li:
+                surround = URL_IN_TEXT_RE.sub("", _normalize_text(li.get_text())).strip(" -–—:•")
+                if surround:
+                    title = surround
+        out.append((_classify_link_type(href), title, href))
+
+    # Iterate top-level children, but also recurse into <ul>/<ol>
+    def walk(nodes: Iterable) -> None:
+        nonlocal current_section
+        for node in nodes:
+            if isinstance(node, NavigableString):
+                continue
+            if not isinstance(node, Tag):
+                continue
+            name = node.name.lower()
+
+            # Headings
+            if name in ("h1", "h2", "h3", "h4"):
+                # An <h2> can wrap a single file link — emit that link, treat heading as new section
+                links = node.find_all("a")
+                if links:
+                    for a in links:
+                        if not section_is_ignore():
+                            emit_link(a)
+                current_section = _normalize_text(node.get_text())
+                continue
+
+            if name == "p":
+                if _looks_like_heading(node):
+                    current_section = _normalize_text(node.get_text())
+                    continue
+                if section_is_ignore():
+                    continue
+                links = node.find_all("a")
+                if links:
+                    for a in links:
+                        emit_link(a)
+                else:
+                    text = _normalize_text(node.get_text())
+                    if text and text != " ":
+                        out.append(("reading", text, ""))
+                continue
+
+            if name in ("ul", "ol"):
+                for li in node.find_all("li", recursive=False):
+                    if section_is_ignore():
+                        continue
+                    links = li.find_all("a")
+                    if links:
+                        for a in links:
+                            emit_link(a, fallback_title=_title_from_li_with_link(li, a))
+                    else:
+                        text = _normalize_text(li.get_text())
+                        # Treat li ending in ':' as a sub-heading (skip, but don't reset section)
+                        if not text or text.endswith(":"):
+                            continue
+                        # Liberal: emit plain-text li under any non-ignore section
+                        out.append(("reading", text, ""))
+                continue
+
+            if name == "a":
+                if not section_is_ignore():
+                    emit_link(node)
+                continue
+
+            # Recurse for <div>, <span>, etc.
+            if node.contents:
+                walk(node.contents)
+
+    walk(soup.children)
+
+    # Drop blanks and obvious noise
+    cleaned = []
+    seen_in_page = set()
+    for typ, title, link in out:
+        t = _normalize_text(title)
+        if not t or t in {" ", "•", "-"}:
+            continue
+        if t.endswith(":") and len(t) <= 80:  # leftover heading caught somewhere
+            continue
+        key = t.lower()
+        if key in seen_in_page:
+            continue
+        seen_in_page.add(key)
+        cleaned.append((typ, t, link))
+    return cleaned
+
+
+def page_child_id(page_id: int | str, title: str) -> str:
+    """Stable id for a page-derived item, based on page id + title hash."""
+    h = hashlib.md5(_normalize_text(title).lower().encode("utf-8")).hexdigest()[:8]
+    return f"page_child:{page_id}:{h}"
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 # Week math
 # ─────────────────────────────────────────────────────────────────────────────
 
@@ -429,8 +623,12 @@ def fetch_course_items(canvas: Canvas, course: Course, cfg: dict) -> list[Item]:
             print(f"  ⚠ {course.code} discussions: {e}")
 
     # 4. Module items (pages, files, external URLs — these become readings/videos)
+    page_children_emitted = 0
+    pages_expanded = 0
     try:
         modules = list(canvas.paginate(f"/courses/{cid}/modules", {"include[]": "items"}))
+        # Dedupe page-children across the whole course by normalized title
+        seen_page_child_titles: set[str] = set()
         for module in modules:
             mod_week = guess_week_from_module_name(module.get("name", ""), semester_start, total_weeks)
             mod_items = module.get("items") or []
@@ -438,17 +636,49 @@ def fetch_course_items(canvas: Canvas, course: Course, cfg: dict) -> list[Item]:
                 kind = classify_module_item(it)
                 if not kind:
                     continue
-                items.append(Item(
-                    week=mod_week,
-                    courseId=course.id,
-                    type=kind,
-                    title=it.get("title", "Untitled"),
-                    detail="",
-                    due="—",
-                    link=it.get("html_url") or it.get("external_url") or "",
-                    canvas_id=f"module_item:{it.get('id')}",
-                    source="module_item",
-                ))
+
+                base_link = it.get("html_url") or it.get("external_url") or ""
+
+                # Story 3+5: if this is a Page, fetch its body and try to expand
+                children: list[tuple[str, str, str]] = []
+                if it.get("type") == "Page" and it.get("page_url"):
+                    body = fetch_page_body(canvas, course.canvas_id, it["page_url"])
+                    children = expand_page_body(body or "")
+
+                if children:
+                    pages_expanded += 1
+                    page_id = it.get("id")
+                    for c_type, c_title, c_link in children:
+                        key = c_title.lower()
+                        if key in seen_page_child_titles:
+                            continue
+                        seen_page_child_titles.add(key)
+                        items.append(Item(
+                            week=mod_week,
+                            courseId=course.id,
+                            type=c_type,
+                            title=c_title,
+                            detail=f"from: {it.get('title', '')}".strip(),
+                            due="—",
+                            link=c_link or base_link,
+                            canvas_id=page_child_id(page_id, c_title),
+                            source="page_child",
+                        ))
+                        page_children_emitted += 1
+                else:
+                    items.append(Item(
+                        week=mod_week,
+                        courseId=course.id,
+                        type=kind,
+                        title=it.get("title", "Untitled"),
+                        detail="",
+                        due="—",
+                        link=base_link,
+                        canvas_id=f"module_item:{it.get('id')}",
+                        source="module_item",
+                    ))
+        if pages_expanded:
+            print(f"  ↳ {course.code}: expanded {pages_expanded} page(s) into {page_children_emitted} child items")
     except requests.HTTPError as e:
         if getattr(e.response, "status_code", None) == 404:
             print(f"  ℹ {course.code}: modules endpoint disabled (404)")
