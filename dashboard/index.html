@@ -639,7 +639,8 @@ async function triggerRefresh() {
     pollForFreshData(STATE.data?.generated_at);
   } catch (e) {
     console.error('[refresh]', e);
-    setRefreshBtn('err', '✗ Failed — try again');
+    const msg = e.message || 'unknown error';
+    setRefreshBtn('err', `✗ ${msg.length < 40 ? msg : 'Failed — see console'}`);
     REFRESH.active = false;
   }
 }

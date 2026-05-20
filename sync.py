@@ -667,7 +667,12 @@ def _find_zoom_tab_url(canvas: Canvas, course_id: int) -> str:
             url = tab.get("full_url") or tab.get("html_url") or ""
             if url and not url.startswith("http"):
                 url = canvas.base + url
-            return url
+            # Only accept if it's a real Zoom meeting URL.
+            # Canvas LTI tab URLs (naropa.instructure.com/…/external_tools/…)
+            # open the Zoom scheduler inside Canvas — not a direct meeting link.
+            if "zoom.us" in url:
+                return url
+            # Tab found but not a direct link — fall through to HTML passes.
 
     # ── 2. Course front page ──────────────────────────────────────────────────
     try:
