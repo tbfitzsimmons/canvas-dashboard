@@ -647,21 +647,67 @@ def select_courses(canvas: Canvas, cfg: dict) -> list[Course]:
 
 
 def _find_zoom_tab_url(canvas: Canvas, course_id: int) -> str:
-    """Look for Naropa's 'Online Events' tab (their Zoom integration). Returns
-    the absolute URL or '' if none found. Falls back to common alt-labels."""
+    """Find the Zoom/conferencing URL for a course.
+
+    Three-pass search (fastest → most expensive):
+      1. Canvas navigation tab labelled 'Online Events', 'Zoom', 'Conferences', etc.
+      2. Course front page HTML — scan for zoom.us meeting links.
+      3. Canvas Pages whose title contains 'instructor', 'contact', 'professor',
+         'syllabus', or 'zoom' — scan each for a meeting link.
+    """
+    # ── 1. Navigation tab ────────────────────────────────────────────────────
     try:
         tabs = canvas._get(f"/courses/{course_id}/tabs").json() or []
     except requests.HTTPError:
-        return ""
-    needles = ("online events", "zoom", "conferences", "meetings", "video conferencing")
+        tabs = []
+    tab_needles = ("online events", "zoom", "conferences", "meetings", "video conferencing")
     for tab in tabs:
         label = (tab.get("label") or "").lower()
-        if any(n in label for n in needles):
+        if any(n in label for n in tab_needles):
             url = tab.get("full_url") or tab.get("html_url") or ""
             if url and not url.startswith("http"):
                 url = canvas.base + url
             return url
+
+    # ── 2. Course front page ──────────────────────────────────────────────────
+    try:
+        front = canvas._get(f"/courses/{course_id}/front_page").json()
+        url = _extract_zoom_url_from_html(front.get("body", ""))
+        if url:
+            return url
+    except requests.HTTPError:
+        pass
+
+    # ── 3. Instructor / syllabus pages ────────────────────────────────────────
+    page_needles = ("instructor", "professor", "contact", "syllabus", "zoom", "faculty")
+    try:
+        pages = canvas._get(f"/courses/{course_id}/pages",
+                            params={"per_page": 50, "sort": "title"}).json() or []
+        for page in pages:
+            title = (page.get("title") or "").lower()
+            if any(n in title for n in page_needles):
+                body = fetch_page_body(canvas, course_id, page["url"])
+                url = _extract_zoom_url_from_html(body or "")
+                if url:
+                    return url
+    except requests.HTTPError:
+        pass
+
     return ""
+
+
+def _extract_zoom_url_from_html(html: str) -> str:
+    """Return the first zoom.us meeting/webinar link found in HTML, or ''."""
+    if not html:
+        return ""
+    soup = BeautifulSoup(html, "html.parser")
+    for a in soup.find_all("a", href=True):
+        href = a["href"]
+        if "zoom.us" in href and any(seg in href for seg in ("/j/", "/my/", "/meeting/", "/s/", "/wc/")):
+            return href
+    # Plain-text URL not wrapped in <a>
+    m = re.search(r"https?://[a-z0-9.\-]*zoom\.us/(?:j|my|meeting|s|wc)/[^\s\"'<>]+", html)
+    return m.group(0).rstrip(".,;)\"'") if m else ""
 
 
 def clean_course_name(name: str) -> str:
@@ -681,6 +727,22 @@ def fetch_course_items(canvas: Canvas, course: Course, cfg: dict) -> list[Item]:
 
     items: list[Item] = []
     seen_assignment_ids: set[int] = set()
+
+    # Pre-fetch modules once — reused for (a) discussion week fallback and
+    # (b) the full module-item pass below.  Avoids a double API round-trip.
+    try:
+        modules_data = list(canvas.paginate(f"/courses/{cid}/modules", {"include[]": "items"}))
+    except requests.HTTPError:
+        modules_data = []
+
+    # Build discussion_id → module_week map so ungraded discussions with no
+    # due_at can still be placed in the right week column.
+    discussion_module_weeks: dict[str, int] = {}
+    for _mod in modules_data:
+        _mw = guess_week_from_module_name(_mod.get("name", ""), semester_start, total_weeks)
+        for _it in _mod.get("items") or []:
+            if _it.get("type") == "Discussion" and _it.get("content_id"):
+                discussion_module_weeks[str(_it["content_id"])] = _mw
 
     # 1. Assignments
     try:
@@ -744,12 +806,16 @@ def fetch_course_items(canvas: Canvas, course: Course, cfg: dict) -> list[Item]:
             if d.get("assignment_id") and int(d["assignment_id"]) in seen_assignment_ids:
                 continue
             due = parse_iso((d.get("assignment") or {}).get("due_at") or d.get("delayed_post_at"))
+            # Fallback: use the week inferred from whichever module this discussion
+            # lives in — catches discussions that have no due date of their own.
+            mod_week_fallback = discussion_module_weeks.get(str(d.get("id", "")), 0)
+            wk = week_number(due, semester_start, total_weeks) if due else mod_week_fallback
             d_title = d.get("title", "Untitled discussion")
             d_title_lc = lower(d_title)
             video_hints = ("recording", "video", "zoom recording", "lecture video", "recorded session")
             d_type = "video" if any(h in d_title_lc for h in video_hints) else "discussion"
             items.append(Item(
-                week=week_number(due, semester_start, total_weeks),
+                week=wk,
                 courseId=course.id,
                 type=d_type,
                 title=d_title,
@@ -770,7 +836,7 @@ def fetch_course_items(canvas: Canvas, course: Course, cfg: dict) -> list[Item]:
     page_children_emitted = 0
     pages_expanded = 0
     try:
-        modules = list(canvas.paginate(f"/courses/{cid}/modules", {"include[]": "items"}))
+        modules = modules_data  # already fetched above; no second API call needed
         # Dedupe page-children across the whole course by normalized title
         seen_page_child_titles: set[str] = set()
         for module in modules:
@@ -836,10 +902,7 @@ def fetch_course_items(canvas: Canvas, course: Course, cfg: dict) -> list[Item]:
         if pages_expanded:
             print(f"  ↳ {course.code}: expanded {pages_expanded} page(s) into {page_children_emitted} child items")
     except requests.HTTPError as e:
-        if getattr(e.response, "status_code", None) == 404:
-            print(f"  ℹ {course.code}: modules endpoint disabled (404)")
-        else:
-            print(f"  ⚠ {course.code} modules: {e}")
+        print(f"  ⚠ {course.code} module page expansion: {e}")
 
     print(f"  ✓ {course.code}: {len(items)} items")
     return items
