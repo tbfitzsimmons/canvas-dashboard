@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-20T17:43:08.122795+00:00",
+  "generated_at": "2026-05-20T18:00:24.740034+00:00",
   "semester": {
     "name": "Summer 2026",
     "start_date": "2026-05-18",
@@ -4135,6 +4135,21 @@
     {
       "week": 11,
       "courseId": "course1",
+      "type": "discussion",
+      "title": "Engagement Discussion Topic",
+      "detail": "Ungraded discussion",
+      "due": "—",
+      "due_date": null,
+      "link": "https://naropa.instructure.com/courses/8851/discussion_topics/105718",
+      "points": null,
+      "canvas_id": "discussion:105718",
+      "source": "discussion",
+      "is_overview": false,
+      "summary": ""
+    },
+    {
+      "week": 11,
+      "courseId": "course1",
       "type": "video",
       "title": "Expert on Narcissism",
       "detail": "from: Readings and Resources for Personality Disorders",
@@ -7999,21 +8014,6 @@
       "points": 2.0,
       "canvas_id": "assignment:113032",
       "source": "assignment",
-      "is_overview": false,
-      "summary": ""
-    },
-    {
-      "week": 0,
-      "courseId": "course1",
-      "type": "discussion",
-      "title": "Engagement Discussion Topic",
-      "detail": "Ungraded discussion",
-      "due": "—",
-      "due_date": null,
-      "link": "https://naropa.instructure.com/courses/8851/discussion_topics/105718",
-      "points": null,
-      "canvas_id": "discussion:105718",
-      "source": "discussion",
       "is_overview": false,
       "summary": ""
     },
