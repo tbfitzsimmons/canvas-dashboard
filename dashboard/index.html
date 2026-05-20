@@ -929,7 +929,10 @@ function renderWhatsnext() {
     const overdue = isOverdue(it);
     const soon    = !overdue && isDueSoon(it);
     const urgCls  = overdue ? 'overdue' : soon ? 'due-soon' : '';
-    const dueLbl  = overdue ? `overdue (${escapeHtml(it.due)})` : escapeHtml(it.due);
+    const dueFmt  = it.due_date
+      ? new Date(it.due_date).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })
+      : (it.due || '—');
+    const dueLbl  = overdue ? `overdue · ${dueFmt}` : dueFmt;
     const titleHtml = it.link
       ? `<a href="${escapeAttr(it.link)}" target="_blank">${escapeHtml(it.title)}</a>`
       : escapeHtml(it.title);
