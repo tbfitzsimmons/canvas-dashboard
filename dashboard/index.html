@@ -1349,13 +1349,7 @@ function escapeHtml(s) {
 function escapeAttr(s) { return escapeHtml(s); }
 
 function repoSlug() {
-  // Pulls the GitHub user/repo from the current URL when hosted on Pages.
-  // https://<user>.github.io/<repo>/ → "<user>/<repo>"
-  try {
-    const host = location.host.replace('.github.io', '');
-    const path = location.pathname.split('/').filter(Boolean)[0] || '';
-    return `${host}/${path}`;
-  } catch { return 'tbfitzsimmons/canvas-dashboard'; }
+  return GH_REPO;
 }
 
 // ─────────────────────────────────────────────────────────────── boot ──
