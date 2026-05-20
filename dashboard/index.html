@@ -382,6 +382,64 @@
     gap: 12px;
   }
 
+  /* ───── Undated items section ───── */
+  .undated-block {
+    margin-top: 24px;
+    border: 1px solid #FDE68A;
+    border-radius: 8px;
+    background: #FFFBEB;
+  }
+  .undated-block summary {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    padding: 12px 16px;
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+    flex-wrap: wrap;
+  }
+  .undated-block summary::-webkit-details-marker { display: none; }
+  .undated-block summary:hover { background: #FEF3C7; border-radius: 8px; }
+  .undated-block[open] summary { border-bottom: 1px solid #FDE68A; border-radius: 8px 8px 0 0; }
+  .undated-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #92400E;
+  }
+  .undated-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 6px;
+    background: #F59E0B;
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    border-radius: 10px;
+    margin-left: 4px;
+  }
+  .undated-sub {
+    font-size: 12px;
+    color: #92400E;
+    opacity: 0.75;
+    flex: 1;
+  }
+  .undated-body {
+    padding: 14px 16px 16px;
+  }
+  .undated-note {
+    font-size: 12.5px;
+    color: #78350F;
+    margin-bottom: 14px;
+    padding: 8px 12px;
+    background: #FEF3C7;
+    border-radius: 6px;
+    border-left: 3px solid #F59E0B;
+  }
+
   /* ───── Footer ───── */
   footer.foot {
     margin-top: 40px;
@@ -1170,14 +1228,57 @@ function renderProgressSection_update() {
   if (wn) wn.innerHTML = renderWhatsnext();
 }
 
+function filteredUndatedItems() {
+  return STATE.data.items.filter(it => {
+    if (it.week !== 0) return false;
+    if (STATE.typeFilters.size > 0 && !STATE.typeFilters.has(it.type)) return false;
+    if (STATE.courseFilters.size > 0 && !STATE.courseFilters.has(it.courseId)) return false;
+    return true;
+  });
+}
+
+function renderUndatedSection() {
+  const items = filteredUndatedItems();
+  if (!items.length) return '';
+  const done = items.filter(it => CHECKED.has(it.canvas_id)).length;
+  const courses = STATE.data.courses.filter(c =>
+    STATE.courseFilters.size === 0 || STATE.courseFilters.has(c.id)
+  );
+  const cols = courses.map(course => {
+    const courseItems = items.filter(it => it.courseId === course.id);
+    if (!courseItems.length) return '';
+    const cdone = courseItems.filter(it => CHECKED.has(it.canvas_id)).length;
+    return `
+      <div class="col">
+        <div class="col-head" style="background:${course.color_bar};">
+          <div><span class="col-title">${escapeHtml(course.name)}</span>
+               <span class="col-code-tag">${escapeHtml(course.code)}</span></div>
+          <div class="col-progress">${cdone}/${courseItems.length}</div>
+        </div>
+        <div class="col-body">${courseItems.map(renderItem).join('')}</div>
+      </div>`;
+  }).join('');
+  return `
+    <details class="undated-block">
+      <summary>
+        <span class="undated-title">⚠ No Due Date <span class="undated-badge">${items.length}</span></span>
+        <span class="undated-sub">${done}/${items.length} done · These items exist in Canvas but have no due date assigned</span>
+      </summary>
+      <div class="undated-body">
+        <p class="undated-note">Canvas contains these items but no professor has set a due date. They still need your attention — check Canvas or ask when they're due.</p>
+        <div class="columns">${cols}</div>
+      </div>
+    </details>`;
+}
+
 function renderView() {
   const container = document.getElementById('view-container');
   const wn = document.getElementById('whats-next-container');
   if (wn) wn.innerHTML = renderWhatsnext();
   if (STATE.view === 'week') {
-    container.innerHTML = renderWeekColumns(STATE.viewedWeek);
+    container.innerHTML = renderWeekColumns(STATE.viewedWeek) + renderUndatedSection();
   } else {
-    container.innerHTML = renderAllWeeks();
+    container.innerHTML = renderAllWeeks() + renderUndatedSection();
   }
   wireCheckboxes();
   wireNoteButtons();

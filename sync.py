@@ -758,7 +758,9 @@ def fetch_course_items(canvas: Canvas, course: Course, cfg: dict) -> list[Item]:
         for a in canvas.paginate(f"/courses/{cid}/assignments"):
             if not a.get("published", True):
                 continue
-            due = parse_iso(a.get("due_at"))
+            # Use due_at if set; fall back to unlock_at (when it becomes available).
+            # lock_at is intentionally not used — it's the cutoff, not the deadline.
+            due = parse_iso(a.get("due_at")) or parse_iso(a.get("unlock_at"))
             kind = classify_assignment(a)
             items.append(Item(
                 week=week_number(due, semester_start, total_weeks),
@@ -844,6 +846,7 @@ def fetch_course_items(canvas: Canvas, course: Course, cfg: dict) -> list[Item]:
     # 4. Module items (pages, files, external URLs — these become readings/videos)
     page_children_emitted = 0
     pages_expanded = 0
+    seen_module_page_urls: set[str] = set()  # track for coverage check
     try:
         modules = modules_data  # already fetched above; no second API call needed
         # Dedupe page-children across the whole course by normalized title
@@ -870,6 +873,7 @@ def fetch_course_items(canvas: Canvas, course: Course, cfg: dict) -> list[Item]:
                 children: list[tuple[str, str, str]] = []
                 body_for_summary: str | None = None
                 if it.get("type") == "Page" and it.get("page_url"):
+                    seen_module_page_urls.add(it["page_url"])
                     body_for_summary = fetch_page_body(canvas, course.canvas_id, it["page_url"])
                     if not is_overview_page:
                         children = expand_page_body(body_for_summary or "", page_title=title)
@@ -914,7 +918,69 @@ def fetch_course_items(canvas: Canvas, course: Course, cfg: dict) -> list[Item]:
         print(f"  ⚠ {course.code} module page expansion: {e}")
 
     print(f"  ✓ {course.code}: {len(items)} items")
+    _coverage_check(canvas, course, items, seen_module_page_urls)
     return items
+
+
+def _coverage_check(
+    canvas: Canvas,
+    course: Course,
+    items: list[Item],
+    seen_module_page_urls: set[str],
+) -> None:
+    """Print a per-course coverage sanity check to the Actions log.
+
+    Flags:
+    - Graded assignments with no due date (will show in Undated section)
+    - unlock_at as a fallback signal for undated items
+    - Canvas pages that exist but are not referenced by any module
+    """
+    from collections import Counter
+    cid = course.canvas_id
+    by_source = Counter(it.source for it in items)
+
+    undated_graded = [
+        it for it in items
+        if it.source == "assignment" and it.week == 0
+    ]
+
+    lines = [
+        f"  📊 {course.code}: "
+        f"assignments={by_source.get('assignment', 0)}, "
+        f"quizzes={by_source.get('quiz', 0)}, "
+        f"discussions={by_source.get('discussion', 0)}, "
+        f"readings/videos={by_source.get('module_item', 0) + by_source.get('page_child', 0)}, "
+        f"total={len(items)}"
+    ]
+
+    if undated_graded:
+        titles = ", ".join(f'"{it.title}"' for it in undated_graded[:3])
+        extra = f" +{len(undated_graded) - 3} more" if len(undated_graded) > 3 else ""
+        lines.append(
+            f"  ⚠  {course.code}: {len(undated_graded)} graded assignment(s) have no due date "
+            f"(shown in Undated section): {titles}{extra}"
+        )
+
+    # Check for Canvas pages not referenced by any module
+    try:
+        all_pages = list(canvas.paginate(f"/courses/{cid}/pages", {"per_page": 50}))
+        orphan_pages = [
+            p for p in all_pages
+            if p.get("url") and p["url"] not in seen_module_page_urls
+            and p.get("published", True)
+        ]
+        if orphan_pages:
+            titles = ", ".join(f'"{p.get("title", "?")}"' for p in orphan_pages[:4])
+            extra = f" +{len(orphan_pages) - 4} more" if len(orphan_pages) > 4 else ""
+            lines.append(
+                f"  ⚠  {course.code}: {len(orphan_pages)} published page(s) not in any module "
+                f"(may be missed): {titles}{extra}"
+            )
+    except requests.HTTPError:
+        pass
+
+    for line in lines:
+        print(line)
 
 
 def points_detail(a: dict) -> str:
