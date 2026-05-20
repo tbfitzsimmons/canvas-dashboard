@@ -415,6 +415,84 @@
 
   .hidden { display: none !important; }
 
+  /* ───── Urgency / overdue ───── */
+  .item.overdue-item  { border-left: 3px solid #DC2626; margin-left: -3px; border-radius: 0 6px 6px 0; }
+  .item.due-soon-item { border-left: 3px solid #F59E0B; margin-left: -3px; border-radius: 0 6px 6px 0; }
+  .item-due.due-soon  { color: #B45309; font-weight: 700; }
+  .item-due.overdue   { color: #DC2626; font-weight: 700; }
+
+  /* ───── What's Next strip ───── */
+  .whats-next {
+    margin-bottom: 16px;
+    padding: 11px 14px 12px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+  }
+  .whats-next-header {
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .next-items { display: flex; flex-direction: column; gap: 5px; }
+  .next-item {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    font-size: 13px;
+    line-height: 1.35;
+  }
+  .next-item .next-ico   { flex-shrink: 0; font-size: 12px; }
+  .next-item .next-title { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .next-item .next-title a { color: var(--link); text-decoration: none; }
+  .next-item .next-title a:hover { text-decoration: underline; }
+  .next-item .next-meta  { flex-shrink: 0; font-size: 11.5px; font-family: var(--font-mono); color: var(--muted); white-space: nowrap; }
+  .next-item .next-meta.due-soon { color: #B45309; font-weight: 700; }
+  .next-item .next-meta.overdue  { color: #DC2626; font-weight: 700; }
+
+  /* ───── Progress pills ───── */
+  .prog-pills { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+  .prog-pill {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 2px 9px;
+    font-size: 11.5px;
+    color: var(--ink-soft);
+    white-space: nowrap;
+  }
+  .prog-pill-done { background: #D1FAE5; border-color: #6EE7B7; color: #065F46; }
+  .prog-celebrate {
+    font-size: 15px;
+    font-weight: 700;
+    color: #065F46;
+    text-align: center;
+    padding: 6px 0 4px;
+  }
+
+  /* ───── Empty course column ───── */
+  .col.col-muted .col-head { opacity: 0.55; }
+  .col-quiet { padding: 18px 8px; text-align: center; color: var(--muted); font-size: 12px; font-style: italic; }
+
+  /* ───── Note copy button ───── */
+  .note-btn {
+    background: none;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 1px 7px;
+    font-family: inherit;
+    font-size: 10.5px;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.12s ease;
+    margin-left: 2px;
+  }
+  .note-btn:hover { border-color: var(--ink-soft); color: var(--ink); }
+  .note-btn.copied { border-color: #10B981; color: #065F46; }
+
   /* ───── Refresh now button ───── */
   .refresh-btn {
     display: inline-flex;
@@ -498,18 +576,20 @@ function readTokenFromHash() {
 }
 const SYNC_TOKEN = readTokenFromHash();
 
-// GitHub fine-grained PAT for triggering workflow_dispatch.
-// Add &gh=<your-pat> to your bookmark URL fragment (same pattern as &t=<sync-token>).
-// The PAT needs only "Actions: write" permission on this repo.
+// ── Refresh state machine ──────────────────────────────────────────────────
+// The button calls the canvas-dispatch Cloudflare Worker (no token in URL).
+// Legacy fallback: if &gh=<PAT> is still in the URL fragment, use it directly
+// until the worker is deployed and the param can be removed from the bookmark.
+const DISPATCH_WORKER = 'https://canvas-dispatch.tbfitzsimmons.workers.dev/dispatch';
+const GH_REPO = 'tbfitzsimmons/canvas-dashboard';
+
 function readGithubTokenFromHash() {
   const h = (location.hash || '').replace(/^#/, '');
   const t = new URLSearchParams(h).get('gh');
   return t && t.length >= 16 ? t : null;
 }
-const GITHUB_TOKEN = readGithubTokenFromHash();
-const GH_REPO = 'tbfitzsimmons/canvas-dashboard';
+const LEGACY_GH_TOKEN = readGithubTokenFromHash();
 
-// ── Refresh state machine ──────────────────────────────────────────────────
 const REFRESH = { active: false, startedAt: 0, timer: null };
 
 function setRefreshBtn(cls, label) {
@@ -522,33 +602,34 @@ function setRefreshBtn(cls, label) {
 
 async function triggerRefresh() {
   if (REFRESH.active) return;
-  if (!GITHUB_TOKEN) {
-    // No token in URL — open Actions tab as fallback
-    window.open(`https://github.com/${GH_REPO}/actions/workflows/sync.yml`, '_blank');
-    return;
-  }
   REFRESH.active = true;
   REFRESH.startedAt = Date.now();
   setRefreshBtn('busy', 'Triggering…');
   try {
-    const res = await fetch(
-      `https://api.github.com/repos/${GH_REPO}/actions/workflows/sync.yml/dispatches`,
-      {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${GITHUB_TOKEN}`,
-          'Accept': 'application/vnd.github+json',
-          'Content-Type': 'application/json',
-          'X-GitHub-Api-Version': '2022-11-28',
-        },
-        body: JSON.stringify({ ref: 'main' }),
-      }
-    );
+    let res;
+    if (LEGACY_GH_TOKEN) {
+      // Legacy: direct GitHub API with PAT still in URL — works until worker is live
+      res = await fetch(
+        `https://api.github.com/repos/${GH_REPO}/actions/workflows/sync.yml/dispatches`,
+        {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${LEGACY_GH_TOKEN}`,
+            'Accept': 'application/vnd.github+json',
+            'Content-Type': 'application/json',
+            'X-GitHub-Api-Version': '2022-11-28',
+          },
+          body: JSON.stringify({ ref: 'main' }),
+        }
+      );
+    } else {
+      // Clean path: Cloudflare Worker holds the PAT as a secret
+      res = await fetch(DISPATCH_WORKER, { method: 'POST' });
+    }
     if (!res.ok) {
       const msg = await res.text().catch(() => '');
-      throw new Error(`GitHub ${res.status}${msg ? ': ' + msg : ''}`);
+      throw new Error(`Dispatch ${res.status}${msg ? ': ' + msg : ''}`);
     }
-    // Workflow is queued. Poll data.json until generated_at advances.
     pollForFreshData(STATE.data?.generated_at);
   } catch (e) {
     console.error('[refresh]', e);
@@ -808,6 +889,83 @@ function itemsForWeek(weekNum) {
   return filteredItems().filter(it => it.week === weekNum);
 }
 
+// ───────────────────────────────────────────────────────────── urgency math ──
+
+function dueTimestamp(it) {
+  if (!it.due_date) return null;
+  return new Date(it.due_date + 'T23:59:59').getTime();
+}
+function isOverdue(it) {
+  const ts = dueTimestamp(it);
+  return ts !== null && ts < Date.now() && !CHECKED.has(it.canvas_id);
+}
+function isDueSoon(it) {
+  const ts = dueTimestamp(it);
+  if (ts === null || CHECKED.has(it.canvas_id) || ts < Date.now()) return false;
+  return (ts - Date.now()) / 3_600_000 <= 48;
+}
+
+// ─────────────────────────────────────────────── What's Next data + render ──
+
+function whatsnextItems() {
+  return STATE.data.items
+    .filter(it => !CHECKED.has(it.canvas_id) && it.due_date)
+    .sort((a, b) => (a.due_date > b.due_date ? 1 : a.due_date < b.due_date ? -1 : 0))
+    .slice(0, 3);
+}
+
+function renderWhatsnext() {
+  const items = whatsnextItems();
+  if (!items.length) return '';
+  const rows = items.map(it => {
+    const course = STATE.data.courses.find(c => c.id === it.courseId);
+    const t = TYPE_META[it.type] || { ico: '•' };
+    const overdue = isOverdue(it);
+    const soon    = !overdue && isDueSoon(it);
+    const urgCls  = overdue ? 'overdue' : soon ? 'due-soon' : '';
+    const dueLbl  = overdue ? `overdue (${escapeHtml(it.due)})` : escapeHtml(it.due);
+    const titleHtml = it.link
+      ? `<a href="${escapeAttr(it.link)}" target="_blank">${escapeHtml(it.title)}</a>`
+      : escapeHtml(it.title);
+    return `
+      <div class="next-item">
+        <span class="next-ico">${t.ico}</span>
+        <span class="next-title">${titleHtml}</span>
+        <span class="next-meta ${urgCls}">${course ? escapeHtml(course.code) : ''} · ${dueLbl}</span>
+      </div>`;
+  }).join('');
+  return `
+    <div class="whats-next" id="whats-next">
+      <div class="whats-next-header">Up next</div>
+      <div class="next-items">${rows}</div>
+    </div>`;
+}
+
+// ──────────────────────────────────────────── Granola-style note clipboard ──
+
+function copyItemNote(canvasId) {
+  const it = STATE.data.items.find(i => i.canvas_id === canvasId);
+  if (!it) return;
+  const course = STATE.data.courses.find(c => c.id === it.courseId);
+  const t = TYPE_META[it.type] || { ico: '•', label: it.type };
+  const lines = [
+    `${t.ico} ${it.title}`,
+    `Course:  ${course ? course.name + (course.code ? ` (${course.code})` : '') : '—'}`,
+    `Due:     ${it.due || '—'}`,
+    it.link ? `Link:    ${it.link}` : '',
+    '',
+    '---',
+    '',
+  ].filter((l, i, a) => l !== '' || (i > 0 && a[i - 1] !== ''));
+  navigator.clipboard.writeText(lines.join('\n')).then(() => {
+    const btn = document.querySelector(`.note-btn[data-note="${CSS.escape(canvasId)}"]`);
+    if (!btn) return;
+    btn.textContent = '✓ Copied';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = '📋 Note'; btn.classList.remove('copied'); }, 2000);
+  }).catch(() => {});
+}
+
 // ─────────────────────────────────────────────────────────────── rendering ──
 
 function renderTokenWarning(expiresStr) {
@@ -853,6 +1011,8 @@ function render() {
     <div class="filter-row" id="course-filter"></div>
 
     ${renderProgressSection()}
+
+    <div id="whats-next-container"></div>
 
     <div id="view-container"></div>
 
@@ -958,50 +1118,59 @@ function renderCourseFilter() {
 }
 
 function renderProgressSection() {
-  // Scope progress to whatever the user is looking at:
-  //  - Week view  → just this week
-  //  - All Weeks  → the whole semester
   const inWeekView = STATE.view === 'week';
   const items = inWeekView ? itemsForWeek(STATE.viewedWeek) : filteredItems();
   const total = items.length;
-  const done = items.filter(it => CHECKED.has(it.canvas_id)).length;
-  const pct = total ? Math.round((done / total) * 100) : 0;
-  const label = inWeekView
-    ? `Week ${STATE.viewedWeek} Progress`
-    : 'Semester Progress';
+  const done  = items.filter(it => CHECKED.has(it.canvas_id)).length;
+  const pct   = total ? Math.round((done / total) * 100) : 0;
+  const allDone = total > 0 && done === total;
+  const label = inWeekView ? `Week ${STATE.viewedWeek}` : 'Semester';
 
-  const breakdown = TYPE_ORDER.map(t => {
+  const pills = TYPE_ORDER.map(t => {
     const ts = items.filter(it => it.type === t);
     if (!ts.length) return '';
     const td = ts.filter(it => CHECKED.has(it.canvas_id)).length;
-    return `<span><span class="ico">${TYPE_META[t].ico}</span>${t}: ${td}/${ts.length}</span>`;
+    const cls = td === ts.length ? ' prog-pill-done' : '';
+    return `<span class="prog-pill${cls}">${TYPE_META[t].ico} ${td}/${ts.length}</span>`;
   }).filter(Boolean).join('');
 
+  if (allDone) {
+    return `
+      <div class="progress-section" id="progress-section">
+        <div class="prog-celebrate">🎉 All done ${inWeekView ? 'this week' : 'for the semester'}!</div>
+        <div class="prog-pills">${pills}</div>
+      </div>`;
+  }
   return `
     <div class="progress-section" id="progress-section">
       <div class="top-line">
-        <span class="label">${label}</span>
-        <span class="count">${done}/${total} (${pct}%)</span>
+        <span class="label">${label} — ${done}/${total}</span>
+        <span class="count">${pct}%</span>
       </div>
       <div class="progress-bar"><div class="fill" style="width: ${pct}%"></div></div>
-      <div class="progress-breakdown">${breakdown}</div>
-    </div>
-  `;
+      <div class="prog-pills">${pills}</div>
+    </div>`;
 }
 
 function renderProgressSection_update() {
   const el = document.getElementById('progress-section');
   if (el) el.outerHTML = renderProgressSection();
+  // Also refresh What's Next so checked items disappear from the strip
+  const wn = document.getElementById('whats-next-container');
+  if (wn) wn.innerHTML = renderWhatsnext();
 }
 
 function renderView() {
   const container = document.getElementById('view-container');
+  const wn = document.getElementById('whats-next-container');
+  if (wn) wn.innerHTML = renderWhatsnext();
   if (STATE.view === 'week') {
     container.innerHTML = renderWeekColumns(STATE.viewedWeek);
   } else {
     container.innerHTML = renderAllWeeks();
   }
   wireCheckboxes();
+  wireNoteButtons();
   wireAccordions();
 }
 
@@ -1013,12 +1182,28 @@ function renderWeekColumns(weekNum) {
     return `<div class="col-empty" style="margin: 40px 0;">No items in Week ${weekNum} match your filters.</div>`;
   }
 
+  // Only show empty-state columns when no course filter is active
+  // (if a course is filtered out deliberately, don't pad with ghost columns)
+  const showEmpty = STATE.courseFilters.size === 0;
+
   return `<div class="columns">${
     courses.map(course => {
       const courseItems = items.filter(it => it.courseId === course.id)
-        .slice() // don't mutate original order
+        .slice()
         .sort((a, b) => (b.is_overview ? 1 : 0) - (a.is_overview ? 1 : 0));
-      if (!courseItems.length) return '';
+
+      if (!courseItems.length) {
+        if (!showEmpty) return '';
+        return `
+          <div class="col col-muted">
+            <div class="col-head" style="background:${course.color_bar};">
+              <div><span class="col-title">${escapeHtml(course.name)}</span>
+                   <span class="col-code-tag">${escapeHtml(course.code)}</span></div>
+            </div>
+            <div class="col-quiet">Nothing assigned this week ✓</div>
+          </div>`;
+      }
+
       const done = courseItems.filter(it => CHECKED.has(it.canvas_id)).length;
       return `
         <div class="col">
@@ -1028,8 +1213,7 @@ function renderWeekColumns(weekNum) {
             <div class="col-progress">${done}/${courseItems.length}</div>
           </div>
           <div class="col-body">${courseItems.map(renderItem).join('')}</div>
-        </div>
-      `;
+        </div>`;
     }).join('')
   }</div>`;
 }
@@ -1065,16 +1249,27 @@ function renderAllWeeks() {
 }
 
 function renderItem(it) {
-  const isDone = CHECKED.has(it.canvas_id);
+  const isDone   = CHECKED.has(it.canvas_id);
+  const overdue  = !isDone && isOverdue(it);
+  const soon     = !isDone && !overdue && isDueSoon(it);
+  const urgClass = overdue ? 'overdue-item' : soon ? 'due-soon-item' : '';
+  const dueClass = overdue ? 'overdue' : soon ? 'due-soon' : '';
+  const duePfx   = overdue ? '⚠ overdue · ' : '';
+
   const t = TYPE_META[it.type] || { ico: '•', label: it.type.toUpperCase() };
+
   const overviewBadge = it.is_overview
-    ? `<span class="badge-overview">📌 Overview</span>`
-    : '';
+    ? `<span class="badge-overview">📌 Overview</span>` : '';
   const overviewSummary = (it.is_overview && it.summary)
-    ? `<div class="item-summary">${escapeHtml(it.summary)}</div>`
+    ? `<div class="item-summary">${escapeHtml(it.summary)}</div>` : '';
+
+  // Note button for video + lecture items (copies a Granola-ready template)
+  const noteBtn = (it.type === 'video' || it.type === 'lecture')
+    ? `<button class="note-btn" data-note="${escapeAttr(it.canvas_id)}">📋 Note</button>`
     : '';
+
   return `
-    <div class="item ${isDone ? 'done' : ''} ${it.is_overview ? 'is-overview' : ''}" data-id="${escapeAttr(it.canvas_id)}">
+    <div class="item ${isDone ? 'done' : ''} ${it.is_overview ? 'is-overview' : ''} ${urgClass}" data-id="${escapeAttr(it.canvas_id)}">
       <input type="checkbox" ${isDone ? 'checked' : ''} />
       <div class="item-body">
         <div class="item-title">
@@ -1089,11 +1284,11 @@ function renderItem(it) {
           <span class="item-type" style="background:var(--type-${it.type}-bg);color:var(--type-${it.type}-fg);">
             ${t.ico} ${t.label}
           </span>
-          <span class="item-due">due ${escapeHtml(it.due)}</span>
+          <span class="item-due ${dueClass}">${duePfx}due ${escapeHtml(it.due)}</span>
+          ${noteBtn}
         </div>
       </div>
-    </div>
-  `;
+    </div>`;
 }
 
 function wireCheckboxes() {
@@ -1122,6 +1317,15 @@ function updateColProgress(colEl) {
 function wireAccordions() {
   document.querySelectorAll('.week-block-head').forEach(head => {
     head.onclick = () => head.parentElement.classList.toggle('open');
+  });
+}
+
+function wireNoteButtons() {
+  document.querySelectorAll('.note-btn').forEach(btn => {
+    btn.onclick = (e) => {
+      e.stopPropagation();
+      copyItemNote(btn.dataset.note);
+    };
   });
 }
 
