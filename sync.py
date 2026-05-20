@@ -627,10 +627,14 @@ def select_courses(canvas: Canvas, cfg: dict) -> list[Course]:
         included_ids = {str(x) for x in included_ids}
         raw = [c for c in raw if str(c.get("id")) in included_ids]
 
+    instructor_overrides = cfg.get("instructor_overrides", {})
     courses = []
     for i, c in enumerate(raw):
         teachers = c.get("teachers") or []
         instructor = teachers[0].get("display_name") if teachers else ""
+        # Allow config to override wrong/multiple-teacher courses
+        course_code_base = c.get("course_code", "").split(".")[0]
+        instructor = instructor_overrides.get(course_code_base, instructor)
         zoom_url = _find_zoom_tab_url(canvas, int(c["id"]))
         courses.append(Course(
             id=f"course{i+1}",
