@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-20T18:19:49.224705+00:00",
+  "generated_at": "2026-05-20T18:20:28.569914+00:00",
   "semester": {
     "name": "Summer 2026",
     "start_date": "2026-05-18",
@@ -18,7 +18,7 @@
       "color_tag_bg": "#DDE0EB",
       "color_tag_fg": "#38426C",
       "canvas_url": "https://naropa.instructure.com/courses/8851",
-      "zoom_url": "https://naropa.instructure.com/courses/8851/external_tools/1040"
+      "zoom_url": "https://naropa.zoom.us/j/3617516044"
     },
     {
       "id": "course2",
@@ -30,7 +30,7 @@
       "color_tag_bg": "#D2E6EA",
       "color_tag_fg": "#0F5763",
       "canvas_url": "https://naropa.instructure.com/courses/8868",
-      "zoom_url": "https://naropa.instructure.com/courses/8868/external_tools/1040"
+      "zoom_url": "https://naropa.zoom.us/j/4996578696"
     },
     {
       "id": "course3",
@@ -42,7 +42,7 @@
       "color_tag_bg": "#DCE9D5",
       "color_tag_fg": "#345A2E",
       "canvas_url": "https://naropa.instructure.com/courses/9306",
-      "zoom_url": "https://naropa.instructure.com/courses/9306/external_tools/1040"
+      "zoom_url": ""
     },
     {
       "id": "course4",
@@ -54,7 +54,7 @@
       "color_tag_bg": "#F1E5C9",
       "color_tag_fg": "#7A5A1C",
       "canvas_url": "https://naropa.instructure.com/courses/8857",
-      "zoom_url": "https://naropa.instructure.com/courses/8857/external_tools/1040"
+      "zoom_url": "https://naropa.zoom.us/j/93183836687"
     },
     {
       "id": "course5",
@@ -66,7 +66,7 @@
       "color_tag_bg": "#F4D7E3",
       "color_tag_fg": "#8A2A52",
       "canvas_url": "https://naropa.instructure.com/courses/8897",
-      "zoom_url": "https://naropa.instructure.com/courses/8897/external_tools/1040"
+      "zoom_url": "https://us02web.zoom.us/j/83708243365"
     },
     {
       "id": "course6",
@@ -78,7 +78,7 @@
       "color_tag_bg": "#E2D8F0",
       "color_tag_fg": "#5A4683",
       "canvas_url": "https://naropa.instructure.com/courses/8908",
-      "zoom_url": "https://naropa.instructure.com/courses/8908/external_tools/1040"
+      "zoom_url": ""
     }
   ],
   "items": [
