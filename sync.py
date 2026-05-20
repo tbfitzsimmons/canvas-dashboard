@@ -1074,6 +1074,176 @@ def summarize(items: list[Item]) -> dict:
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+# Canvas Planner API — reconciliation pass
+# ─────────────────────────────────────────────────────────────────────────────
+#
+# GET /api/v1/planner/items returns *exactly* what Canvas shows in a student's
+# To-Do sidebar — graded assignments, quizzes, discussions, announcements with
+# deadlines, calendar events, and dated wiki pages — regardless of whether the
+# professor used Modules, the Assignments tab, or just the Calendar.
+#
+# We use this as a safety net: after the per-course passes collect everything
+# they can find, the Planner pass finds anything they missed and adds it.
+# Items already captured (matched by canvas_id) are silently skipped.
+
+# Maps Canvas plannable_type → our canvas_id prefix (must match fetch_course_items)
+_PLANNER_ID_PREFIX: dict[str, str] = {
+    "assignment":      "assignment",
+    "sub_assignment":  "assignment",
+    "quiz":            "quiz",
+    "discussion_topic":"discussion",
+    "announcement":    "discussion",  # announcements are a discussion subtype in Canvas
+    "wiki_page":       "module_item", # pages already keyed as module_item when in a module
+    "calendar_event":  "calendar_event",
+    "assessment_request": "assignment",
+}
+
+# Canvas types to skip in the planner — these are grading/peer-review requests,
+# not student to-do items with original content.
+_PLANNER_SKIP_TYPES: set[str] = {"assessment_request"}
+
+# Calendar event subtypes that are sessions/office hours, not deliverables.
+# We include everything else (reservation, event created by a teacher as a deadline).
+_SKIP_CALENDAR_CONTEXT = ("course_section",)
+
+
+def _planner_item_type(p_type: str, plannable: dict) -> str:
+    """Map a planner plannable_type to our 7-type taxonomy."""
+    name = lower(plannable.get("title") or plannable.get("name") or "")
+    if p_type in ("assignment", "sub_assignment", "assessment_request"):
+        return classify_assignment(plannable)
+    if p_type == "quiz":
+        return "exam" if any(h in name for h in EXAM_HINTS) else "quiz"
+    if p_type in ("discussion_topic", "announcement"):
+        return "discussion"
+    if p_type == "wiki_page":
+        return "reading"
+    if p_type == "calendar_event":
+        # Treat calendar events as assignment (deadline reminder) unless title
+        # strongly suggests it's a video/recording.
+        return "video" if any(h in name for h in VIDEO_HINTS) else "assignment"
+    return "assignment"
+
+
+def fetch_planner_reconciliation(
+    canvas: Canvas,
+    courses: list[Course],
+    cfg: dict,
+    existing_ids: set[str],
+) -> list[Item]:
+    """Call /planner/items and return any items not already in existing_ids.
+
+    Covers: calendar events, announcements with deadlines, dated wiki pages,
+    and any assignment/quiz/discussion the per-course passes may have missed.
+    """
+    semester = cfg["semester"]
+    start_date = semester["start_date"]
+    semester_start = parse_iso(start_date) or datetime.now(timezone.utc)
+    total_weeks = semester["weeks"]
+    end_date = (semester_start + timedelta(days=total_weeks * 7)).strftime("%Y-%m-%d")
+
+    course_map: dict[int, Course] = {c.canvas_id: c for c in courses}
+
+    print(f"\n→ Planner API reconciliation ({start_date} → {end_date})…")
+    try:
+        raw = list(canvas.paginate("/planner/items", {
+            "start_date": start_date,
+            "end_date": end_date,
+            "per_page": 50,  # Planner API caps at 50
+        }))
+    except requests.HTTPError as e:
+        print(f"  ⚠ Planner API unavailable: {e}")
+        return []
+
+    new_items: list[Item] = []
+    skipped_known = 0
+    skipped_other_course = 0
+
+    for p in raw:
+        p_type = p.get("plannable_type", "")
+        if p_type in _PLANNER_SKIP_TYPES:
+            continue
+
+        course_id = p.get("course_id")
+        if not course_id or int(course_id) not in course_map:
+            skipped_other_course += 1
+            continue
+        course = course_map[int(course_id)]
+
+        plannable = p.get("plannable") or {}
+        p_id = p.get("plannable_id") or plannable.get("id")
+        if not p_id:
+            continue
+
+        # Build the canvas_id we'd use for this item
+        prefix = _PLANNER_ID_PREFIX.get(p_type, p_type)
+        canvas_id = f"{prefix}:{p_id}"
+
+        # Also check the wiki_page case: when a page IS in a module it gets
+        # canvas_id = "module_item:{module_item_id}" not "module_item:{page_id}".
+        # So for wiki_pages, do a secondary check by scanning existing_ids.
+        if p_type == "wiki_page":
+            page_title = lower(plannable.get("title") or "")
+            already = any(
+                "module_item" in eid and page_title in eid.lower()
+                for eid in existing_ids
+            ) or canvas_id in existing_ids
+            if already:
+                skipped_known += 1
+                continue
+        elif canvas_id in existing_ids:
+            skipped_known += 1
+            continue
+
+        due_str = p.get("plannable_date") or plannable.get("due_at") or plannable.get("start_at")
+        due = parse_iso(due_str)
+        title = plannable.get("title") or plannable.get("name") or "Untitled"
+        link = plannable.get("html_url") or ""
+        kind = _planner_item_type(p_type, plannable)
+
+        # Calendar events: skip obvious "class session" entries (no deliverable)
+        if p_type == "calendar_event":
+            ctx = (plannable.get("context_code") or "")
+            if any(s in ctx for s in _SKIP_CALENDAR_CONTEXT):
+                continue
+            # Also skip all-day events with no specific time (likely a holiday marker)
+            if plannable.get("all_day") and not plannable.get("start_at"):
+                continue
+
+        detail_prefix = {
+            "announcement": "Announcement",
+            "calendar_event": "Calendar event",
+            "wiki_page": "Page (not in module)",
+        }.get(p_type, "")
+
+        new_items.append(Item(
+            week=week_number(due, semester_start, total_weeks),
+            courseId=course.id,
+            type=kind,
+            title=title,
+            detail=detail_prefix,
+            due=due_day_short(due),
+            due_date=due.isoformat() if due else None,
+            link=link,
+            points=plannable.get("points_possible"),
+            canvas_id=canvas_id,
+            source="planner",
+        ))
+
+    print(f"  ✓ Planner: {len(raw)} total items scanned, "
+          f"{skipped_known} already captured, "
+          f"{skipped_other_course} other courses, "
+          f"{len(new_items)} new item(s) added")
+    if new_items:
+        for it in new_items:
+            c = next((c for c in courses if c.id == it.courseId), None)
+            code = c.code if c else it.courseId
+            print(f"  + [{code}] {it.type}: {it.title}"
+                  + (f" (due {it.due})" if it.due != '—' else " (no due date)"))
+    return new_items
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 # Entry
 # ─────────────────────────────────────────────────────────────────────────────
 
@@ -1096,6 +1266,11 @@ def main() -> int:
             except Exception as e:
                 course = futures[fut]
                 print(f"  ⚠ {course.code} failed: {e}", file=sys.stderr)
+
+    # Planner API reconciliation — catches anything the per-course passes missed
+    existing_ids = {it.canvas_id for it in all_items}
+    planner_new = fetch_planner_reconciliation(canvas, courses, cfg, existing_ids)
+    all_items.extend(planner_new)
 
     # Stable sort: by week, then by due date, then by course, then by title
     all_items.sort(key=lambda i: (i.week or 99, i.due_date or "9999", i.courseId, i.title.lower()))
