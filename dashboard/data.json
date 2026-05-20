@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-20T18:30:59.666884+00:00",
+  "generated_at": "2026-05-20T18:44:12.720617+00:00",
   "semester": {
     "name": "Summer 2026",
     "start_date": "2026-05-18",
@@ -94,6 +94,21 @@
       "points": null,
       "canvas_id": "discussion:105278",
       "source": "discussion",
+      "is_overview": false,
+      "summary": ""
+    },
+    {
+      "week": 1,
+      "courseId": "course1",
+      "type": "paper",
+      "title": "Character Case Conceptualization and Treatment Plan Design Project (B9 KPI) - Movie Case Paper  DUE by 8/9/26 ",
+      "detail": "20 pts · text entry, URL, media, file upload",
+      "due": "Mon",
+      "due_date": "2026-05-18T06:00:00+00:00",
+      "link": "https://naropa.instructure.com/courses/8851/assignments/113046",
+      "points": 20.0,
+      "canvas_id": "assignment:113046",
+      "source": "assignment",
       "is_overview": false,
       "summary": ""
     },
@@ -7789,21 +7804,6 @@
       "points": null,
       "canvas_id": "page_child:408616:b65ae4ab",
       "source": "page_child",
-      "is_overview": false,
-      "summary": ""
-    },
-    {
-      "week": 0,
-      "courseId": "course1",
-      "type": "paper",
-      "title": "Character Case Conceptualization and Treatment Plan Design Project (B9 KPI) - Movie Case Paper  DUE by 8/9/26 ",
-      "detail": "20 pts · text entry, URL, media, file upload",
-      "due": "—",
-      "due_date": null,
-      "link": "https://naropa.instructure.com/courses/8851/assignments/113046",
-      "points": 20.0,
-      "canvas_id": "assignment:113046",
-      "source": "assignment",
       "is_overview": false,
       "summary": ""
     },
