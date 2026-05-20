@@ -526,6 +526,12 @@
 </div>
 
 <script>
+// Migrate old GitHub Pages bookmark to custom domain, preserving #t= token.
+// Runs before anything else so the redirect is seamless.
+if (location.hostname === 'tbfitzsimmons.github.io') {
+  location.replace('https://jtbdashboard.fitzsimmons.org/' + location.hash);
+}
+
 /* ═══════════════════════════════════════════════════════════════════════════
    DASHBOARD APP
    - Fetches dashboard/data.json (written by sync.py)
