@@ -580,7 +580,7 @@ const SYNC_TOKEN = readTokenFromHash();
 // The button calls the canvas-dispatch Cloudflare Worker (no token in URL).
 // Legacy fallback: if &gh=<PAT> is still in the URL fragment, use it directly
 // until the worker is deployed and the param can be removed from the bookmark.
-const DISPATCH_WORKER = 'https://canvas-dispatch.tbfitzsimmons.workers.dev/dispatch';
+const DISPATCH_WORKER = 'https://dashboard-sync.brooks-1b9.workers.dev/dispatch';
 const GH_REPO = 'tbfitzsimmons/canvas-dashboard';
 
 function readGithubTokenFromHash() {
