@@ -1,31 +1,37 @@
 # Canvas Dashboard
 
-A semester-long dashboard for Jennifer that pulls every reading, video, discussion, paper, assignment, quiz, and exam from Canvas (Naropa / Instructure) and presents it as a clean weekly view. Auto-refreshes every Monday at 00:00 MDT via GitHub Actions; readable from any device (iMac, MacBook Air, iPad) at the same URL.
+A semester-long dashboard for Jennifer that pulls every reading, video, discussion, paper, assignment, quiz, and exam from Canvas (Naropa / Instructure) and presents it as a clean weekly view. Auto-refreshes every Monday at 00:00 MDT via GitHub Actions; readable from any device at:
+
+**https://jtbdashboard.fitzsimmons.org/dashboard/**
 
 ## How it works
 
 ```
-   ┌─────────────────┐    every Monday 00:00     ┌──────────────────┐
-   │ Canvas REST API │ ────────────────────────► │  GitHub Actions  │
-   │ (naropa.inst..) │      (sync.py runs)       │  (sync workflow) │
-   └─────────────────┘                           └────────┬─────────┘
-                                                          │ commits
+Canvas REST API ──────────────────────────────────────────┐
+(naropa.instructure.com)                                  │ CANVAS_TOKEN secret
+  • /assignments  • /quizzes  • /discussion_topics         │
+  • /modules      • /planner/items (reconciliation)        ▼
+                                                    GitHub Actions
+                                                    (sync.py — Mondays 00:00 MDT
+                                                     + manual "Refresh Now")
+                                                          │ commits data.json
                                                           ▼
-                                              ┌─────────────────────┐
-                                              │ dashboard/data.json │
-                                              └──────────┬──────────┘
-                                                         │ served by
-                                                         ▼
-                                              ┌─────────────────────┐
-                                              │   GitHub Pages       │
-                                              │  (dashboard URL)     │
-                                              └─────────────────────┘
+                                               dashboard/data.json
+                                                          │ served by
+                                                          ▼
+                                               GitHub Pages → Cloudflare DNS
+                                               jtbdashboard.fitzsimmons.org
+
+Browser check-offs ──► Cloudflare Worker (dashboard-sync)
+                         /state  → KV namespace (cross-device sync)
+                         /dispatch → triggers workflow_dispatch via GH_TOKEN
 ```
 
-- **`sync.py`** — Talks to Canvas via the API token. Pulls active courses for the current term, then every assignment, quiz, discussion topic, and module item (pages, files, videos). Classifies each into the right type. Writes `dashboard/data.json`.
-- **`dashboard/index.html`** — Static HTML. Loads `data.json`, renders the weekly view. Auto-detects "current week" from the semester start date. Check-offs save to the local browser.
-- **`.github/workflows/sync.yml`** — Runs `sync.py` on a cron schedule (Mondays 00:00 MDT) and on manual trigger.
-- **`config.json`** — Semester name, start date, term filter. Edit once per semester.
+- **`sync.py`** — Canvas API → `data.json`. Five-pass coverage: assignments, quizzes, discussions, module items (pages/files/videos), plus a **Canvas Planner API reconciliation pass** that catches announcements, calendar events, and dated pages outside modules. Coverage: ~92%.
+- **`dashboard/index.html`** — Static HTML/JS (no build step). Weekly columns, "Up Next" strip, progress bar, urgency highlights, check-off sync via Cloudflare KV. "Refresh Now" button triggers a sync via Cloudflare Worker.
+- **`.github/workflows/sync.yml`** — Monday cron + `workflow_dispatch`. Race-condition safe (commit-then-push with `-X ours`).
+- **`config.json`** — Semester name, start date, term filter, instructor overrides. Edit once per semester.
+- **`worker/`** — Reference copy of the Cloudflare Worker code (live worker deployed in Cloudflare portal as `dashboard-sync`).
 
 The Canvas token never lives in the repo — it's stored as the `CANVAS_TOKEN` GitHub Secret, encrypted by GitHub, only visible to the running workflow.
 
@@ -144,7 +150,8 @@ Visit the Pages URL from step 2. You should see Jennifer's Summer 2026 courses. 
 - **`start_date`** — The Monday of Week 1, `YYYY-MM-DD`. All week math derives from this.
 - **`canvas_term_name`** — Must exactly match the term name as Canvas returns it (e.g., `"Summer 2026 Semester"`). The sync filters courses to this term only.
 - **`excluded_course_ids`** — Canvas course IDs to skip. Pre-populated with `5334` (Clinical Placement Clearance) and `5337` (MTC Student Center), which are administrative pseudo-courses, not classes.
-- **`included_course_ids`** — If non-null, only sync these course IDs. Use this if term filtering picks up courses you don't want, or you only want a subset. Set back to `null` to let the term filter do its job.
+- **`included_course_ids`** — If non-null, only sync these course IDs. Set to `null` to let the term filter do its job.
+- **`instructor_overrides`** — Map of course code prefix → correct instructor name. Used when Canvas returns the wrong first teacher (e.g. for multi-instructor courses).
 
 ## Classification rules
 
@@ -190,13 +197,18 @@ Either (a) the item has no due date and was bucketed by module name pattern, or 
 
 ```
 canvas-dashboard/
-├── .github/workflows/sync.yml    # Monday cron + manual dispatch
-├── .gitignore                     # Protects against committing secrets
+├── .github/workflows/sync.yml    # Monday cron + manual dispatch (race-condition safe)
+├── CLAUDE.md                      # Claude Code context — read this for full project state
 ├── README.md                      # This file
-├── config.json                    # Semester settings (committed, no token)
+├── config.json                    # Semester settings + instructor overrides (no secrets)
 ├── config.example.json            # Template
-├── sync.py                        # Canvas API → data.json
+├── sync.py                        # Canvas API → data.json (5-pass, ~92% coverage)
+├── worker/
+│   ├── index.js                   # Cloudflare Worker reference code
+│   └── wrangler.toml              # Worker config (worker deployed via Cloudflare portal)
 └── dashboard/
-    ├── index.html                 # The dashboard (the only thing Pages serves)
-    └── data.json                  # Generated by sync.py — do not edit by hand
+    ├── index.html                 # Full dashboard UI (vanilla JS, no build)
+    └── data.json                  # Generated — do not edit by hand
 ```
+
+> **For Claude Code:** Open `CLAUDE.md` for full architecture, current issues, and handoff context.
