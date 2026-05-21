@@ -60,6 +60,54 @@ VIDEO_HINTS = [
 PAPER_HINTS = ["paper", "essay", "term paper", "reflection paper", "final paper"]
 EXAM_HINTS = ["midterm", "final exam", "final assessment", "exam", "comprehensive"]
 
+# Catches "DUE by 8/9/26", "DUE 08/09/2026", "Due: 8-9-26" inside item titles —
+# professors sometimes bake the real deadline into the title when Canvas's
+# due_at field is wrong (Movie Case Paper case in Summer 2026).
+TITLE_DUE_RE = re.compile(
+    r"\bdue\s*(?:by|on|:)?\s*(\d{1,2})[/-](\d{1,2})[/-](\d{2,4})\b",
+    re.IGNORECASE,
+)
+
+# Catches "Discussion #5", "Discussion 12", "Disc #3" — the number is the week.
+# Used as a last-resort week fallback for graded discussions with no due_at.
+DISCUSSION_NUMBER_RE = re.compile(
+    r"\bdiscussion\s*#?\s*(\d{1,2})\b",
+    re.IGNORECASE,
+)
+
+
+def parse_due_from_title(title: str) -> datetime | None:
+    """Return a datetime parsed from 'DUE by M/D/YY' patterns in a title, or None."""
+    if not title:
+        return None
+    m = TITLE_DUE_RE.search(title)
+    if not m:
+        return None
+    try:
+        mo, dy, yr = int(m.group(1)), int(m.group(2)), int(m.group(3))
+        if yr < 100:
+            yr += 2000
+        # Canvas times are UTC; choose end-of-day to mirror the usual 11:59pm deadline.
+        return datetime(yr, mo, dy, 23, 59, 0, tzinfo=timezone.utc)
+    except (ValueError, TypeError):
+        return None
+
+
+def reconcile_due(due_at: datetime | None, title: str) -> datetime | None:
+    """If the title carries an explicit later deadline (DUE by M/D/YY), prefer it.
+    This handles assignments where Canvas's due_at is wrong/default and the prof
+    baked the real deadline into the title."""
+    title_due = parse_due_from_title(title)
+    if not title_due:
+        return due_at
+    if due_at is None:
+        return title_due
+    # Only override when the title date is meaningfully later (≥7 days) — that
+    # signals a real mismatch rather than a one-day extension.
+    if (title_due - due_at).days >= 7:
+        return title_due
+    return due_at
+
 # Canvas pagination — pull everything.
 PER_PAGE = 100
 
@@ -761,12 +809,24 @@ def fetch_course_items(canvas: Canvas, course: Course, cfg: dict) -> list[Item]:
             # Use due_at if set; fall back to unlock_at (when it becomes available).
             # lock_at is intentionally not used — it's the cutoff, not the deadline.
             due = parse_iso(a.get("due_at")) or parse_iso(a.get("unlock_at"))
+            title = a.get("name", "Untitled")
+            # If the title carries an explicit "DUE by M/D/YY", trust it over due_at.
+            due = reconcile_due(due, title)
             kind = classify_assignment(a)
+            # Last-resort week fallback for graded discussions with no date: parse
+            # the discussion number out of the title (Discussion #5 → week 5).
+            wk = week_number(due, semester_start, total_weeks)
+            if wk == 0 and kind == "discussion":
+                m = DISCUSSION_NUMBER_RE.search(title)
+                if m:
+                    n = int(m.group(1))
+                    if 1 <= n <= total_weeks:
+                        wk = n
             items.append(Item(
-                week=week_number(due, semester_start, total_weeks),
+                week=wk,
                 courseId=course.id,
                 type=kind,
-                title=a.get("name", "Untitled"),
+                title=title,
                 detail=points_detail(a),
                 due=due_day_short(due),
                 due_date=due.isoformat() if due else None,
@@ -1098,9 +1158,11 @@ _PLANNER_ID_PREFIX: dict[str, str] = {
     "assessment_request": "assignment",
 }
 
-# Canvas types to skip in the planner — these are grading/peer-review requests,
-# not student to-do items with original content.
-_PLANNER_SKIP_TYPES: set[str] = {"assessment_request"}
+# Canvas types to skip in the planner — peer-review requests aren't deliverables,
+# and announcements ("Welcome…", "Greetings & Course Update", "Intro Video is UP!")
+# are professor notices, not student work — they were showing up as discussion
+# rows in Week 1 and cluttering the UI.
+_PLANNER_SKIP_TYPES: set[str] = {"assessment_request", "announcement"}
 
 # Calendar event subtypes that are sessions/office hours, not deliverables.
 # We include everything else (reservation, event created by a teacher as a deadline).
@@ -1198,6 +1260,7 @@ def fetch_planner_reconciliation(
         due_str = p.get("plannable_date") or plannable.get("due_at") or plannable.get("start_at")
         due = parse_iso(due_str)
         title = plannable.get("title") or plannable.get("name") or "Untitled"
+        due = reconcile_due(due, title)
         link = plannable.get("html_url") or ""
         kind = _planner_item_type(p_type, plannable)
 
