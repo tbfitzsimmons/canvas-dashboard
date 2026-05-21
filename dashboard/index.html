@@ -267,14 +267,13 @@
   }
   .col-head .caret {
     display: inline-block;
-    width: 16px;
-    margin-right: 8px;
+    width: 12px;
+    margin-right: 6px;
     transition: transform 0.15s ease;
-    font-size: 16px;
+    font-size: 11px;
     line-height: 1;
     opacity: 1;
     color: white;
-    text-shadow: 0 1px 1px rgba(0,0,0,0.25);
   }
   .col.collapsed .col-head .caret { transform: rotate(-90deg); }
   .col.collapsed .col-body,
@@ -1288,7 +1287,7 @@ function renderUndatedSection() {
     return `
       <div class="col ${isCollapsed ? 'collapsed' : ''}">
         <div class="col-head" style="background:${course.color_bar};" onclick="toggleCourseCollapsed('${escapeAttr(course.id)}')">
-          <div><span class="caret">▾</span><span class="col-title">${escapeHtml(course.name)}</span>
+          <div><span class="caret">▼</span><span class="col-title">${escapeHtml(course.name)}</span>
                <span class="col-code-tag">${escapeHtml(course.code)}</span></div>
           <div class="col-progress">${cdone}/${courseItems.length}</div>
         </div>
@@ -1345,7 +1344,7 @@ function renderWeekColumns(weekNum) {
         return `
           <div class="col col-muted ${isCollapsed ? 'collapsed' : ''}">
             <div class="col-head" style="background:${course.color_bar};" onclick="toggleCourseCollapsed('${escapeAttr(course.id)}')">
-              <div><span class="caret">▾</span><span class="col-title">${escapeHtml(course.name)}</span>
+              <div><span class="caret">▼</span><span class="col-title">${escapeHtml(course.name)}</span>
                    <span class="col-code-tag">${escapeHtml(course.code)}</span></div>
             </div>
             <div class="col-quiet">Nothing assigned this week ✓</div>
@@ -1356,7 +1355,7 @@ function renderWeekColumns(weekNum) {
       return `
         <div class="col ${isCollapsed ? 'collapsed' : ''}">
           <div class="col-head" style="background:${course.color_bar};" onclick="toggleCourseCollapsed('${escapeAttr(course.id)}')">
-            <div><span class="caret">▾</span><span class="col-title">${escapeHtml(course.name)}</span>
+            <div><span class="caret">▼</span><span class="col-title">${escapeHtml(course.name)}</span>
                  <span class="col-code-tag">${escapeHtml(course.code)}</span></div>
             <div class="col-progress">${done}/${courseItems.length}</div>
           </div>
