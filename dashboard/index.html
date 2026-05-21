@@ -262,7 +262,21 @@
     justify-content: space-between;
     align-items: baseline;
     font-weight: 600;
+    cursor: pointer;
+    user-select: none;
   }
+  .col-head .caret {
+    display: inline-block;
+    width: 12px;
+    margin-right: 6px;
+    transition: transform 0.15s ease;
+    font-size: 10px;
+    line-height: 1;
+    opacity: 0.85;
+  }
+  .col.collapsed .col-head .caret { transform: rotate(-90deg); }
+  .col.collapsed .col-body,
+  .col.collapsed .col-quiet { display: none; }
   .col-head .col-title { font-size: 14px; line-height: 1.2; }
   .col-head .col-code-tag {
     font-family: var(--font-mono);
@@ -740,6 +754,25 @@ function persistLocal(set) {
   try { localStorage.setItem(STORAGE_KEY, JSON.stringify([...set])); } catch {}
 }
 const CHECKED = loadChecked();
+
+// ── Per-course collapse state (local-only, persisted in localStorage) ──────
+const COLLAPSED_KEY = 'canvas-dashboard.collapsed-courses-v1';
+function loadCollapsedCourses() {
+  try { return new Set(JSON.parse(localStorage.getItem(COLLAPSED_KEY) || '[]')); }
+  catch { return new Set(); }
+}
+function persistCollapsedCourses(set) {
+  try { localStorage.setItem(COLLAPSED_KEY, JSON.stringify([...set])); } catch {}
+}
+const COLLAPSED_COURSES = loadCollapsedCourses();
+
+function toggleCourseCollapsed(courseId) {
+  if (COLLAPSED_COURSES.has(courseId)) COLLAPSED_COURSES.delete(courseId);
+  else COLLAPSED_COURSES.add(courseId);
+  persistCollapsedCourses(COLLAPSED_COURSES);
+  // Re-render whichever view is showing
+  if (typeof renderView === 'function') renderView();
+}
 
 // ── Sync state machine ─────────────────────────────────────────────────────
 //   'synced'  green   — local and remote agree (or no token, localStorage only)
@@ -1248,10 +1281,11 @@ function renderUndatedSection() {
     const courseItems = items.filter(it => it.courseId === course.id);
     if (!courseItems.length) return '';
     const cdone = courseItems.filter(it => CHECKED.has(it.canvas_id)).length;
+    const isCollapsed = COLLAPSED_COURSES.has(course.id);
     return `
-      <div class="col">
-        <div class="col-head" style="background:${course.color_bar};">
-          <div><span class="col-title">${escapeHtml(course.name)}</span>
+      <div class="col ${isCollapsed ? 'collapsed' : ''}">
+        <div class="col-head" style="background:${course.color_bar};" onclick="toggleCourseCollapsed('${escapeAttr(course.id)}')">
+          <div><span class="caret">▾</span><span class="col-title">${escapeHtml(course.name)}</span>
                <span class="col-code-tag">${escapeHtml(course.code)}</span></div>
           <div class="col-progress">${cdone}/${courseItems.length}</div>
         </div>
@@ -1303,12 +1337,14 @@ function renderWeekColumns(weekNum) {
         .slice()
         .sort((a, b) => (b.is_overview ? 1 : 0) - (a.is_overview ? 1 : 0));
 
+      const isCollapsed = COLLAPSED_COURSES.has(course.id);
+
       if (!courseItems.length) {
         if (!showEmpty) return '';
         return `
-          <div class="col col-muted">
-            <div class="col-head" style="background:${course.color_bar};">
-              <div><span class="col-title">${escapeHtml(course.name)}</span>
+          <div class="col col-muted ${isCollapsed ? 'collapsed' : ''}">
+            <div class="col-head" style="background:${course.color_bar};" onclick="toggleCourseCollapsed('${escapeAttr(course.id)}')">
+              <div><span class="caret">▾</span><span class="col-title">${escapeHtml(course.name)}</span>
                    <span class="col-code-tag">${escapeHtml(course.code)}</span></div>
             </div>
             <div class="col-quiet">Nothing assigned this week ✓</div>
@@ -1317,9 +1353,9 @@ function renderWeekColumns(weekNum) {
 
       const done = courseItems.filter(it => CHECKED.has(it.canvas_id)).length;
       return `
-        <div class="col">
-          <div class="col-head" style="background:${course.color_bar};">
-            <div><span class="col-title">${escapeHtml(course.name)}</span>
+        <div class="col ${isCollapsed ? 'collapsed' : ''}">
+          <div class="col-head" style="background:${course.color_bar};" onclick="toggleCourseCollapsed('${escapeAttr(course.id)}')">
+            <div><span class="caret">▾</span><span class="col-title">${escapeHtml(course.name)}</span>
                  <span class="col-code-tag">${escapeHtml(course.code)}</span></div>
             <div class="col-progress">${done}/${courseItems.length}</div>
           </div>

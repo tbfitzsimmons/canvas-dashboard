@@ -1335,11 +1335,62 @@ def main() -> int:
     planner_new = fetch_planner_reconciliation(canvas, courses, cfg, existing_ids)
     all_items.extend(planner_new)
 
+    # Synthetic items — recurring weekly tasks not visible in Canvas
+    all_items.extend(generate_synthetic_items(courses, cfg))
+
     # Stable sort: by week, then by due date, then by course, then by title
     all_items.sort(key=lambda i: (i.week or 99, i.due_date or "9999", i.courseId, i.title.lower()))
 
     write_data(courses, all_items, cfg)
     return 0
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Synthetic items — recurring weekly tasks that don't exist as Canvas items
+# but Jennifer needs to track anyway.
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Course-name patterns that trigger the "Update Hours in Supervision Assist"
+# weekly to-do. Matched case-insensitively against the course name.
+SUPERVISION_HOURS_COURSE_PATTERNS = re.compile(r"\b(practicum|internship)\b", re.IGNORECASE)
+SUPERVISION_ASSIST_URL = "https://app.supervisionassist.com/"
+
+
+def generate_synthetic_items(courses: list[Course], cfg: dict) -> list[Item]:
+    """Generate recurring weekly to-dos for courses that don't surface them in Canvas.
+
+    Currently: one 'Update Hours in Supervision Assist' item per week for each
+    course whose name contains 'Practicum' or 'Internship'. Stable canvas_id
+    (`synthetic:supervision_assist:{course.id}:wk{n}`) so check-offs persist
+    across syncs."""
+    semester = cfg["semester"]
+    semester_start = parse_iso(semester["start_date"]) or datetime.now(timezone.utc)
+    total_weeks = int(semester["weeks"])
+
+    out: list[Item] = []
+    for course in courses:
+        haystack = f"{course.name} {course.code}"
+        if not SUPERVISION_HOURS_COURSE_PATTERNS.search(haystack):
+            continue
+        for wk in range(1, total_weeks + 1):
+            # Due Sunday end-of-day for that week
+            week_start = semester_start + timedelta(days=(wk - 1) * 7)
+            due = week_start + timedelta(days=6, hours=23, minutes=59)
+            out.append(Item(
+                week=wk,
+                courseId=course.id,
+                type="assignment",
+                title="Update Hours in Supervision Assist",
+                detail="Weekly hours log",
+                due=due_day_short(due),
+                due_date=due.isoformat(),
+                link=SUPERVISION_ASSIST_URL,
+                points=None,
+                canvas_id=f"synthetic:supervision_assist:{course.id}:wk{wk}",
+                source="synthetic",
+            ))
+        print(f"  ↳ {course.code}: added {total_weeks} weekly 'Supervision Assist' to-dos")
+    return out
 
 
 if __name__ == "__main__":
