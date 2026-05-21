@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-21T03:00:01.004185+00:00",
+  "generated_at": "2026-05-21T21:20:24.304242+00:00",
   "semester": {
     "name": "Summer 2026",
     "start_date": "2026-05-18",
@@ -754,6 +754,21 @@
       "points": null,
       "canvas_id": "page_child:407537:a36ad18a",
       "source": "page_child",
+      "is_overview": false,
+      "summary": ""
+    },
+    {
+      "week": 1,
+      "courseId": "course5",
+      "type": "reading",
+      "title": "Loving Kindness Contemplation ",
+      "detail": "",
+      "due": "—",
+      "due_date": null,
+      "link": "https://naropa.instructure.com/courses/8897/modules/items/410389",
+      "points": null,
+      "canvas_id": "module_item:410389",
+      "source": "module_item",
       "is_overview": false,
       "summary": ""
     },
@@ -11889,7 +11904,7 @@
     }
   ],
   "totals": {
-    "reading": 596,
+    "reading": 597,
     "video": 105,
     "discussion": 32,
     "paper": 6,
