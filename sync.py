@@ -805,11 +805,17 @@ def fetch_course_items(canvas: Canvas, course: Course, cfg: dict) -> list[Item]:
     # Build discussion_id → module_week map so ungraded discussions with no
     # due_at can still be placed in the right week column.
     discussion_module_weeks: dict[str, int] = {}
+    assignment_module_weeks: dict[str, int] = {}
     for _mod in modules_data:
         _mw = guess_week_from_module_name(_mod.get("name", ""), semester_start, total_weeks)
         for _it in _mod.get("items") or []:
-            if _it.get("type") == "Discussion" and _it.get("content_id"):
-                discussion_module_weeks[str(_it["content_id"])] = _mw
+            cid_str = str(_it.get("content_id") or "")
+            if not cid_str:
+                continue
+            if _it.get("type") == "Discussion":
+                discussion_module_weeks[cid_str] = _mw
+            elif _it.get("type") == "Assignment":
+                assignment_module_weeks[cid_str] = _mw
 
     # 1. Assignments
     try:
@@ -823,15 +829,26 @@ def fetch_course_items(canvas: Canvas, course: Course, cfg: dict) -> list[Item]:
             # If the title carries an explicit "DUE by M/D/YY", trust it over due_at.
             due = reconcile_due(due, title)
             kind = classify_assignment(a)
-            # Last-resort week fallback for graded discussions with no date: parse
-            # the discussion number out of the title (Discussion #5 → week 5).
             wk = week_number(due, semester_start, total_weeks)
-            if wk == 0 and kind == "discussion":
-                m = DISCUSSION_NUMBER_RE.search(title)
-                if m:
-                    n = int(m.group(1))
-                    if 1 <= n <= total_weeks:
-                        wk = n
+            # No due_at? Try to recover a week from the assignment's module position.
+            # Canvas often leaves due_at null for items that follow the module rhythm
+            # rather than a specific calendar date (graded discussions, weekly check-ins).
+            if wk == 0:
+                # 1. If this assignment is itself a module item, use that module's week.
+                if str(a.get("id")) in assignment_module_weeks:
+                    wk = assignment_module_weeks[str(a.get("id"))]
+                # 2. If this is a discussion-assignment, follow its discussion_topic into modules.
+                if wk == 0 and kind == "discussion":
+                    disc_id = a.get("discussion_topic", {}).get("id") if isinstance(a.get("discussion_topic"), dict) else None
+                    if disc_id and str(disc_id) in discussion_module_weeks:
+                        wk = discussion_module_weeks[str(disc_id)]
+                # 3. Last resort: parse "Discussion #N" from the title.
+                if wk == 0 and kind == "discussion":
+                    m = DISCUSSION_NUMBER_RE.search(title)
+                    if m:
+                        n = int(m.group(1))
+                        if 1 <= n <= total_weeks:
+                            wk = n
             items.append(Item(
                 week=wk,
                 courseId=course.id,
