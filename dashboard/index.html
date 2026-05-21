@@ -1119,8 +1119,6 @@ function render() {
 
     ${renderProgressSection()}
 
-    <div id="whats-next-container"></div>
-
     <div id="view-container"></div>
 
     <footer class="foot">
@@ -1262,9 +1260,6 @@ function renderProgressSection() {
 function renderProgressSection_update() {
   const el = document.getElementById('progress-section');
   if (el) el.outerHTML = renderProgressSection();
-  // Also refresh What's Next so checked items disappear from the strip
-  const wn = document.getElementById('whats-next-container');
-  if (wn) wn.innerHTML = renderWhatsnext();
 }
 
 function filteredUndatedItems() {
@@ -1313,8 +1308,6 @@ function renderUndatedSection() {
 
 function renderView() {
   const container = document.getElementById('view-container');
-  const wn = document.getElementById('whats-next-container');
-  if (wn) wn.innerHTML = renderWhatsnext();
   if (STATE.view === 'week') {
     container.innerHTML = renderWeekColumns(STATE.viewedWeek) + renderUndatedSection();
   } else {
