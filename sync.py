@@ -68,10 +68,11 @@ TITLE_DUE_RE = re.compile(
     re.IGNORECASE,
 )
 
-# Catches "Discussion #5", "Discussion 12", "Disc #3" — the number is the week.
+# Catches "Discussion #5", "Discussion 12", "Disc #3", "Discussion Question #1",
+# "Discussion Topic 4". Allows one short word between "discussion" and the number.
 # Used as a last-resort week fallback for graded discussions with no due_at.
 DISCUSSION_NUMBER_RE = re.compile(
-    r"\bdiscussion\s*#?\s*(\d{1,2})\b",
+    r"\bdiscussion(?:\s+(?:question|topic|prompt|post|thread))?\s*#?\s*(\d{1,2})\b",
     re.IGNORECASE,
 )
 
@@ -375,6 +376,15 @@ DELIVERABLE_SECTIONS = re.compile(
 # Sections to drop — class discussion prompts, agenda, etc.
 IGNORE_SECTIONS = re.compile(
     r"^(discussion (questions?|topics?|prompts?)|class topics?|agenda|schedule|notes?)\b",
+    re.IGNORECASE,
+)
+
+# Page-title patterns that signal "container page" — the page exists only to
+# list other deliverables. If parsing yields zero children, drop the page itself
+# rather than emit it as a phantom reading row.
+CONTAINER_PAGE_TITLE_RE = re.compile(
+    r"\b(resources?|materials?|optional learning|readings? and|"
+    r"presentation for week|files|slides|assignments?)\b",
     re.IGNORECASE,
 )
 
@@ -959,6 +969,16 @@ def fetch_course_items(canvas: Canvas, course: Course, cfg: dict) -> list[Item]:
                         ))
                         page_children_emitted += 1
                 else:
+                    # A Page that yielded 0 children AND whose title looks like
+                    # a container ("Optional Learning and Resources", "Week 1
+                    # Resources", "Files", etc.) is just a directory — drop it
+                    # entirely rather than emit it as a phantom reading row.
+                    if (
+                        it.get("type") == "Page"
+                        and not is_overview_page
+                        and CONTAINER_PAGE_TITLE_RE.search(title or "")
+                    ):
+                        continue
                     items.append(Item(
                         week=mod_week,
                         courseId=course.id,

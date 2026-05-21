@@ -277,6 +277,12 @@
   .col.collapsed .col-head .caret { transform: rotate(-90deg); }
   .col.collapsed .col-body,
   .col.collapsed .col-quiet { display: none; }
+  /* When collapsed, the column shrinks to its header — don't let the grid stretch
+     it to match its taller neighbours (otherwise a white box hangs below). */
+  .col.collapsed {
+    align-self: start;
+    border-color: transparent;
+  }
   .col-head .col-title { font-size: 14px; line-height: 1.2; }
   .col-head .col-code-tag {
     font-family: var(--font-mono);
@@ -627,7 +633,7 @@ const TYPE_META = {
   lecture:    { ico: '🎤', label: 'LECTURE' },
   discussion: { ico: '💬', label: 'DISCUSSION' },
   paper:      { ico: '📝', label: 'PAPER' },
-  assignment: { ico: '✅', label: 'ASSIGNMENT' },
+  assignment: { ico: '📋', label: 'ASSIGNMENT' },
   quiz:       { ico: '🧩', label: 'QUIZ' },
   exam:       { ico: '🎓', label: 'EXAM' },
 };
