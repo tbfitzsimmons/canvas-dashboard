@@ -1038,6 +1038,11 @@ window.addEventListener('online', () => { if (SYNC.dirty) flushRemote(); });
 document.addEventListener('visibilitychange', () => {
   if (!document.hidden && SYNC_TOKEN && !SYNC.dirty) pullRemote();
 });
+// And poll while the tab is visible — catches cross-device changes within 30s
+// even if the user doesn't switch tabs/apps.
+setInterval(() => {
+  if (!document.hidden && SYNC_TOKEN && !SYNC.dirty) pullRemote();
+}, 30000);
 // Re-fetch data.json when tab refocuses — picks up any sync that ran while away
 document.addEventListener('visibilitychange', () => {
   if (!document.hidden && STATE.data && !REFRESH.active) {

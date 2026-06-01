@@ -1309,6 +1309,16 @@ def fetch_planner_reconciliation(
         elif canvas_id in existing_ids:
             skipped_known += 1
             continue
+        # Graded discussions are emitted by the assignments pass as
+        # "assignment:<assignment_id>" — the planner sees the same item as
+        # "discussion:<topic_id>". Walk the plannable to find the linked
+        # assignment_id and dedupe against it. Without this, the dashboard
+        # shows two rows for every graded discussion (one checked, one not).
+        if p_type in ("discussion_topic", "announcement"):
+            linked_assignment = plannable.get("assignment_id")
+            if linked_assignment and f"assignment:{linked_assignment}" in existing_ids:
+                skipped_known += 1
+                continue
 
         due_str = p.get("plannable_date") or plannable.get("due_at") or plannable.get("start_at")
         due = parse_iso(due_str)
