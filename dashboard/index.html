@@ -842,7 +842,7 @@ const CHECKED = loadChecked();
 // reports a submission for it (workflow_state submitted/graded — captured
 // at sync time and stored on the item as `submitted: true`).
 function isItemDone(it) {
-  return isItemDone(it) || !!it.submitted;
+  return CHECKED.has(it.canvas_id) || !!it.submitted;
 }
 
 // ── Per-course collapse state (local-only, persisted in localStorage) ──────
