@@ -1014,7 +1014,8 @@ async function flushRemote(attempt = 0) {
 // where dev tools aren't easily accessible. Shows the last sync error.
 function showSyncDiagnostics() {
   const lines = [
-    `Token paired: ${SYNC_TOKEN ? 'yes (' + SYNC_TOKEN.slice(0,6) + '…)' : 'NO'}`,
+    `Token (full): ${SYNC_TOKEN || 'NONE'}`,
+    `Token length: ${SYNC_TOKEN ? SYNC_TOKEN.length : 0}`,
     `Local items: ${CHECKED.size}`,
     `Remote items (last pull): ${REMOTE_BLOB ? Object.keys(extractSemesterItems(REMOTE_BLOB)).length : 'never pulled'}`,
     `Sync status: ${SYNC.status}`,
