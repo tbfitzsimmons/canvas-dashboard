@@ -683,6 +683,60 @@ function clearSyncToken() {
   location.href = location.pathname;
 }
 
+// Download a JSON backup of this device's local check-offs. Pure read; never
+// mutates anything. Useful before any risky sync operation.
+function exportLocalCheckoffs() {
+  let arr = [];
+  try { arr = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); } catch {}
+  const payload = {
+    exported_at: new Date().toISOString(),
+    device: navigator.userAgent,
+    semester_hint: (window.STATE && STATE.data && STATE.data.semester && STATE.data.semester.name) || null,
+    storage_key: STORAGE_KEY,
+    count: arr.length,
+    items: arr,
+  };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `canvas-dashboard-backup-${new Date().toISOString().slice(0,10)}.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  alert(`Backup saved (${arr.length} items). Keep this file until you've verified cross-device sync.`);
+}
+
+// Restore a previously-exported backup file. Reads the JSON, unions every ID
+// into local check-offs, persists, and (if paired) immediately pushes to KV.
+function importLocalCheckoffs() {
+  const inp = document.createElement('input');
+  inp.type = 'file';
+  inp.accept = 'application/json';
+  inp.onchange = async (e) => {
+    const f = e.target.files[0];
+    if (!f) return;
+    try {
+      const text = await f.text();
+      const payload = JSON.parse(text);
+      const items = Array.isArray(payload.items) ? payload.items : Array.isArray(payload) ? payload : null;
+      if (!items) throw new Error('Backup file format unrecognized');
+      let added = 0;
+      for (const id of items) {
+        if (typeof id === 'string' && !CHECKED.has(id)) { CHECKED.add(id); added++; }
+      }
+      persistLocal(CHECKED);
+      if (SYNC_TOKEN) { SYNC.dirty = true; await flushRemote(); }
+      if (typeof render === 'function' && STATE.data) render();
+      alert(`Restored ${added} new check-offs (total now ${CHECKED.size}).`);
+    } catch (err) {
+      alert('Restore failed: ' + err.message);
+    }
+  };
+  inp.click();
+}
+
 // ── Refresh state machine ──────────────────────────────────────────────────
 // The button calls the canvas-dispatch Cloudflare Worker (no token in URL).
 // Legacy fallback: if &gh=<PAT> is still in the URL fragment, use it directly
@@ -1152,7 +1206,7 @@ function render() {
         <button id="refresh-btn" class="refresh-btn" onclick="triggerRefresh()">↻ Refresh now</button>
       </div>
       ${SYNC_TOKEN
-        ? `<div class="sync-notice" style="font-size:11px;">Paired for cross-device sync · <a href="#" onclick="event.preventDefault(); if(confirm('Unpair this device? You\\'ll need the bookmark URL to re-pair.')) clearSyncToken();">unpair this device</a></div>`
+        ? `<div class="sync-notice" style="font-size:11px;">Paired for cross-device sync · <a href="#" onclick="event.preventDefault(); exportLocalCheckoffs();">📥 backup</a> · <a href="#" onclick="event.preventDefault(); importLocalCheckoffs();">📤 restore</a> · <a href="#" onclick="event.preventDefault(); if(confirm('Unpair this device? You\\'ll need the bookmark URL to re-pair.')) clearSyncToken();">unpair this device</a></div>`
         : `<div class="sync-notice">⚠ This device isn't paired. Check-offs save only locally. Open Jennifer's bookmark URL once to pair this device.</div>`}
     </div>
 
