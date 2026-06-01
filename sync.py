@@ -22,6 +22,13 @@ import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass, field, asdict
 from datetime import datetime, timedelta, timezone
+from zoneinfo import ZoneInfo  # stdlib in Python 3.9+
+
+# Naropa / Jennifer are in Boulder. All week math and day-of-week labels must
+# be done in local time, NOT UTC. Canvas stores a "11:59 PM Sunday MDT"
+# deadline as UTC ("2026-06-01T05:59:59Z") — naive .date() on that gives
+# Monday, which puts the item in the wrong week.
+LOCAL_TZ = ZoneInfo("America/Denver")
 from pathlib import Path
 from typing import Any, Iterable
 from urllib.parse import urlparse
@@ -88,8 +95,8 @@ def parse_due_from_title(title: str) -> datetime | None:
         mo, dy, yr = int(m.group(1)), int(m.group(2)), int(m.group(3))
         if yr < 100:
             yr += 2000
-        # Canvas times are UTC; choose end-of-day to mirror the usual 11:59pm deadline.
-        return datetime(yr, mo, dy, 23, 59, 0, tzinfo=timezone.utc)
+        # Professors mean 11:59 PM Mountain Time when they type "DUE 8/9/26".
+        return datetime(yr, mo, dy, 23, 59, 0, tzinfo=LOCAL_TZ)
     except (ValueError, TypeError):
         return None
 
@@ -624,10 +631,17 @@ def parse_iso(s: str | None) -> datetime | None:
         return None
 
 
+def _local_date(d: datetime):
+    """Return d's calendar date in Naropa local time. Strips tz if present."""
+    if d.tzinfo is not None:
+        return d.astimezone(LOCAL_TZ).date()
+    return d.date()
+
+
 def week_number(due: datetime | None, semester_start: datetime, total_weeks: int) -> int:
     if not due:
         return 0  # "unscheduled" bucket
-    days = (due.date() - semester_start.date()).days
+    days = (_local_date(due) - _local_date(semester_start)).days
     if days < 0:
         return 1  # pre-semester item — bucket into week 1
     wk = days // 7 + 1
@@ -637,7 +651,9 @@ def week_number(due: datetime | None, semester_start: datetime, total_weeks: int
 def due_day_short(due: datetime | None) -> str:
     if not due:
         return "—"
-    return due.strftime("%a")  # "Mon", "Tue", etc.
+    if due.tzinfo is not None:
+        return due.astimezone(LOCAL_TZ).strftime("%a")
+    return due.strftime("%a")
 
 
 # ─────────────────────────────────────────────────────────────────────────────
