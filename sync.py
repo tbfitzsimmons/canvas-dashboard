@@ -139,6 +139,7 @@ class Item:
     source: str = ""              # which Canvas object: assignment | quiz | discussion | page | module_item
     is_overview: bool = False     # weekly-summary page → pinned to top of its week column
     summary: str = ""             # short excerpt for overview rows (first ~180 chars of body text)
+    submitted: bool = False       # Canvas reports a submission for this item — render as auto-done
 
 
 @dataclass
@@ -167,17 +168,43 @@ class Canvas:
         })
 
     def _get(self, path: str, params: dict | None = None) -> Any:
-        """Single GET, returns parsed JSON."""
+        """Single GET, returns parsed Response. Retries on 429 + transient 5xx
+        with exponential backoff. Honors Canvas's Retry-After hint if present."""
         url = path if path.startswith("http") else f"{self.base}/api/v1{path}"
-        r = self.session.get(url, params=params, timeout=30)
-        if r.status_code == 401:
-            raise SystemExit(
-                "❌ Canvas rejected the token (401 Unauthorized).\n"
-                "   Your token may have expired (Naropa caps tokens at 120 days).\n"
-                "   Regenerate at: Account → Settings → New Access Token\n"
-                "   Then update the CANVAS_TOKEN secret in GitHub."
-            )
-        r.raise_for_status()
+        max_attempts = 4
+        for attempt in range(max_attempts):
+            try:
+                r = self.session.get(url, params=params, timeout=30)
+            except (requests.ConnectionError, requests.Timeout) as e:
+                # Transient network glitch — retry
+                if attempt == max_attempts - 1:
+                    raise
+                wait = 2 ** attempt
+                print(f"  ↻ network error ({e.__class__.__name__}); retrying in {wait}s")
+                time.sleep(wait)
+                continue
+            if r.status_code == 401:
+                raise SystemExit(
+                    "❌ Canvas rejected the token (401 Unauthorized).\n"
+                    "   Your token may have expired (Naropa caps tokens at 120 days).\n"
+                    "   Regenerate at: Account → Settings → New Access Token\n"
+                    "   Then update the CANVAS_TOKEN secret in GitHub."
+                )
+            # 429 Too Many Requests OR 5xx server hiccup → retry
+            if r.status_code == 429 or 500 <= r.status_code < 600:
+                if attempt == max_attempts - 1:
+                    r.raise_for_status()
+                # Canvas sometimes returns Retry-After in seconds; fall back to backoff
+                retry_after = r.headers.get("Retry-After")
+                try:
+                    wait = int(retry_after) if retry_after else 2 ** attempt
+                except ValueError:
+                    wait = 2 ** attempt
+                print(f"  ↻ HTTP {r.status_code}; retrying in {wait}s")
+                time.sleep(wait)
+                continue
+            r.raise_for_status()
+            return r
         return r
 
     def paginate(self, path: str, params: dict | None = None) -> Iterable[dict]:
@@ -811,6 +838,23 @@ def fetch_course_items(canvas: Canvas, course: Course, cfg: dict) -> list[Item]:
     items: list[Item] = []
     seen_assignment_ids: set[int] = set()
 
+    # Pre-fetch Jennifer's submissions for this course so we can auto-mark
+    # already-submitted assignments as done. State "submitted" or "graded"
+    # → mark as submitted. The dashboard renders these with a strikethrough
+    # whether or not she's manually checked them off.
+    submitted_assignment_ids: set[int] = set()
+    try:
+        for sub in canvas.paginate(
+            f"/courses/{cid}/students/submissions",
+            {"student_ids[]": "self", "per_page": PER_PAGE},
+        ):
+            if sub.get("workflow_state") in ("submitted", "graded") and sub.get("attempt"):
+                submitted_assignment_ids.add(int(sub["assignment_id"]))
+    except requests.HTTPError as e:
+        # Non-fatal — older Canvas versions may scope this differently
+        if getattr(e.response, "status_code", None) != 404:
+            print(f"  ⚠ {course.code} submissions probe: {e}")
+
     # Pre-fetch modules once — reused for (a) discussion week fallback and
     # (b) the full module-item pass below.  Avoids a double API round-trip.
     try:
@@ -877,6 +921,7 @@ def fetch_course_items(canvas: Canvas, course: Course, cfg: dict) -> list[Item]:
                 points=a.get("points_possible"),
                 canvas_id=f"assignment:{a.get('id')}",
                 source="assignment",
+                submitted=int(a["id"]) in submitted_assignment_ids,
             ))
             seen_assignment_ids.add(int(a["id"]))
     except requests.HTTPError as e:

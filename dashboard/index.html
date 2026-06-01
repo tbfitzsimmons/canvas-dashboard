@@ -838,6 +838,13 @@ function persistLocal(set) {
 }
 const CHECKED = loadChecked();
 
+// An item counts as "done" if the user manually checked it OR if Canvas
+// reports a submission for it (workflow_state submitted/graded — captured
+// at sync time and stored on the item as `submitted: true`).
+function isItemDone(it) {
+  return isItemDone(it) || !!it.submitted;
+}
+
 // ── Per-course collapse state (local-only, persisted in localStorage) ──────
 const COLLAPSED_KEY = 'canvas-dashboard.collapsed-courses-v1';
 function loadCollapsedCourses() {
@@ -1121,11 +1128,11 @@ function dueTimestamp(it) {
 }
 function isOverdue(it) {
   const ts = dueTimestamp(it);
-  return ts !== null && ts < Date.now() && !CHECKED.has(it.canvas_id);
+  return ts !== null && ts < Date.now() && !isItemDone(it);
 }
 function isDueSoon(it) {
   const ts = dueTimestamp(it);
-  if (ts === null || CHECKED.has(it.canvas_id) || ts < Date.now()) return false;
+  if (ts === null || isItemDone(it) || ts < Date.now()) return false;
   return (ts - Date.now()) / 3_600_000 <= 48;
 }
 
@@ -1133,7 +1140,7 @@ function isDueSoon(it) {
 
 function whatsnextItems() {
   return STATE.data.items
-    .filter(it => !CHECKED.has(it.canvas_id) && it.due_date)
+    .filter(it => !isItemDone(it) && it.due_date)
     .sort((a, b) => (a.due_date > b.due_date ? 1 : a.due_date < b.due_date ? -1 : 0))
     .slice(0, 3);
 }
@@ -1348,7 +1355,7 @@ function renderProgressSection() {
   const inWeekView = STATE.view === 'week';
   const items = inWeekView ? itemsForWeek(STATE.viewedWeek) : filteredItems();
   const total = items.length;
-  const done  = items.filter(it => CHECKED.has(it.canvas_id)).length;
+  const done  = items.filter(it => isItemDone(it)).length;
   const pct   = total ? Math.round((done / total) * 100) : 0;
   const allDone = total > 0 && done === total;
   const label = inWeekView ? `Week ${STATE.viewedWeek}` : 'Semester';
@@ -1356,7 +1363,7 @@ function renderProgressSection() {
   const pills = TYPE_ORDER.map(t => {
     const ts = items.filter(it => it.type === t);
     if (!ts.length) return '';
-    const td = ts.filter(it => CHECKED.has(it.canvas_id)).length;
+    const td = ts.filter(it => isItemDone(it)).length;
     const cls = td === ts.length ? ' prog-pill-done' : '';
     return `<span class="prog-pill${cls}">${TYPE_META[t].ico} ${td}/${ts.length}</span>`;
   }).filter(Boolean).join('');
@@ -1396,14 +1403,14 @@ function filteredUndatedItems() {
 function renderUndatedSection() {
   const items = filteredUndatedItems();
   if (!items.length) return '';
-  const done = items.filter(it => CHECKED.has(it.canvas_id)).length;
+  const done = items.filter(it => isItemDone(it)).length;
   const courses = STATE.data.courses.filter(c =>
     STATE.courseFilters.size === 0 || STATE.courseFilters.has(c.id)
   );
   const cols = courses.map(course => {
     const courseItems = items.filter(it => it.courseId === course.id);
     if (!courseItems.length) return '';
-    const cdone = courseItems.filter(it => CHECKED.has(it.canvas_id)).length;
+    const cdone = courseItems.filter(it => isItemDone(it)).length;
     const isCollapsed = COLLAPSED_COURSES.has(course.id);
     return `
       <div class="col ${isCollapsed ? 'collapsed' : ''}">
@@ -1472,7 +1479,7 @@ function renderWeekColumns(weekNum) {
           </div>`;
       }
 
-      const done = courseItems.filter(it => CHECKED.has(it.canvas_id)).length;
+      const done = courseItems.filter(it => isItemDone(it)).length;
       return `
         <div class="col ${isCollapsed ? 'collapsed' : ''}">
           <div class="col-head" style="background:${course.color_bar};" onclick="toggleCourseCollapsed('${escapeAttr(course.id)}')">
@@ -1492,7 +1499,7 @@ function renderAllWeeks() {
   return `<div class="all-weeks">${
     Array.from({length: weeks}, (_, i) => i + 1).map(wn => {
       const items = itemsForWeek(wn);
-      const done = items.filter(it => CHECKED.has(it.canvas_id)).length;
+      const done = items.filter(it => isItemDone(it)).length;
       const isCurrent = wn === cur;
       return `
         <div class="week-block ${isCurrent ? 'current open' : ''}" data-week="${wn}">
@@ -1517,7 +1524,7 @@ function renderAllWeeks() {
 }
 
 function renderItem(it) {
-  const isDone   = CHECKED.has(it.canvas_id);
+  const isDone   = isItemDone(it);
   const overdue  = !isDone && isOverdue(it);
   const soon     = !isDone && !overdue && isDueSoon(it);
   const urgClass = overdue ? 'overdue-item' : soon ? 'due-soon-item' : '';
