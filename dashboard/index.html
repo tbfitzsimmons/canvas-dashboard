@@ -652,14 +652,36 @@ const root = document.getElementById('root');
 // start with an empty local cache so a remote wipe propagates correctly.
 const STORAGE_KEY = 'canvas-dashboard.checked-v2';
 const SYNC_BASE = 'https://dashboard-sync.brooks-1b9.workers.dev/state';
+const TOKEN_STORAGE_KEY = 'canvas-dashboard.sync-token-v1';
 
-function readTokenFromHash() {
+// Read the sync token from the URL fragment AND/OR localStorage. Persists
+// the token on first sight so the device stays paired even if the bookmark
+// later loses the fragment (some apps strip fragments on share, some browsers
+// strip them on re-bookmark, copy/paste loses them).
+function readSyncToken() {
+  // 1. URL fragment — wins. If present, persist for future visits.
   const h = (location.hash || '').replace(/^#/, '');
   const params = new URLSearchParams(h);
-  const t = params.get('t');
-  return t && t.length >= 16 ? t : null;
+  const tFromUrl = params.get('t');
+  if (tFromUrl && tFromUrl.length >= 16) {
+    try { localStorage.setItem(TOKEN_STORAGE_KEY, tFromUrl); } catch {}
+    return tFromUrl;
+  }
+  // 2. Previously-paired device — fall back to localStorage.
+  try {
+    const tFromLocal = localStorage.getItem(TOKEN_STORAGE_KEY);
+    if (tFromLocal && tFromLocal.length >= 16) return tFromLocal;
+  } catch {}
+  return null;
 }
-const SYNC_TOKEN = readTokenFromHash();
+const SYNC_TOKEN = readSyncToken();
+
+// Clear the paired token on this device (used by the "re-pair" affordance)
+function clearSyncToken() {
+  try { localStorage.removeItem(TOKEN_STORAGE_KEY); } catch {}
+  // Reload onto a clean URL — the user will re-arrive via the proper bookmark
+  location.href = location.pathname;
+}
 
 // ── Refresh state machine ──────────────────────────────────────────────────
 // The button calls the canvas-dispatch Cloudflare Worker (no token in URL).
@@ -833,7 +855,10 @@ function extractSemesterItems(blob) {
 async function pullRemote() {
   if (!SYNC_TOKEN) return;
   try {
-    const res = await fetch(`${SYNC_BASE}?t=${encodeURIComponent(SYNC_TOKEN)}`, { cache: 'no-store' });
+    const res = await fetch(SYNC_BASE, {
+      cache: 'no-store',
+      headers: { 'Authorization': `Bearer ${SYNC_TOKEN}` },
+    });
     if (!res.ok) throw new Error('HTTP ' + res.status);
     REMOTE_BLOB = await res.json();
     const remoteItems = extractSemesterItems(REMOTE_BLOB);
@@ -889,9 +914,12 @@ async function flushRemote(attempt = 0) {
   };
 
   try {
-    const res = await fetch(`${SYNC_BASE}?t=${encodeURIComponent(SYNC_TOKEN)}`, {
+    const res = await fetch(SYNC_BASE, {
       method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${SYNC_TOKEN}`,
+      },
       body: JSON.stringify(body),
     });
     if (!res.ok) throw new Error('HTTP ' + res.status);
@@ -1108,7 +1136,9 @@ function render() {
         ${stale ? '&nbsp;<span class="stale-warn">⚠ data is more than 2 days old</span>' : ''}
         <button id="refresh-btn" class="refresh-btn" onclick="triggerRefresh()">↻ Refresh now</button>
       </div>
-      ${SYNC_TOKEN ? '' : '<div class="sync-notice">Check-offs save only on this device. Use the shared bookmark URL for cross-device sync.</div>'}
+      ${SYNC_TOKEN
+        ? `<div class="sync-notice" style="font-size:11px;">Paired for cross-device sync · <a href="#" onclick="event.preventDefault(); if(confirm('Unpair this device? You\\'ll need the bookmark URL to re-pair.')) clearSyncToken();">unpair this device</a></div>`
+        : `<div class="sync-notice">⚠ This device isn't paired. Check-offs save only locally. Open Jennifer's bookmark URL once to pair this device.</div>`}
     </div>
 
     ${renderCourseStrip()}
