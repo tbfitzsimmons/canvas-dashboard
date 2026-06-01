@@ -862,15 +862,25 @@ async function pullRemote() {
     if (!res.ok) throw new Error('HTTP ' + res.status);
     REMOTE_BLOB = await res.json();
     const remoteItems = extractSemesterItems(REMOTE_BLOB);
-    // Remote is authoritative. Replace CHECKED with the remote bucket so that
-    // a remote wipe propagates to every device. (Pending writes survive: if
-    // SYNC.dirty is true when we pull, we keep the local set instead.)
-    if (!SYNC.dirty) {
-      CHECKED.clear();
-      for (const id of Object.keys(remoteItems)) {
-        if (remoteItems[id]) CHECKED.add(id);
-      }
-      persistLocal(CHECKED);
+    const remoteCount = Object.keys(remoteItems).length;
+    const localCount = CHECKED.size;
+    // Merge policy:
+    //   • If remote has NO entries for this semester, this is a first-pairing
+    //     (or KV wipe). Don't clear local — push it UP to seed the bucket.
+    //   • Otherwise: union local ∪ remote so a check from any device sticks,
+    //     then push the union back so all devices converge.
+    // Manual wipes are handled via the explicit unpair/repair affordance, not
+    // by trusting an empty remote bucket. This protects against accidental
+    // data loss when KV is empty for any reason (server reset, never written).
+    let changed = false;
+    for (const id of Object.keys(remoteItems)) {
+      if (remoteItems[id] && !CHECKED.has(id)) { CHECKED.add(id); changed = true; }
+    }
+    persistLocal(CHECKED);
+    // If the union differs from remote (i.e. local had checks remote didn't,
+    // or vice versa), push the merged state up so other devices see it.
+    if (CHECKED.size !== remoteCount || changed || localCount > 0 && remoteCount === 0) {
+      scheduleRemoteWrite();
     }
     setSyncStatus('synced');
     if (typeof render === 'function' && STATE.data) render();
