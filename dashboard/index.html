@@ -999,6 +999,7 @@ async function flushRemote(attempt = 0) {
     setSyncStatus('synced');
   } catch (e) {
     console.warn('[sync] push failed:', e);
+    window.__LAST_SYNC_ERROR__ = (e && e.message) ? e.message : String(e);
     if (attempt < 3) {
       const backoff = 1000 * Math.pow(2, attempt); // 1s, 2s, 4s
       setTimeout(() => flushRemote(attempt + 1), backoff);
@@ -1007,6 +1008,21 @@ async function flushRemote(attempt = 0) {
       setSyncStatus('failed');
     }
   }
+}
+
+// Diagnostic helper exposed via the masthead "diag" link — works on mobile
+// where dev tools aren't easily accessible. Shows the last sync error.
+function showSyncDiagnostics() {
+  const lines = [
+    `Token paired: ${SYNC_TOKEN ? 'yes (' + SYNC_TOKEN.slice(0,6) + '…)' : 'NO'}`,
+    `Local items: ${CHECKED.size}`,
+    `Remote items (last pull): ${REMOTE_BLOB ? Object.keys(extractSemesterItems(REMOTE_BLOB)).length : 'never pulled'}`,
+    `Sync status: ${SYNC.status}`,
+    `Last error: ${window.__LAST_SYNC_ERROR__ || '(none)'}`,
+    `Worker URL: ${SYNC_BASE}`,
+    `User agent: ${navigator.userAgent.slice(0,80)}`,
+  ];
+  alert(lines.join('\n'));
 }
 
 // Public save fn called from checkbox handler
@@ -1206,7 +1222,7 @@ function render() {
         <button id="refresh-btn" class="refresh-btn" onclick="triggerRefresh()">↻ Refresh now</button>
       </div>
       ${SYNC_TOKEN
-        ? `<div class="sync-notice" style="font-size:11px;">Paired for cross-device sync · <a href="#" onclick="event.preventDefault(); exportLocalCheckoffs();">📥 backup</a> · <a href="#" onclick="event.preventDefault(); importLocalCheckoffs();">📤 restore</a> · <a href="#" onclick="event.preventDefault(); if(confirm('Unpair this device? You\\'ll need the bookmark URL to re-pair.')) clearSyncToken();">unpair this device</a></div>`
+        ? `<div class="sync-notice" style="font-size:11px;">Paired for cross-device sync · <a href="#" onclick="event.preventDefault(); exportLocalCheckoffs();">📥 backup</a> · <a href="#" onclick="event.preventDefault(); importLocalCheckoffs();">📤 restore</a> · <a href="#" onclick="event.preventDefault(); showSyncDiagnostics();">🔍 diag</a> · <a href="#" onclick="event.preventDefault(); if(confirm('Unpair this device? You\\'ll need the bookmark URL to re-pair.')) clearSyncToken();">unpair this device</a></div>`
         : `<div class="sync-notice">⚠ This device isn't paired. Check-offs save only locally. Open Jennifer's bookmark URL once to pair this device.</div>`}
     </div>
 
