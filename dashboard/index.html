@@ -877,13 +877,18 @@ async function pullRemote() {
       if (remoteItems[id] && !CHECKED.has(id)) { CHECKED.add(id); changed = true; }
     }
     persistLocal(CHECKED);
-    // If the union differs from remote (i.e. local had checks remote didn't,
-    // or vice versa), push the merged state up so other devices see it.
-    if (CHECKED.size !== remoteCount || changed || localCount > 0 && remoteCount === 0) {
-      scheduleRemoteWrite();
-    }
     setSyncStatus('synced');
     if (typeof render === 'function' && STATE.data) render();
+    // If local has data the remote doesn't, push IMMEDIATELY (no 500ms timer).
+    // This is critical on mobile: Safari can suspend a tab before a debounced
+    // write fires, losing the push entirely. The boot-time pull is the worst
+    // case for that, so we await the flush right here.
+    const needPush = (CHECKED.size !== remoteCount) || changed
+                  || (localCount > 0 && remoteCount === 0);
+    if (needPush) {
+      SYNC.dirty = true;
+      await flushRemote();
+    }
   } catch (e) {
     console.warn('[sync] pull failed:', e);
     setSyncStatus('failed');
