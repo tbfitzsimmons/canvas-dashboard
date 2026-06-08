@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-06T15:14:18.319771+00:00",
+  "generated_at": "2026-06-08T10:48:29.239592+00:00",
   "semester": {
     "name": "Summer 2026",
     "start_date": "2026-05-18",
@@ -1648,7 +1648,7 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": true
     },
     {
       "week": 3,
@@ -1680,7 +1680,7 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": true
     },
     {
       "week": 3,
