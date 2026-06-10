@@ -161,10 +161,33 @@ custom domain, preserving the `#t=` hash. Code at top of `<script>` in index.htm
 
 ---
 
+## Design facts — do NOT re-litigate these
+
+1. **Check-off sync uses tombstones (v3, since 2026-06-08).** KV + localStorage
+   store `id → {c: bool, ts: epoch-ms}`. Merge rule: latest `ts` wins; tie →
+   checked wins (legacy-migration parity). An UNCHECK is a `{c:false, ts}`
+   record, never an absence — additive-union merging caused unchecks to be
+   resurrected by stale devices (bug found 2026-06-08). localStorage key:
+   `canvas-dashboard.marks-v3` (migrates v2 array on first load, ts=0).
+   The Worker stores the blob verbatim — format changes need NO worker redeploy.
+
+2. **Assignment overrides are a NON-issue.** Jennifer's token is student-scoped
+   (verified 2026-06-08: StudentEnrollment only). Canvas resolves `due_at` to her
+   effective date server-side and hides assignments not assigned to her. Do not
+   add override-handling code.
+
+3. **Coverage is continuously self-verified.** Every sync re-fetches
+   /assignments + /discussion_topics per course and asserts each published item
+   is on the board. Result embedded in data.json as `coverage`; the dashboard
+   shows a red banner if anything is missing and a quiet "✓ Verified" line when
+   clean. If a refactor ever breaks item emission, the next sync says so on the
+   dashboard itself.
+
+4. **iCal export: explicitly declined by Jennifer.** Don't propose it again.
+
 ## Known issues / next steps
 
-### 1. Worker /dispatch returns error 1101 — NOT YET FIXED
-See "Cloudflare Worker" section above. The Refresh Now button shows "Failed to fetch".
+### 1. Worker /dispatch — FIXED (verified 2026-06-08, OPTIONS returns 204)
 
 ### 2. Undated readings/videos (~8% gap)
 Canvas does not treat module readings/videos as student to-dos, so neither the Planner

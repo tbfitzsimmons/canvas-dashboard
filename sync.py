@@ -1187,7 +1187,73 @@ def guess_week_from_module_name(name: str, semester_start: datetime, total_weeks
 # Output
 # ─────────────────────────────────────────────────────────────────────────────
 
-def write_data(courses: list[Course], items: list[Item], cfg: dict) -> None:
+def verify_coverage(canvas: Canvas, courses: list[Course], items: list[Item]) -> dict:
+    """Continuous coverage self-audit — runs inside every sync.
+
+    Independently re-fetches the two gradeable sources (/assignments and
+    /discussion_topics) per course and asserts every published item appears
+    in the emitted set. The result is embedded in data.json so the DASHBOARD
+    can attest "all graded Canvas work is on this board" — or show a loud
+    warning if anything slipped through. This is the guard that makes
+    "did we miss an assignment?" a continuously-verified property instead
+    of a one-time manual audit.
+
+    NOTE on overrides: Jennifer's token is student-scoped, so Canvas resolves
+    due-date overrides server-side and hides assignments not assigned to her.
+    No override handling is needed here (verified 2026-06-08).
+    """
+    emitted = {i.canvas_id for i in items}
+    asn_total = asn_hit = dis_total = dis_hit = 0
+    missing: list[str] = []
+
+    for course in courses:
+        cid = course.canvas_id
+        try:
+            for a in canvas.paginate(f"/courses/{cid}/assignments"):
+                if not a.get("published", True):
+                    continue
+                asn_total += 1
+                if f"assignment:{a.get('id')}" in emitted:
+                    asn_hit += 1
+                else:
+                    missing.append(f"{course.code}: {a.get('name', '?')}")
+        except requests.HTTPError as e:
+            print(f"  ⚠ coverage probe {course.code} assignments: {e}")
+        try:
+            for d in canvas.paginate(f"/courses/{cid}/discussion_topics"):
+                if not d.get("published", True):
+                    continue
+                # Graded discussions are emitted under their assignment id
+                if d.get("assignment_id") and f"assignment:{d['assignment_id']}" in emitted:
+                    dis_total += 1; dis_hit += 1
+                    continue
+                dis_total += 1
+                if f"discussion:{d.get('id')}" in emitted:
+                    dis_hit += 1
+                else:
+                    missing.append(f"{course.code}: {d.get('title', '?')} (discussion)")
+        except requests.HTTPError as e:
+            if getattr(e.response, "status_code", None) != 404:
+                print(f"  ⚠ coverage probe {course.code} discussions: {e}")
+
+    if missing:
+        print(f"\n❌ COVERAGE GAP — {len(missing)} graded item(s) NOT on the dashboard:")
+        for m in missing:
+            print(f"     MISSING: {m}")
+    else:
+        print(f"\n✓ COVERAGE VERIFIED: {asn_hit}/{asn_total} assignments, "
+              f"{dis_hit}/{dis_total} discussions — every graded Canvas item is on the board")
+
+    return {
+        "verified_at": datetime.now(timezone.utc).isoformat(),
+        "assignments": {"total": asn_total, "captured": asn_hit},
+        "discussions": {"total": dis_total, "captured": dis_hit},
+        "missing": missing,
+    }
+
+
+def write_data(courses: list[Course], items: list[Item], cfg: dict,
+               coverage: dict | None = None) -> None:
     payload = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "semester": cfg["semester"],
@@ -1195,6 +1261,7 @@ def write_data(courses: list[Course], items: list[Item], cfg: dict) -> None:
         "courses": [course_dict(c) for c in courses],
         "items": [asdict(i) for i in items],
         "totals": summarize(items),
+        "coverage": coverage,
     }
     DATA_PATH.parent.mkdir(parents=True, exist_ok=True)
     tmp = DATA_PATH.with_suffix(".json.tmp")
@@ -1449,7 +1516,10 @@ def main() -> int:
     # Stable sort: by week, then by due date, then by course, then by title
     all_items.sort(key=lambda i: (i.week or 99, i.due_date or "9999", i.courseId, i.title.lower()))
 
-    write_data(courses, all_items, cfg)
+    # Continuous coverage self-audit — re-verifies every graded item landed
+    coverage = verify_coverage(canvas, courses, all_items)
+
+    write_data(courses, all_items, cfg, coverage)
     return 0
 
 

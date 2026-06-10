@@ -686,15 +686,14 @@ function clearSyncToken() {
 // Download a JSON backup of this device's local check-offs. Pure read; never
 // mutates anything. Useful before any risky sync operation.
 function exportLocalCheckoffs() {
-  let arr = [];
-  try { arr = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); } catch {}
+  const checkedCount = Object.values(MARKS).filter(m => m && m.c).length;
   const payload = {
     exported_at: new Date().toISOString(),
     device: navigator.userAgent,
     semester_hint: (window.STATE && STATE.data && STATE.data.semester && STATE.data.semester.name) || null,
-    storage_key: STORAGE_KEY,
-    count: arr.length,
-    items: arr,
+    format: 'marks-v3',
+    count: checkedCount,
+    marks: MARKS,
   };
   const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
@@ -705,11 +704,12 @@ function exportLocalCheckoffs() {
   a.click();
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
-  alert(`Backup saved (${arr.length} items). Keep this file until you've verified cross-device sync.`);
+  alert(`Backup saved (${checkedCount} checked items). Keep this file until you've verified cross-device sync.`);
 }
 
-// Restore a previously-exported backup file. Reads the JSON, unions every ID
-// into local check-offs, persists, and (if paired) immediately pushes to KV.
+// Restore a previously-exported backup file. Accepts the v3 format
+// ({marks: {id:{c,ts}}}) and the legacy v2 format ({items: [id,...]}).
+// Merges via the same latest-timestamp rule as cross-device sync.
 function importLocalCheckoffs() {
   const inp = document.createElement('input');
   inp.type = 'file';
@@ -720,16 +720,28 @@ function importLocalCheckoffs() {
     try {
       const text = await f.text();
       const payload = JSON.parse(text);
-      const items = Array.isArray(payload.items) ? payload.items : Array.isArray(payload) ? payload : null;
-      if (!items) throw new Error('Backup file format unrecognized');
-      let added = 0;
-      for (const id of items) {
-        if (typeof id === 'string' && !CHECKED.has(id)) { CHECKED.add(id); added++; }
+      let incoming = {};
+      if (payload.marks && typeof payload.marks === 'object') {
+        incoming = payload.marks;                       // v3
+      } else if (Array.isArray(payload.items)) {
+        for (const id of payload.items) incoming[id] = { c: true, ts: 0 };  // v2
+      } else if (Array.isArray(payload)) {
+        for (const id of payload) incoming[id] = { c: true, ts: 0 };        // bare array
+      } else {
+        throw new Error('Backup file format unrecognized');
       }
-      persistLocal(CHECKED);
+      let merged = 0;
+      for (const id of Object.keys(incoming)) {
+        const inc = normalizeMark(incoming[id]);
+        const cur = (id in MARKS) ? normalizeMark(MARKS[id]) : null;
+        const w = pickMark(cur, inc);
+        if (!cur || w.c !== cur.c || w.ts !== cur.ts) { MARKS[id] = w; merged++; }
+      }
+      rebuildChecked();
+      persistLocal();
       if (SYNC_TOKEN) { SYNC.dirty = true; await flushRemote(); }
       if (typeof render === 'function' && STATE.data) render();
-      alert(`Restored ${added} new check-offs (total now ${CHECKED.size}).`);
+      alert(`Restored ${merged} entries from backup (${CHECKED.size} now checked).`);
     } catch (err) {
       alert('Restore failed: ' + err.message);
     }
@@ -829,14 +841,64 @@ function pollForFreshData(priorGenerated) {
   REFRESH.timer = setTimeout(tick, 8000);
 }
 
-function loadChecked() {
-  try { return new Set(JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]')); }
-  catch { return new Set(); }
+// ── Check-off state: tombstone model (v3) ──────────────────────────────────
+// MARKS is the source of truth: id → {c: checked?, ts: epoch-ms of the toggle}.
+// An UNCHECK is a real record ({c:false, ts}), not an absence — so it wins
+// against stale devices instead of being resurrected by an additive union.
+// CHECKED is a derived Set kept in lockstep for the render paths.
+const MARKS_KEY = 'canvas-dashboard.marks-v3';
+
+function loadMarks() {
+  try {
+    const v3 = JSON.parse(localStorage.getItem(MARKS_KEY) || 'null');
+    if (v3 && typeof v3 === 'object' && !Array.isArray(v3)) return v3;
+  } catch {}
+  // One-time migration from v2 (bare array of checked ids). ts:0 means
+  // "ancient" — any real toggle on any device wins over these.
+  try {
+    const v2 = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    const m = {};
+    for (const id of v2) m[id] = { c: true, ts: 0 };
+    return m;
+  } catch { return {}; }
 }
-function persistLocal(set) {
-  try { localStorage.setItem(STORAGE_KEY, JSON.stringify([...set])); } catch {}
+
+const MARKS = loadMarks();
+const CHECKED = new Set();
+function rebuildChecked() {
+  CHECKED.clear();
+  for (const id of Object.keys(MARKS)) {
+    if (MARKS[id] && MARKS[id].c) CHECKED.add(id);
+  }
 }
-const CHECKED = loadChecked();
+rebuildChecked();
+
+function persistLocal() {
+  try { localStorage.setItem(MARKS_KEY, JSON.stringify(MARKS)); } catch {}
+}
+
+// The single mutation point for user toggles.
+function setMark(id, checked) {
+  MARKS[id] = { c: !!checked, ts: Date.now() };
+  rebuildChecked();
+  persistLocal();
+  scheduleRemoteWrite();
+}
+
+// Normalize a stored mark: new format {c,ts} or legacy bare `true`.
+function normalizeMark(v) {
+  if (v && typeof v === 'object') return { c: !!v.c, ts: Number(v.ts) || 0 };
+  return { c: !!v, ts: 0 };
+}
+
+// Conflict rule: latest timestamp wins; on a tie (both ts:0 legacy),
+// prefer checked — matches the old additive behavior for migrated data.
+function pickMark(a, b) {
+  if (!a) return b;
+  if (!b) return a;
+  if (a.ts !== b.ts) return a.ts > b.ts ? a : b;
+  return a.c ? a : b;
+}
 
 // An item counts as "done" if the user manually checked it OR if Canvas
 // reports a submission for it (workflow_state submitted/graded — captured
@@ -922,31 +984,31 @@ async function pullRemote() {
     });
     if (!res.ok) throw new Error('HTTP ' + res.status);
     REMOTE_BLOB = await res.json();
-    const remoteItems = extractSemesterItems(REMOTE_BLOB);
-    const remoteCount = Object.keys(remoteItems).length;
-    const localCount = CHECKED.size;
-    // Merge policy:
-    //   • If remote has NO entries for this semester, this is a first-pairing
-    //     (or KV wipe). Don't clear local — push it UP to seed the bucket.
-    //   • Otherwise: union local ∪ remote so a check from any device sticks,
-    //     then push the union back so all devices converge.
-    // Manual wipes are handled via the explicit unpair/repair affordance, not
-    // by trusting an empty remote bucket. This protects against accidental
-    // data loss when KV is empty for any reason (server reset, never written).
-    let changed = false;
-    for (const id of Object.keys(remoteItems)) {
-      if (remoteItems[id] && !CHECKED.has(id)) { CHECKED.add(id); changed = true; }
+    const remoteRaw = extractSemesterItems(REMOTE_BLOB);
+    // Per-item merge: latest timestamp wins (see pickMark). This makes
+    // UNCHECKS durable — a {c:false, ts} tombstone beats a stale device's
+    // {c:true, ts:older}, so toggles can never be resurrected. An empty
+    // remote bucket is also harmless: local marks simply win and get
+    // pushed up (first-pairing / KV-reset case).
+    let localChanged = false;   // remote taught us something → re-render
+    let remoteStale  = false;   // we know something remote doesn't → push
+    const allIds = new Set([...Object.keys(remoteRaw), ...Object.keys(MARKS)]);
+    for (const id of allIds) {
+      const r = (id in remoteRaw) ? normalizeMark(remoteRaw[id]) : null;
+      const l = (id in MARKS)     ? normalizeMark(MARKS[id])     : null;
+      const w = pickMark(l, r);
+      if (!l || w.c !== l.c || w.ts !== l.ts) { MARKS[id] = w; localChanged = true; }
+      if (!r || w.c !== r.c || w.ts !== r.ts) { remoteStale = true; }
     }
-    persistLocal(CHECKED);
+    if (localChanged) {
+      rebuildChecked();
+      persistLocal();
+      if (typeof render === 'function' && STATE.data) render();
+    }
     setSyncStatus('synced');
-    if (typeof render === 'function' && STATE.data) render();
-    // If local has data the remote doesn't, push IMMEDIATELY (no 500ms timer).
-    // This is critical on mobile: Safari can suspend a tab before a debounced
-    // write fires, losing the push entirely. The boot-time pull is the worst
-    // case for that, so we await the flush right here.
-    const needPush = (CHECKED.size !== remoteCount) || changed
-                  || (localCount > 0 && remoteCount === 0);
-    if (needPush) {
+    // Push IMMEDIATELY (no 500ms timer) — Safari can suspend a tab before a
+    // debounced write fires; the boot-time pull is the worst case for that.
+    if (remoteStale) {
       SYNC.dirty = true;
       await flushRemote();
     }
@@ -966,8 +1028,14 @@ function scheduleRemoteWrite() {
 
 async function flushRemote(attempt = 0) {
   if (!SYNC_TOKEN || !SYNC.dirty) return;
+  // Push the FULL marks map — including {c:false} tombstones, which is what
+  // lets unchecks propagate to other devices.
   const snapshot = {};
-  for (const id of CHECKED) snapshot[id] = true;
+  for (const id of Object.keys(MARKS)) snapshot[id] = MARKS[id];
+  // Bare-bool mirror of currently-checked ids: the worker sanity-checks
+  // body.items, and it keeps the blob readable for manual curl inspection.
+  const checkedMirror = {};
+  for (const id of CHECKED) checkedMirror[id] = true;
 
   // Build v2 blob: preserve other semesters' buckets, replace only the current one.
   const existingSemesters = (REMOTE_BLOB && REMOTE_BLOB.semesters && typeof REMOTE_BLOB.semesters === 'object')
@@ -984,8 +1052,8 @@ async function flushRemote(attempt = 0) {
   existingSemesters[currentSemesterKey()] = snapshot;
   // Worker still validates body.items as a sanity check — include it (mirror of current semester).
   const body = {
-    v: 2,
-    items: snapshot,
+    v: 3,
+    items: checkedMirror,
     semesters: existingSemesters,
   };
 
@@ -1023,7 +1091,7 @@ function showSyncDiagnostics() {
   const lines = [
     `Token (full): ${SYNC_TOKEN || 'NONE'}`,
     `Token length: ${SYNC_TOKEN ? SYNC_TOKEN.length : 0}`,
-    `Local items: ${CHECKED.size}`,
+    `Local: ${CHECKED.size} checked, ${Object.keys(MARKS).length - CHECKED.size} tombstones`,
     `Remote items (last pull): ${REMOTE_BLOB ? Object.keys(extractSemesterItems(REMOTE_BLOB)).length : 'never pulled'}`,
     `Sync status: ${SYNC.status}`,
     `Last error: ${window.__LAST_SYNC_ERROR__ || '(none)'}`,
@@ -1033,11 +1101,7 @@ function showSyncDiagnostics() {
   alert(lines.join('\n'));
 }
 
-// Public save fn called from checkbox handler
-function saveChecked(set) {
-  persistLocal(set);
-  scheduleRemoteWrite();
-}
+// (Toggles go through setMark() — defined with the tombstone model above.)
 
 // Flush queued writes when network comes back
 window.addEventListener('online', () => { if (SYNC.dirty) flushRemote(); });
@@ -1202,6 +1266,24 @@ function copyItemNote(canvasId) {
 
 // ─────────────────────────────────────────────────────────────── rendering ──
 
+// Coverage attestation — sync.py independently re-verifies every published
+// assignment + discussion against the emitted board and embeds the result.
+// Missing items → loud red banner. Clean → quiet one-line proof under the
+// masthead so Jennifer KNOWS nothing graded is slipping past her.
+function renderCoverageBanner(cov) {
+  if (!cov) return '';
+  const miss = (cov.missing || []).length;
+  if (miss > 0) {
+    return `<div class="token-warn expired">❌ <strong>${miss} graded Canvas item${miss === 1 ? '' : 's'} missing from this board:</strong> ${cov.missing.slice(0,3).map(escapeHtml).join(' · ')}${miss > 3 ? ' · …' : ''} — check the sync log.</div>`;
+  }
+  return '';
+}
+function coverageProofLine(cov) {
+  if (!cov || (cov.missing || []).length) return '';
+  const a = cov.assignments || {}, d = cov.discussions || {};
+  return `<div class="sync-notice" style="font-size:11px;">✓ Verified at last sync: all ${a.total ?? '?'} assignments + ${d.total ?? '?'} discussions from Canvas are on this board</div>`;
+}
+
 function renderTokenWarning(expiresStr) {
   if (!expiresStr) return '';
   const exp = new Date(expiresStr + 'T00:00:00');
@@ -1224,6 +1306,7 @@ function render() {
 
   root.innerHTML = `
     ${renderTokenWarning(d.token_expires)}
+    ${renderCoverageBanner(d.coverage)}
     <div class="masthead">
       <h1>
         <span class="emoji">🎓</span>${escapeHtml(d.semester.name)} Semester Dashboard
@@ -1237,6 +1320,7 @@ function render() {
       ${SYNC_TOKEN
         ? `<div class="sync-notice" style="font-size:11px;">Paired for cross-device sync · <a href="#" onclick="event.preventDefault(); exportLocalCheckoffs();">📥 backup</a> · <a href="#" onclick="event.preventDefault(); if(confirm('Unpair this device? You\\'ll need the bookmark URL to re-pair.')) clearSyncToken();">unpair this device</a></div>`
         : `<div class="sync-notice">⚠ This device isn't paired. Check-offs save only locally. Open Jennifer's bookmark URL once to pair this device.</div>`}
+      ${coverageProofLine(d.coverage)}
     </div>
 
     ${renderCourseStrip()}
@@ -1570,8 +1654,7 @@ function wireCheckboxes() {
   document.querySelectorAll('.item input[type=checkbox]').forEach(box => {
     box.onchange = (e) => {
       const id = e.target.closest('.item').dataset.id;
-      if (e.target.checked) CHECKED.add(id); else CHECKED.delete(id);
-      saveChecked(CHECKED);
+      setMark(id, e.target.checked);
       // Update row appearance + column count without full re-render
       e.target.closest('.item').classList.toggle('done', e.target.checked);
       renderProgressSection_update();
