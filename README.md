@@ -4,6 +4,9 @@ A semester-long dashboard for Jennifer that pulls every reading, video, discussi
 
 **https://jtbdashboard.fitzsimmons.org/dashboard/**
 
+> Want one of your own? See **[FORKING.md](FORKING.md)** — a checklist for
+> turning a fork into your own deployment (~1 hour, no coding required).
+
 ## How it works
 
 ```
@@ -41,7 +44,7 @@ The Canvas token never lives in the repo — it's stored as the `CANVAS_TOKEN` G
 
 ### 1. Add the Canvas token as a GitHub Secret
 
-You should have just regenerated your Canvas token (the previous one was revoked after appearing in chat). On the Canvas "Approved Integrations" page, copy the new token string — Canvas only shows it once.
+On the Canvas "Approved Integrations" page (Account → Settings → + New Access Token), copy the token string — Canvas only shows it once.
 
 Then in this repo:
 
