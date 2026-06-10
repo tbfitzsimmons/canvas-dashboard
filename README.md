@@ -27,8 +27,8 @@ Browser check-offs ──► Cloudflare Worker (dashboard-sync)
                          /dispatch → triggers workflow_dispatch via GH_TOKEN
 ```
 
-- **`sync.py`** — Canvas API → `data.json`. Five-pass coverage: assignments, quizzes, discussions, module items (pages/files/videos), plus a **Canvas Planner API reconciliation pass** that catches announcements, calendar events, and dated pages outside modules. Coverage: ~92%.
-- **`dashboard/index.html`** — Static HTML/JS (no build step). Weekly columns, "Up Next" strip, progress bar, urgency highlights, check-off sync via Cloudflare KV. "Refresh Now" button triggers a sync via Cloudflare Worker.
+- **`sync.py`** — Canvas API → `data.json`. Five-pass coverage: assignments, quizzes, discussions, module items (pages/files/videos), plus a **Canvas Planner API reconciliation pass** that catches announcements, calendar events, and dated pages outside modules. Every run ends with a **coverage self-audit**: it re-fetches all graded items and verifies each is on the board. The result shows on the dashboard ("✓ Verified at last sync: all N assignments + M discussions") and flips to a red banner naming anything missing.
+- **`dashboard/index.html`** — Static HTML/JS (no build step). Weekly columns, progress bar, urgency highlights. "Refresh Now" button triggers a sync via Cloudflare Worker. **Check-offs sync across devices** via timestamped records in Cloudflare KV — checks *and unchecks* propagate within ~30s; latest toggle wins on conflict. Each device pairs once by opening the bookmark URL (`#t=…`); the token then persists on-device. The masthead's **📥 backup** link downloads a JSON snapshot; "unpair this device" + reopening the bookmark re-pairs.
 - **`.github/workflows/sync.yml`** — Monday cron + `workflow_dispatch`. Race-condition safe (commit-then-push with `-X ours`).
 - **`config.json`** — Semester name, start date, term filter, instructor overrides. Edit once per semester.
 - **`worker/`** — Reference copy of the Cloudflare Worker code (live worker deployed in Cloudflare portal as `dashboard-sync`).
@@ -202,7 +202,7 @@ canvas-dashboard/
 ├── README.md                      # This file
 ├── config.json                    # Semester settings + instructor overrides (no secrets)
 ├── config.example.json            # Template
-├── sync.py                        # Canvas API → data.json (5-pass, ~92% coverage)
+├── sync.py                        # Canvas API → data.json (5-pass + coverage self-audit)
 ├── worker/
 │   ├── index.js                   # Cloudflare Worker reference code
 │   └── wrangler.toml              # Worker config (worker deployed via Cloudflare portal)
