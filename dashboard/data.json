@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-18T18:36:46.827765+00:00",
+  "generated_at": "2026-06-20T16:08:17.928019+00:00",
   "semester": {
     "name": "Summer 2026",
     "start_date": "2026-05-18",
@@ -11510,6 +11510,22 @@
       "week": 0,
       "courseId": "course3",
       "type": "reading",
+      "title": "6-23-2022, Creaven, Sense of Trust chapters 4.docx",
+      "detail": "from: Required Reading & Optional Video",
+      "due": "—",
+      "due_date": null,
+      "link": "https://naropa.instructure.com/courses/9306/files/1467448?verifier=3XTbaS30lw2N0stApgVjXvxjuOaDocHeuEqdjrdd&wrap=1",
+      "points": null,
+      "canvas_id": "page_child:406416:cd8753f4",
+      "source": "page_child",
+      "is_overview": false,
+      "summary": "",
+      "submitted": false
+    },
+    {
+      "week": 0,
+      "courseId": "course3",
+      "type": "reading",
       "title": "A Conflict of Visions Ch 1.pdf",
       "detail": "from: Required Reading & Video",
       "due": "—",
@@ -11701,6 +11717,22 @@
     {
       "week": 0,
       "courseId": "course3",
+      "type": "video",
+      "title": "How to Find Meaning of Life - Viktor Frankl",
+      "detail": "from: Required Reading & Optional Video",
+      "due": "—",
+      "due_date": null,
+      "link": "https://youtube.com/shorts/DLNLQrUslj8?si=P2a5DcwJ3rcHaL6m",
+      "points": null,
+      "canvas_id": "page_child:406416:0cb62f78",
+      "source": "page_child",
+      "is_overview": false,
+      "summary": "",
+      "submitted": false
+    },
+    {
+      "week": 0,
+      "courseId": "course3",
       "type": "reading",
       "title": "https://www.psychologytoday.com/profile/1506782",
       "detail": "from: Instructor Information",
@@ -11869,6 +11901,22 @@
       "link": "https://youtube.com/shorts/T3sT6ygBJR8?si=_PHldAWoKxDib9U6",
       "points": null,
       "canvas_id": "page_child:406401:9a7c8d38",
+      "source": "page_child",
+      "is_overview": false,
+      "summary": "",
+      "submitted": false
+    },
+    {
+      "week": 0,
+      "courseId": "course3",
+      "type": "reading",
+      "title": "THe Coddling of the American Mind Ch 1.pdf",
+      "detail": "from: Required Reading & Optional Video",
+      "due": "—",
+      "due_date": null,
+      "link": "https://naropa.instructure.com/courses/9306/files/1467439?verifier=6QRkabihtm7tW4Ge5Smlsmecod8AecGV31FSVZhD&wrap=1",
+      "points": null,
+      "canvas_id": "page_child:406416:c34bac6c",
       "source": "page_child",
       "is_overview": false,
       "summary": "",
@@ -14212,8 +14260,8 @@
     }
   ],
   "totals": {
-    "reading": 662,
-    "video": 129,
+    "reading": 664,
+    "video": 130,
     "discussion": 33,
     "paper": 8,
     "assignment": 33,
@@ -14222,7 +14270,7 @@
     "lecture": 18
   },
   "coverage": {
-    "verified_at": "2026-06-18T18:36:46.827723+00:00",
+    "verified_at": "2026-06-20T16:08:17.927980+00:00",
     "assignments": {
       "total": 48,
       "captured": 48
