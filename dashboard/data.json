@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T11:48:57.715792+00:00",
+  "generated_at": "2026-06-22T23:31:45.591309+00:00",
   "semester": {
     "name": "Summer 2026",
     "start_date": "2026-05-18",
@@ -2160,7 +2160,7 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": true
     },
     {
       "week": 4,
@@ -14270,7 +14270,7 @@
     "lecture": 18
   },
   "coverage": {
-    "verified_at": "2026-06-22T11:48:57.715746+00:00",
+    "verified_at": "2026-06-22T23:31:45.591265+00:00",
     "assignments": {
       "total": 48,
       "captured": 48
