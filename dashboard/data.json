@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-27T19:51:40.251954+00:00",
+  "generated_at": "2026-06-28T16:20:56.290787+00:00",
   "semester": {
     "name": "Summer 2026",
     "start_date": "2026-05-18",
@@ -11814,6 +11814,22 @@
       "week": 0,
       "courseId": "course3",
       "type": "reading",
+      "title": "Lee - Neurobiolobical Shame and Belonging - BGJ Final - Oct 11 2007-3.pdf",
+      "detail": "from: Intensive Integration & Optional Video / Reading",
+      "due": "—",
+      "due_date": null,
+      "link": "https://naropa.instructure.com/courses/9306/files/1471235?verifier=ruN5SHBXjzXU4Lfo3SCXc6ctlysSbTN7zPvnBgXK&wrap=1",
+      "points": null,
+      "canvas_id": "page_child:406429:c13c5b07",
+      "source": "page_child",
+      "is_overview": false,
+      "summary": "",
+      "submitted": false
+    },
+    {
+      "week": 0,
+      "courseId": "course3",
+      "type": "reading",
       "title": "Limitations and Cautions in the Gestalt Approach. PDF Accessible.pdf",
       "detail": "",
       "due": "—",
@@ -11822,6 +11838,22 @@
       "points": null,
       "canvas_id": "module_item:406434",
       "source": "module_item",
+      "is_overview": false,
+      "summary": "",
+      "submitted": false
+    },
+    {
+      "week": 0,
+      "courseId": "course3",
+      "type": "reading",
+      "title": "Nelson, theodicy, Five faces of evil.pdf",
+      "detail": "from: Intensive Integration & Optional Video / Reading",
+      "due": "—",
+      "due_date": null,
+      "link": "https://naropa.instructure.com/courses/9306/files/1471236?verifier=OV9nLMrX9nwN1KbuxzWrQwY84tCijr0prbBFWKIa&wrap=1",
+      "points": null,
+      "canvas_id": "page_child:406429:2fa542f3",
+      "source": "page_child",
       "is_overview": false,
       "summary": "",
       "submitted": false
@@ -11942,6 +11974,22 @@
       "week": 0,
       "courseId": "course3",
       "type": "reading",
+      "title": "Somatic gestalt on addictions.docx",
+      "detail": "from: Intensive Integration & Optional Video / Reading",
+      "due": "—",
+      "due_date": null,
+      "link": "https://naropa.instructure.com/courses/9306/files/1471238?verifier=pEPAnjPu0RwWoatirlZf120Abp6qPKPDC04zAYCj&wrap=1",
+      "points": null,
+      "canvas_id": "page_child:406429:b156827b",
+      "source": "page_child",
+      "is_overview": false,
+      "summary": "",
+      "submitted": false
+    },
+    {
+      "week": 0,
+      "courseId": "course3",
+      "type": "reading",
       "title": "Tedeschi_RG_Calhoun_LGPosttraumatic_growth_concept.pdf",
       "detail": "from: Required Reading  & Video",
       "due": "—",
@@ -12029,6 +12077,22 @@
       "link": "https://www.youtube.com/watch?v=q6M1FumqeyM&t=49s",
       "points": null,
       "canvas_id": "page_child:406452:ff0d6f7e",
+      "source": "page_child",
+      "is_overview": false,
+      "summary": "",
+      "submitted": false
+    },
+    {
+      "week": 0,
+      "courseId": "course3",
+      "type": "reading",
+      "title": "Tronick, Beeghly 2010 Infant Meaning making-1.pdf",
+      "detail": "from: Intensive Integration & Optional Video / Reading",
+      "due": "—",
+      "due_date": null,
+      "link": "https://naropa.instructure.com/courses/9306/files/1471237?verifier=6fzR7U0Sn18sosU78Oq1HVOXH1YQvkYj76dCc2qa&wrap=1",
+      "points": null,
+      "canvas_id": "page_child:406429:0ec703cc",
       "source": "page_child",
       "is_overview": false,
       "summary": "",
@@ -14356,7 +14420,7 @@
     }
   ],
   "totals": {
-    "reading": 669,
+    "reading": 673,
     "video": 131,
     "discussion": 33,
     "paper": 9,
@@ -14366,7 +14430,7 @@
     "lecture": 18
   },
   "coverage": {
-    "verified_at": "2026-06-27T19:51:40.251907+00:00",
+    "verified_at": "2026-06-28T16:20:56.290748+00:00",
     "assignments": {
       "total": 48,
       "captured": 48
