@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-30T16:49:10.268330+00:00",
+  "generated_at": "2026-07-01T17:51:30.800565+00:00",
   "semester": {
     "name": "Summer 2026",
     "start_date": "2026-05-18",
@@ -11701,6 +11701,54 @@
     {
       "week": 0,
       "courseId": "course3",
+      "type": "lecture",
+      "title": "Day 1 - Advanced topics in Gestalt part 2.pptx",
+      "detail": "from: Intensive Integration & Optional Video / Reading",
+      "due": "—",
+      "due_date": null,
+      "link": "https://naropa.instructure.com/courses/9306/files/1471971?verifier=ndc1WP455BBS0AEI9iDqdgf4T1PE795VLgjSDcLV&wrap=1",
+      "points": null,
+      "canvas_id": "page_child:406429:1b87007f",
+      "source": "page_child",
+      "is_overview": false,
+      "summary": "",
+      "submitted": false
+    },
+    {
+      "week": 0,
+      "courseId": "course3",
+      "type": "lecture",
+      "title": "Day 1 - Advanced topics in Gestalt-1.pptx",
+      "detail": "from: Intensive Integration & Optional Video / Reading",
+      "due": "—",
+      "due_date": null,
+      "link": "https://naropa.instructure.com/courses/9306/files/1471970?verifier=gHpAukvDorO7bbCfzZbe66QBgC81IzLsCN2o22Gj&wrap=1",
+      "points": null,
+      "canvas_id": "page_child:406429:9d3400ad",
+      "source": "page_child",
+      "is_overview": false,
+      "summary": "",
+      "submitted": false
+    },
+    {
+      "week": 0,
+      "courseId": "course3",
+      "type": "lecture",
+      "title": "Day 2 - Advanced topics in Gestalt -1.pptx",
+      "detail": "from: Intensive Integration & Optional Video / Reading",
+      "due": "—",
+      "due_date": null,
+      "link": "https://naropa.instructure.com/courses/9306/files/1471972?verifier=A8TmMbMscM5S47cvBaxfvQUxIdnfyiISom0K8oi7&wrap=1",
+      "points": null,
+      "canvas_id": "page_child:406429:4d63b125",
+      "source": "page_child",
+      "is_overview": false,
+      "summary": "",
+      "submitted": false
+    },
+    {
+      "week": 0,
+      "courseId": "course3",
       "type": "video",
       "title": "Does the Body Keep the Score? Reflections by Dr. Arielle Schwartz",
       "detail": "from: Intensive Integration & Optional Video / Reading",
@@ -14459,10 +14507,10 @@
     "assignment": 32,
     "quiz": 0,
     "exam": 0,
-    "lecture": 18
+    "lecture": 21
   },
   "coverage": {
-    "verified_at": "2026-06-30T16:49:10.268287+00:00",
+    "verified_at": "2026-07-01T17:51:30.800526+00:00",
     "assignments": {
       "total": 48,
       "captured": 48
