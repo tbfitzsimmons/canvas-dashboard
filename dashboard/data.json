@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-02T15:10:35.758094+00:00",
+  "generated_at": "2026-07-03T05:24:45.506410+00:00",
   "semester": {
     "name": "Summer 2026",
     "start_date": "2026-05-18",
@@ -11831,7 +11831,7 @@
       "courseId": "course3",
       "type": "reading",
       "title": "https://naropa.zoom.us/j/99385444623",
-      "detail": "from: Intensive Schedule, PowerPoint & LINK",
+      "detail": "from: Intensive Schedule & LINK",
       "due": "—",
       "due_date": null,
       "link": "https://naropa.zoom.us/j/99385444623",
@@ -11997,6 +11997,22 @@
       "link": "https://naropa.instructure.com/courses/9306/pages/references",
       "points": null,
       "canvas_id": "page_child:406388:44a2dc91",
+      "source": "page_child",
+      "is_overview": false,
+      "summary": "",
+      "submitted": false
+    },
+    {
+      "week": 0,
+      "courseId": "course3",
+      "type": "reading",
+      "title": "References for Advanced Topics in Gestalt .docx",
+      "detail": "from: Intensive Integration & Optional Video / Reading",
+      "due": "—",
+      "due_date": null,
+      "link": "https://naropa.instructure.com/courses/9306/files/1476487?verifier=D0ijBRYl8KlfFCTsseUvMkeE8R2VM56jEsmjSyyu&wrap=1",
+      "points": null,
+      "canvas_id": "page_child:406429:b0e33c13",
       "source": "page_child",
       "is_overview": false,
       "summary": "",
@@ -14500,7 +14516,7 @@
     }
   ],
   "totals": {
-    "reading": 675,
+    "reading": 676,
     "video": 131,
     "discussion": 33,
     "paper": 9,
@@ -14510,7 +14526,7 @@
     "lecture": 21
   },
   "coverage": {
-    "verified_at": "2026-07-02T15:10:35.758059+00:00",
+    "verified_at": "2026-07-03T05:24:45.506366+00:00",
     "assignments": {
       "total": 48,
       "captured": 48
