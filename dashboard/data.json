@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-06T10:13:51.781249+00:00",
+  "generated_at": "2026-07-06T15:24:14.623867+00:00",
   "semester": {
     "name": "Summer 2026",
     "start_date": "2026-05-18",
@@ -11638,13 +11638,13 @@
       "week": 0,
       "courseId": "course3",
       "type": "video",
-      "title": "Catherine Liu: #Trauma | #politics #psychology #ptsd",
+      "title": "Catherine Liu: #Trauma | #Politics",
       "detail": "from: Required Reading & Video",
       "due": "—",
       "due_date": null,
       "link": "https://youtube.com/shorts/dSHSs3rp3cM?si=9S_uADNN0Xvn0S22",
       "points": null,
-      "canvas_id": "page_child:406401:2fb76bfc",
+      "canvas_id": "page_child:406401:a1f4316e",
       "source": "page_child",
       "is_overview": false,
       "summary": "",
@@ -14526,7 +14526,7 @@
     "lecture": 21
   },
   "coverage": {
-    "verified_at": "2026-07-06T10:13:51.781201+00:00",
+    "verified_at": "2026-07-06T15:24:14.623823+00:00",
     "assignments": {
       "total": 48,
       "captured": 48
