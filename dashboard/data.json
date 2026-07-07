@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-06T16:46:52.729961+00:00",
+  "generated_at": "2026-07-07T01:48:44.387547+00:00",
   "semester": {
     "name": "Summer 2026",
     "start_date": "2026-05-18",
@@ -4733,38 +4733,6 @@
       "link": "https://www.youtube.com/watch?v=-x95ltQP8qQ",
       "points": null,
       "canvas_id": "page_child:407567:1f9f12a5",
-      "source": "page_child",
-      "is_overview": false,
-      "summary": "",
-      "submitted": false
-    },
-    {
-      "week": 7,
-      "courseId": "course5",
-      "type": "reading",
-      "title": "https://docs.google.com/document/d/1NPpcq0zy3WS-OkihKEmMXE0sLNBkgEe8rLRdy4w57TU/edit?tab=t.0Links to an external site.",
-      "detail": "from: Meditation Instruction",
-      "due": "—",
-      "due_date": null,
-      "link": "https://docs.google.com/document/d/1NPpcq0zy3WS-OkihKEmMXE0sLNBkgEe8rLRdy4w57TU/edit?tab=t.0",
-      "points": null,
-      "canvas_id": "page_child:407568:a1d15805",
-      "source": "page_child",
-      "is_overview": false,
-      "summary": "",
-      "submitted": false
-    },
-    {
-      "week": 7,
-      "courseId": "course5",
-      "type": "reading",
-      "title": "https://naropa.zoom.us/j/3617516044",
-      "detail": "from: Meditation Instruction",
-      "due": "—",
-      "due_date": null,
-      "link": "https://naropa.zoom.us/j/3617516044",
-      "points": null,
-      "canvas_id": "page_child:407568:aedcb3f3",
       "source": "page_child",
       "is_overview": false,
       "summary": "",
@@ -14516,7 +14484,7 @@
     }
   ],
   "totals": {
-    "reading": 676,
+    "reading": 674,
     "video": 131,
     "discussion": 33,
     "paper": 9,
@@ -14526,7 +14494,7 @@
     "lecture": 21
   },
   "coverage": {
-    "verified_at": "2026-07-06T16:46:52.729919+00:00",
+    "verified_at": "2026-07-07T01:48:44.387505+00:00",
     "assignments": {
       "total": 48,
       "captured": 48
