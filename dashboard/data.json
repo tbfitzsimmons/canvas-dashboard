@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-07T15:15:00.200148+00:00",
+  "generated_at": "2026-07-13T09:20:44.314317+00:00",
   "semester": {
     "name": "Summer 2026",
     "start_date": "2026-05-18",
@@ -2464,7 +2464,7 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": true
     },
     {
       "week": 5,
@@ -4176,7 +4176,7 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": true
     },
     {
       "week": 7,
@@ -4816,7 +4816,7 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": true
     },
     {
       "week": 8,
@@ -4832,7 +4832,7 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": true
     },
     {
       "week": 8,
@@ -14494,7 +14494,7 @@
     "lecture": 21
   },
   "coverage": {
-    "verified_at": "2026-07-07T15:15:00.200105+00:00",
+    "verified_at": "2026-07-13T09:20:44.314272+00:00",
     "assignments": {
       "total": 48,
       "captured": 48
