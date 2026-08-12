@@ -828,11 +828,35 @@ def pick_active_term(cfg: dict) -> tuple[str, dict] | None:
 def fetch_raw_courses(canvas: Canvas, cfg: dict) -> list[dict]:
     """Fetch active courses once and record term metadata. Exclusions are applied
     here so admin pseudo-courses can't masquerade as 'a new semester started'."""
-    print("→ Fetching active courses…")
-    raw = list(canvas.paginate("/courses", {
-        "enrollment_state": "active",
-        "include[]": ["term", "teachers"],
-    }))
+    print("→ Fetching courses…")
+    # A next-semester course that Canvas already shows the student is NOT
+    # returned by enrollment_state=active until the term opens — the enrollment
+    # sits in invited/pending. Fetch both so an upcoming term becomes visible to
+    # the rollover logic as soon as it's real. (Observed 2026-08-12: Fall 2026
+    # courses were browsable in Canvas but absent from the active-only fetch.)
+    raw: list[dict] = []
+    seen_ids: set[str] = set()
+    states_by_term: dict[str, set[str]] = {}
+    for state in ("active", "invited_or_pending"):
+        try:
+            batch = list(canvas.paginate("/courses", {
+                "enrollment_state": state,
+                "include[]": ["term", "teachers"],
+            }))
+        except requests.HTTPError as e:
+            print(f"  ⚠ course fetch ({state}): {e}")
+            continue
+        for c in batch:
+            nm = (c.get("term") or {}).get("name")
+            if nm:
+                states_by_term.setdefault(nm, set()).add(state)
+            cid = str(c.get("id"))
+            if cid in seen_ids:
+                continue
+            seen_ids.add(cid)
+            c["_enrollment_state"] = state
+            raw.append(c)
+
     excluded_ids = set(cfg.get("excluded_course_ids", []))
     raw = [c for c in raw if c.get("id") not in excluded_ids and str(c.get("id")) not in excluded_ids]
 
@@ -847,9 +871,14 @@ def fetch_raw_courses(canvas: Canvas, cfg: dict) -> list[dict]:
             "start_at": t.get("start_at"),
             "end_at": t.get("end_at"),
             "courses": 0,
+            "enrollment_states": sorted(states_by_term.get(nm, [])),
         })
         TERM_META[nm]["courses"] += 1
-    print(f"  ℹ terms with active enrollments: {', '.join(sorted(TERM_META)) or '(none)'}")
+    for nm in sorted(TERM_META):
+        m = TERM_META[nm]
+        print(f"  ℹ term: {nm}  courses={m['courses']}  "
+              f"enrollment={'/'.join(m.get('enrollment_states') or ['?'])}  "
+              f"start={m.get('start_at')}")
     return raw
 
 
