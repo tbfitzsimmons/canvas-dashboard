@@ -200,6 +200,36 @@ custom domain, preserving the `#t=` hash. Code at top of `<script>` in index.htm
      `semester.name` changes (legitimate rollover). Override:
      `SYNC_ALLOW_REGRESSION=1`.
 
+7. **Semester rollover is AUTOMATIC (since 2026-08-12) — do not reintroduce a
+   manual checklist.** `pick_active_term()` + `derive_semester()` compute the
+   whole `semester` block from Canvas term metadata (`start_at`/`end_at`), which
+   was verified to reproduce the hand-written Summer 2026 config exactly (name,
+   start_date, canvas_term_name; `weeks` came out 13 vs 12 because Canvas's term
+   window runs a week past the last class — harmless trailing empty week).
+   Two gates, both required before switching:
+     • the candidate term has already STARTED (future terms never displace the
+       current board), and
+     • it yields >= `rollover_min_items` (default 15) real items — a published
+       but empty term must never replace a working board, because to Jennifer
+       that is indistinguishable from data loss.
+   On switch, `archive_current_semester()` copies the outgoing data.json to
+   `dashboard/archive/<slug>.json` + `index.json`; the dashboard's semester
+   dropdown loads them read-only (`VIEWING_ARCHIVE` blocks pushes so browsing
+   history can't write into an old KV bucket). `.github/workflows/sync.yml`
+   stages `dashboard/archive` alongside data.json — verified 2026-08-12.
+   Escape hatch: `"auto_rollover": false` in config.json.
+
+8. **Only real academic terms count as rollover candidates.** Canvas returns
+   housekeeping buckets ("Default Term", no-term) for library/orientation
+   enrollments; `_looks_like_semester()` requires a season word AND a year.
+   Without it, "Default Term" pinned a permanent false "new term!" notice
+   (observed and fixed 2026-08-12).
+
+9. **The board must never silently degrade.** `assert_no_regression()` refuses
+   to overwrite data.json when, within the SAME semester, the course count drops
+   or items fall >40%. It stands down automatically across a semester change.
+   Override with `SYNC_ALLOW_REGRESSION=1`.
+
 ## Known issues / next steps
 
 ### 1. Worker /dispatch — FIXED (verified 2026-06-08, OPTIONS returns 204)
