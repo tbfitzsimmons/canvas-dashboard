@@ -799,7 +799,21 @@ def pick_active_term(cfg: dict) -> tuple[str, dict] | None:
     now = datetime.now(timezone.utc)
     grace = timedelta(days=int(cfg.get("rollover_grace_days", 14)))
 
+    # "What are we showing now?" comes from the last committed data.json, NOT
+    # config.json. data.json is rewritten every run, so it always reflects
+    # reality after a rollover; config.json's semester block is only a seed for
+    # the very first run (or when auto_rollover is off). Reading config here
+    # would re-fire the rollover on every subsequent run and archive the CURRENT
+    # semester as though it were the outgoing one.
     current_name = (cfg.get("semester") or {}).get("canvas_term_name")
+    if cfg.get("auto_rollover", True) and DATA_PATH.exists():
+        try:
+            prev = json.loads(DATA_PATH.read_text())
+            prev_term = (prev.get("semester") or {}).get("canvas_term_name")
+            if prev_term:
+                current_name = prev_term
+        except Exception:
+            pass
     current_meta = TERM_META.get(current_name) or {}
     current_start = parse_iso(current_meta.get("start_at"))
     current_end = parse_iso(current_meta.get("end_at"))
@@ -1722,7 +1736,21 @@ def main() -> int:
     #   (2) only once its courses actually yield content ("available to build")
     #       — switching to an empty shell of a term would look, to Jennifer,
     #       exactly like the board had been wiped.
+    #
+    # The semester currently on the board lives in data.json, not config.json.
+    # config.json's semester block is only a seed for the first run (or when
+    # auto_rollover is off), so we adopt data.json's block here. Skipping this
+    # would rebuild the previous semester's board on the very next run.
+    if cfg.get("auto_rollover", True) and DATA_PATH.exists():
+        try:
+            prev_sem = (json.loads(DATA_PATH.read_text()).get("semester") or {})
+            if prev_sem.get("canvas_term_name"):
+                cfg = {**cfg, "semester": prev_sem}
+        except Exception as e:
+            print(f"  ⚠ could not read current semester from data.json: {e}")
+
     configured_term = cfg.get("semester", {}).get("canvas_term_name")
+    print(f"  ▸ board currently showing: {configured_term}")
     rollover_info: dict | None = None
     if cfg.get("auto_rollover", True):
         picked = pick_active_term(cfg)
