@@ -22,8 +22,9 @@ change `canvas_url` in `config.json` to your school's Canvas domain too.
 ## 2. Personalize the config
 
 Edit `config.json`:
-- `semester` — your term name/dates (`canvas_term_name` must match Canvas
-  **letter-for-letter**; `start_date` must be a Monday).
+- `semester` — leave as-is. The first sync auto-detects your current term from
+  Canvas and overwrites this block (name, start date, length, exact term name).
+  Only fill it in by hand if you also set `"auto_rollover": false`.
 - `excluded_course_ids` — start with `[]`; add IDs of pseudo-courses if any
   appear after your first sync.
 - `instructor_overrides` — start with `{}`.
