@@ -123,6 +123,21 @@ PER_PAGE = 100
 # select_courses(); surfaced in data.json so the dashboard can flag a rollover.
 OTHER_TERMS: list[str] = []
 
+# A real academic term names a season AND a year ("Fall 2026 Semester").
+# Canvas also hands back housekeeping buckets — "Default Term", "(no term)" —
+# for library/orientation/permanent enrollments. Those are NOT a new semester;
+# treating them as one would pin a false "roll over now" notice to the
+# dashboard forever (observed: "Default Term", 2026-08-12).
+_SEMESTER_TERM_RE = re.compile(
+    r"\b(fall|spring|summer|winter|autumn)\b.*\b(19|20)\d{2}\b"
+    r"|\b(19|20)\d{2}\b.*\b(fall|spring|summer|winter|autumn)\b",
+    re.IGNORECASE,
+)
+
+
+def _looks_like_semester(term_name: str) -> bool:
+    return bool(term_name) and bool(_SEMESTER_TERM_RE.search(term_name))
+
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Data model
@@ -747,7 +762,7 @@ def select_courses(canvas: Canvas, cfg: dict) -> list[Course]:
     # update config.json — no need to remember to go check.
     all_terms = sorted({(c.get("term") or {}).get("name") or "(no term)" for c in raw})
     OTHER_TERMS.clear()
-    OTHER_TERMS.extend(t for t in all_terms if t != term_filter and t != "(no term)")
+    OTHER_TERMS.extend(t for t in all_terms if t != term_filter and _looks_like_semester(t))
     print(f"  ℹ terms with active enrollments: {', '.join(all_terms) or '(none)'}")
     if OTHER_TERMS:
         print(f"  ⚠ NEW TERM AVAILABLE: {', '.join(OTHER_TERMS)}")
