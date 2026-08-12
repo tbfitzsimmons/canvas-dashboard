@@ -45,6 +45,7 @@ from bs4 import BeautifulSoup, NavigableString, Tag
 ROOT = Path(__file__).parent
 CONFIG_PATH = ROOT / "config.json"
 DATA_PATH = ROOT / "dashboard" / "data.json"
+ARCHIVE_DIR = ROOT / "dashboard" / "archive"
 
 # Course color palette — assigned in enrollment order.
 PALETTE = [
@@ -744,49 +745,102 @@ def get_token(cfg: dict) -> str:
     return token
 
 
-def select_courses(canvas: Canvas, cfg: dict) -> list[Course]:
-    """Pull active courses, filter to current term, assign internal IDs and colors."""
+def _monday_of(d: datetime) -> str:
+    """Snap a term start to the Monday of its week, in Naropa local time."""
+    local = d.astimezone(LOCAL_TZ).date() if d.tzinfo else d.date()
+    return (local - timedelta(days=local.weekday())).isoformat()
+
+
+def derive_semester(term_name: str, meta: dict) -> dict | None:
+    """Build a semester config block from Canvas's own term metadata.
+
+    Everything the old manual checklist asked a human to type is already in the
+    term object: the exact name, the start date, and the length. Returns None if
+    Canvas didn't give us dates to work from.
+    """
+    start = parse_iso(meta.get("start_at"))
+    if not start:
+        return None
+    end = parse_iso(meta.get("end_at"))
+    if end:
+        days = (end.astimezone(LOCAL_TZ).date() - start.astimezone(LOCAL_TZ).date()).days
+        weeks = max(1, min(20, round(days / 7)))
+    else:
+        weeks = 16  # sane default for a term with no end date published
+    # "Fall 2026 Semester" → "Fall 2026" for the dashboard headline
+    display = re.sub(r"\s*\bsemester\b\s*$", "", term_name, flags=re.IGNORECASE).strip()
+    return {
+        "name": display or term_name,
+        "start_date": _monday_of(start),
+        "weeks": weeks,
+        "canvas_term_name": term_name,
+    }
+
+
+def pick_active_term(cfg: dict) -> tuple[str, dict] | None:
+    """Choose which term the board should show, from TERM_META.
+
+    Rule: among real academic terms that have already STARTED, take the one that
+    started most recently. A term that hasn't started yet is ignored, so Fall
+    never displaces Summer early. Returns (term_name, derived_semester_block).
+    """
+    now = datetime.now(timezone.utc)
+    started: list[tuple[datetime, str, dict]] = []
+    for name, meta in TERM_META.items():
+        if not _looks_like_semester(name) or not meta.get("courses"):
+            continue
+        start = parse_iso(meta.get("start_at"))
+        if start and start <= now:
+            started.append((start, name, meta))
+    if not started:
+        return None
+    started.sort(key=lambda t: t[0])
+    _, name, meta = started[-1]
+    derived = derive_semester(name, meta)
+    return (name, derived) if derived else None
+
+
+def fetch_raw_courses(canvas: Canvas, cfg: dict) -> list[dict]:
+    """Fetch active courses once and record term metadata. Exclusions are applied
+    here so admin pseudo-courses can't masquerade as 'a new semester started'."""
     print("→ Fetching active courses…")
     raw = list(canvas.paginate("/courses", {
         "enrollment_state": "active",
         "include[]": ["term", "teachers"],
     }))
-
-    term_filter = cfg.get("semester", {}).get("canvas_term_name")
-
-    # Optional manual exclusion (e.g., student-center pseudo-courses).
-    # Applied BEFORE term detection so admin pseudo-courses — which often sit in
-    # an odd term or none at all — can't masquerade as "a new semester started".
     excluded_ids = set(cfg.get("excluded_course_ids", []))
     raw = [c for c in raw if c.get("id") not in excluded_ids and str(c.get("id")) not in excluded_ids]
 
-    # Rollover early-warning: record every term Canvas can see, so the log (and
-    # data.json) shows the moment a NEW term goes live. That's the signal to
-    # update config.json — no need to remember to go check.
-    # Capture full term objects (name + start/end dates). Recorded in data.json
-    # so rollover can eventually be derived from Canvas rather than hand-edited.
     TERM_META.clear()
     for c in raw:
         t = c.get("term") or {}
         nm = t.get("name")
-        if nm and nm not in TERM_META:
-            TERM_META[nm] = {
-                "id": t.get("id"),
-                "start_at": t.get("start_at"),
-                "end_at": t.get("end_at"),
-                "courses": 0,
-            }
-        if nm:
-            TERM_META[nm]["courses"] += 1
+        if not nm:
+            continue
+        TERM_META.setdefault(nm, {
+            "id": t.get("id"),
+            "start_at": t.get("start_at"),
+            "end_at": t.get("end_at"),
+            "courses": 0,
+        })
+        TERM_META[nm]["courses"] += 1
+    print(f"  ℹ terms with active enrollments: {', '.join(sorted(TERM_META)) or '(none)'}")
+    return raw
 
-    all_terms = sorted({(c.get("term") or {}).get("name") or "(no term)" for c in raw})
+
+def select_courses(canvas: Canvas, cfg: dict, raw: list[dict] | None = None,
+                   term_override: str | None = None) -> list[Course]:
+    """Filter the fetched courses to one term and build Course objects."""
+    if raw is None:
+        raw = fetch_raw_courses(canvas, cfg)
+
+    term_filter = term_override or cfg.get("semester", {}).get("canvas_term_name")
+
     OTHER_TERMS.clear()
-    OTHER_TERMS.extend(t for t in all_terms if t != term_filter and _looks_like_semester(t))
-    print(f"  ℹ terms with active enrollments: {', '.join(all_terms) or '(none)'}")
+    OTHER_TERMS.extend(t for t in sorted(TERM_META)
+                       if t != term_filter and _looks_like_semester(t))
     if OTHER_TERMS:
-        print(f"  ⚠ NEW TERM AVAILABLE: {', '.join(OTHER_TERMS)}")
-        print(f'     Currently syncing "{term_filter}". To roll over, update')
-        print("     config.json → semester.{name,start_date,weeks,canvas_term_name}")
+        print(f"  ℹ other terms visible: {', '.join(OTHER_TERMS)}")
 
     if term_filter:
         raw = [c for c in raw if (c.get("term") or {}).get("name") == term_filter]
@@ -1363,7 +1417,7 @@ def verify_coverage(canvas: Canvas, courses: list[Course], items: list[Item]) ->
 
 
 def write_data(courses: list[Course], items: list[Item], cfg: dict,
-               coverage: dict | None = None) -> None:
+               coverage: dict | None = None, rollover: dict | None = None) -> None:
     payload = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "semester": cfg["semester"],
@@ -1374,6 +1428,8 @@ def write_data(courses: list[Course], items: list[Item], cfg: dict,
         "coverage": coverage,
         "other_terms": list(OTHER_TERMS),
         "term_meta": dict(TERM_META),
+        "rollover": rollover,
+        "archives": _archive_index(),
     }
     DATA_PATH.parent.mkdir(parents=True, exist_ok=True)
     tmp = DATA_PATH.with_suffix(".json.tmp")
@@ -1603,7 +1659,42 @@ def main() -> int:
     base_url = cfg["canvas_url"]
     canvas = Canvas(base_url, token)
 
-    courses = select_courses(canvas, cfg)
+    raw_courses = fetch_raw_courses(canvas, cfg)
+
+    # ── Automatic semester rollover ────────────────────────────────────────
+    # Everything the old manual checklist asked for is derivable from Canvas's
+    # own term metadata. Two guardrails, per Brooks's requirements:
+    #   (1) only switch once the new term has STARTED, and
+    #   (2) only once its courses actually yield content ("available to build")
+    #       — switching to an empty shell of a term would look, to Jennifer,
+    #       exactly like the board had been wiped.
+    configured_term = cfg.get("semester", {}).get("canvas_term_name")
+    rollover_info: dict | None = None
+    if cfg.get("auto_rollover", True):
+        picked = pick_active_term(cfg)
+        if picked and picked[0] != configured_term:
+            cand_name, cand_semester = picked
+            print(f'\n→ Candidate new term detected: "{cand_name}"')
+            cand_courses = select_courses(canvas, cfg, raw=raw_courses, term_override=cand_name)
+            cand_items = build_items(canvas, cand_courses, {**cfg, "semester": cand_semester})
+            threshold = int(cfg.get("rollover_min_items", 15))
+            if len(cand_items) >= threshold:
+                print(f"  ✓ {cand_name}: {len(cand_courses)} course(s), {len(cand_items)} items "
+                      f"— content is live, rolling over")
+                rollover_info = {
+                    "from": cfg.get("semester", {}).get("name"),
+                    "to": cand_semester["name"],
+                    "at": datetime.now(timezone.utc).isoformat(),
+                }
+                archive_current_semester(cfg)
+                cfg = {**cfg, "semester": cand_semester}
+                configured_term = cand_name
+            else:
+                print(f"  ⏸ {cand_name}: only {len(cand_items)} item(s) so far "
+                      f"(need {threshold}) — professors haven't published content yet.")
+                print(f'     Staying on "{configured_term}". Will re-check next sync.')
+
+    courses = select_courses(canvas, cfg, raw=raw_courses, term_override=configured_term)
     if not courses:
         # Show the term names Canvas ACTUALLY returns. At semester rollover this
         # is the one fact needed to fix config.json; guessing at it is how you
@@ -1633,26 +1724,7 @@ def main() -> int:
         msg.append("        config.json → semester.canvas_term_name")
         raise SystemExit("\n".join(msg))
 
-    all_items: list[Item] = []
-    with ThreadPoolExecutor(max_workers=min(8, len(courses))) as pool:
-        futures = {pool.submit(fetch_course_items, canvas, c, cfg): c for c in courses}
-        for fut in as_completed(futures):
-            try:
-                all_items.extend(fut.result())
-            except Exception as e:
-                course = futures[fut]
-                print(f"  ⚠ {course.code} failed: {e}", file=sys.stderr)
-
-    # Planner API reconciliation — catches anything the per-course passes missed
-    existing_ids = {it.canvas_id for it in all_items}
-    planner_new = fetch_planner_reconciliation(canvas, courses, cfg, existing_ids)
-    all_items.extend(planner_new)
-
-    # Synthetic items — recurring weekly tasks not visible in Canvas
-    all_items.extend(generate_synthetic_items(courses, cfg))
-
-    # Stable sort: by week, then by due date, then by course, then by title
-    all_items.sort(key=lambda i: (i.week or 99, i.due_date or "9999", i.courseId, i.title.lower()))
+    all_items = build_items(canvas, courses, cfg)
 
     # Continuous coverage self-audit — re-verifies every graded item landed
     coverage = verify_coverage(canvas, courses, all_items)
@@ -1664,8 +1736,77 @@ def main() -> int:
     # the drop is expected, so the guard stands down.
     assert_no_regression(all_items, courses, cfg)
 
-    write_data(courses, all_items, cfg, coverage)
+    write_data(courses, all_items, cfg, coverage, rollover_info)
     return 0
+
+
+def build_items(canvas: Canvas, courses: list[Course], cfg: dict) -> list[Item]:
+    """All four per-course passes + planner reconciliation + synthetic items."""
+    if not courses:
+        return []
+    all_items: list[Item] = []
+    with ThreadPoolExecutor(max_workers=min(8, len(courses))) as pool:
+        futures = {pool.submit(fetch_course_items, canvas, c, cfg): c for c in courses}
+        for fut in as_completed(futures):
+            try:
+                all_items.extend(fut.result())
+            except Exception as e:
+                course = futures[fut]
+                print(f"  ⚠ {course.code} failed: {e}", file=sys.stderr)
+
+    existing_ids = {it.canvas_id for it in all_items}
+    all_items.extend(fetch_planner_reconciliation(canvas, courses, cfg, existing_ids))
+    all_items.extend(generate_synthetic_items(courses, cfg))
+    all_items.sort(key=lambda i: (i.week or 99, i.due_date or "9999", i.courseId, i.title.lower()))
+    return all_items
+
+
+def _archive_index() -> list[dict]:
+    """Read the archive index so the dashboard can offer past semesters."""
+    p = ARCHIVE_DIR / "index.json"
+    try:
+        return json.loads(p.read_text()) if p.exists() else []
+    except Exception:
+        return []
+
+
+def archive_current_semester(cfg: dict) -> None:
+    """Retire the outgoing semester but RETAIN it: copy the live data.json into
+    dashboard/archive/<slug>.json and update an index the dashboard can browse.
+    Check-offs need no archiving — KV already namespaces them by semester name."""
+    if not DATA_PATH.exists():
+        return
+    try:
+        prev = json.loads(DATA_PATH.read_text())
+    except Exception as e:
+        print(f"  ⚠ could not read data.json to archive: {e}")
+        return
+    name = (prev.get("semester") or {}).get("name") or "unknown"
+    slug = re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-") or "unknown"
+
+    ARCHIVE_DIR.mkdir(parents=True, exist_ok=True)
+    (ARCHIVE_DIR / f"{slug}.json").write_text(json.dumps(prev, indent=2, ensure_ascii=False))
+
+    index_path = ARCHIVE_DIR / "index.json"
+    try:
+        index = json.loads(index_path.read_text()) if index_path.exists() else []
+    except Exception:
+        index = []
+    index = [e for e in index if e.get("slug") != slug]
+    index.append({
+        "slug": slug,
+        "name": name,
+        "file": f"archive/{slug}.json",
+        "archived_at": datetime.now(timezone.utc).isoformat(),
+        "generated_at": prev.get("generated_at"),
+        "items": len(prev.get("items") or []),
+        "courses": len(prev.get("courses") or []),
+        "start_date": (prev.get("semester") or {}).get("start_date"),
+    })
+    index.sort(key=lambda e: e.get("start_date") or "", reverse=True)
+    index_path.write_text(json.dumps(index, indent=2, ensure_ascii=False))
+    print(f"  📦 archived '{name}' → dashboard/archive/{slug}.json "
+          f"({len(prev.get('items') or [])} items retained)")
 
 
 # ─────────────────────────────────────────────────────────────────────────────

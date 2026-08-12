@@ -828,6 +828,7 @@ function pollForFreshData(priorGenerated) {
       .then(fresh => {
         if (fresh.generated_at && fresh.generated_at !== priorGenerated) {
           STATE.data = fresh;
+          CURRENT_DATA = fresh;
           render();
           setRefreshBtn('done', '✓ Up to date');
           setTimeout(() => { setRefreshBtn('idle', '↻ Refresh now'); REFRESH.active = false; }, 3000);
@@ -1028,6 +1029,9 @@ function scheduleRemoteWrite() {
 
 async function flushRemote(attempt = 0) {
   if (!SYNC_TOKEN || !SYNC.dirty) return;
+  // Archived semesters are read-only history — never push marks into an old
+  // semester's KV bucket just because the user was browsing it.
+  if (VIEWING_ARCHIVE) { SYNC.dirty = false; return; }
   // Push the FULL marks map — including {c:false} tombstones, which is what
   // lets unchecks propagate to other devices.
   const snapshot = {};
@@ -1116,12 +1120,13 @@ setInterval(() => {
 }, 30000);
 // Re-fetch data.json when tab refocuses — picks up any sync that ran while away
 document.addEventListener('visibilitychange', () => {
-  if (!document.hidden && STATE.data && !REFRESH.active) {
+  if (!document.hidden && STATE.data && !REFRESH.active && !VIEWING_ARCHIVE) {
     fetch('data.json?t=' + Date.now(), { cache: 'no-store' })
       .then(r => r.json())
       .then(fresh => {
         if (fresh.generated_at && fresh.generated_at !== STATE.data.generated_at) {
           STATE.data = fresh;
+          CURRENT_DATA = fresh;
           render();
         }
       })
@@ -1284,6 +1289,61 @@ function coverageProofLine(cov) {
   return `<div class="sync-notice" style="font-size:11px;">✓ Verified at last sync: all ${a.total ?? '?'} assignments + ${d.total ?? '?'} discussions from Canvas are on this board</div>`;
 }
 
+// ── Past semesters ─────────────────────────────────────────────────────────
+// A rolled-over semester is retired from the main view but RETAINED: sync.py
+// archives its data.json, and check-offs already live in their own KV bucket
+// keyed by semester name. Selecting an archived term loads both back.
+let VIEWING_ARCHIVE = null;   // slug of the archived semester being viewed, or null
+
+function renderSemesterPicker(d) {
+  const archives = d.archives || [];
+  const rolled = d.rollover;
+  const bits = [];
+
+  if (rolled && !VIEWING_ARCHIVE) {
+    bits.push(`<div class="sync-notice" style="font-size:11px;color:#92400E;">📅 Rolled over to <strong>${escapeHtml(rolled.to)}</strong>. ${escapeHtml(rolled.from || 'The previous semester')} is retired but retained — pick it below to look back. Its check-offs are untouched.</div>`);
+  }
+  if (VIEWING_ARCHIVE) {
+    bits.push(`<div class="sync-notice" style="font-size:11px;color:#92400E;">👓 Viewing an archived semester (read-only history). <a href="#" onclick="event.preventDefault(); loadSemester(null);">back to current</a></div>`);
+  }
+  if (archives.length) {
+    const opts = [`<option value="">${escapeHtml(CURRENT_DATA?.semester?.name || 'Current')} (current)</option>`]
+      .concat(archives.map(a =>
+        `<option value="${escapeAttr(a.slug)}" ${VIEWING_ARCHIVE === a.slug ? 'selected' : ''}>${escapeHtml(a.name)} — ${a.items} items</option>`));
+    bits.push(`<div class="sync-notice" style="font-size:11px;">Semester: <select onchange="loadSemester(this.value || null)" style="font-size:11px;padding:1px 4px;">${opts.join('')}</select></div>`);
+  }
+  return bits.join('');
+}
+
+// Keep the live board around so we can switch back without a network round-trip
+let CURRENT_DATA = null;
+
+async function loadSemester(slug) {
+  try {
+    if (!slug) {
+      VIEWING_ARCHIVE = null;
+      STATE.data = CURRENT_DATA;
+    } else {
+      const entry = (CURRENT_DATA.archives || []).find(a => a.slug === slug);
+      if (!entry) return;
+      const res = await fetch(entry.file + '?t=' + Date.now(), { cache: 'no-store' });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const archived = await res.json();
+      // Carry the archive list forward so the picker still renders
+      archived.archives = CURRENT_DATA.archives;
+      VIEWING_ARCHIVE = slug;
+      STATE.data = archived;
+    }
+    STATE.viewedWeek = currentWeekNumber();
+    // Check-offs are namespaced by semester name — repoint at the right bucket
+    rebuildChecked();
+    render();
+    if (SYNC_TOKEN) pullRemote();
+  } catch (e) {
+    alert('Could not load that semester: ' + e.message);
+  }
+}
+
 function renderTokenWarning(expiresStr) {
   if (!expiresStr) return '';
   const exp = new Date(expiresStr + 'T00:00:00');
@@ -1324,9 +1384,7 @@ function render() {
         ? `<div class="sync-notice" style="font-size:11px;">Paired for cross-device sync · <a href="#" onclick="event.preventDefault(); exportLocalCheckoffs();">📥 backup</a> · <a href="#" onclick="event.preventDefault(); if(confirm('Unpair this device? You\\'ll need the bookmark URL to re-pair.')) clearSyncToken();">unpair this device</a></div>`
         : `<div class="sync-notice">⚠ This device isn't paired. Check-offs save only locally. Open Jennifer's bookmark URL once to pair this device.</div>`}
       ${coverageProofLine(d.coverage)}
-      ${(d.other_terms && d.other_terms.length)
-        ? `<div class="sync-notice" style="font-size:11px;color:#92400E;">📅 New term live in Canvas: <strong>${d.other_terms.map(escapeHtml).join(', ')}</strong> — this board is still showing ${escapeHtml(d.semester.name)}. Time to roll over <code>config.json</code>.</div>`
-        : ''}
+      ${renderSemesterPicker(d)}
     </div>
 
     ${renderCourseStrip()}
@@ -1714,6 +1772,7 @@ async function boot() {
     const res = await fetch('data.json?t=' + Date.now(), { cache: 'no-store' });
     if (!res.ok) throw new Error(`Couldn't load data.json (HTTP ${res.status})`);
     STATE.data = await res.json();
+    CURRENT_DATA = STATE.data;   // keep the live board for the semester picker
     STATE.viewedWeek = currentWeekNumber();
     render();
 
