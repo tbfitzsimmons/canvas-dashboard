@@ -99,8 +99,8 @@ Visit the Pages URL from step 2. You should see Jennifer's Summer 2026 courses. 
    - Scroll to **Approved Integrations** → click **+ New Access Token**
    - Purpose: `Canvas Dashboard`. Leave the expiry field blank.
    - **Write down the expiry date Canvas shows you** — you need it in step 3.
-     Naropa caps token lifetime server-side (observed: ~60 days, NOT 120), so
-     the date Canvas assigns is usually sooner than you'd guess.
+     Naropa's token lifetime VARIES (observed: 61 days in May 2026, 90 days in
+     Aug 2026) — it is not a fixed 120. Never assume; use the date on screen.
    - **Copy the token now** — Canvas only shows it once.
 
 2. **Update the GitHub secret** with the new token.

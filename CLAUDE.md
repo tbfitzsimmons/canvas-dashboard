@@ -185,9 +185,9 @@ custom domain, preserving the `#t=` hash. Code at top of `<script>` in index.htm
 
 4. **iCal export: explicitly declined by Jennifer.** Don't propose it again.
 
-5. **`token_expires` must be COPIED from Canvas, never estimated.** Naropa caps
-   token lifetime server-side at ~60 days (observed May 18 → Jul 18, 2026), not
-   the 120 days the docs once claimed. An estimated value (Sept 5) meant the
+5. **`token_expires` must be COPIED from Canvas, never estimated.** Observed
+   lifetimes vary (61 days for the May 2026 token, 90 days for the Aug 2026 one)
+   — there is no reliable formula. An estimated value (Sept 5) meant the
    expiry banner never fired; the token died Jul 18 and the sync failed silently
    for 12 runs over 3 weeks. On a 401, sync.py now prints the exact `expired_at`
    Canvas returns — put THAT date in config.json.
