@@ -1553,20 +1553,30 @@ def main() -> int:
         # Show the term names Canvas ACTUALLY returns. At semester rollover this
         # is the one fact needed to fix config.json; guessing at it is how you
         # get another week of failed syncs.
-        try:
-            raw = list(canvas.paginate("/courses", {
-                "enrollment_state": "active", "include[]": "term",
-            }))
-            seen = sorted({(c.get("term") or {}).get("name") or "(no term)" for c in raw})
-            hint = "\n".join(f'     • "{t}"' for t in seen) or "     (no active courses at all)"
-        except Exception:
-            hint = "     (could not list terms)"
+        def _terms(state: str) -> list[str]:
+            try:
+                raw = list(canvas.paginate("/courses", {
+                    "enrollment_state": state, "include[]": "term",
+                }))
+                return sorted({(c.get("term") or {}).get("name") or "(no term)" for c in raw})
+            except Exception:
+                return []
+
+        active = _terms("active")
+        pending = [t for t in _terms("invited_or_pending") if t not in active]
         want = cfg.get("semester", {}).get("canvas_term_name")
-        raise SystemExit(
-            f'❌ No active courses matched canvas_term_name = "{want}".\n'
-            f"   Term names Canvas actually returns for your active courses:\n{hint}\n"
-            f"   Copy one of those EXACTLY into config.json → semester.canvas_term_name."
-        )
+
+        msg = [f'❌ No ACTIVE courses matched canvas_term_name = "{want}".']
+        msg.append("   Terms with active enrollments right now:")
+        msg += [f'     • "{t}"' for t in active] or ["     (none)"]
+        if pending:
+            # Distinguishes "typo in the term name" from "next term hasn't opened yet"
+            msg.append("   Terms you're enrolled in but NOT yet active")
+            msg.append("   (course unpublished or term hasn't started — wait, don't edit config):")
+            msg += [f'     • "{t}"' for t in pending]
+        msg.append("   Fix: copy an ACTIVE term name EXACTLY into")
+        msg.append("        config.json → semester.canvas_term_name")
+        raise SystemExit("\n".join(msg))
 
     all_items: list[Item] = []
     with ThreadPoolExecutor(max_workers=min(8, len(courses))) as pool:
