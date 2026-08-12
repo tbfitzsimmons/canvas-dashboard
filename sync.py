@@ -123,6 +123,9 @@ PER_PAGE = 100
 # select_courses(); surfaced in data.json so the dashboard can flag a rollover.
 OTHER_TERMS: list[str] = []
 
+# name → {id, start_at, end_at, courses}. Diagnostic for automating rollover.
+TERM_META: dict[str, dict] = {}
+
 # A real academic term names a season AND a year ("Fall 2026 Semester").
 # Canvas also hands back housekeeping buckets — "Default Term", "(no term)" —
 # for library/orientation/permanent enrollments. Those are NOT a new semester;
@@ -760,6 +763,22 @@ def select_courses(canvas: Canvas, cfg: dict) -> list[Course]:
     # Rollover early-warning: record every term Canvas can see, so the log (and
     # data.json) shows the moment a NEW term goes live. That's the signal to
     # update config.json — no need to remember to go check.
+    # Capture full term objects (name + start/end dates). Recorded in data.json
+    # so rollover can eventually be derived from Canvas rather than hand-edited.
+    TERM_META.clear()
+    for c in raw:
+        t = c.get("term") or {}
+        nm = t.get("name")
+        if nm and nm not in TERM_META:
+            TERM_META[nm] = {
+                "id": t.get("id"),
+                "start_at": t.get("start_at"),
+                "end_at": t.get("end_at"),
+                "courses": 0,
+            }
+        if nm:
+            TERM_META[nm]["courses"] += 1
+
     all_terms = sorted({(c.get("term") or {}).get("name") or "(no term)" for c in raw})
     OTHER_TERMS.clear()
     OTHER_TERMS.extend(t for t in all_terms if t != term_filter and _looks_like_semester(t))
@@ -1354,6 +1373,7 @@ def write_data(courses: list[Course], items: list[Item], cfg: dict,
         "totals": summarize(items),
         "coverage": coverage,
         "other_terms": list(OTHER_TERMS),
+        "term_meta": dict(TERM_META),
     }
     DATA_PATH.parent.mkdir(parents=True, exist_ok=True)
     tmp = DATA_PATH.with_suffix(".json.tmp")
