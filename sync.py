@@ -119,6 +119,10 @@ def reconcile_due(due_at: datetime | None, title: str) -> datetime | None:
 # Canvas pagination — pull everything.
 PER_PAGE = 100
 
+# Terms Canvas can see that we are NOT currently syncing. Populated by
+# select_courses(); surfaced in data.json so the dashboard can flag a rollover.
+OTHER_TERMS: list[str] = []
+
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Data model
@@ -731,12 +735,27 @@ def select_courses(canvas: Canvas, cfg: dict) -> list[Course]:
     }))
 
     term_filter = cfg.get("semester", {}).get("canvas_term_name")
-    if term_filter:
-        raw = [c for c in raw if (c.get("term") or {}).get("name") == term_filter]
 
-    # Optional manual exclusion (e.g., student-center pseudo-courses)
+    # Optional manual exclusion (e.g., student-center pseudo-courses).
+    # Applied BEFORE term detection so admin pseudo-courses — which often sit in
+    # an odd term or none at all — can't masquerade as "a new semester started".
     excluded_ids = set(cfg.get("excluded_course_ids", []))
     raw = [c for c in raw if c.get("id") not in excluded_ids and str(c.get("id")) not in excluded_ids]
+
+    # Rollover early-warning: record every term Canvas can see, so the log (and
+    # data.json) shows the moment a NEW term goes live. That's the signal to
+    # update config.json — no need to remember to go check.
+    all_terms = sorted({(c.get("term") or {}).get("name") or "(no term)" for c in raw})
+    OTHER_TERMS.clear()
+    OTHER_TERMS.extend(t for t in all_terms if t != term_filter and t != "(no term)")
+    print(f"  ℹ terms with active enrollments: {', '.join(all_terms) or '(none)'}")
+    if OTHER_TERMS:
+        print(f"  ⚠ NEW TERM AVAILABLE: {', '.join(OTHER_TERMS)}")
+        print(f'     Currently syncing "{term_filter}". To roll over, update')
+        print("     config.json → semester.{name,start_date,weeks,canvas_term_name}")
+
+    if term_filter:
+        raw = [c for c in raw if (c.get("term") or {}).get("name") == term_filter]
 
     # Optional manual override of which courses to include
     included_ids = cfg.get("included_course_ids")
@@ -1319,6 +1338,7 @@ def write_data(courses: list[Course], items: list[Item], cfg: dict,
         "items": [asdict(i) for i in items],
         "totals": summarize(items),
         "coverage": coverage,
+        "other_terms": list(OTHER_TERMS),
     }
     DATA_PATH.parent.mkdir(parents=True, exist_ok=True)
     tmp = DATA_PATH.with_suffix(".json.tmp")

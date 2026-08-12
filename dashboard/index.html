@@ -1324,6 +1324,9 @@ function render() {
         ? `<div class="sync-notice" style="font-size:11px;">Paired for cross-device sync · <a href="#" onclick="event.preventDefault(); exportLocalCheckoffs();">📥 backup</a> · <a href="#" onclick="event.preventDefault(); if(confirm('Unpair this device? You\\'ll need the bookmark URL to re-pair.')) clearSyncToken();">unpair this device</a></div>`
         : `<div class="sync-notice">⚠ This device isn't paired. Check-offs save only locally. Open Jennifer's bookmark URL once to pair this device.</div>`}
       ${coverageProofLine(d.coverage)}
+      ${(d.other_terms && d.other_terms.length)
+        ? `<div class="sync-notice" style="font-size:11px;color:#92400E;">📅 New term live in Canvas: <strong>${d.other_terms.map(escapeHtml).join(', ')}</strong> — this board is still showing ${escapeHtml(d.semester.name)}. Time to roll over <code>config.json</code>.</div>`
+        : ''}
     </div>
 
     ${renderCourseStrip()}
