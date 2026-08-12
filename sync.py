@@ -780,22 +780,47 @@ def derive_semester(term_name: str, meta: dict) -> dict | None:
 def pick_active_term(cfg: dict) -> tuple[str, dict] | None:
     """Choose which term the board should show, from TERM_META.
 
-    Rule: among real academic terms that have already STARTED, take the one that
-    started most recently. A term that hasn't started yet is ignored, so Fall
-    never displaces Summer early. Returns (term_name, derived_semester_block).
+    Three rules, each protecting against a specific failure:
+
+    1. FORWARD ONLY. A candidate must start strictly later than the term we're
+       already showing. Without this, a configured-but-not-yet-started term
+       (e.g. pointing at Fall in mid-August) would be "corrected" back to the
+       older term that has started — archiving and un-archiving on every run.
+
+    2. EARLY ACCESS. A term that hasn't started yet still qualifies once the
+       CURRENT term is finished or nearly finished (within `rollover_grace_days`,
+       default 14). That lets Jennifer start on next semester's coursework as
+       soon as professors publish it, without a Spring shell hijacking the board
+       in the middle of Fall.
+
+    3. Content is checked by the caller (`rollover_min_items`), so a published
+       but empty term can never replace a working board.
     """
     now = datetime.now(timezone.utc)
-    started: list[tuple[datetime, str, dict]] = []
+    grace = timedelta(days=int(cfg.get("rollover_grace_days", 14)))
+
+    current_name = (cfg.get("semester") or {}).get("canvas_term_name")
+    current_meta = TERM_META.get(current_name) or {}
+    current_start = parse_iso(current_meta.get("start_at"))
+    current_end = parse_iso(current_meta.get("end_at"))
+    current_wrapping_up = (current_end is not None) and (now >= current_end - grace)
+
+    candidates: list[tuple[datetime, str, dict]] = []
     for name, meta in TERM_META.items():
-        if not _looks_like_semester(name) or not meta.get("courses"):
+        if name == current_name or not _looks_like_semester(name) or not meta.get("courses"):
             continue
         start = parse_iso(meta.get("start_at"))
-        if start and start <= now:
-            started.append((start, name, meta))
-    if not started:
+        if not start:
+            continue
+        if current_start and start <= current_start:
+            continue                      # rule 1: never roll backward
+        if start <= now or current_wrapping_up:   # rule 2
+            candidates.append((start, name, meta))
+
+    if not candidates:
         return None
-    started.sort(key=lambda t: t[0])
-    _, name, meta = started[-1]
+    candidates.sort(key=lambda t: t[0])
+    _, name, meta = candidates[0]   # the NEXT term, not the furthest-future one
     derived = derive_semester(name, meta)
     return (name, derived) if derived else None
 
