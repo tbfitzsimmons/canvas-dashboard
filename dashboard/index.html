@@ -1302,10 +1302,13 @@ function renderTokenWarning(expiresStr) {
 function render() {
   const d = STATE.data;
   const generated = formatRefreshTime(d.generated_at);
-  const stale = hoursSince(d.generated_at) > 48; // warn if >2 days old
+  const staleHrs = hoursSince(d.generated_at);
+  const stale = staleHrs > 48;        // soft warning after 2 days
+  const veryStale = staleHrs > 24 * 5; // the sync is broken, not just late
 
   root.innerHTML = `
     ${renderTokenWarning(d.token_expires)}
+    ${veryStale ? `<div class="token-warn expired">⚠ <strong>This board stopped updating ${Math.floor(staleHrs/24)} days ago.</strong> The Monday sync is failing — most often an expired Canvas token. New assignments will NOT appear until it's fixed. <a href="https://github.com/${repoSlug()}/actions/workflows/sync.yml" target="_blank">Check the sync log ↗</a></div>` : ''}
     ${renderCoverageBanner(d.coverage)}
     <div class="masthead">
       <h1>

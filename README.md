@@ -97,7 +97,10 @@ Visit the Pages URL from step 2. You should see Jennifer's Summer 2026 courses. 
 1. **Regenerate the Canvas token** (Naropa's 120-day cap forces this).
    - Go to https://naropa.instructure.com/profile/settings
    - Scroll to **Approved Integrations** → click **+ New Access Token**
-   - Purpose: `Canvas Dashboard`. Leave expiry blank or set ~110 days out.
+   - Purpose: `Canvas Dashboard`. Leave the expiry field blank.
+   - **Write down the expiry date Canvas shows you** — you need it in step 3.
+     Naropa caps token lifetime server-side (observed: ~60 days, NOT 120), so
+     the date Canvas assigns is usually sooner than you'd guess.
    - **Copy the token now** — Canvas only shows it once.
 
 2. **Update the GitHub secret** with the new token.
@@ -106,7 +109,10 @@ Visit the Pages URL from step 2. You should see Jennifer's Summer 2026 courses. 
 
 3. **Update `token_expires` in `config.json`** so the dashboard banner reflects the new expiry.
    - Open https://github.com/tbfitzsimmons/canvas-dashboard/edit/main/config.json
-   - Set `"token_expires"` to ~110 days from today, format `YYYY-MM-DD`.
+   - Set `"token_expires"` to the **exact date Canvas showed** when you created
+     the token, format `YYYY-MM-DD`. **Do not estimate it.** In July 2026 an
+     estimated date (Sept 5) hid a real expiry (July 18) and the sync failed
+     silently for 12 runs / 3 weeks before anyone noticed.
 
 4. **Edit `config.json` for the new semester** (same file, same edit page):
    - `semester.name` — e.g. `"Fall 2026"` (display name on the dashboard).
@@ -180,7 +186,9 @@ Rules live in `sync.py` near the top — search for `VIDEO_HINTS`, `PAPER_HINTS`
 The first sync hasn't run yet. Go to Actions → Sync Canvas Data → Run workflow.
 
 **Action fails with "Canvas rejected the token (401)"**
-The token expired (Naropa caps at 120 days). Regenerate it on Canvas, update the `CANVAS_TOKEN` secret.
+The token expired. The sync log prints the exact expiry Canvas reports. Regenerate it on
+Canvas, update the `CANVAS_TOKEN` secret, **and** update `token_expires` in `config.json`
+to the real date Canvas shows.
 
 **Action fails with "No active courses matched"**
 The `canvas_term_name` in `config.json` doesn't match what Canvas returns. Check it letter-for-letter (e.g., `"Summer 2026 Semester"` vs `"Summer 2026"`).

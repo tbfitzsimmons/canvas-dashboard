@@ -185,6 +185,21 @@ custom domain, preserving the `#t=` hash. Code at top of `<script>` in index.htm
 
 4. **iCal export: explicitly declined by Jennifer.** Don't propose it again.
 
+5. **`token_expires` must be COPIED from Canvas, never estimated.** Naropa caps
+   token lifetime server-side at ~60 days (observed May 18 → Jul 18, 2026), not
+   the 120 days the docs once claimed. An estimated value (Sept 5) meant the
+   expiry banner never fired; the token died Jul 18 and the sync failed silently
+   for 12 runs over 3 weeks. On a 401, sync.py now prints the exact `expired_at`
+   Canvas returns — put THAT date in config.json.
+
+6. **Two guards protect the board from silent degradation** (added 2026-08-11):
+   - Zero courses matched → hard fail that LISTS the term names Canvas actually
+     returns (the one fact needed to fix `canvas_term_name` at rollover).
+   - Within the same semester, a course-count drop or >40% item drop → hard fail
+     rather than overwrite the last good data.json. Skipped automatically when
+     `semester.name` changes (legitimate rollover). Override:
+     `SYNC_ALLOW_REGRESSION=1`.
+
 ## Known issues / next steps
 
 ### 1. Worker /dispatch — FIXED (verified 2026-06-08, OPTIONS returns 204)

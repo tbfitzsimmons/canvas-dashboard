@@ -184,11 +184,27 @@ class Canvas:
                 time.sleep(wait)
                 continue
             if r.status_code == 401:
+                # Canvas puts the REAL expiry in the 401 body — surface it, since
+                # config.json's token_expires is only as good as what was typed in.
+                detail = ""
+                try:
+                    errs = (r.json() or {}).get("errors") or []
+                    for e in errs:
+                        if e.get("expired_at"):
+                            detail = f"   Canvas says this token expired at: {e['expired_at']}\n"
+                        elif e.get("message"):
+                            detail = f"   Canvas says: {e['message']}\n"
+                except Exception:
+                    pass
                 raise SystemExit(
                     "❌ Canvas rejected the token (401 Unauthorized).\n"
-                    "   Your token may have expired (Naropa caps tokens at 120 days).\n"
-                    "   Regenerate at: Account → Settings → New Access Token\n"
-                    "   Then update the CANVAS_TOKEN secret in GitHub."
+                    f"{detail}"
+                    "   Regenerate: https://naropa.instructure.com/profile/settings\n"
+                    "     → Approved Integrations → + New Access Token\n"
+                    "   Then: (1) update the CANVAS_TOKEN secret in GitHub, and\n"
+                    "         (2) copy the EXACT expiry Canvas displays into\n"
+                    "             config.json → token_expires (do NOT estimate it —\n"
+                    "             Naropa's actual cap has been ~60 days, not 120)."
                 )
             # 429 Too Many Requests OR 5xx server hiccup → retry
             if r.status_code == 429 or 500 <= r.status_code < 600:
@@ -1187,6 +1203,47 @@ def guess_week_from_module_name(name: str, semester_start: datetime, total_weeks
 # Output
 # ─────────────────────────────────────────────────────────────────────────────
 
+def assert_no_regression(items: list[Item], courses: list[Course], cfg: dict) -> None:
+    """Refuse to overwrite a healthy data.json with a badly degraded one.
+
+    Only applies WITHIN a semester — at rollover the numbers legitimately change,
+    so the guard is skipped when semester.name differs from the previous file.
+    Set SYNC_ALLOW_REGRESSION=1 to force a write past this check.
+    """
+    if os.environ.get("SYNC_ALLOW_REGRESSION") == "1":
+        print("  ℹ regression guard bypassed (SYNC_ALLOW_REGRESSION=1)")
+        return
+    if not DATA_PATH.exists():
+        return
+    try:
+        prev = json.loads(DATA_PATH.read_text())
+    except Exception:
+        return
+    prev_sem = (prev.get("semester") or {}).get("name")
+    cur_sem = (cfg.get("semester") or {}).get("name")
+    if prev_sem != cur_sem:
+        print(f"  ℹ semester changed ({prev_sem} → {cur_sem}); regression guard skipped")
+        return
+
+    prev_items = len(prev.get("items") or [])
+    prev_courses = len(prev.get("courses") or [])
+    if prev_courses and len(courses) < prev_courses:
+        raise SystemExit(
+            f"❌ Course count dropped {prev_courses} → {len(courses)} within "
+            f"'{cur_sem}'. Refusing to overwrite the last good data.json.\n"
+            "   Likely: a course concluded early, an enrollment changed, or the\n"
+            "   term filter is now too narrow. Re-run with SYNC_ALLOW_REGRESSION=1\n"
+            "   once you've confirmed the smaller list is correct."
+        )
+    if prev_items >= 50 and len(items) < prev_items * 0.6:
+        raise SystemExit(
+            f"❌ Item count dropped {prev_items} → {len(items)} (>40%) within "
+            f"'{cur_sem}'. Refusing to overwrite the last good data.json.\n"
+            "   Something in the fetch/classification path likely broke.\n"
+            "   Re-run with SYNC_ALLOW_REGRESSION=1 if the drop is legitimate."
+        )
+
+
 def verify_coverage(canvas: Canvas, courses: list[Course], items: list[Item]) -> dict:
     """Continuous coverage self-audit — runs inside every sync.
 
@@ -1493,7 +1550,23 @@ def main() -> int:
 
     courses = select_courses(canvas, cfg)
     if not courses:
-        raise SystemExit("❌ No active courses matched. Check 'canvas_term_name' in config.json.")
+        # Show the term names Canvas ACTUALLY returns. At semester rollover this
+        # is the one fact needed to fix config.json; guessing at it is how you
+        # get another week of failed syncs.
+        try:
+            raw = list(canvas.paginate("/courses", {
+                "enrollment_state": "active", "include[]": "term",
+            }))
+            seen = sorted({(c.get("term") or {}).get("name") or "(no term)" for c in raw})
+            hint = "\n".join(f'     • "{t}"' for t in seen) or "     (no active courses at all)"
+        except Exception:
+            hint = "     (could not list terms)"
+        want = cfg.get("semester", {}).get("canvas_term_name")
+        raise SystemExit(
+            f'❌ No active courses matched canvas_term_name = "{want}".\n'
+            f"   Term names Canvas actually returns for your active courses:\n{hint}\n"
+            f"   Copy one of those EXACTLY into config.json → semester.canvas_term_name."
+        )
 
     all_items: list[Item] = []
     with ThreadPoolExecutor(max_workers=min(8, len(courses))) as pool:
@@ -1518,6 +1591,13 @@ def main() -> int:
 
     # Continuous coverage self-audit — re-verifies every graded item landed
     coverage = verify_coverage(canvas, courses, all_items)
+
+    # Regression guard: never silently replace a healthy board with a degraded
+    # one. Within the SAME semester, a large drop in items or courses means
+    # something broke (an endpoint, a classification rule, a permissions change)
+    # — fail loudly and keep the last good data.json. Across a semester change
+    # the drop is expected, so the guard stands down.
+    assert_no_regression(all_items, courses, cfg)
 
     write_data(courses, all_items, cfg, coverage)
     return 0
