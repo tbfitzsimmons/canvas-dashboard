@@ -4,6 +4,10 @@ A semester-long dashboard for Jennifer that pulls every reading, video, discussi
 
 **https://jtbdashboard.fitzsimmons.org/dashboard/**
 
+> Building something else against Canvas? **[CANVAS-API-NOTES.md](CANVAS-API-NOTES.md)**
+> collects the portable API lessons (token lifetimes, hidden next-term courses,
+> stale course-copy dates, timezone traps).
+>
 > Want one of your own? See **[FORKING.md](FORKING.md)** — a checklist for
 > turning a fork into your own deployment (~1 hour, no coding required).
 
