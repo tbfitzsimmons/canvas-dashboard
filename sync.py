@@ -79,6 +79,52 @@ TITLE_DUE_RE = re.compile(
 # Catches "Discussion #5", "Discussion 12", "Disc #3", "Discussion Question #1",
 # "Discussion Topic 4". Allows one short word between "discussion" and the number.
 # Used as a last-resort week fallback for graded discussions with no due_at.
+# "Week 5", "Week 12 (11/7) Group Supervision Discussion", "WEEK 3 —". One of the
+# most common Canvas titling conventions, and the professor's own statement of
+# which week an item belongs to. Used when the due date is missing or untrustworthy.
+WEEK_IN_TITLE_RE = re.compile(r"\bweek\s*#?\s*(\d{1,2})\b", re.IGNORECASE)
+
+
+def week_from_title(title: str, total_weeks: int) -> int:
+    """Return the week number named in a title, or 0 if none/out of range."""
+    m = WEEK_IN_TITLE_RE.search(title or "")
+    if not m:
+        return 0
+    n = int(m.group(1))
+    return n if 1 <= n <= total_weeks else 0
+
+
+def sanitize_due(due: datetime | None, semester_start: datetime,
+                 total_weeks: int, label: str = "") -> datetime | None:
+    """Drop due dates that cannot plausibly belong to this semester.
+
+    Canvas carries due dates forward when a professor copies a course, so a
+    Fall 2026 section can arrive stamped with Fall 2022 deadlines (observed:
+    CMHC-622E Internship I, 14 discussions). Those are not deadlines — they are
+    copy artifacts. Treating them as real is worse than having no date at all:
+    week_number() buckets anything earlier than the semester into week 1, which
+    silently stacked every week's discussion onto week 1.
+
+    A 30-day margin on each side keeps genuinely-early ("due the Friday before
+    classes") and genuinely-late ("final grades") items intact.
+    """
+    if not due:
+        return None
+    # Compare calendar dates in Naropa local time: config's start_date is naive
+    # while Canvas timestamps are tz-aware, so raw datetime comparison raises.
+    margin = timedelta(days=30)
+    start_d = _local_date(semester_start)
+    due_d = _local_date(due)
+    window_start = start_d - margin
+    window_end = start_d + timedelta(weeks=total_weeks) + margin
+    if window_start <= due_d <= window_end:
+        return due
+    if label:
+        print(f"     ↳ ignoring stale due date {due_d} on {label[:60]!r} "
+              f"(outside {window_start}–{window_end})")
+    return None
+
+
 DISCUSSION_NUMBER_RE = re.compile(
     r"\bdiscussion(?:\s+(?:question|topic|prompt|post|thread))?\s*#?\s*(\d{1,2})\b",
     re.IGNORECASE,
@@ -1079,6 +1125,8 @@ def fetch_course_items(canvas: Canvas, course: Course, cfg: dict) -> list[Item]:
             title = a.get("name", "Untitled")
             # If the title carries an explicit "DUE by M/D/YY", trust it over due_at.
             due = reconcile_due(due, title)
+            # Drop dates left behind by a course copy (see sanitize_due).
+            due = sanitize_due(due, semester_start, total_weeks, title)
             kind = classify_assignment(a)
             wk = week_number(due, semester_start, total_weeks)
             # No due_at? Try to recover a week from the assignment's module position.
@@ -1093,7 +1141,11 @@ def fetch_course_items(canvas: Canvas, course: Course, cfg: dict) -> list[Item]:
                     disc_id = a.get("discussion_topic", {}).get("id") if isinstance(a.get("discussion_topic"), dict) else None
                     if disc_id and str(disc_id) in discussion_module_weeks:
                         wk = discussion_module_weeks[str(disc_id)]
-                # 3. Last resort: parse "Discussion #N" from the title.
+                # 3. The week named in the title — "Week 5 Reflection". Applies to
+                #    every item type, not just discussions.
+                if wk == 0:
+                    wk = week_from_title(title, total_weeks)
+                # 4. Last resort: parse "Discussion #N" from the title.
                 if wk == 0 and kind == "discussion":
                     m = DISCUSSION_NUMBER_RE.search(title)
                     if m:
@@ -1126,8 +1178,8 @@ def fetch_course_items(canvas: Canvas, course: Course, cfg: dict) -> list[Item]:
             # Quizzes that are graded show up as assignments too; skip duplicates
             if q.get("assignment_id") and int(q["assignment_id"]) in seen_assignment_ids:
                 continue
-            due = parse_iso(q.get("due_at"))
             name = q.get("title", "Untitled quiz")
+            due = sanitize_due(parse_iso(q.get("due_at")), semester_start, total_weeks, name)
             kind = "exam" if any(h in lower(name) for h in EXAM_HINTS) else "quiz"
             items.append(Item(
                 week=week_number(due, semester_start, total_weeks),
@@ -1155,12 +1207,16 @@ def fetch_course_items(canvas: Canvas, course: Course, cfg: dict) -> list[Item]:
                 continue
             if d.get("assignment_id") and int(d["assignment_id"]) in seen_assignment_ids:
                 continue
-            due = parse_iso((d.get("assignment") or {}).get("due_at") or d.get("delayed_post_at"))
-            # Fallback: use the week inferred from whichever module this discussion
-            # lives in — catches discussions that have no due date of their own.
-            mod_week_fallback = discussion_module_weeks.get(str(d.get("id", "")), 0)
-            wk = week_number(due, semester_start, total_weeks) if due else mod_week_fallback
             d_title = d.get("title", "Untitled discussion")
+            due = parse_iso((d.get("assignment") or {}).get("due_at") or d.get("delayed_post_at"))
+            due = sanitize_due(due, semester_start, total_weeks, d_title)
+            # Placement, most trustworthy first: a plausible due date, then the
+            # module this discussion lives in, then the week named in its title.
+            wk = week_number(due, semester_start, total_weeks) if due else 0
+            if not wk:
+                wk = discussion_module_weeks.get(str(d.get("id", "")), 0)
+            if not wk:
+                wk = week_from_title(d_title, total_weeks)
             d_title_lc = lower(d_title)
             video_hints = ("recording", "video", "zoom recording", "lecture video", "recorded session")
             d_type = "video" if any(h in d_title_lc for h in video_hints) else "discussion"
@@ -1672,6 +1728,7 @@ def fetch_planner_reconciliation(
         due = parse_iso(due_str)
         title = plannable.get("title") or plannable.get("name") or "Untitled"
         due = reconcile_due(due, title)
+        due = sanitize_due(due, semester_start, total_weeks, title)
         link = plannable.get("html_url") or ""
         kind = _planner_item_type(p_type, plannable)
 
@@ -1691,7 +1748,7 @@ def fetch_planner_reconciliation(
         }.get(p_type, "")
 
         new_items.append(Item(
-            week=week_number(due, semester_start, total_weeks),
+            week=week_number(due, semester_start, total_weeks) or week_from_title(title, total_weeks),
             courseId=course.id,
             type=kind,
             title=title,
