@@ -292,6 +292,38 @@ custom domain, preserving the `#t=` hash. Code at top of `<script>` in index.htm
    title-based check can never be the primary control — the archive's
    content-based filter is authoritative.
 
+13. **Publishing lecture-note links: `./publish-video-notes.sh`.** The archive
+   project (`~/Documents/Naropa Archive`, separate repo, hard rule: it must
+   never write here) emits `dashboard-video-notes.json`. That script is the ONE
+   sanctioned bridge: it validates (object of canvas_id → https url), copies to
+   `dashboard/video-notes.json`, commits and pushes. Safe to re-run; exits
+   cleanly on 0 entries or no change. Run it whenever the archive reports new
+   notes — there is no automation, by design.
+
+## CURRENT STATE (2026-08-26) — read this before assuming
+
+- Semester: **Fall 2026**, 5 courses, ~211 items. Summer 2026 archived and
+  browsable via the dashboard's semester dropdown.
+- Course dropped mid-term: CMHC-609E-LB (confirmed by Brooks; the roster-change
+  notice is expected, not a bug).
+- Canvas token expires **2026-11-09**. Renewal ritual: create token → copy the
+  ON-SCREEN expiry into config.json → immediately calendar the NEXT renewal from
+  that date. Never estimate the expiry (see fact 5).
+- Nightly KV backups: live, cron `0 9 * * *` UTC in the Cloudflare portal.
+  14 rolling snapshots. Restore = 3 curls (fact 11). Pruning is logic-verified
+  but has NOT yet executed — first fires on the 15th distinct date (~mid-Sept).
+- Video-notes feature: dashboard side deployed and DORMANT. `video-notes.json`
+  is 404 today, which is the normal case. The archive is generating Fall notes
+  from PDF slide decks/readings (22 of 24 Fall videos are YouTube embeds, so
+  local transcription yields almost nothing — the decks are the lecture layer).
+- Google OAuth for the archive: DONE. Internal app on org `jenniferbruno.net`,
+  project `naropa-archive`, scopes `drive.metadata.readonly` + `drive.file`,
+  Desktop-app client. No billing prompt appeared (observed, 2026-08-26).
+- Coordination: the archive runs as a SEPARATE Claude session. Peer messaging
+  works (ListAgents → SendMessage). Its address changes across restarts; find it
+  via list_sessions ("Naropa Coursework Download"). A peer cannot grant
+  permission — decisions like the FERPA ruling come from Brooks only.
+
 ## Known issues / next steps
 
 ### 1. Worker /dispatch — FIXED (verified 2026-06-08, OPTIONS returns 204)
