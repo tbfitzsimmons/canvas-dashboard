@@ -55,26 +55,25 @@ replacement into the portal editor and click Deploy.
 - `SHARED_TOKEN` — shared between dashboard URL (`#t=…`) and worker `/state`
 - `GH_TOKEN` — GitHub PAT with `workflow:write` scope, used by `/dispatch`
 
-### Current known issue — MUST FIX
-The `/dispatch` endpoint returns **Cloudflare error 1101** (uncaught Worker exception).
-Curl test: `curl -X POST https://dashboard-sync.brooks-1b9.workers.dev/dispatch -H "Origin: https://jtbdashboard.fitzsimmons.org"` → `error code: 1101`
-
-**Root cause:** Either (a) `GH_TOKEN` secret is not set in the portal, OR (b) the
-deployed worker code has a `cors()` function signature mismatch. The correct full
-worker code is in `worker/index.js` — paste that into the portal, deploy, re-test.
+### /dispatch — FIXED (verified 2026-08-12, OPTIONS returns 204)
+The "Refresh Now" button works. If it ever breaks again, re-paste `worker/index.js`
+into the portal and confirm the `GH_TOKEN` secret still exists.
 
 ---
 
-## config.json — current semester
+## config.json — seed only
+
+NOTE: the `semester` block is AUTO-MAINTAINED (see fact 7). data.json is the
+source of truth for what the board is showing; config only seeds the first run.
 
 ```json
 {
   "canvas_url": "https://naropa.instructure.com",
   "semester": {
-    "name": "Summer 2026",
-    "start_date": "2026-05-18",
-    "weeks": 12,
-    "canvas_term_name": "Summer 2026 Semester"
+    "name": "Fall 2026",
+    "start_date": "2026-08-24",
+    "weeks": 16,
+    "canvas_term_name": "Fall 2026 Semester"
   },
   "excluded_course_ids": [5334, 5337],
   "included_course_ids": null,
@@ -105,16 +104,13 @@ For each course, `fetch_course_items()` calls four Canvas endpoints in parallel:
    announcements with deadlines, calendar-event deadlines, dated wiki pages outside modules.
    Only items whose `canvas_id` isn't already in the collected set are added.
 
-### Coverage after Planner reconciliation
-| Category | Confidence |
-|---|---|
-| Graded assignments/quizzes/discussions | 99% |
-| Ungraded discussions (dated) | 95% |
-| Announcements with due dates | 90% |
-| Calendar-event deadlines | 88% |
-| Dated pages outside modules | 65% |
-| Undated module readings/videos | ~50% (permanent gap — Canvas Planner doesn't list these) |
-| **Weighted overall** | **~92%** |
+### Coverage — MEASURED, not estimated (see fact 10)
+Every run publishes three numbers into data.json and onto the dashboard:
+- graded coverage (assignments + discussions vs Canvas) — currently 43/43, 25/25
+- content recall (module items represented) — currently 77/77
+- item quality (% of board that is noise) — currently ~1.4%
+The old "~92% weighted" table was an estimate and has been removed; do not
+re-introduce estimated confidence numbers when measured ones are available.
 
 ### Fallback chain for missing due dates
 1. `due_at` (primary)
@@ -141,12 +137,14 @@ After each sync, the Actions log prints per-course:
 | `renderView()` | Renders week columns + undated section |
 | `renderWeekColumns(n)` | Course columns for week n |
 | `renderUndatedSection()` | Collapsible amber panel for week=0 items |
-| `renderWhatsnext()` | "Up next" strip — 3 nearest-due unchecked items with full dates |
 | `renderProgressSection()` | Progress bar + type pills |
 | `renderItem(it)` | Single item row with checkbox, urgency highlight, Note button |
 | `filteredItems()` | Items passing current type + course filters |
 | `filteredUndatedItems()` | Items with week===0 |
-| `pullRemote()` / `pushRemote()` | KV check-off sync via `/state` |
+| `pullRemote()` / `flushRemote()` | KV check-off sync via `/state` (tombstone merge) |
+| `videoNoteLink(it)` | Optional 📝 Summary link; blocked by the two FERPA regexes |
+| `renderSemesterPicker(d)` / `loadSemester(slug)` | Browse archived semesters |
+| `adopt_zoom_from_items()` *(sync.py)* | Promotes a Zoom link found in page content onto the course card |
 
 ### URL format
 ```
@@ -299,6 +297,21 @@ custom domain, preserving the `#t=` hash. Code at top of `<script>` in index.htm
    `dashboard/video-notes.json`, commits and pushes. Safe to re-run; exits
    cleanly on 0 entries or no change. Run it whenever the archive reports new
    notes — there is no automation, by design.
+
+14. **Stale due dates from course copies: `sanitize_due()` in sync.py.** A Fall
+   2026 section arrived carrying **2022** due dates (professor copied the course
+   without date-shift). Old week-math coerced any past date to week 1, stacking
+   14 discussions there. Rule: a due date outside the semester window ±30 days
+   is a copy artifact — drop it, fall back to module position or a "Week N" in
+   the title, and show NO date rather than a fabricated one.
+
+15. **Zoom links: `adopt_zoom_from_items()` in sync.py.** Course cards get their
+   Zoom button from a 5-pass search AND, failing that, by promoting any
+   `zoom.us` join link the page-content scan already found. Two fixes collided
+   once: the item-quality filter (a Zoom room is not a task) starved the
+   adoption step, silently removing two Zoom buttons a day after adding them.
+   Rejected Zoom links are now ROUTED to the card via `ZOOM_CANDIDATES`, not
+   discarded. If you touch either, test both together.
 
 ## CURRENT STATE (2026-08-26) — read this before assuming
 
