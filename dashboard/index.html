@@ -1338,10 +1338,26 @@ const CLASS_RECORDING_RE = new RegExp(
   'group supervision (recording|session)' +
   ')\\b', 'i');
 
+// Auto-generated media filenames from Canvas Studio and Zoom. These are the
+// DANGEROUS case precisely because they describe nothing: the archive session
+// found the three real class recordings on this account are named
+// video1855990433.mp4 / video1058292436.mp4 / video1803754931.mp4, all of which
+// sailed past the descriptive-title patterns above. An opaque filename carries
+// no evidence that it is a lecture, so this fails CLOSED — a legitimately-named
+// lecture uploaded under a bare numeric filename would be indistinguishable by
+// title anyway, and can be linked by fixing its title in Canvas.
+const OPAQUE_MEDIA_RE = new RegExp(
+  '^(' +
+  'video\\d{6,}|' +                     // Canvas Studio
+  'gmt\\d{8}-\\d{6}[-_].*|' +           // Zoom cloud
+  'zoom_?\\d+|' +                       // Zoom local
+  '(recording|meeting)[ _-]?\\d{4,}' +   // generic exports
+  ')\\.(mp4|mov|m4v|webm|m4a)$', 'i');
+
 function videoNoteLink(it) {
   const entry = VIDEO_NOTES[it.canvas_id];
   if (!entry) return '';
-  if (CLASS_RECORDING_RE.test(it.title || '')) {
+  if (CLASS_RECORDING_RE.test(it.title || '') || OPAQUE_MEDIA_RE.test((it.title || '').trim())) {
     console.warn('[ferpa] refusing to link a summary for a class recording:', it.title);
     return '';
   }
