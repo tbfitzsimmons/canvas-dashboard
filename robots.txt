@@ -1,0 +1,10 @@
+# Personal coursework dashboard. Not intended for search indexing.
+#
+# ADVISORY ONLY. robots.txt asks well-behaved crawlers not to index; it does
+# not restrict access to anything. The repo is public and dashboard/data.json
+# is fetchable anonymously from raw.githubusercontent.com regardless of this
+# file. This is NOT the privacy control -- see CLAUDE.md design fact 12: the
+# control is that summaries of recorded class sessions are never generated.
+
+User-agent: *
+Disallow: /

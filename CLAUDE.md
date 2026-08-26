@@ -321,6 +321,30 @@ custom domain, preserving the `#t=` hash. Code at top of `<script>` in index.htm
    Rejected Zoom links are now ROUTED to the card via `ZOOM_CANDIDATES`, not
    discarded. If you touch either, test both together.
 
+16. **`robots.txt` + `noindex` suppress INDEXING, not ACCESS (added 2026-08-27).**
+   The board is served from the repo root (Pages root = repo root; `/dashboard/`
+   is a subdirectory), so `robots.txt` lives at the REPO ROOT — it is only
+   honored at the origin root, not under `/dashboard/`. Both entry points
+   (`index.html` redirect shim and `dashboard/index.html`) carry
+   `<meta name="robots" content="noindex, nofollow">`.
+   Do NOT mistake this for a privacy control. It is advisory: compliant
+   crawlers stop, nobody else does, and `dashboard/data.json` stays fetchable
+   anonymously from raw.githubusercontent.com because THE REPO IS PUBLIC.
+   Asked 2026-08-27 whether Google OAuth would remove the FERPA risk — answer
+   was NO, and the reason is structural: a login gate on the custom domain is
+   a front door on a house with no back wall, and git history is permanent, so
+   a leak could never be un-published by a later commit. GitHub Pages cannot
+   set response headers, so meta + robots.txt is the ceiling on this host.
+   Real access control would require: private repo -> serve from Cloudflare
+   Pages/Workers (infra already exists) -> Cloudflare Access with Google IdP.
+   Not done; not needed for the FERPA question. The actual control remains
+   fact 12 — recorded-class-session summaries are never generated.
+   Also: FERPA binds Naropa, not Jennifer. She is not a covered entity. The
+   duties here are Naropa's recording policy and decency toward classmates,
+   which are CONTENT decisions. No auth gate satisfies them.
+   Verified at the time: `data.json` held 0 email addresses across 5 courses
+   and 211 items.
+
 ## CURRENT STATE (2026-08-26) — read this before assuming
 
 - Semester: **Fall 2026**, 5 courses, ~211 items. Summer 2026 archived and
