@@ -284,6 +284,13 @@ custom domain, preserving the `#t=` hash. Code at top of `<script>` in index.htm
    23 allowed, 1 blocked ("Recordings from Intensive"), 0 false positives.
    If a legitimate lecture ever gets blocked, refine the pattern — do not
    work around it.
+   Gap found and closed 2026-08-26 (by the archive session): the three REAL
+   class recordings are named `video1855990433.mp4` etc. — Canvas Studio /
+   Zoom auto-names that describe nothing and sailed past the descriptive
+   patterns. `OPAQUE_MEDIA_RE` now fails closed on those shapes. The lesson:
+   the dangerous recordings are the ones with no title to read, so a
+   title-based check can never be the primary control — the archive's
+   content-based filter is authoritative.
 
 ## Known issues / next steps
 
