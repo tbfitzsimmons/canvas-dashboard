@@ -1323,9 +1323,28 @@ async function loadVideoNotes() {
   } catch (_) { /* absent or malformed → stay empty, board unaffected */ }
 }
 
+// Second, independent FERPA guard (Brooks's ruling, 2026-08-26). The archive
+// pipeline filters class recordings at generation; this refuses to LINK one
+// even if a stray entry ever reaches video-notes.json. Recorded class sessions
+// contain classmates' voices and names — not hers to surface from a public
+// board, even behind a Google login. Professor lectures are unaffected.
+const CLASS_RECORDING_RE = new RegExp(
+  '\\b(' +
+  'class (session|recording|meeting)s?|' +
+  'recorded class|' +
+  'recording of (the )?(zoom|class|session|intensive)|' +
+  'zoom (class|session|meeting) recording|' +
+  'recordings? from|' +
+  'group supervision (recording|session)' +
+  ')\\b', 'i');
+
 function videoNoteLink(it) {
   const entry = VIDEO_NOTES[it.canvas_id];
   if (!entry) return '';
+  if (CLASS_RECORDING_RE.test(it.title || '')) {
+    console.warn('[ferpa] refusing to link a summary for a class recording:', it.title);
+    return '';
+  }
   const url = typeof entry === 'string' ? entry : entry.url;
   if (!url || !/^https:\/\//.test(url)) return '';
   return `<a class="note-link" href="${escapeAttr(url)}" target="_blank" rel="noopener">📝 Summary</a>`;
