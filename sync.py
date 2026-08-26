@@ -514,6 +514,13 @@ ADMIN_PAGE_TITLE_RE = re.compile(
 # several professors park the actual course readings (Jung PDFs, case
 # conceptualization templates). Skipping it by title dropped 22 real items.
 
+# Zoom join links found while expanding page bodies. They are rejected as
+# ITEMS (a meeting room is not a task) but must not be discarded outright —
+# they are exactly what adopt_zoom_from_items needs for the course card.
+# Regression 2026-08-27: filtering them from items silently removed the Zoom
+# button this same discovery had restored the day before.
+ZOOM_CANDIDATES: dict[str, str] = {}   # course internal id → first join URL
+
 # Stock-image and icon credits. These appear on "References" pages as
 # attribution links and are never coursework — a far better signal than the
 # page title, which can legitimately hold assigned citations.
@@ -646,7 +653,7 @@ def _dedupe_key(text: str) -> str:
     return re.sub(r"[^a-z0-9]+", "", (text or "").lower())
 
 
-def expand_page_body(html: str, page_title: str = "") -> list[tuple[str, str, str]]:
+def expand_page_body(html: str, page_title: str = "", course_key: str = "") -> list[tuple[str, str, str]]:
     """Parse a Canvas page body and return [(type, title, link), ...].
 
     Walks the DOM top-to-bottom, tracking the current section (most recent
@@ -681,7 +688,12 @@ def expand_page_body(html: str, page_title: str = "") -> list[tuple[str, str, st
         # An email address, phone number or Zoom room is contact information,
         # not something to check off. (Zoom rooms are surfaced on the course
         # card instead — see adopt_zoom_from_items.)
-        if NON_TASK_LINK_RE.match(href) or ZOOM_JOIN_RE.search(href):
+        if ZOOM_JOIN_RE.search(href):
+            # Not an item — but route it to the course card.
+            if course_key:
+                ZOOM_CANDIDATES.setdefault(course_key, href)
+            return
+        if NON_TASK_LINK_RE.match(href):
             return
         if any(dom in href.lower() for dom in CREDIT_DOMAINS):
             return   # stock-photo / icon attribution, not coursework
@@ -1161,9 +1173,11 @@ def adopt_zoom_from_items(courses: list[Course], items: list[Item]) -> None:
         if "zoom.us" in link and any(seg in link for seg in JOIN_SEGMENTS):
             by_course.setdefault(it.courseId, link)
     for c in courses:
-        if not c.zoom_url and by_course.get(c.id):
-            c.zoom_url = by_course[c.id]
-            print(f"  ↳ {c.code}: adopted Zoom link found while scanning course content")
+        if not c.zoom_url:
+            found = by_course.get(c.id) or ZOOM_CANDIDATES.get(c.id)
+            if found:
+                c.zoom_url = found
+                print(f"  ↳ {c.code}: adopted Zoom link found while scanning course content")
 
 
 def _extract_zoom_url_from_html(html: str) -> str:
@@ -1403,7 +1417,7 @@ def fetch_course_items(canvas: Canvas, course: Course, cfg: dict) -> list[Item]:
                     seen_module_page_urls.add(it["page_url"])
                     body_for_summary = fetch_page_body(canvas, course.canvas_id, it["page_url"])
                     if not is_overview_page and not is_admin_page:
-                        children = expand_page_body(body_for_summary or "", page_title=title)
+                        children = expand_page_body(body_for_summary or "", page_title=title, course_key=course.id)
                     elif is_admin_page:
                         admin_pages_kept.append(title)
 
@@ -2148,6 +2162,7 @@ def main() -> int:
 
 def build_items(canvas: Canvas, courses: list[Course], cfg: dict) -> list[Item]:
     """All four per-course passes + planner reconciliation + synthetic items."""
+    ZOOM_CANDIDATES.clear()   # candidate-term builds must not leak into the real one
     if not courses:
         return []
     all_items: list[Item] = []
