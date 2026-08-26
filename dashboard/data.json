@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-26T03:51:28.744571+00:00",
+  "generated_at": "2026-08-26T03:53:08.829659+00:00",
   "semester": {
     "name": "Fall 2026",
     "start_date": "2026-08-24",
@@ -18,7 +18,7 @@
       "color_tag_bg": "#DDE0EB",
       "color_tag_fg": "#38426C",
       "canvas_url": "https://naropa.instructure.com/courses/9042",
-      "zoom_url": ""
+      "zoom_url": "https://naropa.zoom.us/j/7421025441"
     },
     {
       "id": "course2",
@@ -66,7 +66,7 @@
       "color_tag_bg": "#F4D7E3",
       "color_tag_fg": "#8A2A52",
       "canvas_url": "https://naropa.instructure.com/courses/9453",
-      "zoom_url": ""
+      "zoom_url": "https://naropa.zoom.us/j/88115592411?pwd=wbrqCGoKZtVvxu8FBtcZ3Ev8ZQTtbN.1"
     }
   ],
   "items": [
@@ -3458,7 +3458,7 @@
     "lecture": 1
   },
   "coverage": {
-    "verified_at": "2026-08-26T03:51:28.742464+00:00",
+    "verified_at": "2026-08-26T03:53:08.827665+00:00",
     "assignments": {
       "total": 43,
       "captured": 43
