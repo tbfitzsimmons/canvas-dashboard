@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-26T03:35:48.534798+00:00",
+  "generated_at": "2026-08-26T03:40:44.697884+00:00",
   "semester": {
     "name": "Fall 2026",
     "start_date": "2026-08-24",
@@ -3458,7 +3458,7 @@
     "lecture": 1
   },
   "coverage": {
-    "verified_at": "2026-08-26T03:35:48.532671+00:00",
+    "verified_at": "2026-08-26T03:40:44.695873+00:00",
     "assignments": {
       "total": 43,
       "captured": 43
@@ -3467,6 +3467,11 @@
       "total": 25,
       "captured": 25
     },
+    "module_items": {
+      "total": 77,
+      "captured": 77
+    },
+    "unrepresented": [],
     "missing": [],
     "quality": {
       "suspect_total": 3,
