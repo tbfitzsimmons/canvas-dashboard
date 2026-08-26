@@ -1344,6 +1344,20 @@ async function loadSemester(slug) {
   }
 }
 
+// A course leaving or joining mid-semester is normal (a drop, a late add), but
+// it must never happen silently — if it wasn't intentional, this is how you find
+// out. Shown for 14 days, then it ages off on its own.
+function renderRosterChange(rc) {
+  if (!rc) return '';
+  const ageDays = (Date.now() - new Date(rc.at)) / 86400000;
+  if (!(ageDays >= 0) || ageDays > 14) return '';
+  const bits = [];
+  if ((rc.dropped || []).length) bits.push(`no longer in Canvas: <strong>${rc.dropped.map(escapeHtml).join(', ')}</strong>`);
+  if ((rc.added || []).length) bits.push(`newly added: <strong>${rc.added.map(escapeHtml).join(', ')}</strong>`);
+  if (!bits.length) return '';
+  return `<div class="token-warn">📋 Course list changed (${rc.courses_before} → ${rc.courses_after}) — ${bits.join(' · ')}. If that wasn't intentional, check your Canvas enrollment.</div>`;
+}
+
 function renderTokenWarning(expiresStr) {
   if (!expiresStr) return '';
   const exp = new Date(expiresStr + 'T00:00:00');
@@ -1370,6 +1384,7 @@ function render() {
     ${renderTokenWarning(d.token_expires)}
     ${veryStale ? `<div class="token-warn expired">⚠ <strong>This board stopped updating ${Math.floor(staleHrs/24)} days ago.</strong> The Monday sync is failing — most often an expired Canvas token. New assignments will NOT appear until it's fixed. <a href="https://github.com/${repoSlug()}/actions/workflows/sync.yml" target="_blank">Check the sync log ↗</a></div>` : ''}
     ${renderCoverageBanner(d.coverage)}
+    ${renderRosterChange(d.roster_change)}
     <div class="masthead">
       <h1>
         <span class="emoji">🎓</span>${escapeHtml(d.semester.name)} Semester Dashboard

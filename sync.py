@@ -1434,45 +1434,85 @@ def guess_week_from_module_name(name: str, semester_start: datetime, total_weeks
 # Output
 # ─────────────────────────────────────────────────────────────────────────────
 
-def assert_no_regression(items: list[Item], courses: list[Course], cfg: dict) -> None:
-    """Refuse to overwrite a healthy data.json with a badly degraded one.
+def assert_no_regression(items: list[Item], courses: list[Course], cfg: dict) -> dict | None:
+    """Guard the board against silent degradation — without bricking on normal change.
 
-    Only applies WITHIN a semester — at rollover the numbers legitimately change,
-    so the guard is skipped when semester.name differs from the previous file.
-    Set SYNC_ALLOW_REGRESSION=1 to force a write past this check.
+    Two different things can shrink a board, and they need opposite responses:
+
+      • A student drops a course, or a section is cancelled. Ordinary. Blocking
+        on this stalls the sync indefinitely with no self-healing path — which is
+        exactly what happened when CMHC-609E-LB was dropped on 2026-08-24: eight
+        consecutive runs failed over two days and Jennifer's board went stale.
+        These are ACCEPTED and reported, so a change nobody intended is still
+        visible rather than silent.
+
+      • The fetch/classification path breaks, or access is lost wholesale. Losing
+        most of the board at once is never routine. These are REFUSED, keeping
+        the last good data.json.
+
+    Returns a roster-change record to publish, or None. Raises SystemExit only on
+    catastrophic loss. SYNC_ALLOW_REGRESSION=1 bypasses everything.
     """
     if os.environ.get("SYNC_ALLOW_REGRESSION") == "1":
         print("  ℹ regression guard bypassed (SYNC_ALLOW_REGRESSION=1)")
-        return
+        return None
     if not DATA_PATH.exists():
-        return
+        return None
     try:
         prev = json.loads(DATA_PATH.read_text())
     except Exception:
-        return
+        return None
     prev_sem = (prev.get("semester") or {}).get("name")
     cur_sem = (cfg.get("semester") or {}).get("name")
     if prev_sem != cur_sem:
         print(f"  ℹ semester changed ({prev_sem} → {cur_sem}); regression guard skipped")
-        return
+        return None
 
     prev_items = len(prev.get("items") or [])
-    prev_courses = len(prev.get("courses") or [])
-    if prev_courses and len(courses) < prev_courses:
+    prev_course_list = prev.get("courses") or []
+    prev_courses = len(prev_course_list)
+
+    # ── Catastrophic loss → refuse ────────────────────────────────────────
+    if prev_courses and not courses:
         raise SystemExit(
-            f"❌ Course count dropped {prev_courses} → {len(courses)} within "
-            f"'{cur_sem}'. Refusing to overwrite the last good data.json.\n"
-            "   Likely: a course concluded early, an enrollment changed, or the\n"
-            "   term filter is now too narrow. Re-run with SYNC_ALLOW_REGRESSION=1\n"
-            "   once you've confirmed the smaller list is correct."
+            f"❌ Every course vanished ({prev_courses} → 0) within '{cur_sem}'.\n"
+            "   Refusing to overwrite the last good data.json. Check the Canvas\n"
+            "   token's access and the term filter before re-running."
+        )
+    if prev_courses >= 3 and len(courses) < prev_courses * 0.6:
+        raise SystemExit(
+            f"❌ Course count dropped {prev_courses} → {len(courses)} (>40%) within\n"
+            f"   '{cur_sem}'. That is too much to be a routine schedule change.\n"
+            "   Refusing to overwrite the last good data.json.\n"
+            "   Re-run with SYNC_ALLOW_REGRESSION=1 once you've confirmed it's real."
         )
     if prev_items >= 50 and len(items) < prev_items * 0.6:
         raise SystemExit(
-            f"❌ Item count dropped {prev_items} → {len(items)} (>40%) within "
-            f"'{cur_sem}'. Refusing to overwrite the last good data.json.\n"
-            "   Something in the fetch/classification path likely broke.\n"
+            f"❌ Item count dropped {prev_items} → {len(items)} (>40%) within\n"
+            f"   '{cur_sem}'. Something in the fetch/classification path likely broke.\n"
+            "   Refusing to overwrite the last good data.json.\n"
             "   Re-run with SYNC_ALLOW_REGRESSION=1 if the drop is legitimate."
         )
+
+    # ── Ordinary roster change → accept, but say so ───────────────────────
+    prev_codes = {c.get("code") for c in prev_course_list if c.get("code")}
+    now_codes = {c.code for c in courses}
+    dropped = sorted(prev_codes - now_codes)
+    added = sorted(now_codes - prev_codes)
+    if not dropped and not added:
+        return None
+    if dropped:
+        print(f"  ⚠ course(s) no longer in Canvas: {', '.join(dropped)}")
+    if added:
+        print(f"  ✓ new course(s) appeared: {', '.join(added)}")
+    print("     Publishing the change. If it wasn't intentional, check Canvas enrollment.")
+    return {
+        "at": datetime.now(timezone.utc).isoformat(),
+        "dropped": dropped,
+        "added": added,
+        "courses_before": prev_courses,
+        "courses_after": len(courses),
+    }
 
 
 def verify_coverage(canvas: Canvas, courses: list[Course], items: list[Item]) -> dict:
@@ -1541,7 +1581,8 @@ def verify_coverage(canvas: Canvas, courses: list[Course], items: list[Item]) ->
 
 
 def write_data(courses: list[Course], items: list[Item], cfg: dict,
-               coverage: dict | None = None, rollover: dict | None = None) -> None:
+               coverage: dict | None = None, rollover: dict | None = None,
+               roster_change: dict | None = None) -> None:
     payload = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "semester": cfg["semester"],
@@ -1553,6 +1594,7 @@ def write_data(courses: list[Course], items: list[Item], cfg: dict,
         "other_terms": list(OTHER_TERMS),
         "term_meta": dict(TERM_META),
         "rollover": rollover,
+        "roster_change": roster_change,
         "archives": _archive_index(),
     }
     DATA_PATH.parent.mkdir(parents=True, exist_ok=True)
@@ -1873,9 +1915,9 @@ def main() -> int:
     # something broke (an endpoint, a classification rule, a permissions change)
     # — fail loudly and keep the last good data.json. Across a semester change
     # the drop is expected, so the guard stands down.
-    assert_no_regression(all_items, courses, cfg)
+    roster_change = assert_no_regression(all_items, courses, cfg)
 
-    write_data(courses, all_items, cfg, coverage, rollover_info)
+    write_data(courses, all_items, cfg, coverage, rollover_info, roster_change)
     return 0
 
 
