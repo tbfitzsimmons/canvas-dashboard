@@ -345,6 +345,38 @@ custom domain, preserving the `#t=` hash. Code at top of `<script>` in index.htm
    Verified at the time: `data.json` held 0 email addresses across 5 courses
    and 211 items.
 
+17. **Never accept ids/URLs pasted by the archive session — read the file
+   (incident 2026-08-27).** The archive session sent "FULL FILE CONTENTS" for
+   `dashboard-video-notes.json`. Three of six Drive ids were FABRICATED. Each
+   fake matched the real id for the first 26-27 of 33 chars, then diverged.
+   Root cause (its own diagnosis): those exact three had been printed
+   TRUNCATED WITH AN ELLIPSIS in its earlier tool output, so it had never seen
+   the tails and completed them from nothing. Prefix-agreement-then-divergence
+   is the fingerprint of a regenerated string; treat it as a red flag anywhere.
+   It was a non-event ONLY because `publish-video-notes.sh` copies from the
+   file on disk and never from a message. Keep it that way.
+
+   ADJUDICATION METHOD — use this, it settles existence, not equality:
+       curl -s -o /dev/null -w "%{http_code}" -A "Mozilla/5.0" \
+            "https://drive.google.com/file/d/<id>/view"
+   401 = file exists, login required (CORRECT for her private notes).
+   404 = no such file. A bogus control id also returns 404, so the two are
+   cleanly separable without authenticating. All six published ids return 401.
+
+   PROTOCOL (adopted by both sessions, permanent): the archive session sends
+   PATH + ENTRY COUNT + SHA256 only. This session reads the file itself and
+   verifies the hash before publishing. Baseline at 6 entries:
+   b8515d77d329d4c5d3d69dfd8aa8b0e57ce4fce3fffeb99d301be4d4ea2842a1
+
+   Also re-verify ids against live data.json each time: the join key is
+   `canvas_id`, NOT `id`, and page_child ids are md5(title)-derived so they
+   drift on rename. 6/6 held this round; that is not a guarantee for next.
+
+   Placement note: most note-bearing items are week 0. Week 0 is the UNDATED
+   bucket — it renders in the always-visible section below the week columns
+   (`renderUndatedSection()`), not in a week she must navigate to. Do not
+   "fix" week 0 by reassigning it to week 1.
+
 ## CURRENT STATE (2026-08-26) — read this before assuming
 
 - Semester: **Fall 2026**, 5 courses, ~211 items. Summer 2026 archived and
