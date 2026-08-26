@@ -78,7 +78,7 @@ worker code is in `worker/index.js` — paste that into the portal, deploy, re-t
   },
   "excluded_course_ids": [5334, 5337],
   "included_course_ids": null,
-  "token_expires": "2026-09-05",
+  "token_expires": "2026-11-09",
   "instructor_overrides": {
     "CNST-770E": "Jenna Noah"
   }
@@ -170,6 +170,9 @@ custom domain, preserving the `#t=` hash. Code at top of `<script>` in index.htm
    resurrected by stale devices (bug found 2026-06-08). localStorage key:
    `canvas-dashboard.marks-v3` (migrates v2 array on first load, ts=0).
    The Worker stores the blob verbatim — format changes need NO worker redeploy.
+   Known wrinkle (accepted): MARKS is device-global, so after a rollover old-
+   semester mark ids can be written into the new semester's KV bucket. Ids are
+   globally unique, so this is bloat, not corruption.
 
 2. **Assignment overrides are a NON-issue.** Jennifer's token is student-scoped
    (verified 2026-06-08: StudentEnrollment only). Canvas resolves `due_at` to her
@@ -287,5 +290,5 @@ by `semester.name`, so updating it auto-creates a clean slate.
 | `SHARED_TOKEN` | Cloudflare Worker secrets | KV check-off sync auth |
 | `GH_TOKEN` | Cloudflare Worker secrets | workflow_dispatch via /dispatch |
 
-Canvas token expires **2026-09-05** — regenerate at naropa.instructure.com/profile/settings
+Canvas token expires **2026-11-09** — regenerate at naropa.instructure.com/profile/settings
 and update both the GitHub secret and `token_expires` in config.json.

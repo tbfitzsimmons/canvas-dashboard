@@ -83,6 +83,25 @@ Internship section arriving with 14 discussions dated **2022**. Treat a due date
 outside the semester window (±30 days) as a copy artifact, not a deadline.
 Fall back to module position, or to a "Week N" named in the title.
 
+## 6b. Course copies carry stale due dates
+
+When a professor copies a course forward without Canvas's date-shift tool, old
+due dates ride along. Observed: a Fall 2026 section arrived with 14 discussions
+dated **2022**; naive week-math coerced "past date" to week 1 and stacked the
+whole semester's discussions there. Treat any due date outside the semester
+window (±30 days) as a copy artifact — fall back to module position or a
+"Week N" named in the title, and leave the date blank rather than fabricating one.
+
+## 6c. Page bodies are full of non-coursework links
+
+Expanding page HTML into items WILL sweep up `mailto:`/`tel:` contact details,
+Zoom room links, stock-image credits (pixabay, thenounproject), and platform
+help links. On one real board that was 26% of all items before filtering.
+Filter by what a LINK is, not what its page is called — title-based page
+skipping deleted 22 real readings ("Online Sourcebook" held actual course PDFs).
+And measure noise separately from coverage: "nothing missing" and "everything
+here is real" are different claims.
+
 ## 7. Feature endpoints 404 when disabled
 
 `/quizzes`, `/discussion_topics`, and `/modules` return **404** (not an empty

@@ -34,7 +34,7 @@ Browser check-offs ──► Cloudflare Worker (dashboard-sync)
                          /dispatch → triggers workflow_dispatch via GH_TOKEN
 ```
 
-- **`sync.py`** — Canvas API → `data.json`. Five-pass coverage: assignments, quizzes, discussions, module items (pages/files/videos), plus a **Canvas Planner API reconciliation pass** that catches announcements, calendar events, and dated pages outside modules. Every run ends with a **coverage self-audit**: it re-fetches all graded items and verifies each is on the board. The result shows on the dashboard ("✓ Verified at last sync: all N assignments + M discussions") and flips to a red banner naming anything missing.
+- **`sync.py`** — Canvas API → `data.json`. Five-pass coverage: assignments, quizzes, discussions, module items (pages/files/videos), plus a **Canvas Planner API reconciliation pass** that catches announcements, calendar events, and dated pages outside modules. Every run ends with a **three-metric self-audit**, published in `data.json` and shown on the dashboard: **graded coverage** (every assignment/discussion in Canvas is on the board), **content recall** (every module item is represented), and **item quality** (% of the board that looks like noise rather than coursework). Anything missing or unrepresented flips a red banner naming the items. Roster changes (a dropped/added course) are accepted and announced on the board for 14 days rather than blocking the sync.
 - **`dashboard/index.html`** — Static HTML/JS (no build step). Weekly columns, progress bar, urgency highlights. "Refresh Now" button triggers a sync via Cloudflare Worker. **Check-offs sync across devices** via timestamped records in Cloudflare KV — checks *and unchecks* propagate within ~30s; latest toggle wins on conflict. Each device pairs once by opening the bookmark URL (`#t=…`); the token then persists on-device. The masthead's **📥 backup** link downloads a JSON snapshot; "unpair this device" + reopening the bookmark re-pairs.
 - **`.github/workflows/sync.yml`** — Monday cron + `workflow_dispatch`. Race-condition safe (commit-then-push with `-X ours`).
 - **`config.json`** — Semester name, start date, term filter, instructor overrides. Edit once per semester.
@@ -232,7 +232,7 @@ canvas-dashboard/
 ├── README.md                      # This file
 ├── config.json                    # Semester settings + instructor overrides (no secrets)
 ├── config.example.json            # Template
-├── sync.py                        # Canvas API → data.json (5-pass + coverage self-audit)
+├── sync.py                        # Canvas API → data.json (5-pass + 3-metric self-audit)
 ├── worker/
 │   ├── index.js                   # Cloudflare Worker reference code
 │   └── wrangler.toml              # Worker config (worker deployed via Cloudflare portal)
