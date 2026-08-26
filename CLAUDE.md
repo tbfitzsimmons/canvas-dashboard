@@ -226,10 +226,18 @@ custom domain, preserving the `#t=` hash. Code at top of `<script>` in index.htm
    Without it, "Default Term" pinned a permanent false "new term!" notice
    (observed and fixed 2026-08-12).
 
-9. **The board must never silently degrade.** `assert_no_regression()` refuses
-   to overwrite data.json when, within the SAME semester, the course count drops
-   or items fall >40%. It stands down automatically across a semester change.
-   Override with `SYNC_ALLOW_REGRESSION=1`.
+9. **The board must never silently degrade — but must not brick either
+   (rewritten 2026-08-26).** `assert_no_regression()` distinguishes two cases
+   that need opposite responses:
+   - ORDINARY roster change (a course dropped/added) → ACCEPTED and published,
+     with a `roster_change` record shown on the board for 14 days. The earlier
+     version refused ANY course decrease, which stalled the sync for 8 runs over
+     2 days when CMHC-609E was legitimately dropped. A safeguard that freezes
+     the tool is not a safeguard.
+   - CATASTROPHIC loss (all courses gone, >40% of courses gone, or items down
+     >40%) → REFUSED, keeping the last good data.json.
+   Stands down entirely across a semester change. Override:
+   `SYNC_ALLOW_REGRESSION=1`. Verified across 6 boundary cases.
 
 10. **Three metrics, or the claim is false confidence (incident 2026-08-26).**
    For weeks the sync reported "43/43 assignments, 25/25 discussions — nothing
@@ -332,6 +340,18 @@ custom domain, preserving the `#t=` hash. Code at top of `<script>` in index.htm
 - Google OAuth for the archive: DONE. Internal app on org `jenniferbruno.net`,
   project `naropa-archive`, scopes `drive.metadata.readonly` + `drive.file`,
   Desktop-app client. No billing prompt appeared (observed, 2026-08-26).
+- **Drive sync is BROKEN (2026-08-26, unresolved).** 5.4 GB / 2,498 archived
+  files exist ONLY on this Mac. Google Drive.app runs and reads work, but no
+  file data uploads; logs show `HandleAuthCodeRequestStatus Error` and
+  "Syncing state changes are currently deferred or disabled". Not storage
+  (30 GB of 2 TB used). Canary: `My Drive/naropa-sync-probe.txt` appears in
+  Drive the moment sync recovers. Fix path: menu-bar Drive icon → resume, or
+  disconnect/re-add the account. DO NOT delete the local folder — it is the
+  only copy. This blocks video-notes: no Drive URL can exist for a file that
+  never reached Drive.
+- Drive OAuth scope check: PASSED (observed on 10 real files, 2026-08-26).
+  `drive.metadata.readonly` DOES return `webViewLink` and DOES see files it did
+  not create. No further console work needed; `token.json` exists.
 - Coordination: the archive runs as a SEPARATE Claude session. Peer messaging
   works (ListAgents → SendMessage). Its address changes across restarts; find it
   via list_sessions ("Naropa Coursework Download"). A peer cannot grant

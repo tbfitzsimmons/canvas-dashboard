@@ -38,6 +38,13 @@ Browser check-offs ──► Cloudflare Worker (dashboard-sync)
 - **`dashboard/index.html`** — Static HTML/JS (no build step). Weekly columns, progress bar, urgency highlights. "Refresh Now" button triggers a sync via Cloudflare Worker. **Check-offs sync across devices** via timestamped records in Cloudflare KV — checks *and unchecks* propagate within ~30s; latest toggle wins on conflict. Each device pairs once by opening the bookmark URL (`#t=…`); the token then persists on-device. The masthead's **📥 backup** link downloads a JSON snapshot; "unpair this device" + reopening the bookmark re-pairs.
 - **`.github/workflows/sync.yml`** — Monday cron + `workflow_dispatch`. Race-condition safe (commit-then-push with `-X ours`).
 - **`config.json`** — Semester name, start date, term filter, instructor overrides. Edit once per semester.
+- **`publish-video-notes.sh`** — The one sanctioned bridge from the separate
+  Naropa Archive project: validates and publishes `dashboard/video-notes.json`
+  (canvas_id → private Drive URL), which makes a "📝 Summary" link appear on
+  matching lecture items. Run it when the archive reports new notes; it is safe
+  to re-run and exits cleanly with nothing to do. Summaries derived from
+  recorded CLASS SESSIONS are excluded (FERPA) and blocked twice — at
+  generation and again by the dashboard.
 - **`worker/`** — Reference copy of the Cloudflare Worker code (live worker deployed in Cloudflare portal as `dashboard-sync`).
 
 The Canvas token never lives in the repo — it's stored as the `CANVAS_TOKEN` GitHub Secret, encrypted by GitHub, only visible to the running workflow.
