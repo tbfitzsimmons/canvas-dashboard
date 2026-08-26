@@ -1740,6 +1740,49 @@ def verify_coverage(canvas: Canvas, courses: list[Course], items: list[Item]) ->
             if getattr(e.response, "status_code", None) != 404:
                 print(f"  ⚠ coverage probe {course.code} discussions: {e}")
 
+    # ── Ungraded content recall ───────────────────────────────────────────
+    # Readings and videos had NO ground-truth check until now — their
+    # false-negative rate was simply unmeasured, and an unmeasured error rate
+    # is how a quarter of the board turned out to be noise without anyone
+    # noticing. Module items are the closest thing Canvas offers to a
+    # definitive list of "content the professor put in this course", so every
+    # one must be represented: either as its own row, or expanded into children
+    # carrying that page's title.
+    mod_total = mod_hit = 0
+    mod_missing: list[str] = []
+    parent_titles = {
+        re.sub(r"^from:\s*", "", (i.detail or "")).strip().lower()
+        for i in items if (i.detail or "").startswith("from:")
+    }
+    emitted_module_ids = {cid.split(":", 1)[1] for cid in emitted if cid.startswith("module_item:")}
+    for course in courses:
+        try:
+            mods = list(canvas.paginate(f"/courses/{course.canvas_id}/modules",
+                                        {"include[]": "items"}))
+        except requests.HTTPError:
+            continue
+        for mod in mods:
+            for it in (mod.get("items") or []):
+                if it.get("type") not in ("Page", "File", "ExternalUrl", "ExternalTool"):
+                    continue
+                title = (it.get("title") or "").strip()
+                mod_total += 1
+                if (str(it.get("id")) in emitted_module_ids
+                        or title.lower() in parent_titles):
+                    mod_hit += 1
+                else:
+                    mod_missing.append(f"{course.code}: {title[:60]}")
+
+    if mod_missing:
+        print(f"⚠ CONTENT RECALL: {mod_hit}/{mod_total} module items represented — "
+              f"{len(mod_missing)} not on the board:")
+        for m in mod_missing[:10]:
+            print(f"     UNREPRESENTED: {m}")
+        if len(mod_missing) > 10:
+            print(f"     … and {len(mod_missing) - 10} more")
+    else:
+        print(f"✓ CONTENT RECALL: {mod_hit}/{mod_total} module items represented")
+
     if missing:
         print(f"\n❌ COVERAGE GAP — {len(missing)} graded item(s) NOT on the dashboard:")
         for m in missing:
@@ -1752,6 +1795,8 @@ def verify_coverage(canvas: Canvas, courses: list[Course], items: list[Item]) ->
         "verified_at": datetime.now(timezone.utc).isoformat(),
         "assignments": {"total": asn_total, "captured": asn_hit},
         "discussions": {"total": dis_total, "captured": dis_hit},
+        "module_items": {"total": mod_total, "captured": mod_hit},
+        "unrepresented": mod_missing,
         "missing": missing,
     }
 
