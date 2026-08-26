@@ -1281,12 +1281,20 @@ function renderCoverageBanner(cov) {
   if (miss > 0) {
     return `<div class="token-warn expired">❌ <strong>${miss} graded Canvas item${miss === 1 ? '' : 's'} missing from this board:</strong> ${cov.missing.slice(0,3).map(escapeHtml).join(' · ')}${miss > 3 ? ' · …' : ''} — check the sync log.</div>`;
   }
+  const unrep = (cov.unrepresented || []).length;
+  if (unrep > 0) {
+    return `<div class="token-warn">⚠ <strong>${unrep} course content item${unrep === 1 ? '' : 's'} not represented on this board:</strong> ${cov.unrepresented.slice(0,3).map(escapeHtml).join(' · ')}${unrep > 3 ? ' · …' : ''}</div>`;
+  }
   return '';
 }
 function coverageProofLine(cov) {
-  if (!cov || (cov.missing || []).length) return '';
+  if (!cov || (cov.missing || []).length || (cov.unrepresented || []).length) return '';
   const a = cov.assignments || {}, d = cov.discussions || {};
-  return `<div class="sync-notice" style="font-size:11px;">✓ Verified at last sync: all ${a.total ?? '?'} assignments + ${d.total ?? '?'} discussions from Canvas are on this board</div>`;
+  const m = cov.module_items || {};
+  const q = cov.quality || {};
+  const recall = (m.total != null) ? ` · ${m.captured}/${m.total} content items` : '';
+  const noise = (q.suspect_pct != null) ? ` · noise ${q.suspect_pct}%` : '';
+  return `<div class="sync-notice" style="font-size:11px;">✓ Verified at last sync: all ${a.total ?? '?'} assignments + ${d.total ?? '?'} discussions${recall}${noise}</div>`;
 }
 
 // ── Past semesters ─────────────────────────────────────────────────────────
