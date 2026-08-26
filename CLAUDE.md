@@ -230,6 +230,28 @@ custom domain, preserving the `#t=` hash. Code at top of `<script>` in index.htm
    or items fall >40%. It stands down automatically across a semester change.
    Override with `SYNC_ALLOW_REGRESSION=1`.
 
+10. **Three metrics, or the claim is false confidence (incident 2026-08-26).**
+   For weeks the sync reported "43/43 assignments, 25/25 discussions — nothing
+   missing" while 26% of the board (44% of "readings") was noise: professor
+   emails, Zoom room links, stock-photo credits, Canvas help docs — all filed as
+   coursework by the page-expansion scraper. The coverage number was true and
+   the conclusion drawn from it was false, because it measured only graded
+   RECALL. Every sync now reports, and data.json carries, all three:
+     • graded coverage  (false negatives, graded)      — target 100%
+     • content recall   (false negatives, module items) — target 100%
+     • item quality     (false positives, whole board)  — noise %, target ~0
+   Rules learned the hard way, do not regress:
+     • mailto:/tel:/Zoom-join links and stock-credit domains (pixabay,
+       thenounproject, …) are never items.
+     • Pages titled Instructor Information / Help and Support / Advisor
+       Contact / policies are kept as ONE row, never exploded into children.
+     • "Online Sourcebook" IS real coursework at Naropa (Jung PDFs, case
+       conceptualization templates) — an earlier fix wrongly skipped it by
+       title and silently deleted 22 real readings. Filter by what a LINK is,
+       not by what a page is called.
+     • A metric must state what it does NOT measure. "Nothing missing" and
+       "everything here is real" are different claims.
+
 ## Known issues / next steps
 
 ### 1. Worker /dispatch — FIXED (verified 2026-06-08, OPTIONS returns 204)
