@@ -1073,6 +1073,30 @@ def _find_zoom_tab_url(canvas: Canvas, course_id: int) -> str:
     return ""
 
 
+def adopt_zoom_from_items(courses: list[Course], items: list[Item]) -> None:
+    """Last-resort Zoom discovery: reuse what the page expansion already scraped.
+
+    The five-pass search can miss a link (e.g. a page the Pages index doesn't
+    return), yet the module-item expansion often captured that very URL while
+    building the board — observed in CMHC-608E-LB, where
+    https://naropa.zoom.us/j/7421025441 sat in an item from "Zoom Intensive
+    Agenda" while the course card showed no Zoom link at all.
+
+    Costs no extra API calls. Recording URLs excluded on purpose: /rec/ is a
+    past recording, not the room to join.
+    """
+    JOIN_SEGMENTS = ("/j/", "/my/", "/meeting/", "/s/", "/wc/")
+    by_course: dict[str, str] = {}
+    for it in items:
+        link = it.link or ""
+        if "zoom.us" in link and any(seg in link for seg in JOIN_SEGMENTS):
+            by_course.setdefault(it.courseId, link)
+    for c in courses:
+        if not c.zoom_url and by_course.get(c.id):
+            c.zoom_url = by_course[c.id]
+            print(f"  ↳ {c.code}: adopted Zoom link found while scanning course content")
+
+
 def _extract_zoom_url_from_html(html: str) -> str:
     """Return the first zoom.us meeting/webinar link found in HTML, or ''."""
     if not html:
@@ -1945,6 +1969,9 @@ def main() -> int:
     # something broke (an endpoint, a classification rule, a permissions change)
     # — fail loudly and keep the last good data.json. Across a semester change
     # the drop is expected, so the guard stands down.
+    # Promote any Zoom link the content scan already found onto the course card
+    adopt_zoom_from_items(courses, all_items)
+
     roster_change = assert_no_regression(all_items, courses, cfg)
 
     write_data(courses, all_items, cfg, coverage, rollover_info, roster_change)
