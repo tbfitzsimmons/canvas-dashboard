@@ -1268,7 +1268,7 @@ function copyItemNote(canvasId) {
     if (!btn) return;
     btn.textContent = '✓ Copied';
     btn.classList.add('copied');
-    setTimeout(() => { btn.textContent = '📋 Note'; btn.classList.remove('copied'); }, 2000);
+    setTimeout(() => { btn.textContent = '📋 Copy'; btn.classList.remove('copied'); }, 2000);
   }).catch(() => {});
 }
 
@@ -1306,7 +1306,9 @@ function coverageProofLine(cov) {
 // canvas_id → Drive URL as dashboard/video-notes.json. The linked docs are
 // STUDY NOTES built from lecture slide decks (plus caption text where a
 // video has one) — not transcripts or summaries of a recording. The link is
-// labelled "Notes" for that reason; do not relabel it "Summary".
+// labelled "Study Notes" for that reason; do not relabel it "Summary".
+// It sits next to a grey "📋 Copy" button (clipboard, unrelated) — keep the
+// two labels visibly different; "Notes" next to "Note" tested as confusing.
 // This board only ever
 // CONSUMES that file: if it is missing, empty, or malformed, everything renders
 // exactly as it does today. That keeps a failure in the archive pipeline from
@@ -1368,7 +1370,7 @@ function videoNoteLink(it) {
   }
   const url = typeof entry === 'string' ? entry : entry.url;
   if (!url || !/^https:\/\//.test(url)) return '';
-  return `<a class="note-link" href="${escapeAttr(url)}" target="_blank" rel="noopener">📝 Notes</a>`;
+  return `<a class="note-link" href="${escapeAttr(url)}" target="_blank" rel="noopener" title="Open study notes in Google Drive (sign in as Jennifer)">📝 Study Notes</a>`;
 }
 
 // ── Past semesters ─────────────────────────────────────────────────────────
@@ -1786,7 +1788,7 @@ function renderItem(it) {
   // Note button for video + lecture items (copies a Granola-ready template)
   const summaryLink = videoNoteLink(it);
   const noteBtn = (it.type === 'video' || it.type === 'lecture')
-    ? `<button class="note-btn" data-note="${escapeAttr(it.canvas_id)}">📋 Note</button>`
+    ? `<button class="note-btn" data-note="${escapeAttr(it.canvas_id)}" title="Copy this item's details to the clipboard">📋 Copy</button>`
     : '';
 
   return `
