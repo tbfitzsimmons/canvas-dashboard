@@ -45,6 +45,8 @@
   .masthead .sub { font-size: 13px; color: var(--ink-soft); }
   .masthead .sub strong { color: var(--accent); font-weight: 600; }
   .stale-warn { color: #B91C1C; font-weight: 500; }
+  .note-link { font-size: 11px; color: var(--link); text-decoration: none; margin-right: 6px; }
+  .note-link:hover { text-decoration: underline; }
   .sync-dot {
     display: inline-block; width: 9px; height: 9px; border-radius: 50%;
     margin-left: 8px; vertical-align: middle;
@@ -1297,6 +1299,38 @@ function coverageProofLine(cov) {
   return `<div class="sync-notice" style="font-size:11px;">✓ Verified at last sync: all ${a.total ?? '?'} assignments + ${d.total ?? '?'} discussions${recall}${noise}</div>`;
 }
 
+// ── Video notes (optional external contract) ───────────────────────────────
+// The Naropa Archive project transcribes lecture videos and writes summaries to
+// Jennifer's PRIVATE Google Drive, then publishes a small map of
+// canvas_id → Drive URL as dashboard/video-notes.json. This board only ever
+// CONSUMES that file: if it is missing, empty, or malformed, everything renders
+// exactly as it does today. That keeps a failure in the archive pipeline from
+// ever being able to affect her assignment board.
+//
+// The link string is public (this repo is public); the content behind it
+// requires her Google login. Nothing derived from recorded CLASS SESSIONS
+// belongs here — those contain classmates' voices and names.
+let VIDEO_NOTES = {};
+
+async function loadVideoNotes() {
+  try {
+    const res = await fetch('video-notes.json?t=' + Date.now(), { cache: 'no-store' });
+    if (!res.ok) return;                     // 404 is the normal case today
+    const data = await res.json();
+    if (data && typeof data === 'object' && !Array.isArray(data)) {
+      VIDEO_NOTES = data.notes && typeof data.notes === 'object' ? data.notes : data;
+    }
+  } catch (_) { /* absent or malformed → stay empty, board unaffected */ }
+}
+
+function videoNoteLink(it) {
+  const entry = VIDEO_NOTES[it.canvas_id];
+  if (!entry) return '';
+  const url = typeof entry === 'string' ? entry : entry.url;
+  if (!url || !/^https:\/\//.test(url)) return '';
+  return `<a class="note-link" href="${escapeAttr(url)}" target="_blank" rel="noopener">📝 Summary</a>`;
+}
+
 // ── Past semesters ─────────────────────────────────────────────────────────
 // A rolled-over semester is retired from the main view but RETAINED: sync.py
 // archives its data.json, and check-offs already live in their own KV bucket
@@ -1710,6 +1744,7 @@ function renderItem(it) {
     ? `<div class="item-summary">${escapeHtml(it.summary)}</div>` : '';
 
   // Note button for video + lecture items (copies a Granola-ready template)
+  const summaryLink = videoNoteLink(it);
   const noteBtn = (it.type === 'video' || it.type === 'lecture')
     ? `<button class="note-btn" data-note="${escapeAttr(it.canvas_id)}">📋 Note</button>`
     : '';
@@ -1731,6 +1766,7 @@ function renderItem(it) {
             ${t.ico} ${t.label}
           </span>
           <span class="item-due ${dueClass}">${duePfx}due ${escapeHtml(it.due)}</span>
+          ${summaryLink}
           ${noteBtn}
         </div>
       </div>
@@ -1795,6 +1831,7 @@ async function boot() {
     const res = await fetch('data.json?t=' + Date.now(), { cache: 'no-store' });
     if (!res.ok) throw new Error(`Couldn't load data.json (HTTP ${res.status})`);
     STATE.data = await res.json();
+    await loadVideoNotes();   // optional; board renders unchanged if absent
     CURRENT_DATA = STATE.data;   // keep the live board for the semester picker
     STATE.viewedWeek = currentWeekNumber();
     render();
