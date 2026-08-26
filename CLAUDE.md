@@ -270,6 +270,21 @@ custom domain, preserving the `#t=` hash. Code at top of `<script>` in index.htm
    The cron trigger is configured in the Cloudflare portal (Settings → Triggers),
    NOT in this repo; re-add it if the worker is ever recreated.
 
+12. **Video summaries: FERPA line drawn (Brooks, 2026-08-26).** The Naropa
+   Archive project may publish `dashboard/video-notes.json` mapping
+   `canvas_id → private Drive URL`; the board renders a "📝 Summary" link for
+   matching items. It is CONSUMED optionally — absent/empty/malformed/non-https
+   → board renders exactly as today (try/catch, verified in browser).
+   Ruling: summaries derived from RECORDED CLASS SESSIONS are excluded —
+   classmates' voices and names are not hers to surface from a public repo,
+   even behind a Google login. Professor lectures are fine.
+   Enforced twice on purpose: the archive filters at generation (content-level,
+   authoritative) and `CLASS_RECORDING_RE` in index.html refuses to link one
+   by title (backstop). Verified on the live board: 24 video/lecture items,
+   23 allowed, 1 blocked ("Recordings from Intensive"), 0 false positives.
+   If a legitimate lecture ever gets blocked, refine the pattern — do not
+   work around it.
+
 ## Known issues / next steps
 
 ### 1. Worker /dispatch — FIXED (verified 2026-06-08, OPTIONS returns 204)
