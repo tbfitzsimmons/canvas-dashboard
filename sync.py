@@ -974,6 +974,9 @@ def select_courses(canvas: Canvas, cfg: dict, raw: list[dict] | None = None,
         course_code_base = c.get("course_code", "").split(".")[0]
         instructor = instructor_overrides.get(course_code_base, instructor)
         zoom_url = _find_zoom_tab_url(canvas, int(c["id"]))
+        if not zoom_url:
+            print(f"  ℹ no Zoom link found anywhere in {c.get('course_code','?').split('.')[0]} "
+                  f"(checked nav tab, front page, syllabus, announcements, pages)")
         courses.append(Course(
             id=f"course{i+1}",
             canvas_id=int(c["id"]),
@@ -1025,18 +1028,45 @@ def _find_zoom_tab_url(canvas: Canvas, course_id: int) -> str:
     except requests.HTTPError:
         pass
 
-    # ── 3. Instructor / syllabus pages ────────────────────────────────────────
+    # ── 3. Syllabus body ──────────────────────────────────────────────────────
+    # A distinct field from any Page — professors often paste the meeting link
+    # straight into the Syllabus description.
+    try:
+        course = canvas._get(f"/courses/{course_id}",
+                             params={"include[]": "syllabus_body"}).json() or {}
+        url = _extract_zoom_url_from_html(course.get("syllabus_body") or "")
+        if url:
+            return url
+    except requests.HTTPError:
+        pass
+
+    # ── 4. Announcements ──────────────────────────────────────────────────────
+    # "Here's our Zoom room for the semester" is very often an announcement.
+    try:
+        anns = canvas._get(f"/courses/{course_id}/discussion_topics",
+                           params={"only_announcements": "true", "per_page": 20}).json() or []
+        for a in anns:
+            url = _extract_zoom_url_from_html(a.get("message") or "")
+            if url:
+                return url
+    except requests.HTTPError:
+        pass
+
+    # ── 5. Pages ──────────────────────────────────────────────────────────────
+    # Title-matched pages first (cheap and usually right); then, only if nothing
+    # was found, a bounded sweep of the rest — a link parked on a page called
+    # "Week 1" or "Course Overview" is otherwise invisible to us.
     page_needles = ("instructor", "professor", "contact", "syllabus", "zoom", "faculty")
     try:
         pages = canvas._get(f"/courses/{course_id}/pages",
                             params={"per_page": 50, "sort": "title"}).json() or []
-        for page in pages:
-            title = (page.get("title") or "").lower()
-            if any(n in title for n in page_needles):
-                body = fetch_page_body(canvas, course_id, page["url"])
-                url = _extract_zoom_url_from_html(body or "")
-                if url:
-                    return url
+        likely = [p for p in pages if any(n in (p.get("title") or "").lower() for n in page_needles)]
+        others = [p for p in pages if p not in likely][:25]
+        for page in likely + others:
+            body = fetch_page_body(canvas, course_id, page["url"])
+            url = _extract_zoom_url_from_html(body or "")
+            if url:
+                return url
     except requests.HTTPError:
         pass
 
