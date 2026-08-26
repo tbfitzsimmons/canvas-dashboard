@@ -507,9 +507,19 @@ IGNORE_SECTIONS = re.compile(
 # single row each (still one click away) but are never exploded into tasks.
 ADMIN_PAGE_TITLE_RE = re.compile(
     r"\b(instructor information|advisor contact|contact information|faculty information|"
-    r"help and support|technical support|online sourcebook|sourcebook|references|"
-    r"bibliography|academic polic|program polic|exception to)\b",
+    r"help and support|technical support|academic polic|program polic|exception to)\b",
     re.IGNORECASE,
+)
+# NOT administrative, despite sounding like it: "Online Sourcebook" is where
+# several professors park the actual course readings (Jung PDFs, case
+# conceptualization templates). Skipping it by title dropped 22 real items.
+
+# Stock-image and icon credits. These appear on "References" pages as
+# attribution links and are never coursework — a far better signal than the
+# page title, which can legitimately hold assigned citations.
+CREDIT_DOMAINS = (
+    "pixabay.com", "thenounproject.com", "unsplash.com", "pexels.com",
+    "shutterstock.com", "flaticon.com", "freepik.com", "istockphoto.com",
 )
 
 # Link targets that are never an assignment, however they are labelled.
@@ -673,6 +683,8 @@ def expand_page_body(html: str, page_title: str = "") -> list[tuple[str, str, st
         # card instead — see adopt_zoom_from_items.)
         if NON_TASK_LINK_RE.match(href) or ZOOM_JOIN_RE.search(href):
             return
+        if any(dom in href.lower() for dom in CREDIT_DOMAINS):
+            return   # stock-photo / icon attribution, not coursework
         title = _normalize_text(a.get_text()) or fallback_title or href
         # Use the <a>'s "title" attribute for file links (Canvas puts the filename there)
         if a.get("title") and (not title or title.startswith("http")):
