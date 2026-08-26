@@ -255,6 +255,21 @@ custom domain, preserving the `#t=` hash. Code at top of `<script>` in index.htm
      • A metric must state what it does NOT measure. "Nothing missing" and
        "everything here is real" are different claims.
 
+11. **Check-off backups: nightly KV snapshots (added 2026-08-27).** A semester
+   of progress otherwise lives in a single KV key. The worker's `scheduled()`
+   handler copies `checkoffs` → `backup:<YYYY-MM-DD>` daily and keeps the
+   newest 14. Restore needs no portal access — it is three curls:
+   ```
+   T=<SHARED_TOKEN>; W=https://dashboard-sync.brooks-1b9.workers.dev
+   curl -H "Authorization: Bearer $T" $W/backups                  # list dates
+   curl -H "Authorization: Bearer $T" $W/backups/2026-08-27 > s.json
+   curl -X PUT -H "Authorization: Bearer $T" -H 'Content-Type: application/json' \
+        --data-binary @s.json $W/state                            # restore
+   ```
+   `POST /backups/run` snapshots on demand — use it before anything risky.
+   The cron trigger is configured in the Cloudflare portal (Settings → Triggers),
+   NOT in this repo; re-add it if the worker is ever recreated.
+
 ## Known issues / next steps
 
 ### 1. Worker /dispatch — FIXED (verified 2026-06-08, OPTIONS returns 204)
