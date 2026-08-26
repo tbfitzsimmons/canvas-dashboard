@@ -501,6 +501,22 @@ IGNORE_SECTIONS = re.compile(
 # Page-title patterns that signal "container page" — the page exists only to
 # list other deliverables. If parsing yields zero children, drop the page itself
 # rather than emit it as a phantom reading row.
+# Administrative / reference pages. Expanding these floods the board with
+# contact details, policy links and bibliography entries — 38 of 231 items on
+# the Fall 2026 board came from six such pages. They stay on the board as a
+# single row each (still one click away) but are never exploded into tasks.
+ADMIN_PAGE_TITLE_RE = re.compile(
+    r"\b(instructor information|advisor contact|contact information|faculty information|"
+    r"help and support|technical support|online sourcebook|sourcebook|references|"
+    r"bibliography|academic polic|program polic|exception to)\b",
+    re.IGNORECASE,
+)
+
+# Link targets that are never an assignment, however they are labelled.
+NON_TASK_LINK_RE = re.compile(r"^(mailto:|tel:|sms:|skype:)", re.IGNORECASE)
+ZOOM_JOIN_RE = re.compile(r"zoom\.us/(?:j|my|meeting|s|wc)/", re.IGNORECASE)
+
+
 CONTAINER_PAGE_TITLE_RE = re.compile(
     r"\b(resources?|materials?|optional learning|readings? and|"
     r"presentation for week|files|slides|assignments?)\b",
@@ -522,6 +538,37 @@ def _looks_like_heading(p: Tag) -> bool:
         return False
     text = _normalize_text(p.get_text())
     return bool(text) and len(text) <= 80 and text.endswith(":")
+
+
+def _readable_title_from_url(href: str, page_title: str = "") -> str:
+    """Build a human-readable title for a link whose visible text is unusable
+    (a bare URL, or something like "Link"). Prefers the file name, then the
+    page the link came from, then the domain."""
+    try:
+        parsed = urlparse(href)
+    except Exception:
+        return ""
+    last = (parsed.path.rstrip("/").rsplit("/", 1) or [""])[-1]
+    last = re.sub(r"\.(pdf|docx?|pptx?|xlsx?|aspx?|html?)$", "", last, flags=re.IGNORECASE)
+    last = re.sub(r"[-_+]+", " ", last).strip()
+    if last and not last.isdigit() and len(last) >= 5:
+        return _normalize_text(last).title() if last.islower() else _normalize_text(last)
+    host = (parsed.netloc or "").replace("www.", "")
+    if page_title:
+        return f"{_normalize_text(page_title)} — link" + (f" ({host})" if host else "")
+    return f"Link ({host})" if host else ""
+
+
+def _trim_prose_title(text: str, limit: int = 70) -> str:
+    """Reduce a sentence to a scannable label, keeping the leading clause."""
+    t = _normalize_text(text).rstrip(".,;:")
+    for sep in (" — ", " – ", ": ", ", which ", ", that ", ". "):
+        if sep in t:
+            t = t.split(sep)[0]
+            break
+    if len(t) > limit:
+        t = t[:limit].rsplit(" ", 1)[0] + "…"
+    return t
 
 
 def _classify_link_type(href: str, title: str = "") -> str:
@@ -621,6 +668,11 @@ def expand_page_body(html: str, page_title: str = "") -> list[tuple[str, str, st
         href = a.get("href") or ""
         if not href or href.startswith("#"):
             return
+        # An email address, phone number or Zoom room is contact information,
+        # not something to check off. (Zoom rooms are surfaced on the course
+        # card instead — see adopt_zoom_from_items.)
+        if NON_TASK_LINK_RE.match(href) or ZOOM_JOIN_RE.search(href):
+            return
         title = _normalize_text(a.get_text()) or fallback_title or href
         # Use the <a>'s "title" attribute for file links (Canvas puts the filename there)
         if a.get("title") and (not title or title.startswith("http")):
@@ -632,11 +684,16 @@ def expand_page_body(html: str, page_title: str = "") -> list[tuple[str, str, st
                 surround = URL_IN_TEXT_RE.sub("", _normalize_text(li.get_text())).strip(" -–—:•")
                 if surround:
                     title = surround
-        # Still a bare URL? For YouTube/Vimeo, hit oEmbed for the real title.
-        if title.startswith("http"):
+        # A title Jennifer can't read is not a usable task. For video hosts ask
+        # oEmbed for the real title; otherwise derive one from the file name,
+        # the page the link sits on, or the domain.
+        if title.startswith("http") or len(title.strip()) < 5:
             resolved = fetch_video_title(href)
-            if resolved:
-                title = resolved
+            title = resolved or _readable_title_from_url(href, page_title) or title
+        # Prose caught in link text ("Watch the video below, which provides…")
+        # is narration, not an item title. Trim it to something scannable.
+        if _looks_like_prose(title):
+            title = _trim_prose_title(title)
         out.append((_classify_link_type(href, title), title, href))
 
     # Iterate top-level children, but also recurse into <ul>/<ol>
@@ -1295,6 +1352,7 @@ def fetch_course_items(canvas: Canvas, course: Course, cfg: dict) -> list[Item]:
     # 4. Module items (pages, files, external URLs — these become readings/videos)
     page_children_emitted = 0
     pages_expanded = 0
+    admin_pages_kept: list[str] = []
     seen_module_page_urls: set[str] = set()  # track for coverage check
     try:
         modules = modules_data  # already fetched above; no second API call needed
@@ -1318,14 +1376,24 @@ def fetch_course_items(canvas: Canvas, course: Course, cfg: dict) -> list[Item]:
                     and bool(OVERVIEW_TITLE_RE.search(title or ""))
                 )
 
-                # Story 3+5: if this is a Page (and NOT an overview), fetch body and expand
+                # Administrative / reference pages keep their single row but are
+                # never exploded — otherwise a contact list becomes 22 "readings".
+                is_admin_page = (
+                    it.get("type") == "Page"
+                    and bool(ADMIN_PAGE_TITLE_RE.search(title or ""))
+                )
+
+                # Story 3+5: if this is a Page (and NOT an overview/admin page),
+                # fetch body and expand
                 children: list[tuple[str, str, str]] = []
                 body_for_summary: str | None = None
                 if it.get("type") == "Page" and it.get("page_url"):
                     seen_module_page_urls.add(it["page_url"])
                     body_for_summary = fetch_page_body(canvas, course.canvas_id, it["page_url"])
-                    if not is_overview_page:
+                    if not is_overview_page and not is_admin_page:
                         children = expand_page_body(body_for_summary or "", page_title=title)
+                    elif is_admin_page:
+                        admin_pages_kept.append(title)
 
                 if children:
                     pages_expanded += 1
@@ -1373,6 +1441,9 @@ def fetch_course_items(canvas: Canvas, course: Course, cfg: dict) -> list[Item]:
                     ))
         if pages_expanded:
             print(f"  ↳ {course.code}: expanded {pages_expanded} page(s) into {page_children_emitted} child items")
+        if admin_pages_kept:
+            print(f"  ↳ {course.code}: kept {len(admin_pages_kept)} admin/reference page(s) unexpanded: "
+                  f"{', '.join(admin_pages_kept[:4])}{' …' if len(admin_pages_kept) > 4 else ''}")
     except requests.HTTPError as e:
         print(f"  ⚠ {course.code} module page expansion: {e}")
 
@@ -1567,6 +1638,45 @@ def assert_no_regression(items: list[Item], courses: list[Course], cfg: dict) ->
         "courses_before": prev_courses,
         "courses_after": len(courses),
     }
+
+
+def audit_item_quality(items: list[Item]) -> dict:
+    """Count items that look like noise rather than coursework.
+
+    The coverage audit answers "is anything MISSING?" — it says nothing about
+    what was ADDED that shouldn't be there. Reporting 43/43 assignments while a
+    quarter of the board is contact details and bibliography entries is false
+    confidence, so both numbers are published from here on.
+    """
+    checks = {
+        "contact detail": lambda i: NON_TASK_LINK_RE.match(i.link or ""),
+        "zoom room link": lambda i: bool(ZOOM_JOIN_RE.search(i.link or "")),
+        "unusable title": lambda i: i.title.strip().startswith("http") or len(i.title.strip()) < 5,
+        "prose fragment": lambda i: len(i.title) > 110 or bool(re.search(r"[a-z]\. [A-Z]", i.title)),
+        "admin/reference": lambda i: bool(ADMIN_PAGE_TITLE_RE.search(i.detail or "")),
+    }
+    found: dict[str, list[str]] = {k: [] for k in checks}
+    flagged: set[int] = set()
+    for idx, it in enumerate(items):
+        for name, test in checks.items():
+            try:
+                if test(it):
+                    found[name].append(it.title[:60])
+                    flagged.add(idx)
+                    break
+            except Exception:
+                pass
+    counts = {k: len(v) for k, v in found.items() if v}
+    total = len(flagged)
+    pct = (100 * total / len(items)) if items else 0.0
+    if total:
+        print(f"\n⚠ ITEM QUALITY: {total} of {len(items)} items ({pct:.1f}%) look like noise, not coursework")
+        for k, v in sorted(counts.items(), key=lambda x: -x[1]):
+            print(f"     {v:>3}  {k}   e.g. {found[k][0]!r}")
+    else:
+        print(f"\n✓ ITEM QUALITY: no noise detected across {len(items)} items")
+    return {"suspect_total": total, "suspect_pct": round(pct, 1),
+            "by_reason": counts, "items_checked": len(items)}
 
 
 def verify_coverage(canvas: Canvas, courses: list[Course], items: list[Item]) -> dict:
@@ -1963,6 +2073,7 @@ def main() -> int:
 
     # Continuous coverage self-audit — re-verifies every graded item landed
     coverage = verify_coverage(canvas, courses, all_items)
+    coverage["quality"] = audit_item_quality(all_items)
 
     # Regression guard: never silently replace a healthy board with a degraded
     # one. Within the SAME semester, a large drop in items or courses means
