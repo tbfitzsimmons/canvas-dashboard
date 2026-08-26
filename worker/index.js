@@ -37,7 +37,26 @@ const ALLOWED_ORIGINS = new Set([
 
 const STATE_KEY = 'checkoffs';
 const BACKUP_PREFIX = 'backup:';
+// KV list() is EVENTUALLY consistent — a snapshot taken seconds ago can be
+// absent from it (measured: ~10s lag). During a panic restore, "no backups
+// found" is the worst possible lie. get() IS strongly consistent, so the set
+// of snapshots is tracked in an explicit index key and list() is only a
+// fallback for repair. This also makes pruning deterministic.
+const INDEX_KEY = 'backups-index';
 const KEEP_BACKUPS = 14;   // ~14 × ~50KB — trivial against the 1GB free tier
+
+/** Snapshot dates, strongly consistent. Falls back to list() to self-repair. */
+async function readIndex(env) {
+  try {
+    const raw = await env.STATE.get(INDEX_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed)) return parsed;
+    }
+  } catch (_) { /* fall through to rebuild */ }
+  const listed = await env.STATE.list({ prefix: BACKUP_PREFIX });
+  return listed.keys.map(k => k.name.slice(BACKUP_PREFIX.length));
+}
 
 /** Copy the live check-off blob to a dated snapshot, then prune old ones. */
 async function snapshotState(env) {
@@ -48,12 +67,15 @@ async function snapshotState(env) {
   await env.STATE.put(BACKUP_PREFIX + date, val);
 
   // Keep the newest KEEP_BACKUPS. ISO dates sort lexicographically.
-  const listed = await env.STATE.list({ prefix: BACKUP_PREFIX });
-  const names = listed.keys.map(k => k.name).sort().reverse();
-  const stale = names.slice(KEEP_BACKUPS);
-  for (const name of stale) await env.STATE.delete(name);
+  let dates = await readIndex(env);
+  if (!dates.includes(date)) dates.push(date);
+  dates = [...new Set(dates)].sort().reverse();
+  const keep = dates.slice(0, KEEP_BACKUPS);
+  const stale = dates.slice(KEEP_BACKUPS);
+  for (const d of stale) await env.STATE.delete(BACKUP_PREFIX + d);
+  await env.STATE.put(INDEX_KEY, JSON.stringify(keep));
 
-  return { ok: true, date, total: Math.min(names.length, KEEP_BACKUPS), pruned: stale.length };
+  return { ok: true, date, total: keep.length, pruned: stale.length };
 }
 
 function cors(origin, methods = 'GET, PUT, OPTIONS') {
@@ -161,8 +183,7 @@ export default {
 
       // GET /backups — list available snapshot dates
       if (pathname === '/backups' && request.method === 'GET') {
-        const listed = await env.STATE.list({ prefix: BACKUP_PREFIX });
-        const dates = listed.keys.map(k => k.name.slice(BACKUP_PREFIX.length)).sort().reverse();
+        const dates = (await readIndex(env)).sort().reverse();
         return new Response(JSON.stringify({ ok: true, count: dates.length, backups: dates }),
           { status: 200, headers: jsonHeaders });
       }
