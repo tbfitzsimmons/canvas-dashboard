@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-26T03:07:49.044121+00:00",
+  "generated_at": "2026-08-26T03:12:34.423997+00:00",
   "semester": {
     "name": "Fall 2026",
     "start_date": "2026-08-24",
@@ -3778,7 +3778,7 @@
     "lecture": 1
   },
   "coverage": {
-    "verified_at": "2026-08-26T03:07:49.042630+00:00",
+    "verified_at": "2026-08-26T03:12:34.423074+00:00",
     "assignments": {
       "total": 43,
       "captured": 43
@@ -3822,15 +3822,7 @@
     }
   },
   "rollover": null,
-  "roster_change": {
-    "at": "2026-08-26T03:07:49.044042+00:00",
-    "dropped": [
-      "CMHC-609E-LB"
-    ],
-    "added": [],
-    "courses_before": 6,
-    "courses_after": 5
-  },
+  "roster_change": null,
   "archives": [
     {
       "slug": "summer-2026",
