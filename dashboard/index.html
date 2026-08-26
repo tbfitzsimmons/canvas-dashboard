@@ -1303,7 +1303,11 @@ function coverageProofLine(cov) {
 // ── Video notes (optional external contract) ───────────────────────────────
 // The Naropa Archive project transcribes lecture videos and writes summaries to
 // Jennifer's PRIVATE Google Drive, then publishes a small map of
-// canvas_id → Drive URL as dashboard/video-notes.json. This board only ever
+// canvas_id → Drive URL as dashboard/video-notes.json. The linked docs are
+// STUDY NOTES built from lecture slide decks (plus caption text where a
+// video has one) — not transcripts or summaries of a recording. The link is
+// labelled "Notes" for that reason; do not relabel it "Summary".
+// This board only ever
 // CONSUMES that file: if it is missing, empty, or malformed, everything renders
 // exactly as it does today. That keeps a failure in the archive pipeline from
 // ever being able to affect her assignment board.
@@ -1364,7 +1368,7 @@ function videoNoteLink(it) {
   }
   const url = typeof entry === 'string' ? entry : entry.url;
   if (!url || !/^https:\/\//.test(url)) return '';
-  return `<a class="note-link" href="${escapeAttr(url)}" target="_blank" rel="noopener">📝 Summary</a>`;
+  return `<a class="note-link" href="${escapeAttr(url)}" target="_blank" rel="noopener">📝 Notes</a>`;
 }
 
 // ── Past semesters ─────────────────────────────────────────────────────────
