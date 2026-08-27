@@ -1290,6 +1290,32 @@ function renderCoverageBanner(cov) {
   }
   return '';
 }
+// One board-level line explaining why some lectures have Study Notes and others
+// do not. Deliberately NOT a per-item marker: the gap is mostly transient (notes
+// are still being written), and a struck-through control would also appear on
+// courses where notes were never planned, reading as "broken" rather than
+// "not applicable". Courses with zero notes are omitted entirely.
+function studyNotesLine() {
+  if (!VIDEO_NOTES || !Object.keys(VIDEO_NOTES).length) return '';
+  const byCourse = {};
+  (STATE.data.items || []).forEach(it => {
+    if (it.type !== 'video' && it.type !== 'lecture') return;
+    const c = (STATE.data.courses || []).find(c => c.id === it.courseId);
+    if (!c) return;
+    const k = c.code || c.name;
+    byCourse[k] = byCourse[k] || { total: 0, withNote: 0 };
+    byCourse[k].total++;
+    if (VIDEO_NOTES[it.canvas_id]) byCourse[k].withNote++;
+  });
+  const parts = Object.entries(byCourse)
+    .filter(([, v]) => v.withNote > 0)
+    .map(([code, v]) => `${escapeHtml(code)} ${v.withNote} of ${v.total}`);
+  if (!parts.length) return '';
+  const done = Object.values(byCourse).every(v => v.withNote === 0 || v.withNote === v.total);
+  const tail = done ? '' : ' — the rest are still being written.';
+  return `<div class="sync-notice" style="font-size:11px;">📝 Study notes: ${parts.join(' · ')} lecture items${tail}</div>`;
+}
+
 function coverageProofLine(cov) {
   if (!cov || (cov.missing || []).length || (cov.unrepresented || []).length) return '';
   const a = cov.assignments || {}, d = cov.discussions || {};
@@ -1468,6 +1494,7 @@ function render() {
     ${renderTokenWarning(d.token_expires)}
     ${veryStale ? `<div class="token-warn expired">⚠ <strong>This board stopped updating ${Math.floor(staleHrs/24)} days ago.</strong> The Monday sync is failing — most often an expired Canvas token. New assignments will NOT appear until it's fixed. <a href="https://github.com/${repoSlug()}/actions/workflows/sync.yml" target="_blank">Check the sync log ↗</a></div>` : ''}
     ${renderCoverageBanner(d.coverage)}
+    ${studyNotesLine()}
     ${renderRosterChange(d.roster_change)}
     <div class="masthead">
       <h1>
