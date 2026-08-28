@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-28T13:05:20.126063+00:00",
+  "generated_at": "2026-08-28T13:10:59.411378+00:00",
   "semester": {
     "name": "Fall 2026",
     "start_date": "2026-08-24",
@@ -3669,7 +3669,7 @@
     "lecture": 1
   },
   "coverage": {
-    "verified_at": "2026-08-28T13:05:20.124450+00:00",
+    "verified_at": "2026-08-28T13:10:59.409301+00:00",
     "assignments": {
       "total": 43,
       "captured": 43
@@ -3732,11 +3732,12 @@
       "slug": "summer-2026",
       "name": "Summer 2026",
       "file": "archive/summer-2026.json",
-      "archived_at": "2026-08-12T03:40:22.240750+00:00",
-      "generated_at": "2026-08-12T03:38:18.622764+00:00",
-      "items": 949,
+      "archived_at": "2026-08-28T13:09:07.123262+00:00",
+      "generated_at": "2026-08-28T13:09:07.103495+00:00",
+      "items": 923,
       "courses": 6,
-      "start_date": "2026-05-18"
+      "start_date": "2026-05-18",
+      "backfilled": true
     },
     {
       "slug": "spring-2026",
