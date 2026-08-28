@@ -1730,7 +1730,7 @@ function renderUndatedSection() {
         <div class="col-head" style="background:${course.color_bar};" onclick="toggleCourseCollapsed('${escapeAttr(course.id)}')">
           <div><span class="caret">▼</span><span class="col-title">${escapeHtml(course.name)}</span>
                <span class="col-code-tag">${escapeHtml(course.code)}</span></div>
-          <div class="col-progress">${cdone}/${courseItems.length}</div>
+          <div class="col-progress">${isReadOnlySemester() ? courseItems.length + ' items' : cdone + '/' + courseItems.length}</div>
         </div>
         <div class="col-body">${courseItems.map(renderItem).join('')}</div>
       </div>`;
@@ -1823,7 +1823,7 @@ function renderAllWeeks() {
               ${isCurrent ? '<span class="badge-now">current</span>' : ''}
             </div>
             <div>
-              <span class="counts">${done}/${items.length}</span>
+              <span class="counts">${isReadOnlySemester() ? items.length + ' items' : done + '/' + items.length}</span>
               <span class="chevron">▸</span>
             </div>
           </div>
@@ -1900,7 +1900,8 @@ function updateColProgress(colEl) {
   const items = colEl.querySelectorAll('.item');
   const done = colEl.querySelectorAll('.item input:checked').length;
   const progEl = colEl.querySelector('.col-progress');
-  if (progEl) progEl.textContent = `${done}/${items.length}`;
+  if (progEl) progEl.textContent = isReadOnlySemester()
+    ? `${items.length} items` : `${done}/${items.length}`;
 }
 
 function wireAccordions() {
