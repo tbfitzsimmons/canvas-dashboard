@@ -8,5 +8,49 @@
     "items": 949,
     "courses": 6,
     "start_date": "2026-05-18"
+  },
+  {
+    "slug": "spring-2026",
+    "name": "Spring 2026",
+    "file": "archive/spring-2026.json",
+    "archived_at": "2026-08-28T03:43:12.947818+00:00",
+    "generated_at": "2026-08-28T03:43:12.926243+00:00",
+    "items": 604,
+    "courses": 5,
+    "start_date": "2026-01-12",
+    "backfilled": true
+  },
+  {
+    "slug": "fall-2025",
+    "name": "Fall 2025",
+    "file": "archive/fall-2025.json",
+    "archived_at": "2026-08-28T03:42:32.321242+00:00",
+    "generated_at": "2026-08-28T03:42:32.305241+00:00",
+    "items": 302,
+    "courses": 5,
+    "start_date": "2025-08-25",
+    "backfilled": true
+  },
+  {
+    "slug": "summer-2025",
+    "name": "Summer 2025",
+    "file": "archive/summer-2025.json",
+    "archived_at": "2026-08-28T03:42:02.264716+00:00",
+    "generated_at": "2026-08-28T03:42:02.251228+00:00",
+    "items": 566,
+    "courses": 5,
+    "start_date": "2025-05-19",
+    "backfilled": true
+  },
+  {
+    "slug": "spring-2025",
+    "name": "Spring 2025",
+    "file": "archive/spring-2025.json",
+    "archived_at": "2026-08-28T03:41:05.769988+00:00",
+    "generated_at": "2026-08-28T03:41:05.742850+00:00",
+    "items": 622,
+    "courses": 4,
+    "start_date": "2025-01-13",
+    "backfilled": true
   }
 ]

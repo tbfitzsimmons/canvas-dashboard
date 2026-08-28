@@ -46,6 +46,8 @@
   .masthead .sub { font-size: 13px; color: var(--ink-soft); }
   .masthead .sub strong { color: var(--accent); font-weight: 600; }
   .stale-warn { color: #B91C1C; font-weight: 500; }
+  .ro-dot { display:inline-block; width:14px; height:14px; margin-top:2px;
+            border-radius:50%; border:1.5px solid var(--line); flex:0 0 auto; }
   .note-link { font-size: 11px; color: var(--link); text-decoration: none; margin-right: 6px; }
   .note-link:hover { text-decoration: underline; }
   .sync-dot {
@@ -907,6 +909,15 @@ function pickMark(a, b) {
 // An item counts as "done" if the user manually checked it OR if Canvas
 // reports a submission for it (workflow_state submitted/graded — captured
 // at sync time and stored on the item as `submitted: true`).
+// True only for semesters produced by `sync.py --backfill`. Those carry no
+// check-off history — Jennifer never ticked them — so rendering 622 live
+// checkboxes at 0/622 would read as "nothing done" for a semester she passed.
+// Summer 2026 is deliberately NOT covered: it was archived by the rollover with
+// her real check-offs intact, and those stay visible and accurate.
+function isReadOnlySemester() {
+  return !!(STATE.data && STATE.data.archived === true);
+}
+
 function isItemDone(it) {
   return CHECKED.has(it.canvas_id) || !!it.submitted;
 }
@@ -1345,6 +1356,19 @@ function coverageProofLine(cov) {
 // belongs here — those contain classmates' voices and names.
 let VIDEO_NOTES = {};
 
+// The archive list also lives in data.json, but that copy only refreshes on a
+// full sync. Backfilled semesters are written straight into dashboard/archive/,
+// so read the index itself and let it win — otherwise a term is on disk and
+// invisible until the next Monday.
+async function loadArchiveIndex() {
+  try {
+    const res = await fetch('archive/index.json?t=' + Date.now(), { cache: 'no-store' });
+    if (!res.ok) return null;
+    const list = await res.json();
+    return Array.isArray(list) && list.length ? list : null;
+  } catch (_) { return null; }
+}
+
 async function loadVideoNotes() {
   try {
     const res = await fetch('video-notes.json?t=' + Date.now(), { cache: 'no-store' });
@@ -1386,6 +1410,21 @@ const OPAQUE_MEDIA_RE = new RegExp(
   'zoom_?\\d+|' +                       // Zoom local
   '(recording|meeting)[ _-]?\\d{4,}' +   // generic exports
   ')\\.(mp4|mov|m4v|webm|m4a)$', 'i');
+
+// Jennifer asked for the raw transcript alongside the notes. It rides on the
+// SAME contract entry (optional `transcript` field) and passes through the SAME
+// FERPA gate — a verbatim transcript of a recorded class session is strictly
+// more exposing than a summary of one, so it can never be the looser control.
+function transcriptLink(it) {
+  const entry = VIDEO_NOTES[it.canvas_id];
+  const url = entry && entry.transcript;
+  if (!url || !/^https:\/\//i.test(url)) return '';
+  if (CLASS_RECORDING_RE.test(it.title || '') || OPAQUE_MEDIA_RE.test((it.title || '').trim())) {
+    console.warn('[ferpa] refusing to link a transcript for a class recording:', it.title);
+    return '';
+  }
+  return `<a class="note-link" href="${escapeAttr(url)}" target="_blank" rel="noopener" title="Open the full transcript in Google Drive (sign in as Jennifer)">🗒 Transcript</a>`;
+}
 
 function videoNoteLink(it) {
   const entry = VIDEO_NOTES[it.canvas_id];
@@ -1759,7 +1798,7 @@ function renderWeekColumns(weekNum) {
           <div class="col-head" style="background:${course.color_bar};" onclick="toggleCourseCollapsed('${escapeAttr(course.id)}')">
             <div><span class="caret">▼</span><span class="col-title">${escapeHtml(course.name)}</span>
                  <span class="col-code-tag">${escapeHtml(course.code)}</span></div>
-            <div class="col-progress">${done}/${courseItems.length}</div>
+            <div class="col-progress">${isReadOnlySemester() ? courseItems.length + ' items' : done + '/' + courseItems.length}</div>
           </div>
           <div class="col-body">${courseItems.map(renderItem).join('')}</div>
         </div>`;
@@ -1813,14 +1852,14 @@ function renderItem(it) {
     ? `<div class="item-summary">${escapeHtml(it.summary)}</div>` : '';
 
   // Note button for video + lecture items (copies a Granola-ready template)
-  const summaryLink = videoNoteLink(it);
+  const summaryLink = videoNoteLink(it) + transcriptLink(it);
   const noteBtn = (it.type === 'video' || it.type === 'lecture')
     ? `<button class="note-btn" data-note="${escapeAttr(it.canvas_id)}" title="Copy this item's details to the clipboard">📋 Copy</button>`
     : '';
 
   return `
     <div class="item ${isDone ? 'done' : ''} ${it.is_overview ? 'is-overview' : ''} ${urgClass}" data-id="${escapeAttr(it.canvas_id)}">
-      <input type="checkbox" ${isDone ? 'checked' : ''} />
+      ${isReadOnlySemester() ? '<span class="ro-dot" title="Completed semester — reference only"></span>' : `<input type="checkbox" ${isDone ? 'checked' : ''} />`}
       <div class="item-body">
         <div class="item-title">
           ${it.link
@@ -1901,6 +1940,8 @@ async function boot() {
     if (!res.ok) throw new Error(`Couldn't load data.json (HTTP ${res.status})`);
     STATE.data = await res.json();
     await loadVideoNotes();   // optional; board renders unchanged if absent
+    const idx = await loadArchiveIndex();
+    if (idx) STATE.data.archives = idx;   // on-disk index beats data.json's snapshot
     CURRENT_DATA = STATE.data;   // keep the live board for the semester picker
     STATE.viewedWeek = currentWeekNumber();
     render();

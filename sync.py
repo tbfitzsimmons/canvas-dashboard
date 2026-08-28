@@ -14,6 +14,7 @@ so the dashboard never sees a half-written file.
 """
 
 from __future__ import annotations
+import argparse
 import json
 import os
 import re
@@ -966,7 +967,8 @@ def pick_active_term(cfg: dict) -> tuple[str, dict] | None:
     return (name, derived) if derived else None
 
 
-def fetch_raw_courses(canvas: Canvas, cfg: dict) -> list[dict]:
+def fetch_raw_courses(canvas: Canvas, cfg: dict,
+                      states: tuple[str, ...] = ("active", "invited_or_pending")) -> list[dict]:
     """Fetch active courses once and record term metadata. Exclusions are applied
     here so admin pseudo-courses can't masquerade as 'a new semester started'."""
     print("→ Fetching courses…")
@@ -978,7 +980,7 @@ def fetch_raw_courses(canvas: Canvas, cfg: dict) -> list[dict]:
     raw: list[dict] = []
     seen_ids: set[str] = set()
     states_by_term: dict[str, set[str]] = {}
-    for state in ("active", "invited_or_pending"):
+    for state in states:
         try:
             batch = list(canvas.paginate("/courses", {
                 "enrollment_state": state,
@@ -2056,10 +2058,27 @@ def fetch_planner_reconciliation(
 # ─────────────────────────────────────────────────────────────────────────────
 
 def main() -> int:
+    ap = argparse.ArgumentParser(description="Canvas → dashboard/data.json")
+    ap.add_argument("--backfill", metavar="TERM",
+                    help='Build a historical board for a CONCLUDED term '
+                         '(e.g. --backfill "Spring 2025 Semester"). Writes only '
+                         'dashboard/archive/, never data.json.')
+    ap.add_argument("--list-terms", action="store_true",
+                    help="List every term Canvas knows about, then exit.")
+    args = ap.parse_args()
+
     cfg = load_config()
     token = get_token(cfg)
     base_url = cfg["canvas_url"]
     canvas = Canvas(base_url, token)
+
+    if args.list_terms:
+        fetch_raw_courses(canvas, cfg, states=("completed", "active", "invited_or_pending"))
+        print("\n  Terms above; pass one verbatim to --backfill.")
+        return 0
+
+    if args.backfill:
+        return backfill_term(canvas, cfg, args.backfill)
 
     raw_courses = fetch_raw_courses(canvas, cfg)
 
@@ -2189,6 +2208,97 @@ def _archive_index() -> list[dict]:
         return json.loads(p.read_text()) if p.exists() else []
     except Exception:
         return []
+
+
+def backfill_term(canvas: Canvas, cfg: dict, term_name: str) -> int:
+    """Build a HISTORICAL board for a concluded term and write it straight to
+    dashboard/archive/<slug>.json.
+
+    Deliberately never touches data.json, the rollover logic, or the regression
+    guard. A backfill is a read of the past; it must not be able to disturb the
+    board Jennifer uses today. That isolation is the whole safety story here —
+    if this function is wrong, the worst case is a bad archive file, not a wiped
+    current semester.
+
+    Concluded enrollments are invisible to enrollment_state=active, so we ask
+    for "completed" too (verified 2026-08-27: 24 concluded courses across 5
+    terms, all with term start_at/end_at intact).
+    """
+    raw = fetch_raw_courses(canvas, cfg, states=("completed", "active", "invited_or_pending"))
+    if term_name not in TERM_META:
+        print(f'\n❌ No term named "{term_name}" in your enrollments. Canvas returned:')
+        for nm in sorted(TERM_META):
+            m = TERM_META[nm]
+            print(f'     • "{nm}"  courses={m["courses"]}  start={m.get("start_at")}')
+        return 1
+
+    semester = derive_semester(term_name, TERM_META[term_name])
+    if not semester:
+        print(f'❌ "{term_name}" has no start_at in Canvas — cannot place items into weeks.')
+        return 1
+
+    sem_cfg = {**cfg, "semester": semester}
+    print(f'\n→ Backfilling "{semester["name"]}" '
+          f'({semester["start_date"]}, {semester["weeks"]} weeks)')
+
+    courses = select_courses(canvas, sem_cfg, raw=raw, term_override=term_name)
+    if not courses:
+        print(f'❌ No courses matched "{term_name}" after exclusions.')
+        return 1
+    items = build_items(canvas, courses, sem_cfg)
+    adopt_zoom_from_items(courses, items)
+
+    coverage = verify_coverage(canvas, courses, items)
+    coverage["quality"] = audit_item_quality(items)
+
+    slug = re.sub(r"[^a-z0-9]+", "-", semester["name"].lower()).strip("-") or "unknown"
+    payload = {
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "semester": semester,
+        "token_expires": cfg.get("token_expires"),
+        "courses": [course_dict(c) for c in courses],
+        "items": [asdict(i) for i in items],
+        "totals": summarize(items),
+        "coverage": coverage,
+        "other_terms": [],
+        "term_meta": {term_name: TERM_META[term_name]},
+        "rollover": None,
+        "roster_change": None,
+        "archives": [],
+        # Read-only marker. A concluded semester is a RECORD, not a to-do list:
+        # the board hides checkboxes and progress counts for these so four
+        # finished terms don't render as "0/949 done".
+        "archived": True,
+        "backfilled_at": datetime.now(timezone.utc).isoformat(),
+    }
+
+    ARCHIVE_DIR.mkdir(parents=True, exist_ok=True)
+    out = ARCHIVE_DIR / f"{slug}.json"
+    out.write_text(json.dumps(payload, indent=2, ensure_ascii=False))
+
+    index_path = ARCHIVE_DIR / "index.json"
+    try:
+        index = json.loads(index_path.read_text()) if index_path.exists() else []
+    except Exception:
+        index = []
+    index = [e for e in index if e.get("slug") != slug]
+    index.append({
+        "slug": slug,
+        "name": semester["name"],
+        "file": f"archive/{slug}.json",
+        "archived_at": datetime.now(timezone.utc).isoformat(),
+        "generated_at": payload["generated_at"],
+        "items": len(items),
+        "courses": len(courses),
+        "start_date": semester["start_date"],
+        "backfilled": True,
+    })
+    index.sort(key=lambda e: e.get("start_date") or "", reverse=True)
+    index_path.write_text(json.dumps(index, indent=2, ensure_ascii=False))
+
+    print(f'\n✓ Wrote dashboard/archive/{slug}.json '
+          f'({len(items)} items, {len(courses)} courses) — data.json untouched')
+    return 0
 
 
 def archive_current_semester(cfg: dict) -> None:
