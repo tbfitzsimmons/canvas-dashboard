@@ -377,6 +377,59 @@ custom domain, preserving the `#t=` hash. Code at top of `<script>` in index.htm
    (`renderUndatedSection()`), not in a week she must navigate to. Do not
    "fix" week 0 by reassigning it to week 1.
 
+18. **Transcripts: narrower than notes, and the FERPA rule now covers them
+   (Brooks, 2026-08-27).** Jennifer asked for the raw transcript beside the
+   notes. `transcriptLink()` renders "🗒 Transcript" from an OPTIONAL
+   `transcript` field on the same `dashboard-video-notes.json` entry — additive,
+   https-only, absent field renders nothing.
+   It passes through the IDENTICAL `CLASS_RECORDING_RE` / `OPAQUE_MEDIA_RE` gate
+   as the notes link and fails closed. Never loosen it: a verbatim transcript of
+   a recorded class session is STRICTLY MORE EXPOSING than a summary of one —
+   classmates' unedited words, with names.
+   Brooks confirmed with Jennifer and ruled: "she does not want class discussion
+   wrapped around teaching content transcibed." That covers the transcript
+   itself, not just summaries. The archive removed 4 artifacts under it (3
+   opaque `video1*` transcripts + 1 captions file); verified absent from disk
+   2026-08-27, flagged `removed_class_discussion` in transcripts.json and
+   captions.json. Trashed not purged, source video retained, so re-derivable.
+   13 transcripts remain, ALL professor lectures, ALL in prior terms — which is
+   why fact 19's historical boards are what make this request meaningful.
+
+   THE LESSON, worth more than the rule: the content filter originally ran
+   against Canvas media but NOT against YouTube caption tracks. A class session
+   that arrived as a YouTube track walked straight past a filter that was
+   correct and half-wired. **A control that runs on one input path is not a
+   control.** When adding a filter, enumerate every path the content can arrive
+   by and prove it runs on each.
+   Three layers now, weakest last: (1) content-level at generation in the
+   archive — authoritative; (2) the archive's own removal pass; (3) this repo's
+   title regexes — a BACKSTOP that cannot see inside `video1855990433.mp4` and
+   must never be what saves us.
+
+19. **Historical semester boards: `sync.py --backfill "<term>"` (2026-08-27).**
+   Builds a board for a CONCLUDED term and writes ONLY
+   `dashboard/archive/<slug>.json` + `index.json`. It never touches data.json,
+   the rollover logic, or the regression guard — a backfill is a read of the
+   past and must not be able to disturb today's board. Verified byte-identical
+   data.json across all four runs.
+   Concluded enrollments are INVISIBLE to `enrollment_state=active`, so
+   `fetch_raw_courses(states=...)` is parameterised and backfill asks for
+   `completed`. All 5 concluded terms carry term `start_at`/`end_at`, so
+   `derive_semester()` works unmodified.
+   Backfilled 2026-08-27, each at 100% graded coverage:
+     Spring 2025  622 items / 4 courses    Summer 2025  566 / 5
+     Fall 2025    302 items / 5 courses    Spring 2026  604 / 5
+   Backfilled semesters render READ-ONLY — payload carries `"archived": true`,
+   `isReadOnlySemester()` swaps checkboxes for `.ro-dot` and shows "N items"
+   instead of x/y. They have no check-off history, so 0/622 would misread as
+   "nothing done" for a semester she passed. Summer 2026 is EXCLUDED from this:
+   the rollover archived it with her real check-offs, which stay visible.
+   Two bugs found while building it, both worth remembering: the picker read a
+   STALE archive list from data.json (a backfill was on disk but unreachable —
+   now `loadArchiveIndex()` reads `archive/index.json` directly and wins), and
+   progress renders in FOUR places, of which only one had been gated, so one
+   semester showed a mix of "31 items" and "0/6". Grep for every render site.
+
 ## CURRENT STATE (2026-08-26) — read this before assuming
 
 - Semester: **Fall 2026**, 5 courses, ~211 items. Summer 2026 archived and
