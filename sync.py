@@ -210,6 +210,15 @@ class Item:
     is_overview: bool = False     # weekly-summary page → pinned to top of its week column
     summary: str = ""             # short excerpt for overview rows (first ~180 chars of body text)
     submitted: bool = False       # Canvas reports a submission for this item — render as auto-done
+    # Canvas target this item ACTUALLY points at, recorded at build time.
+    # A module item's html_url is an opaque /modules/items/N redirect that does
+    # not name its destination, so it can only be resolved while Canvas still
+    # answers. Naropa will revoke access after graduation (~May 2027), and on
+    # that day an unresolved redirect is unrecoverable. Recording it here makes
+    # the board re-pointable at the Drive archive later, offline.
+    # Shapes: "file:<course>:<id>" | "page:<course>:<slug>" |
+    #         "assignment:<course>:<id>" | "discussion:<course>:<id>" | "external:<url>"
+    canvas_target: str = ""
 
 
 @dataclass
@@ -1396,6 +1405,7 @@ def fetch_course_items(canvas: Canvas, course: Course, cfg: dict) -> list[Item]:
 
                 base_link = it.get("html_url") or it.get("external_url") or ""
                 title = it.get("title", "Untitled")
+                target = module_item_target(course.canvas_id, it)
 
                 # Story 4: detect weekly-overview pages — keep as single pinned row,
                 # don't expand them into children.
@@ -1441,6 +1451,7 @@ def fetch_course_items(canvas: Canvas, course: Course, cfg: dict) -> list[Item]:
                             link=c_link or base_link,
                             canvas_id=page_child_id(page_id, c_title),
                             source="page_child",
+                            canvas_target=target if target.startswith("page:") else "",
                         ))
                         page_children_emitted += 1
                 else:
@@ -1464,6 +1475,7 @@ def fetch_course_items(canvas: Canvas, course: Course, cfg: dict) -> list[Item]:
                         link=base_link,
                         canvas_id=f"module_item:{it.get('id')}",
                         source="module_item",
+                        canvas_target=target,
                         is_overview=is_overview_page,
                         summary=_extract_summary(body_for_summary or "") if is_overview_page else "",
                     ))
@@ -1561,6 +1573,27 @@ def points_detail(a: dict) -> str:
     if sub_str:
         parts.append(sub_str)
     return " · ".join(parts)
+
+
+def module_item_target(course_id: int, it: dict) -> str:
+    """Record what a module item actually points AT, not the redirect that hides it.
+
+    `html_url` for a module item is /courses/N/modules/items/N — opaque. It can
+    only be dereferenced while Canvas answers. Capturing the destination now is
+    what makes the archived boards re-pointable at Drive after access ends.
+    """
+    t = (it.get("type") or "").lower()
+    if t == "file" and it.get("content_id"):
+        return f"file:{course_id}:{it['content_id']}"
+    if t in ("page", "wikipage") and it.get("page_url"):
+        return f"page:{course_id}:{it['page_url']}"
+    if t == "assignment" and it.get("content_id"):
+        return f"assignment:{course_id}:{it['content_id']}"
+    if t == "discussion" and it.get("content_id"):
+        return f"discussion:{course_id}:{it['content_id']}"
+    if t == "externalurl" and it.get("external_url"):
+        return f"external:{it['external_url']}"
+    return ""
 
 
 def guess_week_from_module_name(name: str, semester_start: datetime, total_weeks: int) -> int:

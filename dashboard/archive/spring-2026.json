@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-28T03:43:12.926243+00:00",
+  "generated_at": "2026-08-28T13:04:18.536011+00:00",
   "semester": {
     "name": "Spring 2026",
     "start_date": "2026-01-12",
@@ -84,7 +84,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 1,
@@ -100,7 +101,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 1,
@@ -116,7 +118,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-0-|-basket"
     },
     {
       "week": 1,
@@ -132,7 +135,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-0-|-basket"
     },
     {
       "week": 1,
@@ -148,7 +152,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-0-|-basket"
     },
     {
       "week": 1,
@@ -164,7 +169,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-1-|-basket"
     },
     {
       "week": 1,
@@ -180,7 +186,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-1-|-basket"
     },
     {
       "week": 1,
@@ -196,7 +203,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-1-|-basket"
     },
     {
       "week": 1,
@@ -212,7 +220,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-1-|-basket"
     },
     {
       "week": 1,
@@ -228,7 +237,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-1-|-basket"
     },
     {
       "week": 1,
@@ -244,7 +254,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-1-|-basket"
     },
     {
       "week": 1,
@@ -260,7 +271,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-0-|-basket"
     },
     {
       "week": 1,
@@ -276,7 +288,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-1-|-basket"
     },
     {
       "week": 1,
@@ -292,7 +305,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-0-|-basket"
     },
     {
       "week": 1,
@@ -308,7 +322,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-0-|-basket"
     },
     {
       "week": 1,
@@ -324,7 +339,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-0-|-basket"
     },
     {
       "week": 1,
@@ -340,7 +356,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-1-|-basket"
     },
     {
       "week": 1,
@@ -356,7 +373,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-1-|-basket"
     },
     {
       "week": 1,
@@ -372,7 +390,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-1-|-basket"
     },
     {
       "week": 1,
@@ -388,7 +407,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-1-|-basket"
     },
     {
       "week": 1,
@@ -404,7 +424,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-1-|-basket"
     },
     {
       "week": 1,
@@ -420,7 +441,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Introduction to the class Welcome \"There is no such thing as an underdeveloped moment\" - Chogyam Trungpa Rinpoche Hello everyone, Welcome to Human Growth and Development. I am…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-0-|-home"
     },
     {
       "week": 1,
@@ -436,7 +458,8 @@
       "source": "discussion",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 1,
@@ -452,7 +475,8 @@
       "source": "discussion",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 1,
@@ -468,7 +492,8 @@
       "source": "discussion",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 1,
@@ -484,7 +509,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Pre and Perinatal Stages Welcome Hello everyone, Welcome to Module 1, where we will be exploring pre and perinatal stages and how our earliest experiences and contexts impacts…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-1-|-home"
     },
     {
       "week": 1,
@@ -500,7 +526,8 @@
       "source": "discussion",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 1,
@@ -516,7 +543,8 @@
       "source": "discussion",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 1,
@@ -532,7 +560,8 @@
       "source": "discussion",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 1,
@@ -548,7 +577,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-1-|-basket"
     },
     {
       "week": 1,
@@ -564,7 +594,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-1-|-basket"
     },
     {
       "week": 1,
@@ -580,7 +611,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-0-|-basket"
     },
     {
       "week": 1,
@@ -596,7 +628,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-1-|-basket"
     },
     {
       "week": 1,
@@ -612,7 +645,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-1-|-basket"
     },
     {
       "week": 1,
@@ -628,7 +662,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-0-|-basket"
     },
     {
       "week": 1,
@@ -644,7 +679,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-0-|-basket"
     },
     {
       "week": 1,
@@ -660,7 +696,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-1-|-basket"
     },
     {
       "week": 1,
@@ -676,7 +713,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-1-|-basket"
     },
     {
       "week": 1,
@@ -692,7 +730,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-1-|-basket"
     },
     {
       "week": 1,
@@ -708,7 +747,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-1-|-basket"
     },
     {
       "week": 1,
@@ -724,7 +764,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-1-|-basket"
     },
     {
       "week": 1,
@@ -740,7 +781,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-1-|-basket"
     },
     {
       "week": 1,
@@ -756,7 +798,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-1-|-basket"
     },
     {
       "week": 1,
@@ -772,7 +815,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-0-|-basket"
     },
     {
       "week": 1,
@@ -788,7 +832,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-0-|-basket"
     },
     {
       "week": 1,
@@ -804,7 +849,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8683:1348640"
     },
     {
       "week": 1,
@@ -820,7 +866,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8683:1348777"
     },
     {
       "week": 1,
@@ -836,7 +883,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8683:zoom-link-for-online-intensive"
     },
     {
       "week": 1,
@@ -852,7 +900,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8434:1287160"
     },
     {
       "week": 1,
@@ -868,7 +917,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://grief.com/"
     },
     {
       "week": 1,
@@ -884,7 +934,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://allianceforcareathome.org/patients-families/doula-grief-support/"
     },
     {
       "week": 1,
@@ -900,7 +951,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://maryfrancesoconnor.org/grief-resources"
     },
     {
       "week": 1,
@@ -916,7 +968,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8434:1287151"
     },
     {
       "week": 1,
@@ -932,7 +985,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8434:orienting"
     },
     {
       "week": 1,
@@ -948,7 +1002,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://speakinggrief.org/"
     },
     {
       "week": 1,
@@ -964,7 +1019,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Overview Course Introduction To Do List In order to successfully complete Module 1, please do the following: Complete the course demographics form: Demographics - Spring 2026 –…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8539:module-01-overview-and-to-do-list"
     },
     {
       "week": 1,
@@ -980,7 +1036,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:module-1-readings"
     },
     {
       "week": 1,
@@ -996,7 +1053,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:zoom-link-for-january-24-and-25"
     },
     {
       "week": 2,
@@ -1012,7 +1070,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 2,
@@ -1028,7 +1087,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 2,
@@ -1044,7 +1104,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-2-|-basket-2"
     },
     {
       "week": 2,
@@ -1060,7 +1121,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-2-|-basket-2"
     },
     {
       "week": 2,
@@ -1076,7 +1138,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-2-|-basket-2"
     },
     {
       "week": 2,
@@ -1092,7 +1155,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-2-|-basket-2"
     },
     {
       "week": 2,
@@ -1108,7 +1172,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-2-|-basket-2"
     },
     {
       "week": 2,
@@ -1124,7 +1189,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-2-|-basket-2"
     },
     {
       "week": 2,
@@ -1140,7 +1206,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-2-|-basket-2"
     },
     {
       "week": 2,
@@ -1156,7 +1223,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-2-|-basket-2"
     },
     {
       "week": 2,
@@ -1172,7 +1240,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-2-|-basket-2"
     },
     {
       "week": 2,
@@ -1188,7 +1257,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-2-|-basket-2"
     },
     {
       "week": 2,
@@ -1204,7 +1274,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-2-|-basket-2"
     },
     {
       "week": 2,
@@ -1220,7 +1291,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-2-|-basket-2"
     },
     {
       "week": 2,
@@ -1236,7 +1308,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Infancy and Attachment Welcome Hello everyone, Welcome to Module 2. This week we will be talking about attachment theory starting in infancy and continuing throughout the…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-2-|-home"
     },
     {
       "week": 2,
@@ -1252,7 +1325,8 @@
       "source": "discussion",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 2,
@@ -1268,7 +1342,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-2-|-basket-2"
     },
     {
       "week": 2,
@@ -1284,7 +1359,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-2-|-basket-2"
     },
     {
       "week": 2,
@@ -1300,7 +1376,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-2-|-basket-2"
     },
     {
       "week": 2,
@@ -1316,7 +1393,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-2-|-basket-2"
     },
     {
       "week": 2,
@@ -1332,7 +1410,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-2-|-basket-2"
     },
     {
       "week": 2,
@@ -1348,7 +1427,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-2-|-basket-2"
     },
     {
       "week": 2,
@@ -1364,7 +1444,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-2-|-basket-2"
     },
     {
       "week": 2,
@@ -1380,7 +1461,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-2-|-basket-2"
     },
     {
       "week": 2,
@@ -1396,7 +1478,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-2-|-basket-2"
     },
     {
       "week": 2,
@@ -1412,7 +1495,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-2-|-basket-2"
     },
     {
       "week": 2,
@@ -1428,7 +1512,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-2-|-basket-2"
     },
     {
       "week": 2,
@@ -1444,7 +1529,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8683:1348778"
     },
     {
       "week": 2,
@@ -1460,7 +1546,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8683:1348743"
     },
     {
       "week": 2,
@@ -1476,7 +1563,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8683:1348729"
     },
     {
       "week": 2,
@@ -1492,7 +1580,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8683:1348757"
     },
     {
       "week": 2,
@@ -1508,7 +1597,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8434:1376152"
     },
     {
       "week": 2,
@@ -1524,7 +1614,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://paintedprayerbook.com/2014/02/10/a-blessing-for-the-brokenhearted/"
     },
     {
       "week": 2,
@@ -1540,7 +1631,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:http://www.dougy.org/news-media/podcasts/p4"
     },
     {
       "week": 2,
@@ -1556,7 +1648,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8434:1287143"
     },
     {
       "week": 2,
@@ -1572,7 +1665,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:http://www.psychology-tools.com/test/inventory-complicated-grief"
     },
     {
       "week": 2,
@@ -1588,7 +1682,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://www.compass-uk.org/wp-content/uploads/2023/05/Bereavement_The-four-models-of-grief.pdf"
     },
     {
       "week": 2,
@@ -1604,7 +1699,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Welcome to week 2* To do this week: Read The Grieving Brain, Part 1 Read Grief Counseling and Grief Therapy, Chapters 3 - 5 Review presentation/slides about understanding grief…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8434:overview-understanding-grief"
     },
     {
       "week": 2,
@@ -1620,7 +1716,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Overview Basic concepts will be explored, extending the work on projection and introducing psychosynthesis. To Do List In order to successfully complete this module, please do the…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8539:module-02-overview-and-to-do-list-2"
     },
     {
       "week": 2,
@@ -1636,7 +1733,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:barbara-carter-follow-up-talk"
     },
     {
       "week": 2,
@@ -1652,7 +1750,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:earthlyn-zenju-manuel-sounds-true-interview-transcript"
     },
     {
       "week": 2,
@@ -1668,7 +1767,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:handout-m-dot-i-with-challenge-and-difficulty"
     },
     {
       "week": 2,
@@ -1684,7 +1784,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:links-for-earthlyn-zenju-manuel-and-terry-ray-video-recordings"
     },
     {
       "week": 2,
@@ -1700,7 +1801,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:module-2-content"
     },
     {
       "week": 2,
@@ -1716,7 +1818,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:links-for-earthlyn-zenju-manuel-and-terry-ray-video-recordings"
     },
     {
       "week": 2,
@@ -1732,7 +1835,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:video-barbara-carter"
     },
     {
       "week": 2,
@@ -1748,7 +1852,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:zoom-links"
     },
     {
       "week": 3,
@@ -1764,7 +1869,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 3,
@@ -1780,7 +1886,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-3-|-basket-2"
     },
     {
       "week": 3,
@@ -1796,7 +1903,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-3-|-basket-2"
     },
     {
       "week": 3,
@@ -1812,7 +1920,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-3-|-basket-2"
     },
     {
       "week": 3,
@@ -1828,7 +1937,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-3-|-basket-2"
     },
     {
       "week": 3,
@@ -1844,7 +1954,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-3-|-basket-2"
     },
     {
       "week": 3,
@@ -1860,7 +1971,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-3-|-basket-2"
     },
     {
       "week": 3,
@@ -1876,7 +1988,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Toddlers Welcome “We do not believe in ourselves until someone reveals that deep inside us something is valuable, worth listening to, worthy of our trust, sacred to our touch.…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-3-|-home"
     },
     {
       "week": 3,
@@ -1892,7 +2005,8 @@
       "source": "discussion",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 3,
@@ -1908,7 +2022,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-3-|-basket-2"
     },
     {
       "week": 3,
@@ -1924,7 +2039,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-3-|-basket-2"
     },
     {
       "week": 3,
@@ -1940,7 +2056,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-3-|-basket-2"
     },
     {
       "week": 3,
@@ -1956,7 +2073,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-3-|-basket-2"
     },
     {
       "week": 3,
@@ -1972,7 +2090,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-3-|-basket-2"
     },
     {
       "week": 3,
@@ -1988,7 +2107,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-3-|-basket-2"
     },
     {
       "week": 3,
@@ -2004,7 +2124,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-3-|-basket-2"
     },
     {
       "week": 3,
@@ -2020,7 +2141,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-3-|-basket-2"
     },
     {
       "week": 3,
@@ -2036,7 +2158,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://www.youtube.com/watch?v=-H3OBy0LBfY"
     },
     {
       "week": 3,
@@ -2052,7 +2175,8 @@
       "source": "discussion",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 3,
@@ -2068,7 +2192,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8683:1348763"
     },
     {
       "week": 3,
@@ -2084,7 +2209,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8683:1348739"
     },
     {
       "week": 3,
@@ -2100,7 +2226,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8434:1287149"
     },
     {
       "week": 3,
@@ -2116,7 +2243,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8434:group-presentation-sign-up-sheet"
     },
     {
       "week": 3,
@@ -2132,7 +2260,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "The first response to the disappearance of the partner consists in the anxious attempt to find him again. The goose moves about restlessly by day and night, flying great distances…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8434:overview-the-grieving-brain"
     },
     {
       "week": 3,
@@ -2148,7 +2277,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://www.youtube.com/watch?v=icT078sea0U"
     },
     {
       "week": 3,
@@ -2164,7 +2294,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://naropa.zoom.us/rec/share/nZOntE1Ms8vn4Y6w9N-h85Ul3ZI5ozD-f1c-Yo2tRsqDH-AmH6Dr9yGaXUIfkXLk.G2bHWtn0GI6K4cPZ"
     },
     {
       "week": 3,
@@ -2180,7 +2311,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Overview Modern Perspectives To Do List In order to successfully complete this module, please do the following: Read 1a: Cunningham (2022): Chapter 3 Read 2a: Edinger (1972): The…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8539:module-03-overview-and-to-do-list"
     },
     {
       "week": 3,
@@ -2196,7 +2328,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:module-3-content-2"
     },
     {
       "week": 3,
@@ -2212,7 +2345,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:module-3-content-2"
     },
     {
       "week": 3,
@@ -2228,7 +2362,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:module-3-content-2"
     },
     {
       "week": 3,
@@ -2244,7 +2379,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:module-3-content-2"
     },
     {
       "week": 3,
@@ -2260,7 +2396,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:module-3-content-2"
     },
     {
       "week": 3,
@@ -2276,7 +2413,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:module-3-content-2"
     },
     {
       "week": 3,
@@ -2292,7 +2430,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:module-3-content-2"
     },
     {
       "week": 3,
@@ -2308,7 +2447,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:handout-contemplations-for-respecting-the-roots-of-meditation-practices"
     },
     {
       "week": 3,
@@ -2324,7 +2464,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:module-3-content-2"
     },
     {
       "week": 3,
@@ -2340,7 +2481,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:module-3-content-2"
     },
     {
       "week": 3,
@@ -2356,7 +2498,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:module-3-content-2"
     },
     {
       "week": 3,
@@ -2372,7 +2515,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:module-3-content-2"
     },
     {
       "week": 3,
@@ -2388,7 +2532,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:handout-extreme-states"
     },
     {
       "week": 3,
@@ -2404,7 +2549,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:module-3-content-2"
     },
     {
       "week": 3,
@@ -2420,7 +2566,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:module-3-content-2"
     },
     {
       "week": 3,
@@ -2436,7 +2583,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:zoom-link"
     },
     {
       "week": 3,
@@ -2452,7 +2600,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:video-links-from-1-24-and-25"
     },
     {
       "week": 4,
@@ -2468,7 +2617,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 4,
@@ -2484,7 +2634,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 4,
@@ -2500,7 +2651,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 4,
@@ -2516,7 +2668,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 4,
@@ -2532,7 +2685,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-4-|-basket-2"
     },
     {
       "week": 4,
@@ -2548,7 +2702,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-4-|-basket-2"
     },
     {
       "week": 4,
@@ -2564,7 +2719,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-4-|-basket-2"
     },
     {
       "week": 4,
@@ -2580,7 +2736,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-4-|-basket-2"
     },
     {
       "week": 4,
@@ -2596,7 +2753,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-4-|-basket-2"
     },
     {
       "week": 4,
@@ -2612,7 +2770,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-4-|-basket-2"
     },
     {
       "week": 4,
@@ -2628,7 +2787,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Gender and Development Welcome Hello everyone, Welcome to Module 4 where we will be discussing Gender and Development. Some of you may be very familiar with this material and I…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-4-|-home"
     },
     {
       "week": 4,
@@ -2644,7 +2804,8 @@
       "source": "discussion",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 4,
@@ -2660,7 +2821,8 @@
       "source": "discussion",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 4,
@@ -2676,7 +2838,8 @@
       "source": "discussion",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 4,
@@ -2692,7 +2855,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-4-|-basket-2"
     },
     {
       "week": 4,
@@ -2708,7 +2872,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-4-|-basket-2"
     },
     {
       "week": 4,
@@ -2724,7 +2889,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-4-|-basket-2"
     },
     {
       "week": 4,
@@ -2740,7 +2906,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8683:apa-official-apologies-and-critiques"
     },
     {
       "week": 4,
@@ -2756,7 +2923,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8683:1348776"
     },
     {
       "week": 4,
@@ -2772,7 +2940,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8683:apa-official-apologies-and-critiques"
     },
     {
       "week": 4,
@@ -2788,7 +2957,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8683:apa-official-apologies-and-critiques"
     },
     {
       "week": 4,
@@ -2804,7 +2974,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8683:apa-official-apologies-and-critiques"
     },
     {
       "week": 4,
@@ -2820,7 +2991,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8683:apa-official-apologies-and-critiques"
     },
     {
       "week": 4,
@@ -2836,7 +3008,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://www.ted.com/talks/thema_bryant_why_we_need_to_decolonize_psychology"
     },
     {
       "week": 4,
@@ -2852,7 +3025,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8683:week-4-values-sort-links-pick-one-to-use"
     },
     {
       "week": 4,
@@ -2868,7 +3042,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8683:week-4-values-sort-links-pick-one-to-use"
     },
     {
       "week": 4,
@@ -2884,7 +3059,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8683:1382981"
     },
     {
       "week": 4,
@@ -2900,7 +3076,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8683:week-4-values-sort-links-pick-one-to-use"
     },
     {
       "week": 4,
@@ -2916,7 +3093,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8683:1348758"
     },
     {
       "week": 4,
@@ -2932,7 +3110,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8683:1348762"
     },
     {
       "week": 4,
@@ -2948,7 +3127,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8683:apa-official-apologies-and-critiques"
     },
     {
       "week": 4,
@@ -2964,7 +3144,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://onbeing.org/programs/pauline-boss-navigating-loss-without-closure/"
     },
     {
       "week": 4,
@@ -2980,7 +3161,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8434:1287157"
     },
     {
       "week": 4,
@@ -2996,7 +3178,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8434:1287156"
     },
     {
       "week": 4,
@@ -3012,7 +3195,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "“Ambiguous loss makes us feel incompetent. It erodes our sense of mastery and destroys our belief in the world as a fair, orderly, and manageable place. But if we learn to cope…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8434:overview-ambiguous-loss"
     },
     {
       "week": 4,
@@ -3028,7 +3212,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Overview Challenges of Transpersonal Psychology To Do List In order to successfully complete this module, please do the following: Read 1a: Cunningham (2022): Chapter 4 Read 2a:…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8539:module-04-overview-and-to-do-list-2"
     },
     {
       "week": 4,
@@ -3044,7 +3229,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://naropa.zoom.us/rec/share/rRrxa5X-vbchP5BbKGR_Zj2NgLZpwxoYmWxsYzwHzf6QX-IqD4J-YFVsfBPy5eaG.qaQkQoeMijtjkHXd"
     },
     {
       "week": 4,
@@ -3060,7 +3246,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:group-discussion-on-four-foundations"
     },
     {
       "week": 4,
@@ -3076,7 +3263,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:module-4-content-and-video"
     },
     {
       "week": 4,
@@ -3092,7 +3280,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:zoom-link-5"
     },
     {
       "week": 5,
@@ -3108,7 +3297,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 5,
@@ -3124,7 +3314,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 5,
@@ -3140,7 +3331,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 5,
@@ -3156,7 +3348,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 5,
@@ -3172,7 +3365,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-5-|-basket-2"
     },
     {
       "week": 5,
@@ -3188,7 +3382,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-5-|-basket-2"
     },
     {
       "week": 5,
@@ -3204,7 +3399,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-5-|-basket-2"
     },
     {
       "week": 5,
@@ -3220,7 +3416,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-5-|-basket-2"
     },
     {
       "week": 5,
@@ -3236,7 +3433,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-5-|-basket-2"
     },
     {
       "week": 5,
@@ -3252,7 +3450,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-5-|-basket-2"
     },
     {
       "week": 5,
@@ -3268,7 +3467,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-5-|-basket-2"
     },
     {
       "week": 5,
@@ -3284,7 +3484,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-5-|-basket-2"
     },
     {
       "week": 5,
@@ -3300,7 +3501,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-5-|-basket-2"
     },
     {
       "week": 5,
@@ -3316,7 +3518,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-5-|-basket-2"
     },
     {
       "week": 5,
@@ -3332,7 +3535,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-5-|-basket-2"
     },
     {
       "week": 5,
@@ -3348,7 +3552,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-5-|-basket-2"
     },
     {
       "week": 5,
@@ -3364,7 +3569,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-5-|-basket-2"
     },
     {
       "week": 5,
@@ -3380,7 +3586,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Middle Childhood Welcome \"Everybody is a genius. But if you judge a fish by its ability to climb a tree, it will live its whole life believing that it is stupid.\" — Albert…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-5-|-home"
     },
     {
       "week": 5,
@@ -3396,7 +3603,8 @@
       "source": "discussion",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 5,
@@ -3412,7 +3620,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-5-|-basket-2"
     },
     {
       "week": 5,
@@ -3428,7 +3637,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-5-|-basket-2"
     },
     {
       "week": 5,
@@ -3444,7 +3654,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-5-|-basket-2"
     },
     {
       "week": 5,
@@ -3460,7 +3671,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-5-|-basket-2"
     },
     {
       "week": 5,
@@ -3476,7 +3688,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-5-|-basket-2"
     },
     {
       "week": 5,
@@ -3492,7 +3705,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-5-|-basket-2"
     },
     {
       "week": 5,
@@ -3508,7 +3722,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-5-|-basket-2"
     },
     {
       "week": 5,
@@ -3524,7 +3739,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-5-|-basket-2"
     },
     {
       "week": 5,
@@ -3540,7 +3756,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-5-|-basket-2"
     },
     {
       "week": 5,
@@ -3556,7 +3773,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-5-|-basket-2"
     },
     {
       "week": 5,
@@ -3572,7 +3790,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-5-|-basket-2"
     },
     {
       "week": 5,
@@ -3588,7 +3807,8 @@
       "source": "discussion",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 5,
@@ -3604,7 +3824,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8683:1348637"
     },
     {
       "week": 5,
@@ -3620,7 +3841,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8683:1348727"
     },
     {
       "week": 5,
@@ -3636,7 +3858,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://www.dailygood.org/story/2214/drinking-the-tears-of-the-world-grief-as-deep-activism-francis-weller/?sso_checked=1"
     },
     {
       "week": 5,
@@ -3652,7 +3875,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "This week, please take time to explore the Five Gates of Grief. Our class time will focus on societal sorrow and how we are navigating all of the things. Read: Weller, chapters…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8434:overview"
     },
     {
       "week": 5,
@@ -3668,7 +3892,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://www.youtube.com/watch?v=vRIqTMInPJk"
     },
     {
       "week": 5,
@@ -3684,7 +3909,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Overview The Science To Do List In order to successfully complete this module, please do the following: Read 1a: Cunningham (2022): Chapter 5 Read 2a: Edinger (1972): The Search…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8539:module-05-overview-and-to-do-list-3"
     },
     {
       "week": 5,
@@ -3700,7 +3926,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://naropa.zoom.us/rec/share/KFWZP63AjI6RLO57Y1zI9-E71UCK4GeoUgRZ4fOKEJr-rRrP2OvUSqipzrqSK8Ur.9heSsiieS1LFMVSV"
     },
     {
       "week": 5,
@@ -3716,7 +3943,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:optional-resource-downregulating-skills-including-diaphragmatic-breathing"
     },
     {
       "week": 5,
@@ -3732,7 +3960,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:optional-resource-downregulating-skills-including-diaphragmatic-breathing"
     },
     {
       "week": 5,
@@ -3748,7 +3977,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:optional-resource-downregulating-skills-including-diaphragmatic-breathing"
     },
     {
       "week": 5,
@@ -3764,7 +3994,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:optional-resource-downregulating-skills-including-diaphragmatic-breathing"
     },
     {
       "week": 5,
@@ -3780,7 +4011,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:optional-resource-downregulating-skills-including-diaphragmatic-breathing"
     },
     {
       "week": 5,
@@ -3796,7 +4028,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:optional-resource-downregulating-skills-including-diaphragmatic-breathing"
     },
     {
       "week": 5,
@@ -3812,7 +4045,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:optional-resource-downregulating-skills-including-diaphragmatic-breathing"
     },
     {
       "week": 5,
@@ -3828,7 +4062,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:optional-resource-downregulating-skills-including-diaphragmatic-breathing"
     },
     {
       "week": 5,
@@ -3844,7 +4079,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:module-5-content"
     },
     {
       "week": 5,
@@ -3860,7 +4096,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:module-5-content"
     },
     {
       "week": 5,
@@ -3876,7 +4113,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:optional-resource-downregulating-skills-including-diaphragmatic-breathing"
     },
     {
       "week": 5,
@@ -3892,7 +4130,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:optional-resource-downregulating-skills-including-diaphragmatic-breathing"
     },
     {
       "week": 5,
@@ -3908,7 +4147,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:window-of-tolerance"
     },
     {
       "week": 6,
@@ -3924,7 +4164,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 6,
@@ -3940,7 +4181,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 6,
@@ -3956,7 +4198,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 6,
@@ -3972,7 +4215,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-6-|-basket-2"
     },
     {
       "week": 6,
@@ -3988,7 +4232,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-6-|-basket-2"
     },
     {
       "week": 6,
@@ -4004,7 +4249,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-6-|-basket-2"
     },
     {
       "week": 6,
@@ -4020,7 +4266,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Brain Development and Adolescence Welcome “He allowed himself to be swayed by his conviction that human beings are not born once and for all on the day their mothers give birth to…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-6-|-home"
     },
     {
       "week": 6,
@@ -4036,7 +4283,8 @@
       "source": "discussion",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 6,
@@ -4052,7 +4300,8 @@
       "source": "discussion",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 6,
@@ -4068,7 +4317,8 @@
       "source": "discussion",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 6,
@@ -4084,7 +4334,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-6-|-basket-2"
     },
     {
       "week": 6,
@@ -4100,7 +4351,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-6-|-basket-2"
     },
     {
       "week": 6,
@@ -4116,7 +4368,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-6-|-basket-2"
     },
     {
       "week": 6,
@@ -4132,7 +4385,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8683:1348752"
     },
     {
       "week": 6,
@@ -4148,7 +4402,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8683:1348723"
     },
     {
       "week": 6,
@@ -4164,7 +4419,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://www.youtube.com/watch?v=y5k92zz_nYM"
     },
     {
       "week": 6,
@@ -4180,7 +4436,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "This week we will be thinking about Transitions - all the shifts that we move through - all the kinds of letting go we experience in our lives. To Do: Read - Weller, chapters 5-9…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8434:overview-2"
     },
     {
       "week": 6,
@@ -4196,7 +4453,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://www.youtube.com/watch?v=LG7uzUUnWWg"
     },
     {
       "week": 6,
@@ -4212,7 +4470,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Overview The Creative Fire To Do List In order to successfully complete this module, please do the following: Read 1a: Cunningham (2022): Chapter 6 Read 2a: Edinger (1972): Christ…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8539:module-06-overview-and-to-do-list"
     },
     {
       "week": 6,
@@ -4228,7 +4487,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://naropa.zoom.us/rec/share/2gHYx8iKiD5C9b29_iZAITn0sNco0HFsyufl8p95FQ8DOFoWyOYVK5_jUxPoGjYC.ESsH8Uh5eEiiQPsL"
     },
     {
       "week": 6,
@@ -4244,7 +4504,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:guiding-group-meditation"
     },
     {
       "week": 6,
@@ -4260,7 +4521,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:handout-recommendations-for-group-instruction"
     },
     {
       "week": 6,
@@ -4276,7 +4538,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:outline-for-mindfulness-practice-presentation-to-a-group"
     },
     {
       "week": 6,
@@ -4292,7 +4555,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:prepare-presentation-for-small-groups"
     },
     {
       "week": 6,
@@ -4308,7 +4572,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:handout-answering-questions"
     },
     {
       "week": 6,
@@ -4324,7 +4589,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:what-does-authorized-naropa-m-dot-i-mean"
     },
     {
       "week": 7,
@@ -4340,7 +4606,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 7,
@@ -4356,7 +4623,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 7,
@@ -4372,7 +4640,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 7,
@@ -4388,7 +4657,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 7,
@@ -4404,7 +4674,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 7,
@@ -4420,7 +4691,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-7-|-basket-reading-and-integration-week"
     },
     {
       "week": 7,
@@ -4436,7 +4708,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-7-|-basket-reading-and-integration-week"
     },
     {
       "week": 7,
@@ -4452,7 +4725,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-7-|-basket-reading-and-integration-week"
     },
     {
       "week": 7,
@@ -4468,7 +4742,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-7-|-basket-reading-and-integration-week"
     },
     {
       "week": 7,
@@ -4484,7 +4759,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-7-|-basket-reading-and-integration-week"
     },
     {
       "week": 7,
@@ -4500,7 +4776,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Reading and Integration Week Welcome “Pursue some path, however narrow and crooked, in which you can walk with love and reverence.” —Henry David Thoreau Hello everyone, This week…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-7-|-home-2"
     },
     {
       "week": 7,
@@ -4516,7 +4793,8 @@
       "source": "discussion",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 7,
@@ -4532,7 +4810,8 @@
       "source": "discussion",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 7,
@@ -4548,7 +4827,8 @@
       "source": "discussion",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 7,
@@ -4564,7 +4844,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-7-|-basket-reading-and-integration-week"
     },
     {
       "week": 7,
@@ -4580,7 +4861,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-7-|-basket-reading-and-integration-week"
     },
     {
       "week": 7,
@@ -4596,7 +4878,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-7-|-basket-reading-and-integration-week"
     },
     {
       "week": 7,
@@ -4612,7 +4895,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-7-|-basket-reading-and-integration-week"
     },
     {
       "week": 7,
@@ -4628,7 +4912,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-7-|-basket-reading-and-integration-week"
     },
     {
       "week": 7,
@@ -4644,7 +4929,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-7-|-basket-reading-and-integration-week"
     },
     {
       "week": 7,
@@ -4660,7 +4946,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8683:1389337"
     },
     {
       "week": 7,
@@ -4676,7 +4963,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8683:1389023"
     },
     {
       "week": 7,
@@ -4692,7 +4980,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8683:1389339"
     },
     {
       "week": 7,
@@ -4708,7 +4997,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8683:1389029"
     },
     {
       "week": 7,
@@ -4724,7 +5014,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8683:1389355"
     },
     {
       "week": 7,
@@ -4740,7 +5031,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8683:1348767"
     },
     {
       "week": 7,
@@ -4756,7 +5048,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8683:1348746"
     },
     {
       "week": 7,
@@ -4772,7 +5065,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Intensive dates and times: Friday Feb 27th 2:00-5:30p MST and Sat Feb 28th 9-11:30am MST Dear Class, This week is our second intensive weekend and a specific agenda will be more…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8683:week-7-intensive-overview"
     },
     {
       "week": 7,
@@ -4788,7 +5082,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://www.youtube.com/watch?v=nYZHcKA4UR4"
     },
     {
       "week": 7,
@@ -4804,7 +5099,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8434:1287166"
     },
     {
       "week": 7,
@@ -4820,7 +5116,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8434:1287167"
     },
     {
       "week": 7,
@@ -4836,7 +5133,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8434:1287162"
     },
     {
       "week": 7,
@@ -4852,7 +5150,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Hello to you all... Week 5 To Do: Watch Meghan Devine video Read Anticipatory grief articles UYG Touchstone Four & Journal Post takeaway by Sunday and response to two posts by…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8434:overview-anticipatory-grief"
     },
     {
       "week": 7,
@@ -4868,7 +5167,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://youtu.be/6QeTgvx9R94?si=o-6rggMcG76PpYE1"
     },
     {
       "week": 7,
@@ -4884,7 +5184,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8434:1388467"
     },
     {
       "week": 7,
@@ -4900,7 +5201,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Overview Consciousness To Do List In order to successfully complete this module, please do the following: Read 1a: Cunningham (2022): Chapter 7 Read 2a: Edinger (1972): Being an…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8539:module-07-overview-and-to-do-list"
     },
     {
       "week": 7,
@@ -4916,7 +5218,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 7,
@@ -4932,7 +5235,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 7,
@@ -4948,7 +5252,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:what-does-authorization-mean"
     },
     {
       "week": 8,
@@ -4964,7 +5269,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 8,
@@ -4980,7 +5286,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 8,
@@ -4996,7 +5303,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 8,
@@ -5012,7 +5320,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 8,
@@ -5028,7 +5337,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 8,
@@ -5044,7 +5354,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-8-|-basket"
     },
     {
       "week": 8,
@@ -5060,7 +5371,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-8-|-basket"
     },
     {
       "week": 8,
@@ -5076,7 +5388,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-8-|-basket"
     },
     {
       "week": 8,
@@ -5092,7 +5405,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-8-|-basket"
     },
     {
       "week": 8,
@@ -5108,7 +5422,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-8-|-basket"
     },
     {
       "week": 8,
@@ -5124,7 +5439,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Young Adulthood Welcome \"Something deep in the human soul awakens as things fall apart. Something in the soul knows everything in this world can become lost. And something in the…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-8-|-home-2"
     },
     {
       "week": 8,
@@ -5140,7 +5456,8 @@
       "source": "discussion",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 8,
@@ -5156,7 +5473,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-8-|-basket"
     },
     {
       "week": 8,
@@ -5172,7 +5490,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-8-|-basket"
     },
     {
       "week": 8,
@@ -5188,7 +5507,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-8-|-basket"
     },
     {
       "week": 8,
@@ -5204,7 +5524,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-8-|-basket"
     },
     {
       "week": 8,
@@ -5220,7 +5541,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-8-|-basket"
     },
     {
       "week": 8,
@@ -5236,7 +5558,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-8-|-basket"
     },
     {
       "week": 8,
@@ -5252,7 +5575,8 @@
       "source": "discussion",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 8,
@@ -5268,7 +5592,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8683:1348632"
     },
     {
       "week": 8,
@@ -5284,7 +5609,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8683:1348759"
     },
     {
       "week": 8,
@@ -5300,7 +5626,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8434:1287138"
     },
     {
       "week": 8,
@@ -5316,7 +5643,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://www.transitionslifecare.org/wp-content/uploads/2019/10/AdultIntakeForm-1.30.18.pdf"
     },
     {
       "week": 8,
@@ -5332,7 +5660,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://www.hospicechesapeake.org/wp-content/uploads/2018/03/CLC-Adult-Intake.pdf"
     },
     {
       "week": 8,
@@ -5348,7 +5677,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8434:1390988"
     },
     {
       "week": 8,
@@ -5364,7 +5694,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8434:1390989"
     },
     {
       "week": 8,
@@ -5380,7 +5711,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Hello everyone! This week we will talk about ways to support and work with grief. Week 6 to do: Review materials in Module UYG Touchstone Five & Journal Post takeaway by Sunday…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8434:overview-grief-support"
     },
     {
       "week": 8,
@@ -5396,7 +5728,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:http://vimeo.com/451530204"
     },
     {
       "week": 8,
@@ -5412,7 +5745,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Overview Neurological Correlates to Spiritual Experience To Do List In order to successfully complete this module, please do the following: Read 1a: Cunningham (2022): Chapter 8…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8539:module-08-overview-and-to-do-list"
     },
     {
       "week": 9,
@@ -5428,7 +5762,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 9,
@@ -5444,7 +5779,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 9,
@@ -5460,7 +5796,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 9,
@@ -5476,7 +5813,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-9-|-basket"
     },
     {
       "week": 9,
@@ -5492,7 +5830,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-9-|-basket"
     },
     {
       "week": 9,
@@ -5508,7 +5847,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-9-|-basket"
     },
     {
       "week": 9,
@@ -5524,7 +5864,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Middle and Late Adulthood Welcome Hi Everyone, In this Module we will explore Middle and Late Adulthood. We live in an ageist culture that overly values youth. As you dive into…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-9-|-home"
     },
     {
       "week": 9,
@@ -5540,7 +5881,8 @@
       "source": "discussion",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 9,
@@ -5556,7 +5898,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-9-|-basket"
     },
     {
       "week": 9,
@@ -5572,7 +5915,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-9-|-basket"
     },
     {
       "week": 9,
@@ -5588,7 +5932,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-9-|-basket"
     },
     {
       "week": 9,
@@ -5604,7 +5949,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-9-|-basket"
     },
     {
       "week": 9,
@@ -5620,7 +5966,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-9-|-basket"
     },
     {
       "week": 9,
@@ -5636,7 +5983,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-9-|-basket"
     },
     {
       "week": 9,
@@ -5652,7 +6000,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-9-|-basket"
     },
     {
       "week": 9,
@@ -5668,7 +6017,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8683:commonly-used-freely-available-validated-assessment-tools"
     },
     {
       "week": 9,
@@ -5684,7 +6034,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8683:commonly-used-freely-available-validated-assessment-tools"
     },
     {
       "week": 9,
@@ -5700,7 +6051,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://www.youtube.com/watch?v=i4aaNfLu2_A"
     },
     {
       "week": 9,
@@ -5716,7 +6068,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8683:1348639"
     },
     {
       "week": 9,
@@ -5732,7 +6085,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8683:1398145"
     },
     {
       "week": 9,
@@ -5748,7 +6102,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8683:commonly-used-freely-available-validated-assessment-tools"
     },
     {
       "week": 9,
@@ -5764,7 +6119,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8683:commonly-used-freely-available-validated-assessment-tools"
     },
     {
       "week": 9,
@@ -5780,7 +6136,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8683:commonly-used-freely-available-validated-assessment-tools"
     },
     {
       "week": 9,
@@ -5796,7 +6153,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8683:commonly-used-freely-available-validated-assessment-tools"
     },
     {
       "week": 9,
@@ -5812,7 +6170,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8683:1348768"
     },
     {
       "week": 9,
@@ -5828,7 +6187,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8683:1348772"
     },
     {
       "week": 9,
@@ -5844,7 +6204,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Dear Class, Congrats, we have made it to our last intensive! A more detailed agenda of what to expect at this intensive will be posted closer to this date. We will cover the…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8683:week-9-intensive-overview"
     },
     {
       "week": 9,
@@ -5860,7 +6221,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://www.youtube.com/watch?v=l2zLCCRT-nE"
     },
     {
       "week": 9,
@@ -5876,7 +6238,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://www.eventbrite.com/cc/ekrf-twice-monthly-death-cafes-1749529"
     },
     {
       "week": 9,
@@ -5892,7 +6255,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://thisjungianlife.com/episode-217-death/"
     },
     {
       "week": 9,
@@ -5908,7 +6272,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://www.youtube.com/watch?v=QmZHLvq-gDg"
     },
     {
       "week": 9,
@@ -5924,7 +6289,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Hello everyone, How do you conceptualize what happens after death? This is a question that people who are grieving grapple with. Does a person's energy linger? Is the soul…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8434:overview-after-death"
     },
     {
       "week": 9,
@@ -5940,7 +6306,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8434:1287137"
     },
     {
       "week": 9,
@@ -5956,7 +6323,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://med.virginia.edu/perceptual-studies/"
     },
     {
       "week": 9,
@@ -5972,7 +6340,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://www.pewresearch.org/religion/2021/11/23/views-on-the-afterlife/"
     },
     {
       "week": 9,
@@ -5988,7 +6357,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Overview Initiation To Do List In order to successfully complete this module, please do the following: Read 1a: Cunningham (2022): Chapter 9 Read 2a: Edinger (1972): Metaphysics…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8539:module-09-overview-and-to-do-list-3"
     },
     {
       "week": 10,
@@ -6004,7 +6374,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 10,
@@ -6020,7 +6391,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 10,
@@ -6036,7 +6408,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-10-|-basket"
     },
     {
       "week": 10,
@@ -6052,7 +6425,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-10-|-basket"
     },
     {
       "week": 10,
@@ -6068,7 +6442,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-10-|-basket"
     },
     {
       "week": 10,
@@ -6084,7 +6459,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-10-|-basket"
     },
     {
       "week": 10,
@@ -6100,7 +6476,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-10-|-basket"
     },
     {
       "week": 10,
@@ -6116,7 +6493,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-10-|-basket"
     },
     {
       "week": 10,
@@ -6132,7 +6510,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-10-|-basket"
     },
     {
       "week": 10,
@@ -6148,7 +6527,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-10-|-basket"
     },
     {
       "week": 10,
@@ -6164,7 +6544,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Death and Dying Welcome Dear everyone, We have arrived at our final class. Thank you all for making this developmental journey together. It has been such an honor and a joy to…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-10-|-home"
     },
     {
       "week": 10,
@@ -6180,7 +6561,8 @@
       "source": "discussion",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 10,
@@ -6196,7 +6578,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-10-|-basket"
     },
     {
       "week": 10,
@@ -6212,7 +6595,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:module-10-|-basket"
     },
     {
       "week": 10,
@@ -6228,7 +6612,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8683:1348745"
     },
     {
       "week": 10,
@@ -6244,7 +6629,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8683:1348774"
     },
     {
       "week": 10,
@@ -6260,7 +6646,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "We've had the opportunity to talk about working with clients and so I wanted to share a couple of lectures that will help to understand traumatic grief and pet loss. Please also…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8434:overview-3"
     },
     {
       "week": 10,
@@ -6276,7 +6663,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://www.youtube.com/watch?v=TkJGhQANjZo"
     },
     {
       "week": 10,
@@ -6292,7 +6680,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://www.youtube.com/watch?v=DQq0ntQ4ikk"
     },
     {
       "week": 10,
@@ -6308,7 +6697,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://naropa-my.sharepoint.com/:v:/g/personal/robert_karyadeva_naropa_edu/IQDEjzjUI2YPRYuyCCSkjSdwAQJmz_mNjzo68iMb7OiW9-I?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=DzH9dN"
     },
     {
       "week": 10,
@@ -6324,7 +6714,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Overview A Transpersonal Lens on Personality To Do List In order to successfully complete this module, please do the following: Read 1a: Cunningham (2022): Chapter 10 Read 2a:…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8539:module-10-overview-and-to-do-list"
     },
     {
       "week": 11,
@@ -6340,7 +6731,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 11,
@@ -6356,7 +6748,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://naropa.zoom.us/rec/share/UsklQS8XlfThcXimF3AFh3kaZmL1SGCv4UKP_jPDV5bq9FCRQYevBidA9qCSccvn.MR8QnifVXt1xN8Km?startTime=1774994990000 Passcode: 1T6Y&4U+"
     },
     {
       "week": 11,
@@ -6372,7 +6765,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Group Presentations this week! To Do: Read UYG Touchstone Eight Post takeaway by Sunday and response to two posts by Thursday",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8434:overview-4"
     },
     {
       "week": 11,
@@ -6388,7 +6782,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://naropa.zoom.us/rec/share/7pLc4w4ICkYSv0ppEztBgWKVtGoTvioMLX9iaBJOnNHUL-ZZr4SZC8Ni4U2V2RQP.TsALUKrjEmBOwc-S?startTime=1774904652000"
     },
     {
       "week": 11,
@@ -6404,7 +6799,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Overview Freedom – Motivation and Emotion To Do List In order to successfully complete this module, please do the following: Read 1a: Cunningham (2022): Chapter 11 Read 2a:…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8539:module-11-overview-and-to-do-list"
     },
     {
       "week": 12,
@@ -6420,7 +6816,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 12,
@@ -6436,7 +6833,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 12,
@@ -6452,7 +6850,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 12,
@@ -6468,7 +6867,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 12,
@@ -6484,7 +6884,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 12,
@@ -6500,7 +6901,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 12,
@@ -6516,7 +6918,8 @@
       "source": "discussion",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 12,
@@ -6532,7 +6935,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8683:1348742"
     },
     {
       "week": 12,
@@ -6548,7 +6952,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8683:1348773"
     },
     {
       "week": 12,
@@ -6564,7 +6969,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Group Presentations this week! To Do: Read UYG Touchstone Nine Post takeaway by Sunday and response to two posts by Thursday",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8434:overview-5"
     },
     {
       "week": 12,
@@ -6580,7 +6986,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://naropa.zoom.us/rec/share/lhcZJn8U0UbYaO9HhU8b9u8lkhZORvSz68VBr-QNDmLTWKsZLi1N0UlzH_zZ0Y-c.ZEJiZlLOVX_gCxez"
     },
     {
       "week": 12,
@@ -6596,7 +7003,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Overview Psychological Disorders To Do List In order to successfully complete this module, please do the following: Read 1a: Cunningham (2022): Chapter 12 Read 2a: TBA Read 3a:…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8539:module-12-overview-and-to-do-list"
     },
     {
       "week": 13,
@@ -6612,7 +7020,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 13,
@@ -6628,7 +7037,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 13,
@@ -6644,7 +7054,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 13,
@@ -6660,7 +7071,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 13,
@@ -6676,7 +7088,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8683:1348638"
     },
     {
       "week": 13,
@@ -6692,7 +7105,8 @@
       "source": "discussion",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 13,
@@ -6708,7 +7122,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8683:1408595"
     },
     {
       "week": 13,
@@ -6724,7 +7139,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8683:1348780"
     },
     {
       "week": 13,
@@ -6740,7 +7156,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8683:1348730"
     },
     {
       "week": 13,
@@ -6756,7 +7173,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Group Presentations this week! To Do: Read UYG Touchstone Nine Post takeaway by Sunday and response to two posts by Thursday",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8434:overview-6"
     },
     {
       "week": 13,
@@ -6772,7 +7190,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://naropa.zoom.us/rec/share/MSER6QhfKi5CgfT4vqvUpxavqia4ho51H1WTJCkPkQGy8mEBw6avYqpN5IXbyRw.cQK1gQc8ZRyan56U?startTime=1776719784000"
     },
     {
       "week": 13,
@@ -6788,7 +7207,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Overview Transpersonal Counseling To Do List In order to successfully complete this module, please do the following: Read 1a: Cunningham (2022): Chapter 13 Read 2a: TBA Read 3a:…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8539:module-13-overview-and-to-do-list-2"
     },
     {
       "week": 14,
@@ -6804,7 +7224,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 14,
@@ -6820,7 +7241,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 14,
@@ -6836,7 +7258,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 14,
@@ -6852,7 +7275,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 14,
@@ -6868,7 +7292,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://www.counseling.org/resources/research-reports/artificial-intelligence-counseling/recommendations-for-client-use-and-caution-of-artificial-intelligence#"
     },
     {
       "week": 14,
@@ -6884,7 +7309,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://www.youtube.com/watch?v=fum4nK2zqxI"
     },
     {
       "week": 14,
@@ -6900,7 +7326,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8683:1348783"
     },
     {
       "week": 14,
@@ -6916,7 +7343,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8683:1348770"
     },
     {
       "week": 14,
@@ -6932,7 +7360,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8683:1348748"
     },
     {
       "week": 14,
@@ -6948,7 +7377,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "A lighter week - take some time for self-care and rejuvenation - breathe, lay in the grass, look up at the stars or the trees, tell your people you love them, eat some ice cream…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8434:overview-accumulation-and-self-care"
     },
     {
       "week": 14,
@@ -6964,7 +7394,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://onbeing.org/programs/gregory-orr-shaping-grief-with-language/"
     },
     {
       "week": 14,
@@ -6980,7 +7411,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://onbeing.org/programs/sharon-salzberg-the-healing-is-in-the-return/"
     },
     {
       "week": 14,
@@ -6996,7 +7428,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Overview The Vision of Transpersonal Psychology To Do List In order to successfully complete this module, please do the following: Read 1a: Cunningham (2022): Chapter 14 Read 2a:…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8539:module-14-overview-and-to-do-list"
     },
     {
       "week": 15,
@@ -7012,7 +7445,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 15,
@@ -7028,7 +7462,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 15,
@@ -7044,7 +7479,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 15,
@@ -7060,7 +7496,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://www.youtube.com/watch?v=P24PNmzplro"
     },
     {
       "week": 15,
@@ -7076,7 +7513,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://motivohealth.com/therapist-clinical-supervision"
     },
     {
       "week": 15,
@@ -7092,7 +7530,8 @@
       "source": "discussion",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 15,
@@ -7108,7 +7547,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8683:what-to-expect-in-supervision-slides"
     },
     {
       "week": 15,
@@ -7124,7 +7564,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://www.dougy.org/"
     },
     {
       "week": 15,
@@ -7140,7 +7581,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://grievingstudents.org/gssi/"
     },
     {
       "week": 15,
@@ -7156,7 +7598,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://judishouse.org/"
     },
     {
       "week": 15,
@@ -7172,7 +7615,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://hopva.org/kids-grief-and-healing/"
     },
     {
       "week": 15,
@@ -7188,7 +7632,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://nacg.org/"
     },
     {
       "week": 15,
@@ -7204,7 +7649,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Overview Couples and Transpersonal Psychology To Do List In order to successfully complete this module, please do the following: Read 1a: TBA Read 2a: TBA Read 3a: TBA Read 4a:…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8539:module-15-overview-and-to-do-list-2"
     },
     {
       "week": 16,
@@ -7220,7 +7666,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 16,
@@ -7236,7 +7683,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 16,
@@ -7252,7 +7700,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 16,
@@ -7268,7 +7717,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 16,
@@ -7284,7 +7734,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8683:1431167"
     },
     {
       "week": 16,
@@ -7300,7 +7751,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://www.youtube.com/watch?v=0cx6PPH8WII"
     },
     {
       "week": 16,
@@ -7316,7 +7768,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8683:1431210"
     },
     {
       "week": 16,
@@ -7332,7 +7785,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8434:remembering"
     },
     {
       "week": 16,
@@ -7348,7 +7802,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8539:1363200"
     },
     {
       "week": 16,
@@ -7364,7 +7819,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8539:1363201"
     },
     {
       "week": 16,
@@ -7380,7 +7836,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Overview The Monadic Life To Do List In order to successfully complete this module, please do the following: Assignment: Case Conceptualization Assignment: Discussion - Final…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8539:module-16-overview-and-to-do-list"
     },
     {
       "week": 17,
@@ -7396,7 +7853,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 17,
@@ -7412,7 +7870,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 17,
@@ -7428,7 +7887,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 0,
@@ -7444,7 +7904,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:sourcebook-readings"
     },
     {
       "week": 0,
@@ -7460,7 +7921,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:sourcebook-readings"
     },
     {
       "week": 0,
@@ -7476,7 +7938,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:sourcebook-readings"
     },
     {
       "week": 0,
@@ -7492,7 +7955,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:zoom-intensive-3"
     },
     {
       "week": 0,
@@ -7508,7 +7972,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:zoom-intensive-1"
     },
     {
       "week": 0,
@@ -7524,7 +7989,8 @@
       "source": "discussion",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 0,
@@ -7540,7 +8006,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:sourcebook-readings"
     },
     {
       "week": 0,
@@ -7556,7 +8023,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:sourcebook-readings"
     },
     {
       "week": 0,
@@ -7572,7 +8040,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:sourcebook-readings"
     },
     {
       "week": 0,
@@ -7588,7 +8057,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:sourcebook-readings"
     },
     {
       "week": 0,
@@ -7604,7 +8074,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:sourcebook-readings"
     },
     {
       "week": 0,
@@ -7620,7 +8091,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:sourcebook-readings"
     },
     {
       "week": 0,
@@ -7636,7 +8108,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:sourcebook-readings"
     },
     {
       "week": 0,
@@ -7652,7 +8125,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:sourcebook-readings"
     },
     {
       "week": 0,
@@ -7668,7 +8142,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:sourcebook-readings"
     },
     {
       "week": 0,
@@ -7684,7 +8159,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:sourcebook-readings"
     },
     {
       "week": 0,
@@ -7700,7 +8176,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:sourcebook-readings"
     },
     {
       "week": 0,
@@ -7716,7 +8193,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:sourcebook-readings"
     },
     {
       "week": 0,
@@ -7732,7 +8210,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:sourcebook-readings"
     },
     {
       "week": 0,
@@ -7748,7 +8227,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:sourcebook-readings"
     },
     {
       "week": 0,
@@ -7764,7 +8244,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:sourcebook-readings"
     },
     {
       "week": 0,
@@ -7780,7 +8261,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:sourcebook-readings"
     },
     {
       "week": 0,
@@ -7796,7 +8278,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:sourcebook-readings"
     },
     {
       "week": 0,
@@ -7812,7 +8295,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:sourcebook-readings"
     },
     {
       "week": 0,
@@ -7828,7 +8312,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:sourcebook-readings"
     },
     {
       "week": 0,
@@ -7844,7 +8329,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:sourcebook-readings"
     },
     {
       "week": 0,
@@ -7860,7 +8346,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:sourcebook-readings"
     },
     {
       "week": 0,
@@ -7876,7 +8363,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:sourcebook-readings"
     },
     {
       "week": 0,
@@ -7892,7 +8380,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:sourcebook-readings"
     },
     {
       "week": 0,
@@ -7908,7 +8397,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:sourcebook-readings"
     },
     {
       "week": 0,
@@ -7924,7 +8414,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:sourcebook-readings"
     },
     {
       "week": 0,
@@ -7940,7 +8431,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Human Growth and Development ~ Welcome! I am glad that you are here. This course provides an advanced study of human development from prenatal experience through the life span,…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:home-page-start-here"
     },
     {
       "week": 0,
@@ -7956,7 +8448,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:instructor-information"
     },
     {
       "week": 0,
@@ -7972,7 +8465,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:zoom-intensive-2"
     },
     {
       "week": 0,
@@ -7988,7 +8482,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:sourcebook-readings"
     },
     {
       "week": 0,
@@ -8004,7 +8499,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:zoom-intensive-3"
     },
     {
       "week": 0,
@@ -8020,7 +8516,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:sourcebook-readings"
     },
     {
       "week": 0,
@@ -8036,7 +8533,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:sourcebook-readings"
     },
     {
       "week": 0,
@@ -8052,7 +8550,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:sourcebook-readings"
     },
     {
       "week": 0,
@@ -8068,7 +8567,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:zoom-intensive-1"
     },
     {
       "week": 0,
@@ -8084,7 +8584,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:sourcebook-readings"
     },
     {
       "week": 0,
@@ -8100,7 +8601,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:sourcebook-readings"
     },
     {
       "week": 0,
@@ -8116,7 +8618,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:zoom-intensive-1"
     },
     {
       "week": 0,
@@ -8132,7 +8635,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:spring-break-no-class"
     },
     {
       "week": 0,
@@ -8148,7 +8652,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:sourcebook-readings"
     },
     {
       "week": 0,
@@ -8164,7 +8669,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:sourcebook-readings"
     },
     {
       "week": 0,
@@ -8180,7 +8686,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:sourcebook-readings"
     },
     {
       "week": 0,
@@ -8196,7 +8703,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:sourcebook-readings"
     },
     {
       "week": 0,
@@ -8212,7 +8720,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:sourcebook-readings"
     },
     {
       "week": 0,
@@ -8228,7 +8737,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:sourcebook-readings"
     },
     {
       "week": 0,
@@ -8244,7 +8754,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:sourcebook-readings"
     },
     {
       "week": 0,
@@ -8260,7 +8771,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:sourcebook-readings"
     },
     {
       "week": 0,
@@ -8276,7 +8788,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:sourcebook-readings"
     },
     {
       "week": 0,
@@ -8292,7 +8805,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:zoom-intensive-1"
     },
     {
       "week": 0,
@@ -8308,7 +8822,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:zoom-intensive-2"
     },
     {
       "week": 0,
@@ -8324,7 +8839,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8464:zoom-intensive-3"
     },
     {
       "week": 0,
@@ -8340,7 +8856,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8683:references-2"
     },
     {
       "week": 0,
@@ -8356,7 +8873,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8683:references-2"
     },
     {
       "week": 0,
@@ -8372,7 +8890,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8683:references-2"
     },
     {
       "week": 0,
@@ -8388,7 +8907,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8683:online-sourcebook-3"
     },
     {
       "week": 0,
@@ -8404,7 +8924,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 0,
@@ -8420,7 +8941,8 @@
       "source": "discussion",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 0,
@@ -8436,7 +8958,8 @@
       "source": "discussion",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 0,
@@ -8452,7 +8975,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8683:references-2"
     },
     {
       "week": 0,
@@ -8468,7 +8992,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8683:references-2"
     },
     {
       "week": 0,
@@ -8484,7 +9009,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8683:references-2"
     },
     {
       "week": 0,
@@ -8500,7 +9026,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8683:references-2"
     },
     {
       "week": 0,
@@ -8516,7 +9043,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8683:references-2"
     },
     {
       "week": 0,
@@ -8532,7 +9060,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8683:online-sourcebook-3"
     },
     {
       "week": 0,
@@ -8548,7 +9077,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Online Sourcebook Hello and Welcome to Legal and Ethical Aspects of Counseling! My name is Hannah and I am a practicing licensed professional counselor in Denver, Colorado. I have…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8683:home-page"
     },
     {
       "week": 0,
@@ -8564,7 +9094,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8683:references-2"
     },
     {
       "week": 0,
@@ -8580,7 +9111,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8683:online-sourcebook-3"
     },
     {
       "week": 0,
@@ -8596,7 +9128,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8683:instructor-information-2"
     },
     {
       "week": 0,
@@ -8612,7 +9145,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8683:online-sourcebook-3"
     },
     {
       "week": 0,
@@ -8628,7 +9162,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8683:online-sourcebook-3"
     },
     {
       "week": 0,
@@ -8644,7 +9179,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8683:references-2"
     },
     {
       "week": 0,
@@ -8660,7 +9196,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8683:online-sourcebook-3"
     },
     {
       "week": 0,
@@ -8676,7 +9213,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8683:online-sourcebook-3"
     },
     {
       "week": 0,
@@ -8692,7 +9230,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8683:online-sourcebook-3"
     },
     {
       "week": 0,
@@ -8708,7 +9247,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8683:online-sourcebook-3"
     },
     {
       "week": 0,
@@ -8724,7 +9264,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8683:online-sourcebook-3"
     },
     {
       "week": 0,
@@ -8740,7 +9281,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8683:references-2"
     },
     {
       "week": 0,
@@ -8756,7 +9298,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8683:online-sourcebook-3"
     },
     {
       "week": 0,
@@ -8772,7 +9315,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8683:references-2"
     },
     {
       "week": 0,
@@ -8788,7 +9332,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8683:online-sourcebook-3"
     },
     {
       "week": 0,
@@ -8804,7 +9349,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8683:online-sourcebook-3"
     },
     {
       "week": 0,
@@ -8820,7 +9366,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8683:references-2"
     },
     {
       "week": 0,
@@ -8836,7 +9383,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8683:online-sourcebook-3"
     },
     {
       "week": 0,
@@ -8852,7 +9400,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8683:references-2"
     },
     {
       "week": 0,
@@ -8868,7 +9417,8 @@
       "source": "discussion",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 0,
@@ -8884,7 +9434,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8434:instructor-information"
     },
     {
       "week": 0,
@@ -8900,7 +9451,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:8434:1371792"
     },
     {
       "week": 0,
@@ -8916,7 +9468,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "\"W alk fearlessly into the house of mourning, for grief is only love that has come up against its oldest challenge, and after all these mortal years, love knows how to handle it.\"…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8434:welcome-to-cnst-528-mb-dot-2026sp"
     },
     {
       "week": 0,
@@ -8932,7 +9485,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8539:online-sourcebook"
     },
     {
       "week": 0,
@@ -8948,7 +9502,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8539:online-sourcebook"
     },
     {
       "week": 0,
@@ -8964,7 +9519,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "See Simple Syllabus",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8539:course-overview"
     },
     {
       "week": 0,
@@ -8980,7 +9536,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8539:online-sourcebook"
     },
     {
       "week": 0,
@@ -8996,7 +9553,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Instructor Information Learning Modules Online Sourcebook Community Forum Welcome to your course! Help and Support | References",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8539:home-page"
     },
     {
       "week": 0,
@@ -9012,7 +9570,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8539:instructor-information"
     },
     {
       "week": 0,
@@ -9028,7 +9587,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8539:online-sourcebook"
     },
     {
       "week": 0,
@@ -9044,7 +9604,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8539:online-sourcebook"
     },
     {
       "week": 0,
@@ -9060,7 +9621,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Overview Seasonal Break To Do List NA",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8539:module-xx-overview-and-to-do-list"
     },
     {
       "week": 0,
@@ -9076,7 +9638,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8539:online-sourcebook"
     },
     {
       "week": 0,
@@ -9092,7 +9655,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8539:online-sourcebook"
     },
     {
       "week": 0,
@@ -9108,7 +9672,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8539:online-sourcebook"
     },
     {
       "week": 0,
@@ -9124,7 +9689,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8539:online-sourcebook"
     },
     {
       "week": 0,
@@ -9140,7 +9706,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8539:online-sourcebook"
     },
     {
       "week": 0,
@@ -9156,7 +9723,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8539:online-sourcebook"
     },
     {
       "week": 0,
@@ -9172,7 +9740,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8539:online-sourcebook"
     },
     {
       "week": 0,
@@ -9188,7 +9757,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8539:online-sourcebook"
     },
     {
       "week": 0,
@@ -9204,7 +9774,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Overview Virtual Intensive: Please go to my virtual office at https://naropa.zoom.us/j/5146999298 To Do List Attend the virtual intensive.",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8539:virtual-intensive-overview-and-to-do-list"
     },
     {
       "week": 0,
@@ -9220,7 +9791,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:online-sourcebook"
     },
     {
       "week": 0,
@@ -9236,7 +9808,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:online-sourcebook"
     },
     {
       "week": 0,
@@ -9252,7 +9825,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:online-sourcebook"
     },
     {
       "week": 0,
@@ -9268,7 +9842,8 @@
       "source": "discussion",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 0,
@@ -9284,7 +9859,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:online-sourcebook"
     },
     {
       "week": 0,
@@ -9300,7 +9876,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:online-sourcebook"
     },
     {
       "week": 0,
@@ -9316,7 +9893,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:online-sourcebook"
     },
     {
       "week": 0,
@@ -9332,7 +9910,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:online-sourcebook"
     },
     {
       "week": 0,
@@ -9348,7 +9927,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:instructor-information"
     },
     {
       "week": 0,
@@ -9364,7 +9944,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:online-sourcebook"
     },
     {
       "week": 0,
@@ -9380,7 +9961,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:online-sourcebook"
     },
     {
       "week": 0,
@@ -9396,7 +9978,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:online-sourcebook"
     },
     {
       "week": 0,
@@ -9412,7 +9995,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:online-sourcebook"
     },
     {
       "week": 0,
@@ -9428,7 +10012,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:online-sourcebook"
     },
     {
       "week": 0,
@@ -9444,7 +10029,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:references"
     },
     {
       "week": 0,
@@ -9460,7 +10046,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:online-sourcebook"
     },
     {
       "week": 0,
@@ -9476,7 +10063,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 0,
@@ -9492,7 +10080,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:online-sourcebook"
     },
     {
       "week": 0,
@@ -9508,7 +10097,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:online-sourcebook"
     },
     {
       "week": 0,
@@ -9524,7 +10114,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:online-sourcebook"
     },
     {
       "week": 0,
@@ -9540,7 +10131,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:online-sourcebook"
     },
     {
       "week": 0,
@@ -9556,7 +10148,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:online-sourcebook"
     },
     {
       "week": 0,
@@ -9572,7 +10165,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:online-sourcebook"
     },
     {
       "week": 0,
@@ -9588,7 +10182,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:online-sourcebook"
     },
     {
       "week": 0,
@@ -9604,7 +10199,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:online-sourcebook"
     },
     {
       "week": 0,
@@ -9620,7 +10216,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:online-sourcebook"
     },
     {
       "week": 0,
@@ -9636,7 +10233,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:online-sourcebook"
     },
     {
       "week": 0,
@@ -9652,7 +10250,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:online-sourcebook"
     },
     {
       "week": 0,
@@ -9668,7 +10267,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:online-sourcebook"
     },
     {
       "week": 0,
@@ -9684,7 +10284,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:online-sourcebook"
     },
     {
       "week": 0,
@@ -9700,7 +10301,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:online-sourcebook"
     },
     {
       "week": 0,
@@ -9716,7 +10318,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:online-sourcebook"
     },
     {
       "week": 0,
@@ -9732,7 +10335,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:8537:online-sourcebook"
     }
   ],
   "totals": {
@@ -9746,7 +10350,7 @@
     "lecture": 6
   },
   "coverage": {
-    "verified_at": "2026-08-28T03:43:12.922640+00:00",
+    "verified_at": "2026-08-28T13:04:18.530884+00:00",
     "assignments": {
       "total": 60,
       "captured": 60
@@ -9801,5 +10405,5 @@
   "roster_change": null,
   "archives": [],
   "archived": true,
-  "backfilled_at": "2026-08-28T03:43:12.940521+00:00"
+  "backfilled_at": "2026-08-28T13:04:18.555341+00:00"
 }

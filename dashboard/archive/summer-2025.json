@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-28T03:42:02.251228+00:00",
+  "generated_at": "2026-08-28T13:02:57.252173+00:00",
   "semester": {
     "name": "Summer 2025",
     "start_date": "2025-05-19",
@@ -84,7 +84,8 @@
       "source": "discussion",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 1,
@@ -100,7 +101,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 1,
@@ -116,7 +118,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:lecture-s"
     },
     {
       "week": 1,
@@ -132,7 +135,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:lecture-s"
     },
     {
       "week": 1,
@@ -148,7 +152,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:online-intensive-zoom-link"
     },
     {
       "week": 1,
@@ -164,7 +169,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Hello and welcome to CHR II! This week we will have our online intensive on May 23rd from 9:00 am MST - 12:00 pm MST. We will cover the following topics: Check-in Overview of the…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:overview"
     },
     {
       "week": 1,
@@ -180,7 +186,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:readings"
     },
     {
       "week": 1,
@@ -196,7 +203,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7617:star-in-the-realm-of-hungry-ghosts-part-i-and-ii-the-hellbound-train-and-physician-heal-thyself-chapters-1-10"
     },
     {
       "week": 1,
@@ -212,7 +220,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7617:first-week-intensive-zoom-tuesday-may-20th-4-7pm-mst"
     },
     {
       "week": 1,
@@ -228,7 +237,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Welcome! Topic: Natural Aliveness and the fear-based contraction; Compassionate Abiding practice To Do (please complete the below under this module): Continue with the Observation…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7648:content-4-overview-and-to-do"
     },
     {
       "week": 1,
@@ -244,7 +254,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Welcome! Topic: Preparation for the Intensive To do (prior to the Intensive): Video Presentation : \"Welcoming\" -- \"not a meditation practice\"…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7648:content-preparation-overview-and-to-do"
     },
     {
       "week": 1,
@@ -260,7 +271,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:videos-for-class"
     },
     {
       "week": 1,
@@ -276,7 +288,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:syllabus"
     },
     {
       "week": 1,
@@ -292,7 +305,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:videos-for-class"
     },
     {
       "week": 1,
@@ -308,7 +322,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Week 1 May 20 Introduction Join Zoom Meeting Tue 10am MST https://naropa.zoom.us/j/3617516044 Meeting ID: 361 751 6044 Get acquainted: Review class requirements, needs, and…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:module-1-overview-and-readings"
     },
     {
       "week": 1,
@@ -324,7 +339,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:videos-for-class"
     },
     {
       "week": 1,
@@ -340,7 +356,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:class-zoom-video-recording"
     },
     {
       "week": 1,
@@ -356,7 +373,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:videos-for-class"
     },
     {
       "week": 2,
@@ -372,7 +390,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 2,
@@ -388,7 +407,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 2,
@@ -404,7 +424,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 2,
@@ -420,7 +441,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Intersectionality & Social Identities For class this week, please do the following: Please Watch: What is intersectionality? - YouTube Intersectionality 101 - YouTube Hegemony -…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:intersectionality-overview-and-to-do-list"
     },
     {
       "week": 2,
@@ -436,7 +458,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:lecture-s-2"
     },
     {
       "week": 2,
@@ -452,7 +475,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:sample-clinical-forms"
     },
     {
       "week": 2,
@@ -468,7 +492,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:lecture-s-2"
     },
     {
       "week": 2,
@@ -484,7 +509,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:sample-clinical-forms"
     },
     {
       "week": 2,
@@ -500,7 +526,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:sample-intake-forms-2"
     },
     {
       "week": 2,
@@ -516,7 +543,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:sample-clinical-forms"
     },
     {
       "week": 2,
@@ -532,7 +560,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:optional-video-strategies-for-telehealth-versus-in-person-sessions"
     },
     {
       "week": 2,
@@ -548,7 +577,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Welcome to week 2! We will cover the following topics this week: Pre-session prep Beginning and closing a session The Therapy Hour Informed consent/disclosure statements Intake…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:overview-2"
     },
     {
       "week": 2,
@@ -564,7 +594,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:sample-clinical-forms"
     },
     {
       "week": 2,
@@ -580,7 +611,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://www.youtube.com/watch?v=7VUlKP4LDyQ"
     },
     {
       "week": 2,
@@ -596,7 +628,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://www.youtube.com/watch?v=uhmpi3yLeGg"
     },
     {
       "week": 2,
@@ -612,7 +645,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://www.youtube.com/watch?v=3vKLU5_Hgco"
     },
     {
       "week": 2,
@@ -628,7 +662,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7617:uppers-downers-all-arounders-chapter-2-and-in-the-realm-of-hungry-ghosts-part-iii-a-different-state-of-brain-chapters-11-16"
     },
     {
       "week": 2,
@@ -644,7 +679,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Welcome! Topic: Introduction to Shenpa To Do: Review Chapters below prior to our class via zoom: Taking the Leap: Chapters 1- 5 Our first class for our first intensive will meet…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7648:content-2-overview-and-to-do"
     },
     {
       "week": 2,
@@ -660,7 +696,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:class-zoom-video-recording-2"
     },
     {
       "week": 2,
@@ -676,7 +713,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:presentation-history-of-family-and-couple-therapy"
     },
     {
       "week": 2,
@@ -692,7 +730,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:presentation-history-of-family-and-couple-therapy"
     },
     {
       "week": 2,
@@ -708,7 +747,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Family Systems Theory and Therapy: Concepts of Bowen Theory and Family Diagrams Create Family Genogram Introduction to Gottman Method: Why relationships succeed or fail…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:module-2-overview-and-readings"
     },
     {
       "week": 3,
@@ -724,7 +764,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 3,
@@ -740,7 +781,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 3,
@@ -756,7 +798,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 3,
@@ -772,7 +815,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 3,
@@ -788,7 +832,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 3,
@@ -804,7 +849,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:additional-resources-ableism"
     },
     {
       "week": 3,
@@ -820,7 +866,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Class, Classism, Poverty , SES and ableism Hi Everyone! This week, we will be exploring class, classism, SES, poverty and ableism. Please continue to consider intersectionalities…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:overview-and-to-do-classism"
     },
     {
       "week": 3,
@@ -836,7 +883,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:additional-resources-ableism"
     },
     {
       "week": 3,
@@ -852,7 +900,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:lecture-s-3"
     },
     {
       "week": 3,
@@ -868,7 +917,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:lecture-s-3"
     },
     {
       "week": 3,
@@ -884,7 +934,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Hello and welcome to week 3! We will cover the following topics this week: DAP(Q) Notes Stages of the therapeutic process Goal setting RECOMMENDED: It is recommended that you…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:overview-3"
     },
     {
       "week": 3,
@@ -900,7 +951,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:sample-treatment-plans"
     },
     {
       "week": 3,
@@ -916,7 +968,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:sample-treatment-plans"
     },
     {
       "week": 3,
@@ -932,7 +985,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:sign-up-for-supervision-for-video-number-1"
     },
     {
       "week": 3,
@@ -948,7 +1002,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:lecture-s-3"
     },
     {
       "week": 3,
@@ -964,7 +1019,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:dap-q-notes-quick-reference"
     },
     {
       "week": 3,
@@ -980,7 +1036,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:7617:1146351"
     },
     {
       "week": 3,
@@ -996,7 +1053,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:7617:1146352"
     },
     {
       "week": 3,
@@ -1012,7 +1070,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7617:uppers-downers-all-arounders-chapter-3-4-5-6"
     },
     {
       "week": 3,
@@ -1028,7 +1087,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://www.youtube.com/watch?v=icD3l5bhhKY"
     },
     {
       "week": 3,
@@ -1044,7 +1104,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Welcome! Topic: Practicing with Shenpa; The Four \"R's\" To Do: Review Readings prior to our class via zoom: Taking the Leap: Chapters 1- 5 SB: How we get hooked Our second class…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7648:content-3-overview-and-to-do"
     },
     {
       "week": 3,
@@ -1060,7 +1121,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:module-3-readings"
     },
     {
       "week": 3,
@@ -1076,7 +1138,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:videos-2"
     },
     {
       "week": 3,
@@ -1092,7 +1155,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:relationship-assessment-resources"
     },
     {
       "week": 3,
@@ -1108,7 +1172,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:class-video-recording"
     },
     {
       "week": 3,
@@ -1124,7 +1189,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:relationship-assessment-resources"
     },
     {
       "week": 3,
@@ -1140,7 +1206,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:videos-2"
     },
     {
       "week": 3,
@@ -1156,7 +1223,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:relationship-assessment-resources"
     },
     {
       "week": 3,
@@ -1172,7 +1240,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:relationship-assessment-resources"
     },
     {
       "week": 3,
@@ -1188,7 +1257,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:relationship-assessment-resources"
     },
     {
       "week": 3,
@@ -1204,7 +1274,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:videos-2"
     },
     {
       "week": 3,
@@ -1220,7 +1291,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:relationship-assessment-resources"
     },
     {
       "week": 3,
@@ -1236,7 +1308,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:videos-2"
     },
     {
       "week": 3,
@@ -1252,7 +1325,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:relationship-assessment-resources"
     },
     {
       "week": 3,
@@ -1268,7 +1342,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:module-3-readings"
     },
     {
       "week": 3,
@@ -1284,7 +1359,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:module-3-readings"
     },
     {
       "week": 3,
@@ -1300,7 +1376,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:relationship-assessment-resources"
     },
     {
       "week": 3,
@@ -1316,7 +1393,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:videos-2"
     },
     {
       "week": 3,
@@ -1332,7 +1410,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:module-3-readings"
     },
     {
       "week": 3,
@@ -1348,7 +1427,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:videos-2"
     },
     {
       "week": 4,
@@ -1364,7 +1444,8 @@
       "source": "discussion",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 4,
@@ -1380,7 +1461,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 4,
@@ -1396,7 +1478,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 4,
@@ -1412,7 +1495,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 4,
@@ -1428,7 +1512,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 4,
@@ -1444,7 +1529,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:additional-resources-language"
     },
     {
       "week": 4,
@@ -1460,7 +1546,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:additional-resources-language"
     },
     {
       "week": 4,
@@ -1476,7 +1563,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:additional-resources-language"
     },
     {
       "week": 4,
@@ -1492,7 +1580,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:additional-resources-language"
     },
     {
       "week": 4,
@@ -1508,7 +1597,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:wednesday-6-slash-11-10-00am-mst-meeting-link-slides-recording"
     },
     {
       "week": 4,
@@ -1524,7 +1614,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:additional-resources-language"
     },
     {
       "week": 4,
@@ -1540,7 +1631,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:additional-resources-language"
     },
     {
       "week": 4,
@@ -1556,7 +1648,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:additional-resources-language"
     },
     {
       "week": 4,
@@ -1572,7 +1665,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:additional-resources-language"
     },
     {
       "week": 4,
@@ -1588,7 +1682,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:additional-resources-language"
     },
     {
       "week": 4,
@@ -1604,7 +1699,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:additional-resources-language"
     },
     {
       "week": 4,
@@ -1620,7 +1716,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Language Oppression, Nationalism, Immigrants, and Refugees, Religious and spiritual oppression (e.g., Christian privilege, Islamophobia, Anti-semitism) Please Watch: Language |…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:overview-and-to-do-list"
     },
     {
       "week": 4,
@@ -1636,7 +1733,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:peer-meeting-1-groups"
     },
     {
       "week": 4,
@@ -1652,7 +1750,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:additional-resources-language"
     },
     {
       "week": 4,
@@ -1668,7 +1767,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:wednesday-6-slash-11-10-00am-mst-meeting-link-slides-recording"
     },
     {
       "week": 4,
@@ -1684,7 +1784,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:additional-resources-language"
     },
     {
       "week": 4,
@@ -1700,7 +1801,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:additional-resources-language"
     },
     {
       "week": 4,
@@ -1716,7 +1818,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:additional-resources-language"
     },
     {
       "week": 4,
@@ -1732,7 +1835,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Welcome to week 4! We will cover the following topics this week: Transference and Countertransference Use of Self - developing genuineness and congruence RECOMMENDED: Session #1…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:overview-4"
     },
     {
       "week": 4,
@@ -1748,7 +1852,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:lecture-s-4"
     },
     {
       "week": 4,
@@ -1764,7 +1869,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:lecture-s-4"
     },
     {
       "week": 4,
@@ -1780,7 +1886,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://www.youtube.com/watch?v=07nOScAHnXI"
     },
     {
       "week": 4,
@@ -1796,7 +1903,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7617:in-the-realm-of-hungry-ghosts-part-iv-how-the-addicted-brain-develops-v-the-addiction-process-and-personality-and-vi-imagining-a-humane-reality-chapters-17-28"
     },
     {
       "week": 4,
@@ -1812,7 +1920,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:7617:1194850"
     },
     {
       "week": 4,
@@ -1828,7 +1937,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:7617:1194851"
     },
     {
       "week": 4,
@@ -1844,7 +1954,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://www.youtube.com/watch?v=raDfR_Ztyyo"
     },
     {
       "week": 4,
@@ -1860,7 +1971,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:7617:1194844"
     },
     {
       "week": 4,
@@ -1876,7 +1988,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://civilrights.org/blog/americas-war-on-drugs-50-years-later/"
     },
     {
       "week": 4,
@@ -1892,7 +2005,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:eft-slides-and-attachment"
     },
     {
       "week": 4,
@@ -1908,7 +2022,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:eft-presentation-and-videos"
     },
     {
       "week": 4,
@@ -1924,7 +2039,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:eft-slides-and-attachment"
     },
     {
       "week": 4,
@@ -1940,7 +2056,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:eft-slides-and-attachment"
     },
     {
       "week": 4,
@@ -1956,7 +2073,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:module-4-readings"
     },
     {
       "week": 4,
@@ -1972,7 +2090,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:class-video-recording-2"
     },
     {
       "week": 4,
@@ -1988,7 +2107,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:eft-slides-and-attachment"
     },
     {
       "week": 4,
@@ -2004,7 +2124,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:eft-slides-and-attachment"
     },
     {
       "week": 5,
@@ -2020,7 +2141,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 5,
@@ -2036,7 +2158,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 5,
@@ -2052,7 +2175,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 5,
@@ -2068,7 +2192,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 5,
@@ -2084,7 +2209,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 5,
@@ -2100,7 +2226,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:additional-resources-sizeism"
     },
     {
       "week": 5,
@@ -2116,7 +2243,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:additional-resources-sizeism"
     },
     {
       "week": 5,
@@ -2132,7 +2260,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:additional-resources-sizeism"
     },
     {
       "week": 5,
@@ -2148,7 +2277,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:additional-resources-sizeism"
     },
     {
       "week": 5,
@@ -2164,7 +2294,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:additional-resources-sizeism"
     },
     {
       "week": 5,
@@ -2180,7 +2311,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:additional-resources-sizeism"
     },
     {
       "week": 5,
@@ -2196,7 +2328,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:additional-resources-sizeism"
     },
     {
       "week": 5,
@@ -2212,7 +2345,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Sizeism and Ageism Please Watch: Ageism Age-ism: prejudice or discrimination on the grounds of a person’s age. Ageism, also spelled agism, is stereotyping and/or discrimination…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:overview-and-to-do-4"
     },
     {
       "week": 5,
@@ -2228,7 +2362,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:additional-resources-sizeism"
     },
     {
       "week": 5,
@@ -2244,7 +2379,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:additional-resources-sizeism"
     },
     {
       "week": 5,
@@ -2260,7 +2396,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:additional-resources-sizeism"
     },
     {
       "week": 5,
@@ -2276,7 +2413,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:additional-resources-sizeism"
     },
     {
       "week": 5,
@@ -2292,7 +2430,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:additional-resources-sizeism"
     },
     {
       "week": 5,
@@ -2308,7 +2447,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:lecture-s-6"
     },
     {
       "week": 5,
@@ -2324,7 +2464,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:lecture-s-6"
     },
     {
       "week": 5,
@@ -2340,7 +2481,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:lecture-s-6"
     },
     {
       "week": 5,
@@ -2356,7 +2498,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:lecture-s-6"
     },
     {
       "week": 5,
@@ -2372,7 +2515,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Welcome to week 5! We will have supervision sessions for session #1 this week. We will also cover the following topics this week: Adaptive Strategies Cognitive Behavioral Therapy…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:overview-5"
     },
     {
       "week": 5,
@@ -2388,7 +2532,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:lecture-s-6"
     },
     {
       "week": 5,
@@ -2404,7 +2549,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:readings-5"
     },
     {
       "week": 5,
@@ -2420,7 +2566,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:readings-5"
     },
     {
       "week": 5,
@@ -2436,7 +2583,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:lecture-s-6"
     },
     {
       "week": 5,
@@ -2452,7 +2600,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:lecture-s-6"
     },
     {
       "week": 5,
@@ -2468,7 +2617,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://youtu.be/nBS4XiGAMeo"
     },
     {
       "week": 5,
@@ -2484,7 +2634,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://www.youtube.com/watch?v=xGHxVX9mwYI"
     },
     {
       "week": 5,
@@ -2500,7 +2651,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://www.youtube.com/watch?v=AjuwOf1_63g"
     },
     {
       "week": 5,
@@ -2516,7 +2668,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7617:in-the-realm-of-hungry-ghosts-part-vii-the-ecology-of-healing-chapters-29-34"
     },
     {
       "week": 5,
@@ -2532,7 +2685,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:7617:1146348"
     },
     {
       "week": 5,
@@ -2548,7 +2702,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Welcome! Topic: Finding wakefulness within the contraction To Do: Paper #1: Shenpa and Wakefulness due on Sunday, June 8, 2025 at 11:59 pm MT. Online Discussion Post: What are 3-5…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7648:content-5-overview-and-to-do"
     },
     {
       "week": 5,
@@ -2564,7 +2719,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:gottman-and-eft-videos"
     },
     {
       "week": 5,
@@ -2580,7 +2736,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:module-5-readings"
     },
     {
       "week": 5,
@@ -2596,7 +2753,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:gottman-and-eft-videos"
     },
     {
       "week": 5,
@@ -2612,7 +2770,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:class-video-recording-3"
     },
     {
       "week": 6,
@@ -2628,7 +2787,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 6,
@@ -2644,7 +2804,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 6,
@@ -2660,7 +2821,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 6,
@@ -2676,7 +2838,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 6,
@@ -2692,7 +2855,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Please Read in Sourcebook: Langman, P. F. Including Jews in multiculturalism. Schlosser, L. Z. (2011). Christian privilege: Breaking a sacred taboo. Inayat, Q. (2007) Islamophobia…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:overview-and-to-do-religious-and-spiritual-oppression"
     },
     {
       "week": 6,
@@ -2708,7 +2872,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:risk-assessment-and-safety-plan-resources"
     },
     {
       "week": 6,
@@ -2724,7 +2889,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:lecture-s-8"
     },
     {
       "week": 6,
@@ -2740,7 +2906,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:risk-assessment-and-safety-plan-resources"
     },
     {
       "week": 6,
@@ -2756,7 +2923,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:readings-8"
     },
     {
       "week": 6,
@@ -2772,7 +2940,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Welcome to week 6! We will cover the following topics this week: Crisis Assessment and Intervention REBT Cognitive Theories RECOMMENDED: It is recommended that you complete…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:overview-8"
     },
     {
       "week": 6,
@@ -2788,7 +2957,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:lecture-s-8"
     },
     {
       "week": 6,
@@ -2804,7 +2974,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:lecture-s-8"
     },
     {
       "week": 6,
@@ -2820,7 +2991,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:lecture-s-8"
     },
     {
       "week": 6,
@@ -2836,7 +3008,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:risk-assessment-and-safety-plan-resources"
     },
     {
       "week": 6,
@@ -2852,7 +3025,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:lecture-s-8"
     },
     {
       "week": 6,
@@ -2868,7 +3042,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:lecture-s-8"
     },
     {
       "week": 6,
@@ -2884,7 +3059,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:lecture-s-8"
     },
     {
       "week": 6,
@@ -2900,7 +3076,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:risk-assessment-and-safety-plan-resources"
     },
     {
       "week": 6,
@@ -2916,7 +3093,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:lecture-s-8"
     },
     {
       "week": 6,
@@ -2932,7 +3110,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:lecture-s-8"
     },
     {
       "week": 6,
@@ -2948,7 +3127,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:lecture-s-8"
     },
     {
       "week": 6,
@@ -2964,7 +3144,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:lecture-s-8"
     },
     {
       "week": 6,
@@ -2980,7 +3161,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:readings-8"
     },
     {
       "week": 6,
@@ -2996,7 +3178,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7617:intensive-zoom-saturday-june-28th-9a-12p-mst-mi-lecture-slash-practice-and-group-presentations"
     },
     {
       "week": 6,
@@ -3012,7 +3195,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:7617:1190583"
     },
     {
       "week": 6,
@@ -3028,7 +3212,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:7617:1146349"
     },
     {
       "week": 6,
@@ -3044,7 +3229,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:7617:1146374"
     },
     {
       "week": 6,
@@ -3060,7 +3246,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7617:review-dsm5-substance-use-disorders"
     },
     {
       "week": 6,
@@ -3076,7 +3263,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Welcome! Topic: Introduction to Body-Speech-Mind Observation To Do: Lecture Part I Module 6 Part I (Closed Captions).docx AI Recap of Module 6 Part 1.docx Lecture Part II Module 6…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7648:content-6-overview-and-to-do-2"
     },
     {
       "week": 6,
@@ -3092,7 +3280,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7648:synchronous-lecture-june-11-2025"
     },
     {
       "week": 6,
@@ -3108,7 +3297,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:couples-therapy-role-play"
     },
     {
       "week": 6,
@@ -3124,7 +3314,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:couples-therapy-role-play"
     },
     {
       "week": 6,
@@ -3140,7 +3331,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:therapy-videos"
     },
     {
       "week": 6,
@@ -3156,7 +3348,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:therapy-videos"
     },
     {
       "week": 6,
@@ -3172,7 +3365,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:therapy-videos"
     },
     {
       "week": 6,
@@ -3188,7 +3382,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:couples-therapy-role-play"
     },
     {
       "week": 6,
@@ -3204,7 +3399,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:module-6-readings-2"
     },
     {
       "week": 6,
@@ -3220,7 +3416,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:class-video-recording-4"
     },
     {
       "week": 6,
@@ -3236,7 +3433,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:couples-therapy-role-play"
     },
     {
       "week": 6,
@@ -3252,7 +3450,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:couples-therapy-role-play"
     },
     {
       "week": 6,
@@ -3268,7 +3467,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:couples-therapy-role-play"
     },
     {
       "week": 6,
@@ -3284,7 +3484,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:couples-therapy-role-play"
     },
     {
       "week": 6,
@@ -3300,7 +3501,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:couples-therapy-role-play"
     },
     {
       "week": 6,
@@ -3316,7 +3518,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:couples-therapy-role-play"
     },
     {
       "week": 6,
@@ -3332,7 +3535,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:couples-therapy-role-play"
     },
     {
       "week": 6,
@@ -3348,7 +3552,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:couples-therapy-role-play"
     },
     {
       "week": 7,
@@ -3364,7 +3569,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 7,
@@ -3380,7 +3586,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 7,
@@ -3396,7 +3603,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 7,
@@ -3412,7 +3620,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 7,
@@ -3428,7 +3637,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:additional-material-class-7"
     },
     {
       "week": 7,
@@ -3444,7 +3654,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:additional-material-class-7"
     },
     {
       "week": 7,
@@ -3460,7 +3671,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:additional-material-class-7"
     },
     {
       "week": 7,
@@ -3476,7 +3688,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:additional-material-class-7"
     },
     {
       "week": 7,
@@ -3492,7 +3705,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:additional-material-class-7"
     },
     {
       "week": 7,
@@ -3508,7 +3722,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:additional-material-class-7"
     },
     {
       "week": 7,
@@ -3524,7 +3739,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:additional-material-class-7"
     },
     {
       "week": 7,
@@ -3540,7 +3756,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:additional-material-class-7"
     },
     {
       "week": 7,
@@ -3556,7 +3773,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:additional-material-class-7"
     },
     {
       "week": 7,
@@ -3572,7 +3790,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:additional-material-class-7"
     },
     {
       "week": 7,
@@ -3588,7 +3807,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:additional-material-class-7"
     },
     {
       "week": 7,
@@ -3604,7 +3824,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:additional-material-class-7"
     },
     {
       "week": 7,
@@ -3620,7 +3841,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Affection and Sexual Orientations Please Read: Nichols (2014). Therapy with LGBTQ clients Chasin- Making sense of the asexual community Bilodeau & Renn (2005). Analysis of LGBT…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:overview-and-to-do-affection-and-sexual-orientations"
     },
     {
       "week": 7,
@@ -3636,7 +3858,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:lecture-s-7"
     },
     {
       "week": 7,
@@ -3652,7 +3875,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Welcome to week 7! We will cover the following topics this week: Client Resources and Strengths Reality Therapy (covered in readings) DUE: Session #2 assignment (video,…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:overview-7"
     },
     {
       "week": 7,
@@ -3668,7 +3892,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:lecture-s-7"
     },
     {
       "week": 7,
@@ -3684,7 +3909,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:7617:1195131"
     },
     {
       "week": 7,
@@ -3700,7 +3926,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:7617:1146366"
     },
     {
       "week": 7,
@@ -3716,7 +3943,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://www.youtube.com/watch?v=PQzrx7JmUkM"
     },
     {
       "week": 7,
@@ -3732,7 +3960,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 7,
@@ -3748,7 +3977,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:7617:1146368"
     },
     {
       "week": 7,
@@ -3764,7 +3994,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://www.youtube.com/watch?v=67I6g1I7Zao"
     },
     {
       "week": 7,
@@ -3780,7 +4011,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:7617:1146367"
     },
     {
       "week": 7,
@@ -3796,7 +4028,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:7617:1146369"
     },
     {
       "week": 7,
@@ -3812,7 +4045,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:7617:1146371"
     },
     {
       "week": 7,
@@ -3828,7 +4062,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:7617:1146370"
     },
     {
       "week": 7,
@@ -3844,7 +4079,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Welcome! Topic: Mindfulness of mental activity; Practicing with discursive thoughts, concepts, and beliefs. To Do: Reminder: **BSM Observation & Presentations due in Peer Groups…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7648:content-7-overview-and-to-do-3"
     },
     {
       "week": 7,
@@ -3860,7 +4096,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:module-7-beginning-anew-and-video"
     },
     {
       "week": 7,
@@ -3876,7 +4113,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:module-7-beginning-anew-and-video"
     },
     {
       "week": 7,
@@ -3892,7 +4130,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:module-7-beginning-anew-and-video"
     },
     {
       "week": 7,
@@ -3908,7 +4147,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:module-7-readings-and-links"
     },
     {
       "week": 7,
@@ -3924,7 +4164,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:module-7-beginning-anew-and-video"
     },
     {
       "week": 7,
@@ -3940,7 +4181,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:module-7-readings-and-links"
     },
     {
       "week": 7,
@@ -3956,7 +4198,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:module-7-readings-and-links"
     },
     {
       "week": 7,
@@ -3972,7 +4215,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:class-video-recording-5"
     },
     {
       "week": 7,
@@ -3988,7 +4232,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:module-7-acceptance-and-change-in-couples-part-2"
     },
     {
       "week": 7,
@@ -4004,7 +4249,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:module-7-readings-and-links"
     },
     {
       "week": 7,
@@ -4020,7 +4266,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:module-7-readings-and-links"
     },
     {
       "week": 7,
@@ -4036,7 +4283,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:module-7-readings-and-links"
     },
     {
       "week": 8,
@@ -4052,7 +4300,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 8,
@@ -4068,7 +4317,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 8,
@@ -4084,7 +4334,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 8,
@@ -4100,7 +4351,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 8,
@@ -4116,7 +4368,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 8,
@@ -4132,7 +4385,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Please Watch: Queer Planet - Streaming on Peacock ( Student subscription $2.99 per month ) Alok on Colonisation, Gender Outrage, and Identity Trans 101: Ep 1 - What is…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:overview-and-to-do-gender-identity-and-diverse-relationships"
     },
     {
       "week": 8,
@@ -4148,7 +4402,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:peer-meeting-2-groups"
     },
     {
       "week": 8,
@@ -4164,7 +4419,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:wednesday-7-slash-9-10-00am-mst-meeting-link"
     },
     {
       "week": 8,
@@ -4180,7 +4436,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:lecture-s-9"
     },
     {
       "week": 8,
@@ -4196,7 +4453,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:lecture-s-9"
     },
     {
       "week": 8,
@@ -4212,7 +4470,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:lecture-s-9"
     },
     {
       "week": 8,
@@ -4228,7 +4487,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Welcome to week 8! We will cover the following topics this week: An Introduction to Trauma Self Care RECOMMENDED: It is recommended that session #3 be completed by the end of this…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:overview-9"
     },
     {
       "week": 8,
@@ -4244,7 +4504,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:lecture-s-9"
     },
     {
       "week": 8,
@@ -4260,7 +4521,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:sign-up-for-supervision-for-video-number-3"
     },
     {
       "week": 8,
@@ -4276,7 +4538,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:lecture-s-9"
     },
     {
       "week": 8,
@@ -4292,7 +4555,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:what-is-trauma-and-how-do-we-work-with-it-video-42-min"
     },
     {
       "week": 8,
@@ -4308,7 +4572,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:lecture-s-9"
     },
     {
       "week": 8,
@@ -4324,7 +4589,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:7617:1146356"
     },
     {
       "week": 8,
@@ -4340,7 +4606,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:7617:1194033"
     },
     {
       "week": 8,
@@ -4356,7 +4623,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7617:uppers-downers-all-arounders-chapter-10-mental-health-and-drugs"
     },
     {
       "week": 8,
@@ -4372,7 +4640,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7648:the-neuroscience-of-mindfulness"
     },
     {
       "week": 8,
@@ -4388,7 +4657,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Welcome! Topic : Mindfulness of the Mind and the brain To Do: Peer Meeting #3: BSM Observation & Presentations due in Peer Groups this week; submit note (peer meeting time two…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7648:content-8-overview-and-to-do"
     },
     {
       "week": 8,
@@ -4404,7 +4674,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:module-8-diverse-relationship-models-ethical-non-monogamy-readings"
     },
     {
       "week": 8,
@@ -4420,7 +4691,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:module-8-diverse-relationship-models-ethical-non-monogamy-readings"
     },
     {
       "week": 8,
@@ -4436,7 +4708,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:module-8-diverse-relationship-models-ethical-non-monogamy-readings"
     },
     {
       "week": 8,
@@ -4452,7 +4725,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:videos-and-media-on-enm"
     },
     {
       "week": 8,
@@ -4468,7 +4742,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:videos-and-media-on-enm"
     },
     {
       "week": 8,
@@ -4484,7 +4759,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:module-8-diverse-relationship-models-ethical-non-monogamy-readings"
     },
     {
       "week": 8,
@@ -4500,7 +4776,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:videos-and-media-on-enm"
     },
     {
       "week": 8,
@@ -4516,7 +4793,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:module-8-diverse-relationship-models-ethical-non-monogamy-readings"
     },
     {
       "week": 8,
@@ -4532,7 +4810,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:module-8-diverse-relationship-models-ethical-non-monogamy-readings"
     },
     {
       "week": 8,
@@ -4548,7 +4827,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:module-8-diverse-relationship-models-ethical-non-monogamy-readings"
     },
     {
       "week": 8,
@@ -4564,7 +4844,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:videos-and-media-on-enm"
     },
     {
       "week": 8,
@@ -4580,7 +4861,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:module-8-diverse-relationship-models-ethical-non-monogamy-readings"
     },
     {
       "week": 8,
@@ -4596,7 +4878,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:therapy-role-plays"
     },
     {
       "week": 8,
@@ -4612,7 +4895,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:therapy-role-plays"
     },
     {
       "week": 8,
@@ -4628,7 +4912,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:videos-and-media-on-enm"
     },
     {
       "week": 8,
@@ -4644,7 +4929,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:module-8-diverse-relationship-models-ethical-non-monogamy-readings"
     },
     {
       "week": 9,
@@ -4660,7 +4946,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 9,
@@ -4676,7 +4963,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 9,
@@ -4692,7 +4980,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:post-intensive-resources"
     },
     {
       "week": 9,
@@ -4708,7 +4997,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "In-Person Intensive Prep Please Read: Americans and Cancel Culture Powerblindness Diversity is Diverse Client Perspectives on Broaching amb - on radical imagination and moving…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:overview-and-to-do-in-person-intensive"
     },
     {
       "week": 9,
@@ -4724,7 +5014,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:post-intensive-resources"
     },
     {
       "week": 9,
@@ -4740,7 +5031,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:post-intensive-resources"
     },
     {
       "week": 9,
@@ -4756,7 +5048,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:lecture-s-15"
     },
     {
       "week": 9,
@@ -4772,7 +5065,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Welcome to week 9! We will have our in-person intensive this week on the Arapahoe Campus in Boulder, Colorado. We will meet at the following times for the intensive: Monday, July…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:overview-6"
     },
     {
       "week": 9,
@@ -4788,7 +5082,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:lecture-s-15"
     },
     {
       "week": 9,
@@ -4804,7 +5099,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:lecture-s-15"
     },
     {
       "week": 9,
@@ -4820,7 +5116,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:lecture-s-15"
     },
     {
       "week": 9,
@@ -4836,7 +5133,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:lecture-s-15"
     },
     {
       "week": 9,
@@ -4852,7 +5150,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:lecture-s-15"
     },
     {
       "week": 9,
@@ -4868,7 +5167,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:lecture-s-15"
     },
     {
       "week": 9,
@@ -4884,7 +5184,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:7617:1207135"
     },
     {
       "week": 9,
@@ -4900,7 +5201,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:7617:1207131"
     },
     {
       "week": 9,
@@ -4916,7 +5218,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:7617:1207132"
     },
     {
       "week": 9,
@@ -4932,7 +5235,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:7617:1194030"
     },
     {
       "week": 9,
@@ -4948,7 +5252,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://www.samhsa.gov/find-help/harm-reduction"
     },
     {
       "week": 9,
@@ -4964,7 +5269,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7617:intensive-zoom-saturday-july-19th-9a-12p-mst-mi-practice-and-group-presentations"
     },
     {
       "week": 9,
@@ -4980,7 +5286,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 9,
@@ -4996,7 +5303,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://www.fda.gov/drugs/information-drug-class/information-about-medication-assisted-treatment-mat"
     },
     {
       "week": 9,
@@ -5012,7 +5320,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:7617:1196326"
     },
     {
       "week": 9,
@@ -5028,7 +5337,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://www.youtube.com/watch?v=qJ-qX3yrxC0"
     },
     {
       "week": 9,
@@ -5044,7 +5354,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7617:uppers-downers-all-arounders-chapter-9-treatment"
     },
     {
       "week": 9,
@@ -5060,7 +5371,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7648:synchronous-lecture-july-3-2025"
     },
     {
       "week": 9,
@@ -5076,7 +5388,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Welcome! Topic: Mindfulness and Pain; the Pain Cycle; How mindfulness can make a difference To Do Lecture #1: Mindfulness Interventions for Pain Closed Captions Module 9 Part…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7648:content-9-overview-and-to-do"
     },
     {
       "week": 9,
@@ -5092,7 +5405,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:class-video-recording-6"
     },
     {
       "week": 9,
@@ -5108,7 +5422,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:module-9-mindfulness-and-intimate-relationships"
     },
     {
       "week": 9,
@@ -5124,7 +5439,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:couples-therapy-role-play-and-mock-session"
     },
     {
       "week": 10,
@@ -5140,7 +5456,8 @@
       "source": "discussion",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 10,
@@ -5156,7 +5473,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 10,
@@ -5172,7 +5490,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 10,
@@ -5188,7 +5507,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 10,
@@ -5204,7 +5524,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Racial Injustice Please Watch: Explore this page and watch the trailer found on the main page. https://www.thisisnotwhowearefilm.com/ Radical Dharma: Healing Trauma with Lama Rod…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:overview-and-to-do-racial-injustice"
     },
     {
       "week": 10,
@@ -5220,7 +5541,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:lecture-s-10"
     },
     {
       "week": 10,
@@ -5236,7 +5558,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Welcome to week 10! It was so good to see you in-person last week! This week we will have three Method Presentations. We will also have supervision for session #3. RECOMMENDED: It…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:overview-10"
     },
     {
       "week": 10,
@@ -5252,7 +5575,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:readings-10"
     },
     {
       "week": 10,
@@ -5268,7 +5592,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:7617:1156435"
     },
     {
       "week": 10,
@@ -5284,7 +5609,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:7617:1148672"
     },
     {
       "week": 10,
@@ -5300,7 +5626,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:7617:1148660"
     },
     {
       "week": 10,
@@ -5316,7 +5643,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:7617:1148671"
     },
     {
       "week": 10,
@@ -5332,7 +5660,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:7617:1146365"
     },
     {
       "week": 10,
@@ -5348,7 +5677,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Welcome! Topic: Mindfulness and Trauma; Trauma-Sensitive Mindfulness To Do: I ntrod uction to Mindfulness Intervention Assignment: During the intensive you will present your…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7648:content-10-overview-and-to-do"
     },
     {
       "week": 10,
@@ -5364,7 +5694,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:couple-and-family-therapy-videos-and-media"
     },
     {
       "week": 10,
@@ -5380,7 +5711,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:presentation-on-first-therapy-session"
     },
     {
       "week": 10,
@@ -5396,7 +5728,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:module-10-readings-catch-up"
     },
     {
       "week": 11,
@@ -5412,7 +5745,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 11,
@@ -5428,7 +5762,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 11,
@@ -5444,7 +5779,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 11,
@@ -5460,7 +5796,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Please Read: Training Counseling Psychologists as Social Justice Agents Ratts, M. J. (2009). Social justice counseling: Toward the development of a fifth force among counseling…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:overview-and-to-do-social-justice-counseling"
     },
     {
       "week": 11,
@@ -5476,7 +5813,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:lecture-s-11"
     },
     {
       "week": 11,
@@ -5492,7 +5830,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Welcome to class 11! We will have three more Methods Presentations this week. RECOMMENDED: It is recommended that you complete session #4 by the end of this week.",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:overview-11"
     },
     {
       "week": 11,
@@ -5508,7 +5847,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:readings-11"
     },
     {
       "week": 11,
@@ -5524,7 +5864,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:7617:1148677"
     },
     {
       "week": 11,
@@ -5540,7 +5881,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:7617:1146364"
     },
     {
       "week": 11,
@@ -5556,7 +5898,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://www.youtube.com/watch?v=PY9DcIMGxMs"
     },
     {
       "week": 11,
@@ -5572,7 +5915,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://www.youtube.com/watch?v=br8-qebjIgs"
     },
     {
       "week": 11,
@@ -5588,7 +5932,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Welcome! T opic: MINDFULNESS OF MIND; CHOICELESS AWARENESS Evolution from mindfulness to awareness; formless meditation Sense perceptions as doorways to wakefulness To Do:…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7648:content-11-overview-and-to-do-in-person-morning-session"
     },
     {
       "week": 11,
@@ -5604,7 +5949,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:class-video-recording-7"
     },
     {
       "week": 11,
@@ -5620,7 +5966,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:affairs-and-couples-therapy-notes-and-slides"
     },
     {
       "week": 11,
@@ -5636,7 +5983,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:module-11-the-dark-underbelly-of-relationships-secrets-affairs-violence-divorce"
     },
     {
       "week": 11,
@@ -5652,7 +6000,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:module-11-the-dark-underbelly-of-relationships-secrets-affairs-violence-divorce"
     },
     {
       "week": 11,
@@ -5668,7 +6017,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:module-11-the-dark-underbelly-of-relationships-secrets-affairs-violence-divorce"
     },
     {
       "week": 11,
@@ -5684,7 +6034,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:module-11-the-dark-underbelly-of-relationships-secrets-affairs-violence-divorce"
     },
     {
       "week": 11,
@@ -5700,7 +6051,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:module-11-the-dark-underbelly-of-relationships-secrets-affairs-violence-divorce"
     },
     {
       "week": 11,
@@ -5716,7 +6068,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:module-11-the-dark-underbelly-of-relationships-secrets-affairs-violence-divorce"
     },
     {
       "week": 12,
@@ -5732,7 +6085,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 12,
@@ -5748,7 +6102,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 12,
@@ -5764,7 +6119,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 12,
@@ -5780,7 +6136,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 12,
@@ -5796,7 +6153,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 12,
@@ -5812,7 +6170,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Transpersonal & Mindful Implications Attend: This week's live class: Wednesday, August 6th 10:00-11:30am MST https://naropa.zoom.us/j/97880477030 Class Resources: Read: Repairing…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:overview-and-to-do-transpersonal-implications"
     },
     {
       "week": 12,
@@ -5828,7 +6187,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:peer-meeting-3-groups"
     },
     {
       "week": 12,
@@ -5844,7 +6204,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:wednesday-8-slash-6-10-00am-mst-meeting-link"
     },
     {
       "week": 12,
@@ -5860,7 +6221,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:lecture-s-12"
     },
     {
       "week": 12,
@@ -5876,7 +6238,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Welcome to week 12! You are almost there! We will cover the following topics this week: Post Modern Approaches: Solution-Focused Therapy Narrative Therapy Feminist Therapy DUE:…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:overview-12"
     },
     {
       "week": 12,
@@ -5892,7 +6255,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:readings-12"
     },
     {
       "week": 12,
@@ -5908,7 +6272,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:readings-12"
     },
     {
       "week": 12,
@@ -5924,7 +6289,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 12,
@@ -5940,7 +6306,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:7617:1146377"
     },
     {
       "week": 12,
@@ -5956,7 +6323,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "external:https://www.youtube.com/watch?v=kC7dJQt5BBw"
     },
     {
       "week": 12,
@@ -5972,7 +6340,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:7617:1146357"
     },
     {
       "week": 12,
@@ -5988,7 +6357,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:7617:1146376"
     },
     {
       "week": 12,
@@ -6004,7 +6374,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Welcome! CONTEMPLATIVE INQUIRY: WHO ARE YOU? NOT JUST THAT (in-class experiential) To Do: Contemplative Dyadic Inquiry: “WHO AM I?”, “NOT JUST THAT” The purpose of this practice…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7648:content-12-overview-and-to-do-in-person-afternoon-class-session"
     },
     {
       "week": 12,
@@ -6020,7 +6391,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:continue-dark-underbelly-of-couples-therapy-dot-dot-dot"
     },
     {
       "week": 12,
@@ -6036,7 +6408,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:continue-dark-underbelly-of-couples-therapy-dot-dot-dot"
     },
     {
       "week": 12,
@@ -6052,7 +6425,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:prepare-for-warriors-exam"
     },
     {
       "week": 12,
@@ -6068,7 +6442,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:class-zoom-recording"
     },
     {
       "week": 12,
@@ -6084,7 +6459,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:continue-dark-underbelly-of-couples-therapy-dot-dot-dot"
     },
     {
       "week": 13,
@@ -6100,7 +6476,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 13,
@@ -6116,7 +6493,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 13,
@@ -6132,7 +6510,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 13,
@@ -6148,7 +6527,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 13,
@@ -6164,7 +6544,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 13,
@@ -6180,7 +6561,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": true
+      "submitted": true,
+      "canvas_target": ""
     },
     {
       "week": 13,
@@ -6196,7 +6578,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 13,
@@ -6212,7 +6595,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 13,
@@ -6228,7 +6612,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 13,
@@ -6244,7 +6629,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:lecture-s-13"
     },
     {
       "week": 13,
@@ -6260,7 +6646,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Welcome to the last week! Congratulations, you did it! We will be taking the final exam this week. The 40 - question exam covers Behavior Therapy, Cognitive Therapies, Reality…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:overview-13"
     },
     {
       "week": 13,
@@ -6276,7 +6663,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:readings-13"
     },
     {
       "week": 13,
@@ -6292,7 +6680,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Topic: Retreat Morning (Sec. A and B together) Mindfulness and awareness practices; Compassionate Abiding; Mindful Movement",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7648:content-13-overview-and-to-do-in-person-morning-session"
     },
     {
       "week": 13,
@@ -6308,7 +6697,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:warriors-exam"
     },
     {
       "week": 14,
@@ -6324,7 +6714,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Welcome! Topic: MINDFULNESS INTERVENTION PRESENTATIONS due in your respective small groups.'",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7648:content-14-overview-and-to-do-in-person-afternoon-class-session"
     },
     {
       "week": 14,
@@ -6340,7 +6731,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Welcome! Topic: Digesting the Learning from Intensive To Do: Video Lecture and Handout will be posted on Tuesday, July 22, 2025 at 6:00 pm MT Practice Recommendation: To digest…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7648:content-15-overview-and-to-do"
     },
     {
       "week": 14,
@@ -6356,7 +6748,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7648:content-16"
     },
     {
       "week": 14,
@@ -6372,7 +6765,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7648:content-16"
     },
     {
       "week": 0,
@@ -6388,7 +6782,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -6404,7 +6799,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -6420,7 +6816,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -6436,7 +6833,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -6452,7 +6850,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -6468,7 +6867,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -6484,7 +6884,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -6500,7 +6901,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -6516,7 +6918,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -6532,7 +6935,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -6548,7 +6952,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -6564,7 +6969,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -6580,7 +6986,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -6596,7 +7003,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -6612,7 +7020,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -6628,7 +7037,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -6644,7 +7054,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -6660,7 +7071,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -6676,7 +7088,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -6692,7 +7105,8 @@
       "source": "discussion",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 0,
@@ -6708,7 +7122,8 @@
       "source": "discussion",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 0,
@@ -6724,7 +7139,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "WELCOME~ WELCOME - Dr. Rikki Course Overview About Social and Multicultural Foundations Hello! Welcome to our class. This survey course explores the role of the counselor embedded…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:course-overview"
     },
     {
       "week": 0,
@@ -6740,7 +7156,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -6756,7 +7173,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -6772,7 +7190,8 @@
       "source": "discussion",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 0,
@@ -6788,7 +7207,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -6804,7 +7224,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -6820,7 +7241,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -6836,7 +7258,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:7546:1158454"
     },
     {
       "week": 0,
@@ -6852,7 +7275,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -6868,7 +7292,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -6884,7 +7309,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -6900,7 +7326,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -6916,7 +7343,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -6932,7 +7360,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -6948,7 +7377,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -6964,7 +7394,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -6980,7 +7411,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -6996,7 +7428,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:help-and-support"
     },
     {
       "week": 0,
@@ -7012,7 +7445,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -7028,7 +7462,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -7044,7 +7479,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:smf-community-agreements"
     },
     {
       "week": 0,
@@ -7060,7 +7496,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -7076,7 +7513,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:instructor-information"
     },
     {
       "week": 0,
@@ -7092,7 +7530,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Zoom Link: https://naropa.zoom.us/j/97880477030 Intensive Schedule Overview: Introduction, Norms and Values, Power and Systems of Oppression Hello and Welcome everyone! Below are…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:intensive-overview-and-zoom-link"
     },
     {
       "week": 0,
@@ -7108,7 +7547,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -7124,7 +7564,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -7140,7 +7581,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -7156,7 +7598,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -7172,7 +7615,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -7188,7 +7632,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -7204,7 +7649,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 0,
@@ -7220,7 +7666,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -7236,7 +7683,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -7252,7 +7700,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -7268,7 +7717,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -7284,7 +7734,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -7300,7 +7751,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -7316,7 +7768,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -7332,7 +7785,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -7348,7 +7802,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -7364,7 +7819,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:equity-work-where-are-we-now-ppt"
     },
     {
       "week": 0,
@@ -7380,7 +7836,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:rupture-and-repair-resources"
     },
     {
       "week": 0,
@@ -7396,7 +7853,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -7412,7 +7870,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -7428,7 +7887,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -7444,7 +7904,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:power-and-privilege-lecture"
     },
     {
       "week": 0,
@@ -7460,7 +7921,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -7476,7 +7938,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -7492,7 +7955,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -7508,7 +7972,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -7524,7 +7989,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -7540,7 +8006,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -7556,7 +8023,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -7572,7 +8040,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -7588,7 +8057,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:rupture-and-repair-resources"
     },
     {
       "week": 0,
@@ -7604,7 +8074,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -7620,7 +8091,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -7636,7 +8108,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -7652,7 +8125,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -7668,7 +8142,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -7684,7 +8159,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -7700,7 +8176,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -7716,7 +8193,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -7732,7 +8210,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -7748,7 +8227,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -7764,7 +8244,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -7780,7 +8261,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -7796,7 +8278,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:7546:1201347"
     },
     {
       "week": 0,
@@ -7812,7 +8295,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -7828,7 +8312,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -7844,7 +8329,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -7860,7 +8346,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -7876,7 +8363,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:rupture-and-repair-resources"
     },
     {
       "week": 0,
@@ -7892,7 +8380,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -7908,7 +8397,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -7924,7 +8414,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -7940,7 +8431,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -7956,7 +8448,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -7972,7 +8465,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -7988,7 +8482,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -8004,7 +8499,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7546:online-sourcebook"
     },
     {
       "week": 0,
@@ -8020,7 +8516,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:online-sourcebook"
     },
     {
       "week": 0,
@@ -8036,7 +8533,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 0,
@@ -8052,7 +8550,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 0,
@@ -8068,7 +8567,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:cmhc604-intake-form"
     },
     {
       "week": 0,
@@ -8084,7 +8584,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:7549:1154554"
     },
     {
       "week": 0,
@@ -8100,7 +8601,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:7549:1154562"
     },
     {
       "week": 0,
@@ -8116,7 +8618,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:cmhc604-student-counselor-evaluation-form"
     },
     {
       "week": 0,
@@ -8132,7 +8635,8 @@
       "source": "discussion",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 0,
@@ -8148,7 +8652,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:online-sourcebook"
     },
     {
       "week": 0,
@@ -8164,7 +8669,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:online-sourcebook"
     },
     {
       "week": 0,
@@ -8180,7 +8686,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:online-sourcebook"
     },
     {
       "week": 0,
@@ -8196,7 +8703,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:online-sourcebook"
     },
     {
       "week": 0,
@@ -8212,7 +8720,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:online-sourcebook"
     },
     {
       "week": 0,
@@ -8228,7 +8737,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:online-sourcebook"
     },
     {
       "week": 0,
@@ -8244,7 +8754,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:dr-rikkis-information"
     },
     {
       "week": 0,
@@ -8260,7 +8771,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:online-sourcebook"
     },
     {
       "week": 0,
@@ -8276,7 +8788,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:online-sourcebook"
     },
     {
       "week": 0,
@@ -8292,7 +8805,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:online-sourcebook"
     },
     {
       "week": 0,
@@ -8308,7 +8822,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:online-sourcebook"
     },
     {
       "week": 0,
@@ -8324,7 +8839,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:online-sourcebook"
     },
     {
       "week": 0,
@@ -8340,7 +8856,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:online-sourcebook"
     },
     {
       "week": 0,
@@ -8356,7 +8873,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:online-sourcebook"
     },
     {
       "week": 0,
@@ -8372,7 +8890,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Instructor Information Learning Modules Online Sourcebook Help & Support Welcome to your second semester of graduate school and Counseling and Helping Relationships II! In this…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:home-page"
     },
     {
       "week": 0,
@@ -8388,7 +8907,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:online-sourcebook"
     },
     {
       "week": 0,
@@ -8404,7 +8924,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:online-sourcebook"
     },
     {
       "week": 0,
@@ -8420,7 +8941,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:online-sourcebook"
     },
     {
       "week": 0,
@@ -8436,7 +8958,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:online-sourcebook"
     },
     {
       "week": 0,
@@ -8452,7 +8975,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:methods-presentation-groups-and-dates"
     },
     {
       "week": 0,
@@ -8468,7 +8992,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:online-sourcebook"
     },
     {
       "week": 0,
@@ -8484,7 +9009,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:online-sourcebook"
     },
     {
       "week": 0,
@@ -8500,7 +9026,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "file:7549:1154543"
     },
     {
       "week": 0,
@@ -8516,7 +9043,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:references"
     },
     {
       "week": 0,
@@ -8532,7 +9060,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:online-sourcebook"
     },
     {
       "week": 0,
@@ -8548,7 +9077,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:online-sourcebook"
     },
     {
       "week": 0,
@@ -8564,7 +9094,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:online-sourcebook"
     },
     {
       "week": 0,
@@ -8580,7 +9111,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:online-sourcebook"
     },
     {
       "week": 0,
@@ -8596,7 +9128,8 @@
       "source": "discussion",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 0,
@@ -8612,7 +9145,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7549:video-demonstrating-how-to-record-virtual-session-in-supervision-assist"
     },
     {
       "week": 0,
@@ -8628,7 +9162,8 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 0,
@@ -8644,7 +9179,8 @@
       "source": "discussion",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 0,
@@ -8660,7 +9196,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Instructor Information Learning Modules Online Sourcebook Help & Support Welcome to Addictions Counseling! I am so glad you are here. Please note the following online intensive…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7617:home-page"
     },
     {
       "week": 0,
@@ -8676,7 +9213,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7617:instructor-information"
     },
     {
       "week": 0,
@@ -8692,7 +9230,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Cultivating Mindful Presence This course continues and extends the training in mindfulness-awareness meditation from last semester's \"Foundations of Mindfulness\" and is designed…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7648:home-page"
     },
     {
       "week": 0,
@@ -8708,7 +9247,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7648:instructors-information"
     },
     {
       "week": 0,
@@ -8724,7 +9264,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:canvas-getting-started"
     },
     {
       "week": 0,
@@ -8740,7 +9281,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:canvas-helpful-tips"
     },
     {
       "week": 0,
@@ -8756,7 +9298,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:canvas-getting-started"
     },
     {
       "week": 0,
@@ -8772,7 +9315,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:canvas-getting-started"
     },
     {
       "week": 0,
@@ -8788,7 +9332,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:canvas-getting-started"
     },
     {
       "week": 0,
@@ -8804,7 +9349,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:canvas-getting-started"
     },
     {
       "week": 0,
@@ -8820,7 +9366,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:canvas-helpful-tips"
     },
     {
       "week": 0,
@@ -8836,7 +9383,8 @@
       "source": "module_item",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:about-your-instructor"
     },
     {
       "week": 0,
@@ -8852,7 +9400,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:canvas-getting-started"
     },
     {
       "week": 0,
@@ -8868,7 +9417,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:canvas-helpful-tips"
     },
     {
       "week": 0,
@@ -8884,7 +9434,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:canvas-helpful-tips"
     },
     {
       "week": 0,
@@ -8900,7 +9451,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:online-sourcebook"
     },
     {
       "week": 0,
@@ -8916,7 +9468,8 @@
       "source": "discussion",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": ""
     },
     {
       "week": 0,
@@ -8932,7 +9485,8 @@
       "source": "module_item",
       "is_overview": true,
       "summary": "Course Description: This class focuses on developing a working knowledge of couples and family therapy using different models. Beginning with a foundation of family systems theory…",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:course-overview"
     },
     {
       "week": 0,
@@ -8948,7 +9502,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:canvas-getting-started"
     },
     {
       "week": 0,
@@ -8964,7 +9519,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:canvas-helpful-tips"
     },
     {
       "week": 0,
@@ -8980,7 +9536,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:canvas-helpful-tips"
     },
     {
       "week": 0,
@@ -8996,7 +9553,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:canvas-additional-support"
     },
     {
       "week": 0,
@@ -9012,7 +9570,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:canvas-additional-support"
     },
     {
       "week": 0,
@@ -9028,7 +9587,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:canvas-helpful-tips"
     },
     {
       "week": 0,
@@ -9044,7 +9604,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:canvas-helpful-tips"
     },
     {
       "week": 0,
@@ -9060,7 +9621,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:canvas-helpful-tips"
     },
     {
       "week": 0,
@@ -9076,7 +9638,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:canvas-helpful-tips"
     },
     {
       "week": 0,
@@ -9092,7 +9655,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:canvas-getting-started"
     },
     {
       "week": 0,
@@ -9108,7 +9672,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:canvas-getting-started"
     },
     {
       "week": 0,
@@ -9124,7 +9689,8 @@
       "source": "page_child",
       "is_overview": false,
       "summary": "",
-      "submitted": false
+      "submitted": false,
+      "canvas_target": "page:7620:canvas-getting-started"
     }
   ],
   "totals": {
@@ -9138,7 +9704,7 @@
     "lecture": 21
   },
   "coverage": {
-    "verified_at": "2026-08-28T03:42:02.249269+00:00",
+    "verified_at": "2026-08-28T13:02:57.248106+00:00",
     "assignments": {
       "total": 57,
       "captured": 57
@@ -9183,5 +9749,5 @@
   "roster_change": null,
   "archives": [],
   "archived": true,
-  "backfilled_at": "2026-08-28T03:42:02.259243+00:00"
+  "backfilled_at": "2026-08-28T13:02:57.268463+00:00"
 }
