@@ -2348,6 +2348,17 @@ def archive_current_semester(cfg: dict) -> None:
     name = (prev.get("semester") or {}).get("name") or "unknown"
     slug = re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-") or "unknown"
 
+    # Retired semesters render like backfilled ones: read-only, no checkboxes.
+    # Her check-offs are NOT lost — they live in KV namespaced by semester name,
+    # and the board still shows a tick for anything she completed. Only the
+    # tickable control goes away, which is right for a semester that is over.
+    prev["archived"] = True
+    prev["retired_at"] = datetime.now(timezone.utc).isoformat()
+    # Signals that the CONTENT (files, pages, submissions) still needs pulling
+    # into the Drive archive. Canvas access ends after graduation; a retired
+    # semester whose content was never captured is the failure case this flags.
+    prev.setdefault("content_archive", "pending")
+
     ARCHIVE_DIR.mkdir(parents=True, exist_ok=True)
     (ARCHIVE_DIR / f"{slug}.json").write_text(json.dumps(prev, indent=2, ensure_ascii=False))
 
@@ -2366,11 +2377,23 @@ def archive_current_semester(cfg: dict) -> None:
         "items": len(prev.get("items") or []),
         "courses": len(prev.get("courses") or []),
         "start_date": (prev.get("semester") or {}).get("start_date"),
+        "content_archive": prev.get("content_archive", "pending"),
     })
     index.sort(key=lambda e: e.get("start_date") or "", reverse=True)
     index_path.write_text(json.dumps(index, indent=2, ensure_ascii=False))
     print(f"  📦 archived '{name}' → dashboard/archive/{slug}.json "
           f"({len(prev.get('items') or [])} items retained)")
+    # Loud on purpose. This is the moment the content grab must happen: Canvas
+    # keeps concluded courses only while she is enrolled, and after graduation
+    # this window closes for good.
+    print(f"\n  {'=' * 68}")
+    print(f"  ⚠ ACTION REQUIRED — '{name}' is retired. Capture its CONTENT now:")
+    print(f"      cd ~/Documents/Naropa Archive")
+    print(f"      python3 archive.py --term \"{(prev.get('semester') or {}).get('canvas_term_name') or name}\"")
+    print(f"      python3 upload_drive.py")
+    print(f"    Board links for this semester point at Canvas. Canvas access ends")
+    print(f"    after graduation; the Drive copy is what survives.")
+    print(f"  {'=' * 68}\n")
 
 
 # ─────────────────────────────────────────────────────────────────────────────

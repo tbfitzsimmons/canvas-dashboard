@@ -46,8 +46,11 @@
   .masthead .sub { font-size: 13px; color: var(--ink-soft); }
   .masthead .sub strong { color: var(--accent); font-weight: 600; }
   .stale-warn { color: #B91C1C; font-weight: 500; }
-  .ro-dot { display:inline-block; width:14px; height:14px; margin-top:2px;
-            border-radius:50%; border:1.5px solid var(--line); flex:0 0 auto; }
+  .ro-dot { display:inline-flex; align-items:center; justify-content:center;
+            width:14px; height:14px; margin-top:2px; border-radius:50%;
+            border:1.5px solid var(--line); flex:0 0 auto;
+            font-size:9px; line-height:1; color:var(--muted); }
+  .ro-dot.ro-done { border-color:var(--accent); color:var(--accent); font-weight:700; }
   .note-link { font-size: 11px; color: var(--link); text-decoration: none; margin-right: 6px; }
   .note-link:hover { text-decoration: underline; }
   .sync-dot {
@@ -1453,7 +1456,14 @@ function renderSemesterPicker(d) {
     bits.push(`<div class="sync-notice" style="font-size:11px;color:#92400E;">📅 Rolled over to <strong>${escapeHtml(rolled.to)}</strong>. ${escapeHtml(rolled.from || 'The previous semester')} is retired but retained — pick it below to look back. Its check-offs are untouched.</div>`);
   }
   if (VIEWING_ARCHIVE) {
-    bits.push(`<div class="sync-notice" style="font-size:11px;color:#92400E;">👓 Viewing an archived semester (read-only history). <a href="#" onclick="event.preventDefault(); loadSemester(null);">back to current</a></div>`);
+    bits.push(`<div class="sync-notice" style="font-size:11px;color:#92400E;">👓 Viewing an archived semester (read-only history). Ticks show what you completed. <a href="#" onclick="event.preventDefault(); loadSemester(null);">back to current</a></div>`);
+    // Links on an archived board still point at Canvas. That access ends after
+    // graduation, so a semester whose content was never pulled into Drive is a
+    // countdown, not a footnote. Surfaced quietly, only while viewing it.
+    const meta = (CURRENT_DATA?.archives || []).find(a => a.slug === VIEWING_ARCHIVE);
+    if (meta && meta.content_archive === 'pending') {
+      bits.push(`<div class="token-warn">📦 <strong>${escapeHtml(meta.name)} materials are not yet copied to Google Drive.</strong> Links below point at Canvas, which Naropa withdraws after graduation. Run the archive capture for this term while access lasts.</div>`);
+    }
   }
   if (archives.length) {
     const opts = [`<option value="">${escapeHtml(CURRENT_DATA?.semester?.name || 'Current')} (current)</option>`]
@@ -1859,7 +1869,9 @@ function renderItem(it) {
 
   return `
     <div class="item ${isDone ? 'done' : ''} ${it.is_overview ? 'is-overview' : ''} ${urgClass}" data-id="${escapeAttr(it.canvas_id)}">
-      ${isReadOnlySemester() ? '<span class="ro-dot" title="Completed semester — reference only"></span>' : `<input type="checkbox" ${isDone ? 'checked' : ''} />`}
+      ${isReadOnlySemester()
+          ? `<span class="ro-dot ${isDone ? 'ro-done' : ''}" title="${isDone ? 'You marked this done' : 'Completed semester — reference only'}">${isDone ? '✓' : ''}</span>`
+          : `<input type="checkbox" ${isDone ? 'checked' : ''} />`}
       <div class="item-body">
         <div class="item-title">
           ${it.link

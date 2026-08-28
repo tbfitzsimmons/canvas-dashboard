@@ -419,11 +419,44 @@ custom domain, preserving the `#t=` hash. Code at top of `<script>` in index.htm
    Backfilled 2026-08-27, each at 100% graded coverage:
      Spring 2025  622 items / 4 courses    Summer 2025  566 / 5
      Fall 2025    302 items / 5 courses    Spring 2026  604 / 5
-   Backfilled semesters render READ-ONLY — payload carries `"archived": true`,
+   Archived semesters render READ-ONLY — payload carries `"archived": true`,
    `isReadOnlySemester()` swaps checkboxes for `.ro-dot` and shows "N items"
-   instead of x/y. They have no check-off history, so 0/622 would misread as
-   "nothing done" for a semester she passed. Summer 2026 is EXCLUDED from this:
-   the rollover archived it with her real check-offs, which stay visible.
+   instead of x/y. A tick (`.ro-done`) still shows for anything she completed:
+   check-off state lives in KV namespaced by semester, so only the tickable
+   CONTROL is removed, never the record. Summer 2026 was rebuilt this way too
+   (Brooks, 2026-08-28) — 949 → 923 items, because the July-era rollover copy
+   predated the quality filters. Graded coverage identical at 49/49 and 33/33;
+   the 134 dropped rows were citation fragments, a bare Zoom URL and sentence
+   fragments. Noise 2.1%.
+
+20. **Rollover now triggers the CONTENT grab, not just the board copy
+   (Brooks, 2026-08-28).** `archive_current_semester()` sets `archived: true`,
+   `retired_at`, and `content_archive: "pending"`, and prints a loud ACTION
+   REQUIRED block naming the exact commands to pull that term's files into
+   Drive. The board shows a warning while viewing any archived semester whose
+   `content_archive` is still `pending`.
+   WHY THIS EXISTS: archived board links point at CANVAS. Naropa withdraws
+   Canvas access after graduation (~May 2027), and on that day every
+   un-captured semester becomes unreachable. Brooks's instruction was explicit
+   — do not wait to ask the registrar for a retention date, capture it now.
+   The Drive side is safe: the account is Jennifer's PERSONAL Google, not a
+   Naropa-issued one, so it survives graduation (confirmed 2026-08-28).
+
+21. **`Item.canvas_target` — capture the destination before access ends.**
+   A module item's `html_url` is an opaque `/courses/N/modules/items/N`
+   redirect that does NOT name what it points at; it can only be dereferenced
+   while Canvas answers. `module_item_target()` records it at build time as
+   `file:` / `page:` / `assignment:` / `discussion:` / `external:`.
+   Captured across all five archived terms: 679/682 module-item rows (99%),
+   ~2,700 targets total. Re-pointing archived boards at Drive currently tops
+   out at 76% of Canvas links; the residual is 237 assignment pages, 80
+   discussion threads and 70 Canvas media embeds. Brooks ruled the first two
+   ARE to be snapshotted as HTML into Drive — "it is behind her google drive"
+   — which takes it to ~94%. That capture is the ARCHIVE project's job.
+   Also found and handed over 2026-08-28: 219 of her own submissions exist in
+   Canvas and NOWHERE in the archive — 60 with attachments (67 files), 170
+   graded. Her own written work, with feedback. Highest-value, zero FERPA
+   question, and it dies with Canvas access like everything else.
    Two bugs found while building it, both worth remembering: the picker read a
    STALE archive list from data.json (a backfill was on disk but unreachable —
    now `loadArchiveIndex()` reads `archive/index.json` directly and wins), and
