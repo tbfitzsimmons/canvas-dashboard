@@ -35,6 +35,32 @@ if [ "$COUNT" = "0" ]; then
   exit 0
 fi
 
+# Shrink guard. Learned 2026-08-29 the hard way, in the archive project: a
+# generator bug keyed entries on a field nothing ever sets, so it produced an
+# EMPTY contract, printed "0 entries" with a plausible explanation, and
+# overwrote a working 17-entry file. It read as a finding rather than a failure.
+#
+# The link check above cannot catch this: a contract that loses entries still
+# has every REMAINING link resolve, so it passes cleanly while silently
+# removing working links from Jennifer's board. Losing a good link is a
+# regression whether or not the rest are healthy.
+# Set ALLOW_SHRINK=1 to publish a deliberately smaller contract.
+if [ -f "$DEST" ]; then
+  PREV=$(python3 -c 'import json,sys;d=json.load(open(sys.argv[1]));print(len(d.get("notes",d)))' "$DEST" 2>/dev/null || echo 0)
+  if [ "$COUNT" -lt "$PREV" ] && [ "${ALLOW_SHRINK:-0}" != "1" ]; then
+    echo "❌ REFUSING: incoming contract has $COUNT entries, published has $PREV."
+    echo "   These keys would LOSE their links:"
+    python3 - "$SRC" "$DEST" <<'PY'
+import json,sys
+new=json.load(open(sys.argv[1])); new=new.get("notes",new)
+old=json.load(open(sys.argv[2])); old=old.get("notes",old)
+for k in sorted(set(old)-set(new)): print(f"     {k}")
+PY
+    echo "   Nothing published. If the shrink is intended: ALLOW_SHRINK=1 $0"
+    exit 1
+  fi
+fi
+
 # Link health check. Learned 2026-08-27: an id can be well-formed and still not
 # exist. Unauthenticated, Drive answers 401 for a real private file and 404 for
 # one that is not there, so existence is checkable without credentials.
