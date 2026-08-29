@@ -2243,6 +2243,15 @@ def _archive_index() -> list[dict]:
         return []
 
 
+def strip_archived_content(d: dict) -> dict:
+    """Title + link only. Removes body text lifted from Canvas pages before it is
+    written into a publicly-served archive file. `detail` is kept: it is a
+    provenance breadcrumb ("from: Week 3 Readings"), never content."""
+    d = dict(d)
+    d["summary"] = ""
+    return d
+
+
 def backfill_term(canvas: Canvas, cfg: dict, term_name: str) -> int:
     """Build a HISTORICAL board for a concluded term and write it straight to
     dashboard/archive/<slug>.json.
@@ -2290,7 +2299,13 @@ def backfill_term(canvas: Canvas, cfg: dict, term_name: str) -> int:
         "semester": semester,
         "token_expires": cfg.get("token_expires"),
         "courses": [course_dict(c) for c in courses],
-        "items": [asdict(i) for i in items],
+        # Title + link only on archived boards (Brooks, 2026-08-28). The `summary`
+        # field carries ~180 chars lifted from Canvas overview pages. On the live
+        # board that is useful context; on an archived board it is course content
+        # sitting in a PUBLICLY fetchable JSON file on GitHub Pages, and prior-term
+        # material includes publisher-licensed readings. Hiding it in the UI would
+        # not be enough — dashboard/archive/*.json is served to anyone. Strip it.
+        "items": [strip_archived_content(asdict(i)) for i in items],
         "totals": summarize(items),
         "coverage": coverage,
         "other_terms": [],
@@ -2354,6 +2369,8 @@ def archive_current_semester(cfg: dict) -> None:
     # tickable control goes away, which is right for a semester that is over.
     prev["archived"] = True
     prev["retired_at"] = datetime.now(timezone.utc).isoformat()
+    # Same rule as backfill: an archived board is title + link only.
+    prev["items"] = [strip_archived_content(i) for i in (prev.get("items") or [])]
     # Signals that the CONTENT (files, pages, submissions) still needs pulling
     # into the Drive archive. Canvas access ends after graduation; a retired
     # semester whose content was never captured is the failure case this flags.

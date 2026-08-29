@@ -1858,7 +1858,9 @@ function renderItem(it) {
 
   const overviewBadge = it.is_overview
     ? `<span class="badge-overview">📌 Overview</span>` : '';
-  const overviewSummary = (it.is_overview && it.summary)
+  // Belt and braces: sync.py strips `summary` out of archived files entirely,
+  // but if an older archive file is ever loaded, do not render its body text.
+  const overviewSummary = (it.is_overview && it.summary && !isReadOnlySemester())
     ? `<div class="item-summary">${escapeHtml(it.summary)}</div>` : '';
 
   // Note button for video + lecture items (copies a Granola-ready template)

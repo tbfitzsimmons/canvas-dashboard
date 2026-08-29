@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-28T13:03:40.243415+00:00",
+  "generated_at": "2026-08-29T14:18:27.619522+00:00",
   "semester": {
     "name": "Fall 2025",
     "start_date": "2025-08-25",
@@ -321,7 +321,7 @@
       "canvas_id": "module_item:354657",
       "source": "module_item",
       "is_overview": true,
-      "summary": "August 28 9:00- 12 and 1:30 - 5:30 pm via Zoom Short meditation Introductions Review the syllabus and assignments Coordination of peer groups Discussion on the readings Embodiment…",
+      "summary": "",
       "submitted": false,
       "canvas_target": "page:8001:overview-of-the-intensive"
     },
@@ -440,7 +440,7 @@
       "canvas_id": "module_item:338917",
       "source": "module_item",
       "is_overview": true,
-      "summary": "Overview This Module is the required preparation for the REL609 weekend training course. Because this is a training, which can lead to authorization as a Naropa University…",
+      "summary": "",
       "submitted": false,
       "canvas_target": "page:8089:module-1-overview-and-to-do-list"
     },
@@ -3109,7 +3109,7 @@
       "canvas_id": "module_item:354687",
       "source": "module_item",
       "is_overview": true,
-      "summary": "Module 9 and Module 10 The mindful way workbook pg 111-114 pdf-1.pdf ACT made simple-1.pdf Self Therapy Workbook -1.pdf DBT skills worksheets-1.pdf",
+      "summary": "",
       "submitted": false,
       "canvas_target": "page:8001:intensive-overview"
     },
@@ -3483,7 +3483,7 @@
       "canvas_id": "module_item:354692",
       "source": "module_item",
       "is_overview": true,
-      "summary": "Recommend working on your final paper",
+      "summary": "",
       "submitted": false,
       "canvas_target": "page:8001:overview-7"
     },
@@ -3976,7 +3976,7 @@
       "canvas_id": "module_item:341283",
       "source": "module_item",
       "is_overview": true,
-      "summary": "Instructor Information Learning Modules Online Sourcebook Help & Support Replace with a Welcome Video. Welcome students! IMPORTANT: please not that due to a system glitch which I…",
+      "summary": "",
       "submitted": false,
       "canvas_target": "page:8083:home-page"
     },
@@ -4384,7 +4384,7 @@
       "canvas_id": "module_item:338912",
       "source": "module_item",
       "is_overview": true,
-      "summary": "About Mindfulness Instructor Training I Course Code and Section: REL 609w Course Title: Mindfulness Instructor Training I Credit Hours:Day(s), Time(s), & Location(s) of Class:…",
+      "summary": "",
       "submitted": false,
       "canvas_target": "page:8089:course-overview"
     },
@@ -5216,7 +5216,7 @@
     "lecture": 10
   },
   "coverage": {
-    "verified_at": "2026-08-28T13:03:40.240173+00:00",
+    "verified_at": "2026-08-29T14:18:27.616866+00:00",
     "assignments": {
       "total": 22,
       "captured": 22
@@ -5261,5 +5261,5 @@
   "roster_change": null,
   "archives": [],
   "archived": true,
-  "backfilled_at": "2026-08-28T13:03:40.253271+00:00"
+  "backfilled_at": "2026-08-29T14:18:27.629889+00:00"
 }
