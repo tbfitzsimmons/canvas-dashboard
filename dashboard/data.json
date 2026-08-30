@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-30T01:53:18.678090+00:00",
+  "generated_at": "2026-08-30T15:27:47.328622+00:00",
   "semester": {
     "name": "Fall 2026",
     "start_date": "2026-08-24",
@@ -256,6 +256,23 @@
       "summary": "",
       "submitted": false,
       "canvas_target": "page:9042:zoom-intensive-agenda"
+    },
+    {
+      "week": 1,
+      "courseId": "course3",
+      "type": "reading",
+      "title": "Part of the retrieved lecture for Module 1",
+      "detail": "",
+      "due": "—",
+      "due_date": null,
+      "link": "https://naropa.instructure.com/api/v1/courses/9492/module_item_redirect/434257",
+      "points": null,
+      "canvas_id": "module_item:434257",
+      "source": "module_item",
+      "is_overview": false,
+      "summary": "",
+      "submitted": false,
+      "canvas_target": "external:https://naropa-my.sharepoint.com/:v:/g/personal/robert_karyadeva_naropa_edu/IQDJFx9yi9b9QrFZ98EFuHc8AU8HU9b6cVUYe3aNXbBKj1k?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=NZhR4f"
     },
     {
       "week": 1,
@@ -4152,7 +4169,7 @@
     }
   ],
   "totals": {
-    "reading": 130,
+    "reading": 131,
     "video": 29,
     "discussion": 25,
     "paper": 5,
@@ -4162,7 +4179,7 @@
     "lecture": 1
   },
   "coverage": {
-    "verified_at": "2026-08-30T01:53:18.675780+00:00",
+    "verified_at": "2026-08-30T15:27:47.326311+00:00",
     "assignments": {
       "total": 43,
       "captured": 43
@@ -4172,8 +4189,8 @@
       "captured": 25
     },
     "module_items": {
-      "total": 97,
-      "captured": 97
+      "total": 98,
+      "captured": 98
     },
     "unrepresented": [],
     "missing": [],
@@ -4183,7 +4200,7 @@
       "by_reason": {
         "prose fragment": 3
       },
-      "items_checked": 240
+      "items_checked": 241
     }
   },
   "other_terms": [
