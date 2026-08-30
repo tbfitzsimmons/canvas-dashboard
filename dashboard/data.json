@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-29T14:21:06.780426+00:00",
+  "generated_at": "2026-08-30T01:53:18.678090+00:00",
   "semester": {
     "name": "Fall 2026",
     "start_date": "2026-08-24",
@@ -543,7 +543,7 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false,
+      "submitted": true,
       "canvas_target": ""
     },
     {
@@ -558,23 +558,6 @@
       "points": null,
       "canvas_id": "synthetic:supervision_assist:course2:wk2",
       "source": "synthetic",
-      "is_overview": false,
-      "summary": "",
-      "submitted": false,
-      "canvas_target": ""
-    },
-    {
-      "week": 2,
-      "courseId": "course4",
-      "type": "discussion",
-      "title": "Reading Reflection: DQ 1",
-      "detail": "5 pts · discussion",
-      "due": "Sun",
-      "due_date": "2026-09-07T05:59:59+00:00",
-      "link": "https://naropa.instructure.com/courses/9065/assignments/114452",
-      "points": 5.0,
-      "canvas_id": "assignment:114452",
-      "source": "assignment",
       "is_overview": false,
       "summary": "",
       "submitted": false,
@@ -664,6 +647,23 @@
       "summary": "",
       "submitted": false,
       "canvas_target": "page:9065:articles-and-video"
+    },
+    {
+      "week": 2,
+      "courseId": "course4",
+      "type": "reading",
+      "title": "Group Supervision Sign-Up",
+      "detail": "from: Sign Up for Group Supervision Today",
+      "due": "—",
+      "due_date": null,
+      "link": "https://docs.google.com/spreadsheets/d/1x3ZewjMACKaB4dptB-VAy-C6ucDMEV9ABqb1iYJFlhI/edit?usp=sharing",
+      "points": null,
+      "canvas_id": "page_child:414611:adb68f19",
+      "source": "page_child",
+      "is_overview": false,
+      "summary": "",
+      "submitted": false,
+      "canvas_target": "page:9065:sign-up-for-group-supervision-today"
     },
     {
       "week": 2,
@@ -786,6 +786,23 @@
     },
     {
       "week": 3,
+      "courseId": "course4",
+      "type": "discussion",
+      "title": "Reading Reflection: DQ 1",
+      "detail": "5 pts · discussion",
+      "due": "Sun",
+      "due_date": "2026-09-14T05:59:59+00:00",
+      "link": "https://naropa.instructure.com/courses/9065/assignments/114452",
+      "points": 5.0,
+      "canvas_id": "assignment:114452",
+      "source": "assignment",
+      "is_overview": false,
+      "summary": "",
+      "submitted": false,
+      "canvas_target": ""
+    },
+    {
+      "week": 3,
       "courseId": "course1",
       "type": "video",
       "title": "The Call That Changes Everything: Suicide Risk, Ethics, and Duty to Act",
@@ -838,23 +855,6 @@
     {
       "week": 3,
       "courseId": "course4",
-      "type": "reading",
-      "title": "Required Reading: Naranjo - Intro and Chapter 3",
-      "detail": "from: Required Reading",
-      "due": "—",
-      "due_date": null,
-      "link": "https://naropa.instructure.com/courses/9065/modules/items/414615",
-      "points": null,
-      "canvas_id": "page_child:414615:3399b6de",
-      "source": "page_child",
-      "is_overview": false,
-      "summary": "",
-      "submitted": false,
-      "canvas_target": "page:9065:required-reading-2"
-    },
-    {
-      "week": 3,
-      "courseId": "course4",
       "type": "video",
       "title": "Working with Different Contact Boundary Disturbances",
       "detail": "from: Lecture and Handouts: Contact Boundaries in session",
@@ -883,7 +883,7 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false,
+      "submitted": true,
       "canvas_target": ""
     },
     {
@@ -1174,23 +1174,6 @@
       "summary": "",
       "submitted": false,
       "canvas_target": "page:9065:lecture-experiments-for-diff-contact-boundary-disturbances"
-    },
-    {
-      "week": 5,
-      "courseId": "course4",
-      "type": "reading",
-      "title": "Required Reading: Naranjo - Ch 4 - 7",
-      "detail": "from: Required Reading-4",
-      "due": "—",
-      "due_date": null,
-      "link": "https://naropa.instructure.com/courses/9065/modules/items/414621",
-      "points": null,
-      "canvas_id": "page_child:414621:c176f088",
-      "source": "page_child",
-      "is_overview": false,
-      "summary": "",
-      "submitted": false,
-      "canvas_target": "page:9065:required-reading-4-2"
     },
     {
       "week": 6,
@@ -1514,23 +1497,6 @@
       "summary": "",
       "submitted": false,
       "canvas_target": "page:9065:facilitating-two-chair"
-    },
-    {
-      "week": 7,
-      "courseId": "course4",
-      "type": "reading",
-      "title": "Required Reading: Alman, et al: Chapters 1 - 7",
-      "detail": "from: Required Reading-5",
-      "due": "—",
-      "due_date": null,
-      "link": "https://naropa.instructure.com/courses/9065/modules/items/414628",
-      "points": null,
-      "canvas_id": "page_child:414628:818a812d",
-      "source": "page_child",
-      "is_overview": false,
-      "summary": "",
-      "submitted": false,
-      "canvas_target": "page:9065:required-reading-5-2"
     },
     {
       "week": 8,
@@ -4186,7 +4152,7 @@
     }
   ],
   "totals": {
-    "reading": 132,
+    "reading": 130,
     "video": 29,
     "discussion": 25,
     "paper": 5,
@@ -4196,7 +4162,7 @@
     "lecture": 1
   },
   "coverage": {
-    "verified_at": "2026-08-29T14:21:06.778693+00:00",
+    "verified_at": "2026-08-30T01:53:18.675780+00:00",
     "assignments": {
       "total": 43,
       "captured": 43
@@ -4206,8 +4172,8 @@
       "captured": 25
     },
     "module_items": {
-      "total": 99,
-      "captured": 99
+      "total": 97,
+      "captured": 97
     },
     "unrepresented": [],
     "missing": [],
@@ -4217,7 +4183,7 @@
       "by_reason": {
         "prose fragment": 3
       },
-      "items_checked": 242
+      "items_checked": 240
     }
   },
   "other_terms": [
