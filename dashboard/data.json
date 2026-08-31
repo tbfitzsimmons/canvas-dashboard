@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-30T15:27:47.328622+00:00",
+  "generated_at": "2026-08-31T12:38:18.517777+00:00",
   "semester": {
     "name": "Fall 2026",
     "start_date": "2026-08-24",
@@ -118,7 +118,7 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false,
+      "submitted": true,
       "canvas_target": ""
     },
     {
@@ -3728,6 +3728,23 @@
     {
       "week": 0,
       "courseId": "course4",
+      "type": "reading",
+      "title": "Sizer office hours",
+      "detail": "",
+      "due": "—",
+      "due_date": null,
+      "link": "https://naropa.instructure.com/courses/9065/modules/items/434221",
+      "points": null,
+      "canvas_id": "module_item:434221",
+      "source": "module_item",
+      "is_overview": false,
+      "summary": "",
+      "submitted": false,
+      "canvas_target": "page:9065:sizer-office-hours"
+    },
+    {
+      "week": 0,
+      "courseId": "course4",
       "type": "video",
       "title": "Somatic Intelligence",
       "detail": "from: Recorded Lectures - Gestalt I",
@@ -4169,7 +4186,7 @@
     }
   ],
   "totals": {
-    "reading": 131,
+    "reading": 132,
     "video": 29,
     "discussion": 25,
     "paper": 5,
@@ -4179,7 +4196,7 @@
     "lecture": 1
   },
   "coverage": {
-    "verified_at": "2026-08-30T15:27:47.326311+00:00",
+    "verified_at": "2026-08-31T12:38:18.515203+00:00",
     "assignments": {
       "total": 43,
       "captured": 43
@@ -4189,8 +4206,8 @@
       "captured": 25
     },
     "module_items": {
-      "total": 98,
-      "captured": 98
+      "total": 99,
+      "captured": 99
     },
     "unrepresented": [],
     "missing": [],
@@ -4200,27 +4217,16 @@
       "by_reason": {
         "prose fragment": 3
       },
-      "items_checked": 241
+      "items_checked": 242
     }
   },
-  "other_terms": [
-    "Summer 2026 Semester"
-  ],
+  "other_terms": [],
   "term_meta": {
     "Fall 2026 Semester": {
       "id": "258",
       "start_at": "2026-08-24T06:00:00Z",
       "end_at": "2026-12-12T06:59:59Z",
       "courses": 5,
-      "enrollment_states": [
-        "active"
-      ]
-    },
-    "Summer 2026 Semester": {
-      "id": "257",
-      "start_at": "2026-05-18T06:00:00Z",
-      "end_at": "2026-08-22T05:59:00Z",
-      "courses": 1,
       "enrollment_states": [
         "active"
       ]
