@@ -1429,6 +1429,52 @@ function transcriptLink(it) {
   return `<a class="note-link" href="${escapeAttr(url)}" target="_blank" rel="noopener" title="Open the full transcript in Google Drive (sign in as Jennifer)">🗒 Transcript</a>`;
 }
 
+// ── Reading notes ───────────────────────────────────────────────────────────
+// Study notes for prior-term READINGS, produced by the archive project. Keyed
+// `file:<canvas_course_id>:<canvas_file_id>` — the same shape as Item.canvas_target
+// and as the archive's own manifest.json, so neither side needs a lookup table.
+// Separate file from video-notes.json on purpose: two producers writing one file
+// is the failure we already had, and independent files stay independently
+// publishable.
+let READING_NOTES = {};
+
+async function loadReadingNotes() {
+  try {
+    const res = await fetch('reading-notes.json?t=' + Date.now(), { cache: 'no-store' });
+    if (!res.ok) return;                     // 404 is the normal case until notes exist
+    const data = await res.json();
+    if (data && typeof data === 'object') {
+      READING_NOTES = data.notes && typeof data.notes === 'object' ? data.notes : data;
+    }
+  } catch (_) { /* absent or malformed → stay empty, board unaffected */ }
+}
+
+// An item reaches a file two ways: canvas_target recorded at sync time, or a
+// direct /courses/N/files/N link. Resolve both — which shape a given row has is
+// an artifact of how Canvas served it, not something the archive should model.
+const FILE_LINK_RE = /\/courses\/(\d+)\/files\/(\d+)/;
+function readingNoteKey(it) {
+  const t = it.canvas_target || '';
+  if (t.startsWith('file:')) return t;
+  const m = FILE_LINK_RE.exec(it.link || '');
+  return m ? `file:${m[1]}:${m[2]}` : '';
+}
+
+function readingNoteLink(it) {
+  const key = readingNoteKey(it);
+  if (!key) return '';
+  const entry = READING_NOTES[key];
+  const url = entry && (typeof entry === 'string' ? entry : entry.url);
+  if (!url || !/^https:\/\//i.test(url)) return '';
+  // NOTE: the video FERPA gate is deliberately NOT applied here. Its
+  // CLASS_RECORDING_RE matches the bare word "intensive", which is a normal
+  // word in reading titles ("Module 3 - INTENSIVE I"), so it would silently
+  // drop legitimate readings. The control that matters for readings is
+  // copyright, and it is structural rather than a filter: this renders a LINK
+  // into authenticated Drive and never any note text or source text.
+  return `<a class="note-link" href="${escapeAttr(url)}" target="_blank" rel="noopener" title="Open reading notes in Google Drive (sign in required)">📖 Reading Notes</a>`;
+}
+
 function videoNoteLink(it) {
   const entry = VIDEO_NOTES[it.canvas_id];
   if (!entry) return '';
@@ -1864,7 +1910,7 @@ function renderItem(it) {
     ? `<div class="item-summary">${escapeHtml(it.summary)}</div>` : '';
 
   // Note button for video + lecture items (copies a Granola-ready template)
-  const summaryLink = videoNoteLink(it) + transcriptLink(it);
+  const summaryLink = videoNoteLink(it) + transcriptLink(it) + readingNoteLink(it);
   const noteBtn = (it.type === 'video' || it.type === 'lecture')
     ? `<button class="note-btn" data-note="${escapeAttr(it.canvas_id)}" title="Copy this item's details to the clipboard">📋 Copy</button>`
     : '';
@@ -1955,6 +2001,7 @@ async function boot() {
     if (!res.ok) throw new Error(`Couldn't load data.json (HTTP ${res.status})`);
     STATE.data = await res.json();
     await loadVideoNotes();   // optional; board renders unchanged if absent
+    await loadReadingNotes(); // ditto — absent until the archive emits it
     const idx = await loadArchiveIndex();
     if (idx) STATE.data.archives = idx;   // on-disk index beats data.json's snapshot
     CURRENT_DATA = STATE.data;   // keep the live board for the semester picker
