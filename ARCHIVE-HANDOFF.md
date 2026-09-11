@@ -1,95 +1,86 @@
-# Open items for the archive sessions
+# Archive ↔ dashboard status
 
 Written by the dashboard session. Coordination happens through files, not
 messages — no session here outlives its conversation. Read this when you start.
 
-Last updated: 2026-09-11
+Last updated: 2026-09-11 08:00
 
 ---
 
-## 1. ⚠️ `prior_notes.json` undercounts written notes by 32×
+## Everything previously open here is DONE
 
-**200 prior-term reading notes exist on disk. `prior_notes.json` marks 6 as
-`written: true`.**
+All items in the 2026-09-11 07:20 version of this file were completed by the
+two archive sessions the same morning. Verified independently by the dashboard
+session against disk and the live boards, not taken on report.
 
-```
-records with a notes_path          587
-  ...file EXISTS on disk           200
-  ...marked written == true          6
-  ⚠ exists on disk, written=false  194
-  written=true but file missing      0
-```
+| | Was | Now |
+|---|---|---|
+| `prior_notes.json` written flag | 6 of 200 on disk | 181 |
+| Reading-note links on the boards | 0 | **197 rendering** (251-key contract) |
+| Discussions | 155 done / 21 gap | 170 done / 6 gap |
+| Submissions | 204, every status `null` | 210, all `done` |
+| Assignment pages | 236, every status `null` | 268, all `done` |
+| Files on one machine only | 46–49 | **0** |
+| Validation gate | 17 PASS, stale since 09-05 | 21 PASS, 0 FAIL, 0 WARN |
 
-A further **70** `notes.md` files under `Naropa Archive Content/` (excluding
-Fall 2026) are not referenced by `prior_notes.json` at all — 270 prior-term
-notes on disk against 587 tracked records.
+**Durability, verified by walking the tree:** 4,272 local files, 6.70 GB,
+0 absent from Drive. Nothing in the archive exists in only one place.
 
-This is the state-vs-disk failure your own `validate.py` rule 1 exists to
-catch: *compare state against DISK, never state against itself.* Rule 1 is not
-currently applied to `prior_notes.json`.
+## Live contracts
 
-**Why it matters to the board.** If the reading-notes contract is emitted from
-`written == true`, it ships 19 links. Built from what is actually on disk it
-ships **226** — and all 226 notes are already uploaded to Drive, so nothing
-else has to happen first.
+Both are in sync between disk and the published board. Re-publish with
+`./publish-video-notes.sh` / `./publish-reading-notes.sh` after any change.
 
-| board | file-addressable items | from `written` | from disk | in Drive |
-|---|---|---|---|---|
-| Spring 2025 | 168 | 7 | **57** | 57 |
-| Summer 2025 | 226 | 0 | **40** | 40 |
-| Fall 2025 | 150 | 5 | **38** | 38 |
-| Spring 2026 | 170 | 6 | **37** | 37 |
-| Summer 2026 | 206 | 1 | **54** | 54 |
-| Fall 2026 | 48 | 0 | 0 | 0 |
-| **TOTAL** | **968** | **19** | **226** | **226** |
+| contract | entries | renders |
+|---|---|---|
+| `dashboard-video-notes.json` | 17 (13 with transcript) | Fall 2026 |
+| `dashboard-reading-notes.json` | 251 keys / 194 docs | 5 archived semesters |
 
-Please reconcile the flag against disk before emitting the contract, or emit
-from disk directly. Do not delete the 194 notes to make state match — the files
-are the truth here, the flag is wrong.
+30 of the 251 keys reach no board item. Checked: they are real Canvas files the
+board does not surface as items. They render nothing, and they stay in the
+contract because a future board rebuild may surface them.
 
-## 2. The reading-notes contract the board is waiting for
+## Still open, and who owns it
 
-Everything on the dashboard side is built, deployed and tested. It renders
-nothing until this file exists, so there is no risk in emitting it early or
-incrementally.
+- **6 discussion gaps** — `user_can_see_posts=false`. Canvas will not serve
+  these to Jennifer at all. Not recoverable by anyone; record them as
+  permanently unavailable rather than leaving them looking unfinished.
+- **12 sources genuinely unreadable** — reason recorded beside each. She has
+  the PDFs; she lacks searchable text.
+- **Drive re-pointing** (dashboard session). Archived board links still point
+  at Canvas. `canvas_target` is captured on 679/682 module-item rows, so this
+  can be done offline later — 76% today, ~94% now that assignment-page and
+  discussion HTML exist. **Deadline is Canvas access ending after graduation
+  (~May 2027).** Nobody has asked the registrar for the real date.
 
-```
-path:  ~/Documents/Naropa Archive/dashboard-reading-notes.json
-shape: { "notes": { "file:<canvas_course_id>:<canvas_file_id>": { "url": "https://…" } } }
-```
+## A gate check worth adding (parent fork's suggestion, endorsed)
 
-`prior_notes.json` already carries everything needed: `primary` is
-`"<course>:<file>"`, so the key is `"file:" + primary`. Emit one entry per
-`copies` member too — dedup means one note legitimately serves several courses,
-and that is where most of the 226 comes from.
+`index: reaches all notes` confirms the 312 notes on disk are linked, but does
+not assert that the **state files can find them**. Today that check would have
+failed on 26 notes written beside a non-canonical copy, and the reading-notes
+contract would never have shipped 25 entries short.
 
-Publish with `./publish-reading-notes.sh` in the dashboard repo. It validates
-key shape, refuses a contract smaller than the published one, checks every
-Drive link resolves (401 real / 404 missing), and reports how many keys reach
-an item on a board.
+## The recurring failure, three costumes in one day
 
-Send **path + entry count + sha256**. Never contents, never ids.
+Every significant bug here was a value that looked measured and was not:
 
-## 3. Still outstanding, lower urgency
+1. `written` — a cached scan with no invalidation trigger. It could never
+   become true.
+2. `notes_path` — a correct field describing a stale intention (the canonical
+   copy) while agents wrote beside whichever copy was in their batch.
+3. A leak check that resolved 22 of 30 links and printed PASS.
 
-- **`discussions.json`: 155 done, 21 `gap`.** The 21 are unexplained here;
-  name them rather than letting a reader infer they were skipped.
-- **`submissions.json` (204) and `assignment_pages.json` (236) have no status
-  field at all** — every record is `null`. Cannot tell captured from pending
-  from failed. These are the highest-value artifacts in the archive (her own
-  written work, with feedback) and currently have the weakest tracking.
-- **`documents-prior.json`: 12 `ocr_unusable`, 37 `skipped`.** Both counts are
-  fine as outcomes; they just need to be distinguishable from "not attempted".
+**A cached value with no invalidation reads exactly like a measured one.**
+Compare against disk. Run the control first. A check that cannot fail on
+known-bad input is not a check.
 
-## 4. Standing constraints
+## Standing constraints
 
-- **Title and link only on the board.** Ruled by Brooks 2026-08-28. Archived
-  boards carry zero body text; reading notes render a link into authenticated
-  Drive and never note text or extracted source text. Copyright, not FERPA, is
-  the live issue for readings.
-- **No transcript or summary for recorded class discussion.** Four artifacts
-  removed under this; verified absent.
-- **Canvas access ends after graduation (~May 2027).** `canvas_target` is
-  captured on 679/682 module-item rows so archived boards can be re-pointed at
-  Drive offline. Re-pointing tops out at 76% today; assignment-page and
-  discussion HTML snapshots would take it to ~94%.
+- **Title and link only on the board.** Archived boards carry zero body text.
+  Notes render as a link into authenticated Drive, never note text or source
+  text. Copyright is the live issue for readings; GitHub Pages is public and
+  Drive enforces auth.
+- **No transcript and no summary for recorded class discussion.** Four
+  artifacts removed under this ruling; verified absent.
+- **Contract handoff:** path + entry count + sha256. Never contents, never ids.
+  The dashboard session reads from disk and verifies the hash before publishing.
