@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-18T00:36:58.963891+00:00",
+  "generated_at": "2026-09-21T11:56:41.098502+00:00",
   "semester": {
     "name": "Fall 2026",
     "start_date": "2026-08-24",
@@ -834,6 +834,23 @@
       "summary": "",
       "submitted": false,
       "canvas_target": "page:9042:week-to-do-list-2"
+    },
+    {
+      "week": 3,
+      "courseId": "course3",
+      "type": "video",
+      "title": "Module 3 - Lecture - Passcode: d+hZ0i1@",
+      "detail": "",
+      "due": "—",
+      "due_date": null,
+      "link": "https://naropa.instructure.com/api/v1/courses/9492/module_item_redirect/435309",
+      "points": null,
+      "canvas_id": "module_item:435309",
+      "source": "module_item",
+      "is_overview": false,
+      "summary": "",
+      "submitted": false,
+      "canvas_target": "external:https://naropa.zoom.us/rec/share/dSsc8y9nYywQpv4so6opqKtnrtX9ukvzdwInn6O5wNaocnPUjti-7d3gSL3X1jOD.Z_kmuxRcccUBHFX8"
     },
     {
       "week": 3,
@@ -3966,7 +3983,7 @@
   ],
   "totals": {
     "reading": 132,
-    "video": 30,
+    "video": 31,
     "discussion": 11,
     "paper": 5,
     "assignment": 50,
@@ -3975,7 +3992,7 @@
     "lecture": 1
   },
   "coverage": {
-    "verified_at": "2026-09-18T00:36:58.961671+00:00",
+    "verified_at": "2026-09-21T11:56:41.096288+00:00",
     "assignments": {
       "total": 43,
       "captured": 43
@@ -3985,8 +4002,8 @@
       "captured": 11
     },
     "module_items": {
-      "total": 100,
-      "captured": 100
+      "total": 101,
+      "captured": 101
     },
     "unrepresented": [],
     "missing": [],
@@ -3996,7 +4013,7 @@
       "by_reason": {
         "prose fragment": 3
       },
-      "items_checked": 229
+      "items_checked": 230
     }
   },
   "other_terms": [],
