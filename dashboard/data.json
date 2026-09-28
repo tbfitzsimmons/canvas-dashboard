@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-21T11:56:41.098502+00:00",
+  "generated_at": "2026-09-28T12:51:23.897337+00:00",
   "semester": {
     "name": "Fall 2026",
     "start_date": "2026-08-24",
@@ -1007,6 +1007,74 @@
     },
     {
       "week": 4,
+      "courseId": "course3",
+      "type": "video",
+      "title": "Module 4 - Lecture and Discussion - Passcode: Uh7U+@%2",
+      "detail": "",
+      "due": "—",
+      "due_date": null,
+      "link": "https://naropa.instructure.com/api/v1/courses/9492/module_item_redirect/435640",
+      "points": null,
+      "canvas_id": "module_item:435640",
+      "source": "module_item",
+      "is_overview": false,
+      "summary": "",
+      "submitted": false,
+      "canvas_target": "external:https://naropa.zoom.us/rec/share/d2p5MvyRQMicl92PqmntG89Bk4lrlLv0ftaRVdVfwSiaDSLdOpkoMK9pSTNL9NzW.aOR_fS2obfKYLPAl"
+    },
+    {
+      "week": 4,
+      "courseId": "course3",
+      "type": "reading",
+      "title": "Module 4 Transcription.vtt",
+      "detail": "",
+      "due": "—",
+      "due_date": null,
+      "link": "https://naropa.instructure.com/courses/9492/modules/items/435641",
+      "points": null,
+      "canvas_id": "module_item:435641",
+      "source": "module_item",
+      "is_overview": false,
+      "summary": "",
+      "submitted": false,
+      "canvas_target": "file:9492:1554164"
+    },
+    {
+      "week": 4,
+      "courseId": "course3",
+      "type": "video",
+      "title": "Primordial Qigong",
+      "detail": "",
+      "due": "—",
+      "due_date": null,
+      "link": "https://naropa.instructure.com/api/v1/courses/9492/module_item_redirect/435354",
+      "points": null,
+      "canvas_id": "module_item:435354",
+      "source": "module_item",
+      "is_overview": false,
+      "summary": "",
+      "submitted": false,
+      "canvas_target": "external:https://youtu.be/rIP_ICLWpAs?si=WB24kV_UlcPiXTzh"
+    },
+    {
+      "week": 4,
+      "courseId": "course3",
+      "type": "reading",
+      "title": "Relaxation or Regulation",
+      "detail": "",
+      "due": "—",
+      "due_date": null,
+      "link": "https://naropa.instructure.com/api/v1/courses/9492/module_item_redirect/435353",
+      "points": null,
+      "canvas_id": "module_item:435353",
+      "source": "module_item",
+      "is_overview": false,
+      "summary": "",
+      "submitted": false,
+      "canvas_target": "external:https://pmc.ncbi.nlm.nih.gov/articles/PMC8208883/"
+    },
+    {
+      "week": 4,
       "courseId": "course4",
       "type": "reading",
       "title": "Article: Identifying a Polarity",
@@ -1053,7 +1121,7 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false,
+      "submitted": true,
       "canvas_target": ""
     },
     {
@@ -3982,8 +4050,8 @@
     }
   ],
   "totals": {
-    "reading": 132,
-    "video": 31,
+    "reading": 134,
+    "video": 33,
     "discussion": 11,
     "paper": 5,
     "assignment": 50,
@@ -3992,7 +4060,7 @@
     "lecture": 1
   },
   "coverage": {
-    "verified_at": "2026-09-21T11:56:41.096288+00:00",
+    "verified_at": "2026-09-28T12:51:23.895061+00:00",
     "assignments": {
       "total": 43,
       "captured": 43
@@ -4002,10 +4070,12 @@
       "captured": 11
     },
     "module_items": {
-      "total": 101,
-      "captured": 101
+      "total": 106,
+      "captured": 105
     },
-    "unrepresented": [],
+    "unrepresented": [
+      "CMHC-520E: Module 3 Readings, Viewings, and Materials"
+    ],
     "missing": [],
     "quality": {
       "suspect_total": 3,
@@ -4013,7 +4083,7 @@
       "by_reason": {
         "prose fragment": 3
       },
-      "items_checked": 230
+      "items_checked": 234
     }
   },
   "other_terms": [],
