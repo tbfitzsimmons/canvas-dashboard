@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-29T15:49:23.363057+00:00",
+  "generated_at": "2026-09-30T15:31:59.451814+00:00",
   "semester": {
     "name": "Fall 2026",
     "start_date": "2026-08-24",
@@ -968,7 +968,7 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false,
+      "submitted": true,
       "canvas_target": ""
     },
     {
@@ -1155,7 +1155,7 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false,
+      "submitted": true,
       "canvas_target": ""
     },
     {
@@ -4060,7 +4060,7 @@
     "lecture": 1
   },
   "coverage": {
-    "verified_at": "2026-09-29T15:49:23.360799+00:00",
+    "verified_at": "2026-09-30T15:31:59.449578+00:00",
     "assignments": {
       "total": 43,
       "captured": 43
