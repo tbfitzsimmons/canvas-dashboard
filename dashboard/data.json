@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-30T20:39:19.391511+00:00",
+  "generated_at": "2026-10-02T17:46:24.728360+00:00",
   "semester": {
     "name": "Fall 2026",
     "start_date": "2026-08-24",
@@ -1208,6 +1208,40 @@
       "summary": "",
       "submitted": false,
       "canvas_target": "page:9042:week-to-do-list-4"
+    },
+    {
+      "week": 5,
+      "courseId": "course3",
+      "type": "video",
+      "title": "Module 5 - Lecture - Passcode: 9K8dsq^B",
+      "detail": "",
+      "due": "—",
+      "due_date": null,
+      "link": "https://naropa.instructure.com/api/v1/courses/9492/module_item_redirect/436276",
+      "points": null,
+      "canvas_id": "module_item:436276",
+      "source": "module_item",
+      "is_overview": false,
+      "summary": "",
+      "submitted": false,
+      "canvas_target": "external:https://naropa.zoom.us/rec/share/L16ksCuadPzODr1TF7IjJQaDWdJTpw1JorCbVM4BZhAxs2NDyVnBz8pmodt_nlOW.Wor7RTskTWNlo480"
+    },
+    {
+      "week": 5,
+      "courseId": "course3",
+      "type": "reading",
+      "title": "Module 5 Transcript.vtt",
+      "detail": "",
+      "due": "—",
+      "due_date": null,
+      "link": "https://naropa.instructure.com/courses/9492/modules/items/436277",
+      "points": null,
+      "canvas_id": "module_item:436277",
+      "source": "module_item",
+      "is_overview": false,
+      "summary": "",
+      "submitted": false,
+      "canvas_target": "file:9492:1556200"
     },
     {
       "week": 5,
@@ -4050,8 +4084,8 @@
     }
   ],
   "totals": {
-    "reading": 134,
-    "video": 33,
+    "reading": 135,
+    "video": 34,
     "discussion": 11,
     "paper": 5,
     "assignment": 50,
@@ -4060,7 +4094,7 @@
     "lecture": 1
   },
   "coverage": {
-    "verified_at": "2026-09-30T20:39:19.389237+00:00",
+    "verified_at": "2026-10-02T17:46:24.726174+00:00",
     "assignments": {
       "total": 43,
       "captured": 43
@@ -4070,8 +4104,8 @@
       "captured": 11
     },
     "module_items": {
-      "total": 106,
-      "captured": 105
+      "total": 108,
+      "captured": 107
     },
     "unrepresented": [
       "CMHC-520E: Module 3 Readings, Viewings, and Materials"
@@ -4083,7 +4117,7 @@
       "by_reason": {
         "prose fragment": 3
       },
-      "items_checked": 234
+      "items_checked": 236
     }
   },
   "other_terms": [],
