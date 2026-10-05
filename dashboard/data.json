@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-05T13:32:49.192852+00:00",
+  "generated_at": "2026-10-05T20:45:07.757893+00:00",
   "semester": {
     "name": "Fall 2026",
     "start_date": "2026-08-24",
@@ -1662,40 +1662,6 @@
       "link": "https://www.hakomieducation.net/holiday-gift?utm_campaign=9d4e0746-4cb6-4bc8-90b1-b86e0efc16e7&utm_source=so&utm_medium=mail&cid=c0222d5a-4eca-4a01-92a1-89c2caa4fd16",
       "points": null,
       "canvas_id": "page_child:414632:7fa8efbc",
-      "source": "page_child",
-      "is_overview": false,
-      "summary": "",
-      "submitted": false,
-      "canvas_target": "page:9065:ifs-presentation-and-interview-with-richard-schwartz"
-    },
-    {
-      "week": 8,
-      "courseId": "course4",
-      "type": "reading",
-      "title": "IFS Presentation Part 1",
-      "detail": "from: IFS Presentation and Interview with Richard Schwartz",
-      "due": "—",
-      "due_date": null,
-      "link": "https://drive.google.com/file/d/17hYocOk-ir4iLR824gYBhtDHc0qMZtvs/view",
-      "points": null,
-      "canvas_id": "page_child:414632:16fb6267",
-      "source": "page_child",
-      "is_overview": false,
-      "summary": "",
-      "submitted": false,
-      "canvas_target": "page:9065:ifs-presentation-and-interview-with-richard-schwartz"
-    },
-    {
-      "week": 8,
-      "courseId": "course4",
-      "type": "reading",
-      "title": "IFS Presentation Part 2",
-      "detail": "from: IFS Presentation and Interview with Richard Schwartz",
-      "due": "—",
-      "due_date": null,
-      "link": "https://drive.google.com/file/d/17qsKrAtYsg1VXX9Z1vJgCHbcZVL65eki/view",
-      "points": null,
-      "canvas_id": "page_child:414632:fade3958",
       "source": "page_child",
       "is_overview": false,
       "summary": "",
@@ -4084,7 +4050,7 @@
     }
   ],
   "totals": {
-    "reading": 135,
+    "reading": 133,
     "video": 34,
     "discussion": 11,
     "paper": 5,
@@ -4094,7 +4060,7 @@
     "lecture": 1
   },
   "coverage": {
-    "verified_at": "2026-10-05T13:32:49.190622+00:00",
+    "verified_at": "2026-10-05T20:45:07.755659+00:00",
     "assignments": {
       "total": 43,
       "captured": 43
@@ -4117,7 +4083,7 @@
       "by_reason": {
         "prose fragment": 3
       },
-      "items_checked": 236
+      "items_checked": 234
     }
   },
   "other_terms": [],
