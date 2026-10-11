@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-10T00:05:06.651175+00:00",
+  "generated_at": "2026-10-11T02:43:14.000421+00:00",
   "semester": {
     "name": "Fall 2026",
     "start_date": "2026-08-24",
@@ -1347,6 +1347,40 @@
     },
     {
       "week": 6,
+      "courseId": "course3",
+      "type": "reading",
+      "title": "Clinical_Kinesiology__web_version_.pdf",
+      "detail": "",
+      "due": "—",
+      "due_date": null,
+      "link": "https://naropa.instructure.com/courses/9492/modules/items/436586",
+      "points": null,
+      "canvas_id": "module_item:436586",
+      "source": "module_item",
+      "is_overview": false,
+      "summary": "",
+      "submitted": false,
+      "canvas_target": "file:9492:1558548"
+    },
+    {
+      "week": 6,
+      "courseId": "course3",
+      "type": "video",
+      "title": "Module 6 - Lecture - Passcode: 1Q60O?pi",
+      "detail": "",
+      "due": "—",
+      "due_date": null,
+      "link": "https://naropa.instructure.com/api/v1/courses/9492/module_item_redirect/436585",
+      "points": null,
+      "canvas_id": "module_item:436585",
+      "source": "module_item",
+      "is_overview": false,
+      "summary": "",
+      "submitted": false,
+      "canvas_target": "external:https://naropa.zoom.us/rec/share/lzK49js7utIlPUtnEs7t0f9RZGDfTRTTTnw3EY-9uoFvsBbTGorPhXmdQXouZBgy.YKE_eqECdVm5lME4"
+    },
+    {
+      "week": 6,
       "courseId": "course4",
       "type": "reading",
       "title": "Article reflecting on Bob Resnick's Work",
@@ -1495,7 +1529,7 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false,
+      "submitted": true,
       "canvas_target": ""
     },
     {
@@ -4050,8 +4084,8 @@
     }
   ],
   "totals": {
-    "reading": 133,
-    "video": 34,
+    "reading": 134,
+    "video": 35,
     "discussion": 11,
     "paper": 5,
     "assignment": 50,
@@ -4060,7 +4094,7 @@
     "lecture": 1
   },
   "coverage": {
-    "verified_at": "2026-10-10T00:05:06.647328+00:00",
+    "verified_at": "2026-10-11T02:43:13.998561+00:00",
     "assignments": {
       "total": 43,
       "captured": 43
@@ -4070,8 +4104,8 @@
       "captured": 11
     },
     "module_items": {
-      "total": 108,
-      "captured": 107
+      "total": 110,
+      "captured": 109
     },
     "unrepresented": [
       "CMHC-520E: Module 3 Readings, Viewings, and Materials"
@@ -4083,7 +4117,7 @@
       "by_reason": {
         "prose fragment": 3
       },
-      "items_checked": 234
+      "items_checked": 236
     }
   },
   "other_terms": [],
