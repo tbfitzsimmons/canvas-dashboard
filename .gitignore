@@ -24,3 +24,9 @@ Thumbs.db
 .vscode/
 .idea/
 *.swp
+
+# Offline export — contains Jennifer's coursework index. The SCRIPT is tracked,
+# its output is not: this repo is public and the export inlines data.json plus
+# every archived semester. Generate it with `python3 export_offline.py` and
+# keep the result in Drive beside the archive.
+canvas-dashboard-offline*.html
