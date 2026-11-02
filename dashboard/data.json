@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-10-29T18:36:36.982553+00:00",
+  "generated_at": "2026-11-02T00:56:59.402678+00:00",
   "semester": {
     "name": "Fall 2026",
     "start_date": "2026-08-24",
     "weeks": 16,
     "canvas_term_name": "Fall 2026 Semester"
   },
-  "token_expires": "2026-11-09",
+  "token_expires": "2026-12-01",
   "courses": [
     {
       "id": "course1",
@@ -4111,7 +4111,7 @@
     "lecture": 1
   },
   "coverage": {
-    "verified_at": "2026-10-29T18:36:36.980236+00:00",
+    "verified_at": "2026-11-02T00:56:59.400480+00:00",
     "assignments": {
       "total": 43,
       "captured": 43
