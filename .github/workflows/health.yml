@@ -1,0 +1,79 @@
+name: Dashboard Health Check
+
+# Deliberately SEPARATE from sync.yml. The dangerous failure here is silent:
+# when the Canvas token dies, the site keeps serving the last good data.json
+# and looks completely normal. That went unnoticed for three weeks in July 2026.
+# A check that lives inside the sync cannot report that the sync stopped running,
+# so this one runs on its own schedule and fails loudly. GitHub emails the repo
+# owner on a failed workflow run, which is the alert.
+
+on:
+  schedule:
+    - cron: '0 16 * * 2'      # Tuesdays 16:00 UTC — the morning after the Monday sync
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check the published board
+        run: |
+          set -euo pipefail
+          curl -sSf https://jtbdashboard.fitzsimmons.org/dashboard/data.json -o board.json
+          python3 - <<'PY'
+          import json, sys, datetime as dt
+          d = json.load(open('board.json'))
+          fail = []
+          gen = dt.datetime.fromisoformat(d['generated_at'])
+          age = (dt.datetime.now(dt.timezone.utc) - gen).days
+          print(f"last sync      : {d['generated_at'][:16]}  ({age} days ago)")
+          if age > 9:
+              fail.append(f"board is {age} days stale — the weekly sync has missed a run")
+
+          exp = d.get('token_expires')
+          left = (dt.date.fromisoformat(exp) - dt.date.today()).days if exp else None
+          print(f"token expires  : {exp}  ({left} days)")
+          # extend_tokens() should keep this near 29. A low number means in-place
+          # renewal has stopped, which is the early warning before an outage.
+          if left is not None and left < 12:
+              fail.append(f"token has only {left} days left — extend_tokens() has stopped renewing it")
+
+          c = d.get('coverage') or {}
+          for name in ('assignments', 'discussions'):
+              k = c.get(name) or {}
+              cap, tot = k.get('captured'), k.get('total')
+              print(f"{name:<15}: {cap}/{tot}")
+              if cap is not None and tot is not None and cap < tot:
+                  fail.append(f"{tot-cap} graded {name} missing from the board")
+
+          noise = ((c.get('quality') or {}).get('suspect_pct'))
+          print(f"noise          : {noise}%")
+          if noise is not None and noise > 5:
+              fail.append(f"item noise at {noise}% (normal is 1-3%)")
+
+          if fail:
+              print("\n::error::DASHBOARD UNHEALTHY")
+              for f in fail: print(f"::error::{f}")
+              print("\nSync log: https://github.com/tbfitzsimmons/canvas-dashboard/actions/workflows/sync.yml")
+              print("sync.py prints Canvas's real expired_at from the 401 body when a token dies.")
+              print("Canvas caps student tokens at 30 days; a replacement must be made by hand")
+              print("(Account -> Settings -> New Access Token) and pasted into the CANVAS_TOKEN secret.")
+              sys.exit(1)
+          print("\nAll checks passed.")
+          PY
+
+      - name: Check recent sync runs
+        run: |
+          set -euo pipefail
+          curl -sSf "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/workflows/sync.yml/runs?per_page=5" -o runs.json
+          python3 - <<'PY'
+          import json, sys
+          runs = json.load(open('runs.json')).get('workflow_runs', [])
+          bad = [r for r in runs if r.get('conclusion') not in ('success', None)]
+          for r in runs:
+              print(f"  {r['created_at'][:16]}  {r.get('conclusion') or r.get('status')}")
+          if bad:
+              print(f"\n::error::{len(bad)} of the last {len(runs)} sync runs did not succeed")
+              sys.exit(1)
+          print("\nRecent sync runs look healthy.")
+          PY
