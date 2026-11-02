@@ -463,6 +463,52 @@ custom domain, preserving the `#t=` hash. Code at top of `<script>` in index.htm
    progress renders in FOUR places, of which only one had been gated, so one
    semester showed a mix of "31 items" and "0/6". Grep for every render site.
 
+22. **Canvas tokens: 30-day cap, renewed IN PLACE, and scopes do NOT work
+   (2026-11-01).** Instructure capped user access tokens in 2026 after a spring
+   security incident. Student-only accounts get the strictest tier: **30 days**,
+   enforced on the API as well as the web UI — `POST` with a 90-day expiry
+   returns HTTP 400 "Expiration date cannot be more than 30 days in the future".
+   Jennifer's July 21 token had 111 days, so the cap arrived between July and
+   November. Tiers differ by role (instructors got 90 days, 8/12/26); whether
+   Naropa tightened below Instructure's student default is UNVERIFIED.
+
+   THE FIX — `extend_tokens()` in sync.py, first call in `main()`:
+     PUT /users/self/tokens/:id  token[regenerate]=1   → new secret, SAME expiry (useless)
+     PUT /users/self/tokens/:id  token[expires_at]=…   → SAME secret, NEW expiry ✓
+   The token extends its own life, so **CANVAS_TOKEN never needs touching again**.
+   Renews under 20 days remaining, targets 29 (never 30: Canvas rejects >30 and
+   clocks drift). Never raises — a board that syncs beats a tidy token, and there
+   are ~4 weekly runs per 30-day window. One token renews EVERY user-generated
+   token on the account, so this also keeps the archive project's token alive.
+   Both tokens aligned to one date so there is one event, not two.
+
+   ⚠️ **SCOPES ARE RECORDED BUT NOT ENFORCED HERE. Do not rely on them.**
+   `POST`/`PUT` accept `token[scopes][]`, store them, and echo them back — and a
+   token scoped at birth to ONLY `url:GET|/api/v1/users/:id` still returned HTTP
+   200 on `/courses`, `/planner/items` and `/users/self/user_generated_tokens`.
+   The account's default developer key lacks the "enable scopes" option, exactly
+   as the docs warn. So **the Canvas token has full user rights** — it could
+   submit assignments or post discussions as her — and that cannot be reduced
+   from her account. Only a Canvas admin enabling scope enforcement would change
+   it. Combined with in-place renewal, a leaked token would live indefinitely
+   with full rights; Brooks accepted that trade knowingly on 2026-11-01.
+
+   HOW I GOT IT WRONG, because the lesson is the project's recurring one: I first
+   reported "SCOPING WORKS" after seeing HTTP 200 and the scopes echoed back. I
+   never called an out-of-scope endpoint. **A check that cannot fail is not a
+   check** — the same error this project has caught in a leak check, a cached
+   `written` flag, and a stale `notes_path`. Test the negative case.
+
+23. **`health.yml` — the detection layer (2026-11-01).** A SEPARATE workflow from
+   sync.yml, because a check inside the sync cannot report that the sync stopped
+   running. Tuesdays, plus manual dispatch; exits non-zero on trouble and GitHub
+   emails the owner. Watches: board age >9d, token runway <12d (the early warning
+   that `extend_tokens()` has stopped), graded coverage shortfall, noise >5%, and
+   any non-success in the last five sync runs.
+   NOTE: the repo PAT lacks `workflow` scope, so this file cannot be pushed from
+   here — Brooks added it via GitHub's web editor. Any future change to a
+   workflow file needs the same route, or the scope granted.
+
 ## CURRENT STATE (2026-08-26) — read this before assuming
 
 - Semester: **Fall 2026**, 5 courses, ~211 items. Summer 2026 archived and
