@@ -267,10 +267,14 @@ def run_control(tables, drive):
     ]
     # The URL scrubber is the last thing between a Drive link and a public repo,
     # so prove it strips, preserves and refuses rather than assuming it does.
+    # The ouid below is DELIBERATELY all zeros. A real one is a stable Google
+    # account identifier, and this file lives in a public repo with permanent
+    # history -- the exact exposure the scrubber exists to prevent. Never paste
+    # a real value here, not even to make the fixture look authentic.
     scrub_cases = [
         ("https://drive.google.com/file/d/ABC-123_x/view?usp=drivesdk",
          "https://drive.google.com/file/d/ABC-123_x/view"),
-        ("https://docs.google.com/document/d/ABC/edit?usp=drivesdk&ouid=117028175545755284126&rtpof=true",
+        ("https://docs.google.com/document/d/ABC/edit?usp=drivesdk&ouid=000000000000000000000&rtpof=true",
          "https://docs.google.com/document/d/ABC/edit"),
         ("https://drive.google.com/file/d/ABC/view", "https://drive.google.com/file/d/ABC/view"),
         ("https://evil.example.com/file/d/ABC/view", None),
