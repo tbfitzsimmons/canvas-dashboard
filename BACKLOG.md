@@ -65,7 +65,7 @@ Endpoints: `GET /courses?include[]=total_scores` for course grades;
 Owner: the archive project (writes into `~/Documents/Naropa Archive`). The
 dashboard session never writes there.
 
-## 2. Re-point archived board links at Drive — DASHBOARD, deadline-driven
+## 2. Re-point archived board links at Drive — ✅ DONE 2026-11-01
 
 Archived board links point at Canvas and die with it. `canvas_target` is already
 captured on 679/682 module-item rows precisely so this can be done offline,
@@ -82,7 +82,7 @@ and fall back to Canvas. Additive — nothing breaks where a mapping is missing.
 Join path: board item → `canvas_target` or `/courses/N/files/M` → `manifest.json`
 → `drive_index.json` → `webViewLink`.
 
-## 3. Self-contained offline copy of the board — DASHBOARD
+## 3. Self-contained offline copy of the board — ✅ DONE 2026-11-01
 
 Everything currently assumes `tbfitzsimmons/canvas-dashboard` keeps existing. If
 that lapses, six semesters of navigable index vanish while 6.7 GB of content
@@ -92,6 +92,45 @@ Emit a single HTML file with all data inlined, no fetches, and drop it in Drive
 beside the archive. None of the comparable projects do this —
 `canvas-student-data-export` (276★) produces raw JSON and HTML with no
 navigation layer. Ours IS the navigation layer, and it is the fragile part.
+
+### Outcome (verified independently by the dashboard session, not taken on report)
+
+**Item 2 — `build_archive_urls.py`, re-runnable.** 1,952 of 2,113 Canvas links
+re-pointed, **92.4%**: 1,763 exact + 189 container fallbacks. Unmapped 161:
+85 external targets, 70 Canvas media embeds, 3 discussion gaps, 3 with no
+`canvas_target`. 30 URLs probed, 0 bad; bogus-id control 404s.
+
+A naive join scores 95.8% and is WRONG — for `page_child` rows `canvas_target`
+names the CONTAINING page, so it maps all 70 media embeds onto a parent whose
+embedded player is itself a dead Canvas URL. The residual *count* looked right
+while its *composition* was wrong.
+
+⚠️ A real Google account id (`ouid`) was scrubbed from every board URL and then
+hardcoded into the scrubber's own TEST FIXTURE in the public repo. Removed in
+`28f6748`; **commit b56fc83 still carries it in history** and only a force-push
+would purge it. Brooks's call; assessed low severity (an identifier, not a
+credential).
+
+**Item 3 — `export_offline.py`.** One 1.67 MiB HTML file, 6 semesters, 3,254
+items, 9 payloads inlined. Verified in real headless Chrome on `file://`:
+exactly ONE network request (the file itself) with a deliberate off-box control
+proving the log would have caught more; 0 console errors; all six semesters
+switch; 0 `.item-summary` in archived DOM. Output is gitignored — the script is
+tracked, her data is not.
+
+A durable copy lives at `~/Documents/Canvas Dashboard Offline/` with a README.
+**It belongs in Google Drive** — a copy on one laptop is not an archive. The
+generated file had been sitting in `/tmp`, which macOS reaps (it ate this
+project's working clone twice).
+
+### Follow-up left open, needs a design decision
+
+The 85 **external** links (33 youtube.com, 8 naropa.zoom.us, 4 counseling.org…)
+still die with Canvas: the board points at a `module_item_redirect` while the
+real destination already sits in `canvas_target`. Re-pointing them takes
+durability from 92.4% to ~96.4%. NOT done, deliberately — `archive_url` renders
+as "📁 Drive copy" and a YouTube URL behind that label would be a lie. It needs
+a second field or a varying label.
 
 ## 4. Point an assistant at the ARCHIVE, not at Canvas — SCOPING NEEDED
 
