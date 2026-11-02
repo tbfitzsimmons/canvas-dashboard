@@ -11,9 +11,10 @@ survives graduation; Canvas does not.
 
 ---
 
-## 1. Syllabi, grades, rubrics — ARCHIVE PROJECT, deadline-driven, APPROVED
+## 1. Syllabi, grades, rubrics — ⚠️ PARTLY DONE: 24 syllabi UNREACHABLE by API
 
-**Approved by Jennifer 2026-11-02. Prompt written; needs an archive session.**
+**Archive session completed the API-reachable work 2026-11-01. Gate: 28 PASS,
+1 intended WARN. What remains cannot be solved with code — see below.**
 
 ⚠️ **REPRIORITISED.** This item was first raised as "grades and CACREP KPI
 rubrics". Jennifer corrected it: licensure needs **transcripts and syllabi**,
@@ -64,6 +65,58 @@ Endpoints: `GET /courses?include[]=total_scores` for course grades;
 
 Owner: the archive project (writes into `~/Documents/Naropa Archive`). The
 dashboard session never writes there.
+
+### Outcome, verified independently by the dashboard session
+
+```
+grades    17 of 25 concluded courses, captured and labelled Canvas-computed (NOT official)
+rubrics   12 rubric_assessment records across all 268 submissions
+syllabi   4 documents + 1 real syllabus_body · 24 courses UNREACHABLE · 1 genuinely none
+upload    4,349 / 4,349 — zero files exist on only one machine
+```
+
+🚩 **THE BLOCKER, and it is not an engineering problem.** Naropa's real syllabi
+live in **Simple Syllabus**, an external LTI tool on 29 of 31 course navs
+(`/courses/:id/tabs` → `type=external`, verified). **No Canvas API call reaches
+it.** `syllabus_body` is boilerplate in 6 of the 8 courses that have one —
+literally "do not use this page, use the Simple Syllabus page".
+
+Syllabi are what Jennifer named, unprompted, as what licensure requires. They
+die with her Canvas access and nothing in this codebase can retrieve them.
+
+**Retrieval paths, best first** (from vendor/university docs, not Naropa-specific):
+1. **Naropa admin runs a bulk export.** Simple Syllabus has an administrator
+   "Collect PDFs" feature that zips every syllabus in a unit. One request.
+2. **Her own Syllabus Library / "My Courses" portal** lists past and current
+   syllabi in one place, each with a PRINT button producing a PDF. Needs a
+   browser in her session.
+3. Per-course scrape — fragile, last resort.
+
+No source confirms whether student access survives graduation, so the deadline
+is real and unquantified. Worth asking Naropa alongside the token-cap question.
+
+**The handoff is already built.** `_Records/Syllabi still to retrieve from
+Simple Syllabus.html` lists 29 courses, each naming its slot path
+(`<course>/_Syllabus/Simple Syllabus.pdf`). Drop a PDF there and run
+`archive_records.py --gaps`; capture reads from disk, so it does not matter who
+retrieves them.
+
+Two caveats the archive session volunteered and we should keep: one Spring 2026
+"document" is the Summer 2025 section's syllabus reused, and CNST-771's computed
+score of 0.0 almost certainly means nothing was graded in Canvas.
+
+### Two counting corrections, both mine
+
+- I reported "21 syllabi on disk". Most were the archive's own
+  `Syllabus status.md` records. I counted filenames matching `*syllab*` without
+  checking what they were — a count that could not distinguish the thing from
+  the record of looking for the thing.
+- I reported 35 Drive entries with no local file against their 9. Mine was
+  wrong: `CNST-721` has directories literally named `". 4- Natural Wakefulness…"`
+  and my walk filtered anything starting with `.` as hidden, skipping 24 real
+  directories. **A filter that silently excludes real data looks exactly like
+  data that is not there.** It also means earlier file counts in this project
+  (4,272 / 6.70 GB) were undercounts; the real figures are 4,349 / 6.71 GB.
 
 ## 2. Re-point archived board links at Drive — ✅ DONE 2026-11-01
 
