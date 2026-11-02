@@ -1475,6 +1475,41 @@ function readingNoteLink(it) {
   return `<a class="note-link" href="${escapeAttr(url)}" target="_blank" rel="noopener" title="Open reading notes in Google Drive (sign in required)">📖 Reading Notes</a>`;
 }
 
+// ── Drive copy of archived coursework ──────────────────────────────────────
+// Archived board rows link to Canvas, and Naropa withdraws Canvas access after
+// graduation (~May 2027). On that day every one of those links dies. The
+// content is already in her PERSONAL Drive, which survives graduation, so
+// `build_archive_urls.py` writes an optional `archive_url` onto the archived
+// board files and this renders it as a second, durable way in.
+//
+// Additive by construction: the Canvas `link` stays exactly where it was on the
+// title, so a row without an `archive_url` renders precisely as it does today.
+// She keeps the Canvas link while it still works and has the Drive copy for
+// after it stops — "prefers Drive, falls back to Canvas" is a choice offered to
+// the reader, not a swap performed behind her.
+//
+// Still TITLE AND LINK ONLY. This renders a URL into authenticated Drive and
+// never note text, source text or page body. Archived boards carry zero body
+// text and must continue to.
+const ARCHIVE_URL_RE =
+  /^https:\/\/(drive\.google\.com\/file\/d\/[\w-]+\/view|docs\.google\.com\/(?:document|presentation|spreadsheets)\/d\/[\w-]+\/edit)$/;
+
+function archiveLink(it) {
+  const url = it.archive_url;
+  if (!url || typeof url !== 'string') return '';
+  // Only the two shapes the builder emits. A malformed or unexpected value
+  // renders nothing rather than becoming a link of unknown destination.
+  if (!ARCHIVE_URL_RE.test(url)) {
+    console.warn('[archive] refusing an archive_url of unrecognised shape:', url);
+    return '';
+  }
+  // Belt and braces: only archived board files carry the field, and data.json
+  // never does — but scope it anyway so the CURRENT semester can never grow a
+  // Drive link from a stray field.
+  if (!isReadOnlySemester()) return '';
+  return `<a class="note-link" href="${escapeAttr(url)}" target="_blank" rel="noopener" title="Open the archived copy in Google Drive — works after Canvas access ends (sign in as Jennifer)">📁 Drive copy</a>`;
+}
+
 function videoNoteLink(it) {
   const entry = VIDEO_NOTES[it.canvas_id];
   if (!entry) return '';
@@ -1910,7 +1945,7 @@ function renderItem(it) {
     ? `<div class="item-summary">${escapeHtml(it.summary)}</div>` : '';
 
   // Note button for video + lecture items (copies a Granola-ready template)
-  const summaryLink = videoNoteLink(it) + transcriptLink(it) + readingNoteLink(it);
+  const summaryLink = videoNoteLink(it) + transcriptLink(it) + readingNoteLink(it) + archiveLink(it);
   const noteBtn = (it.type === 'video' || it.type === 'lecture')
     ? `<button class="note-btn" data-note="${escapeAttr(it.canvas_id)}" title="Copy this item's details to the clipboard">📋 Copy</button>`
     : '';
