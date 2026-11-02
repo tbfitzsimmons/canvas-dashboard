@@ -6,9 +6,12 @@
     "weeks": 12,
     "canvas_term_name": "Summer 2026 Semester"
   },
-  "excluded_course_ids": [5334, 5337],
+  "excluded_course_ids": [
+    5334,
+    5337
+  ],
   "included_course_ids": null,
-  "token_expires": "2026-11-09",
+  "token_expires": "2026-12-01",
   "instructor_overrides": {
     "CNST-770E": "Jenna Noah"
   }

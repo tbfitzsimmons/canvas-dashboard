@@ -2090,6 +2090,77 @@ def fetch_planner_reconciliation(
 # Entry
 # ─────────────────────────────────────────────────────────────────────────────
 
+# ─────────────────────────────────────────────────────────────────────────────
+# Token self-renewal
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Instructure capped user access tokens in 2026 after a security incident.
+# Student-only accounts get the strictest tier: 30 days, enforced on the API as
+# well as the web UI ("Expiration date cannot be more than 30 days in the
+# future", HTTP 400). Verified 2026-11-01.
+#
+# Rotation would mean a new secret every month and a GitHub-secret update every
+# month, and a missed one freezes the board SILENTLY — the board keeps serving
+# the last good data.json and looks fine. That failure already cost three weeks
+# in July 2026.
+#
+# The way out, also verified 2026-11-01:
+#   PUT /users/self/tokens/:id  token[regenerate]=1  -> new secret, SAME expiry (useless)
+#   PUT /users/self/tokens/:id  token[expires_at]=…  -> SAME secret, NEW expiry (what we want)
+# So the token extends its own life in place. The secret never changes, which
+# means CANVAS_TOKEN never has to be touched again.
+#
+# One token can extend every user-generated token on the same Canvas account,
+# so this also keeps the sibling archive project's token alive.
+#
+# Failure here is never fatal: a board that syncs is worth more than a tidy
+# token, and the next run tries again. There are ~4 weekly runs inside every
+# 30-day window, so a single failure has plenty of slack.
+
+TOKEN_RENEW_BELOW_DAYS = 20      # extend once under this many days remain
+TOKEN_RENEW_TO_DAYS    = 29      # never 30: Canvas rejects >30 and clocks drift
+
+
+def extend_tokens(canvas: Canvas, cfg: dict) -> None:
+    """Push every live user-generated token's expiry forward. Never raises."""
+    try:
+        r = canvas.session.get(f"{canvas.base}/api/v1/users/self/user_generated_tokens",
+                               timeout=30)
+        if r.status_code != 200:
+            print(f"  ⚠ token renewal: cannot list tokens (HTTP {r.status_code}) — skipping")
+            return
+        tokens = r.json()
+    except Exception as e:
+        print(f"  ⚠ token renewal: {e} — skipping")
+        return
+
+    now = datetime.now(timezone.utc)
+    target = (now + timedelta(days=TOKEN_RENEW_TO_DAYS)).replace(microsecond=0)
+    want = target.strftime("%Y-%m-%dT%H:%M:%SZ")
+
+    for t in tokens:
+        exp = parse_iso(t.get("expires_at"))
+        if not exp:
+            continue                                  # no expiry: nothing to renew
+        days = (exp - now).days
+        if days < 0:
+            continue                                  # already dead; a human must replace it
+        if days >= TOKEN_RENEW_BELOW_DAYS:
+            continue                                  # plenty of runway
+        try:
+            pr = canvas.session.put(
+                f"{canvas.base}/api/v1/users/self/tokens/{t['id']}",
+                data={"token[expires_at]": want}, timeout=30)
+            if pr.status_code == 200:
+                print(f"  🔑 token renewed: {t.get('purpose')!r} "
+                      f"{t.get('expires_at')} → {pr.json().get('expires_at')}")
+            else:
+                print(f"  ⚠ token renewal failed for {t.get('purpose')!r}: "
+                      f"HTTP {pr.status_code} {pr.text[:120]}")
+        except Exception as e:
+            print(f"  ⚠ token renewal failed for {t.get('purpose')!r}: {e}")
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description="Canvas → dashboard/data.json")
     ap.add_argument("--backfill", metavar="TERM",
@@ -2104,6 +2175,10 @@ def main() -> int:
     token = get_token(cfg)
     base_url = cfg["canvas_url"]
     canvas = Canvas(base_url, token)
+
+    # Keep the token alive before doing anything else. If this is the run that
+    # would otherwise have been the last one, renewing first is what saves it.
+    extend_tokens(canvas, cfg)
 
     if args.list_terms:
         fetch_raw_courses(canvas, cfg, states=("completed", "active", "invited_or_pending"))
