@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-02T00:56:59.402678+00:00",
+  "generated_at": "2026-11-02T14:43:02.762002+00:00",
   "semester": {
     "name": "Fall 2026",
     "start_date": "2026-08-24",
@@ -1701,6 +1701,23 @@
       "summary": "",
       "submitted": false,
       "canvas_target": "page:9042:week-to-do-list-7"
+    },
+    {
+      "week": 8,
+      "courseId": "course3",
+      "type": "video",
+      "title": "Module 8 - Lecture - Passcode: h+8uQm*W",
+      "detail": "",
+      "due": "—",
+      "due_date": null,
+      "link": "https://naropa.instructure.com/api/v1/courses/9492/module_item_redirect/442544",
+      "points": null,
+      "canvas_id": "module_item:442544",
+      "source": "module_item",
+      "is_overview": false,
+      "summary": "",
+      "submitted": false,
+      "canvas_target": "external:https://naropa.zoom.us/rec/share/mRHIruhBV5lsFSu4M10_jnFmWabSOph_GkZ9hwcppRZctmKiLwfkJHbF1NkDLBOm.huvxC_FYRTpZ5xH7"
     },
     {
       "week": 8,
@@ -4102,7 +4119,7 @@
   ],
   "totals": {
     "reading": 134,
-    "video": 36,
+    "video": 37,
     "discussion": 11,
     "paper": 5,
     "assignment": 50,
@@ -4111,7 +4128,7 @@
     "lecture": 1
   },
   "coverage": {
-    "verified_at": "2026-11-02T00:56:59.400480+00:00",
+    "verified_at": "2026-11-02T14:43:02.759752+00:00",
     "assignments": {
       "total": 43,
       "captured": 43
@@ -4121,8 +4138,8 @@
       "captured": 11
     },
     "module_items": {
-      "total": 111,
-      "captured": 110
+      "total": 112,
+      "captured": 111
     },
     "unrepresented": [
       "CMHC-520E: Module 3 Readings, Viewings, and Materials"
@@ -4134,7 +4151,7 @@
       "by_reason": {
         "prose fragment": 3
       },
-      "items_checked": 237
+      "items_checked": 238
     }
   },
   "other_terms": [],
