@@ -11,10 +11,30 @@ survives graduation; Canvas does not.
 
 ---
 
-## 1. Capture grades and rubric/KPI assessments — ARCHIVE PROJECT, deadline-driven
+## 1. Syllabi, grades, rubrics — ARCHIVE PROJECT, deadline-driven, APPROVED
 
-**Not yet started. Raised 2026-11-02; not in Brooks's "let's do 2 and 3", so it
-needs an explicit decision rather than silent omission.**
+**Approved by Jennifer 2026-11-02. Prompt written; needs an archive session.**
+
+⚠️ **REPRIORITISED.** This item was first raised as "grades and CACREP KPI
+rubrics". Jennifer corrected it: licensure needs **transcripts and syllabi**,
+and she does not expect to need the KPI rubrics. Checking what she named
+exposed a far bigger gap than the one originally flagged:
+
+```
+syllabus files on disk:  6 total, ALL in Summer 2025
+  Spring 2025  0     Spring 2026  0
+  Fall 2025    0     Summer 2026  0     Fall 2026  0
+Canvas syllabus_body:    8 of 31 courses — captured as such: 0
+```
+
+Likely cause: the archive walks modules and pages, but Canvas's Syllabus tab is
+a separate surface and `syllabus_body` is a course attribute, not a module item
+— so it was never in the crawl path. Same shape as the YouTube-captions FERPA
+gap: a control that runs on one input path is not a control.
+
+Transcripts come from the REGISTRAR, not Canvas — not an archive task.
+
+Priority within this item: syllabi first, then course grades, then rubrics.
 
 Measured against Canvas today:
 
