@@ -306,6 +306,19 @@
     opacity: 0.95;
     font-weight: 500;
   }
+  /* Syllabus link lives ON the coloured course header, so it cannot inherit
+     .note-link's blue (var(--link) on a saturated bar is unreadable). White at
+     0.9 with an underline on hover, same weight as the course-code tag. */
+  .col-head .syl-link {
+    font-size: 11px;
+    font-weight: 500;
+    color: white;
+    opacity: 0.9;
+    text-decoration: none;
+    margin-left: 8px;
+    white-space: nowrap;
+  }
+  .col-head .syl-link:hover { opacity: 1; text-decoration: underline; }
   .col-body { padding: 10px 8px; flex: 1; display: flex; flex-direction: column; gap: 4px; }
   .col-empty { padding: 24px 8px; text-align: center; color: var(--muted); font-style: italic; font-size: 12.5px; }
 
@@ -1475,6 +1488,71 @@ function readingNoteLink(it) {
   return `<a class="note-link" href="${escapeAttr(url)}" target="_blank" rel="noopener" title="Open reading notes in Google Drive (sign in required)">📖 Reading Notes</a>`;
 }
 
+// ── Syllabi (optional external contract) ───────────────────────────────────
+// A syllabus is the single most licensure-relevant document Jennifer has
+// (her words: "licensure would only need transcripts and syllabi"), and it is
+// NOT a weekly task — it is a property of the COURSE. So it renders on the
+// course card next to the code and progress, where `canvas_url` and `zoom_url`
+// already set the precedent, and never as an item row.
+//
+// Contract, third sibling of video-notes.json / reading-notes.json:
+//   { "syllabi": { "<canvas_course_id>": { "url": "https://…" } } }
+//
+// Keyed on the CANVAS COURSE ID (integer, e.g. 7208), which is unique by
+// construction and sits on every course object as `canvas_id` (measured
+// 2026-11-05: 30 of 30 courses across data.json + all five archives carry one).
+// NOT on course code. A code is a section label that recurs across terms —
+// CNSM-651E-LA and -LB are different courses — so it is unique on today's six
+// boards only incidentally (also measured: 30 courses, 30 distinct codes, 0
+// collisions). That is a property of the data as it stands, not a guarantee,
+// and a code key would silently fan one syllabus onto the wrong course the
+// first time it stopped holding.
+//
+// Separate file from the other two contracts on purpose: two producers writing
+// one file is a failure this project already had, and independent files stay
+// independently publishable.
+//
+// CONSUMED OPTIONALLY. Missing / empty / malformed / non-https → the board
+// renders exactly as it does today. The real syllabi are locked in Simple
+// Syllabus (an external LTI tool no Canvas API reaches), so "absent" is the
+// state today and will be the state for most courses for a while.
+//
+// STILL TITLE AND LINK ONLY. This renders a URL into authenticated Drive and
+// never syllabus text. Archived boards carry zero body text (`summary` is
+// stripped by strip_archived_content() in sync.py) and must continue to.
+let SYLLABI = {};
+
+async function loadSyllabi() {
+  try {
+    const res = await fetch('syllabi.json?t=' + Date.now(), { cache: 'no-store' });
+    if (!res.ok) return;                     // 404 is the normal case today
+    const data = await res.json();
+    if (data && typeof data === 'object' && !Array.isArray(data)) {
+      SYLLABI = data.syllabi && typeof data.syllabi === 'object' ? data.syllabi : data;
+    }
+  } catch (_) { /* absent or malformed → stay empty, board unaffected */ }
+}
+
+// Deliberately NOT gated on isReadOnlySemester(): a syllabus link is a LINK,
+// not a control. Read-only archived boards drop tickable controls (fact 19),
+// but a past course's syllabus is exactly what a licensure board asks for, so
+// it must render on archived semesters too.
+function syllabusLink(course) {
+  if (!course || course.canvas_id == null) return '';
+  const entry = SYLLABI[String(course.canvas_id)];
+  if (!entry) return '';
+  const url = typeof entry === 'string' ? entry : entry.url;
+  if (!url || typeof url !== 'string' || !/^https:\/\//i.test(url)) {
+    if (url) console.warn('[syllabus] refusing a non-https url for course', course.canvas_id, url);
+    return '';
+  }
+  // The header is itself a click target (collapse/expand), so stop the event
+  // or opening the syllabus also folds the column up behind it.
+  return `<a class="syl-link" href="${escapeAttr(url)}" target="_blank" rel="noopener"` +
+         ` onclick="event.stopPropagation();"` +
+         ` title="Open the syllabus for ${escapeAttr(course.code || course.name || '')} in Google Drive (sign in as Jennifer)">📄 Syllabus</a>`;
+}
+
 // ── Drive copy of archived coursework ──────────────────────────────────────
 // Archived board rows link to Canvas, and Naropa withdraws Canvas access after
 // graduation (~May 2027). On that day every one of those links dies. The
@@ -1820,7 +1898,7 @@ function renderUndatedSection() {
       <div class="col ${isCollapsed ? 'collapsed' : ''}">
         <div class="col-head" style="background:${course.color_bar};" onclick="toggleCourseCollapsed('${escapeAttr(course.id)}')">
           <div><span class="caret">▼</span><span class="col-title">${escapeHtml(course.name)}</span>
-               <span class="col-code-tag">${escapeHtml(course.code)}</span></div>
+               <span class="col-code-tag">${escapeHtml(course.code)}</span>${syllabusLink(course)}</div>
           <div class="col-progress">${isReadOnlySemester() ? courseItems.length + ' items' : cdone + '/' + courseItems.length}</div>
         </div>
         <div class="col-body">${courseItems.map(renderItem).join('')}</div>
@@ -1877,7 +1955,7 @@ function renderWeekColumns(weekNum) {
           <div class="col col-muted ${isCollapsed ? 'collapsed' : ''}">
             <div class="col-head" style="background:${course.color_bar};" onclick="toggleCourseCollapsed('${escapeAttr(course.id)}')">
               <div><span class="caret">▼</span><span class="col-title">${escapeHtml(course.name)}</span>
-                   <span class="col-code-tag">${escapeHtml(course.code)}</span></div>
+                   <span class="col-code-tag">${escapeHtml(course.code)}</span>${syllabusLink(course)}</div>
             </div>
             <div class="col-quiet">Nothing assigned this week ✓</div>
           </div>`;
@@ -1888,7 +1966,7 @@ function renderWeekColumns(weekNum) {
         <div class="col ${isCollapsed ? 'collapsed' : ''}">
           <div class="col-head" style="background:${course.color_bar};" onclick="toggleCourseCollapsed('${escapeAttr(course.id)}')">
             <div><span class="caret">▼</span><span class="col-title">${escapeHtml(course.name)}</span>
-                 <span class="col-code-tag">${escapeHtml(course.code)}</span></div>
+                 <span class="col-code-tag">${escapeHtml(course.code)}</span>${syllabusLink(course)}</div>
             <div class="col-progress">${isReadOnlySemester() ? courseItems.length + ' items' : done + '/' + courseItems.length}</div>
           </div>
           <div class="col-body">${courseItems.map(renderItem).join('')}</div>
@@ -2037,6 +2115,7 @@ async function boot() {
     STATE.data = await res.json();
     await loadVideoNotes();   // optional; board renders unchanged if absent
     await loadReadingNotes(); // ditto — absent until the archive emits it
+    await loadSyllabi();      // ditto — absent until syllabi escape Simple Syllabus
     const idx = await loadArchiveIndex();
     if (idx) STATE.data.archives = idx;   // on-disk index beats data.json's snapshot
     CURRENT_DATA = STATE.data;   // keep the live board for the semester picker

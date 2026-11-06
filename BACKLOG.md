@@ -95,6 +95,18 @@ die with her Canvas access and nothing in this codebase can retrieve them.
 No source confirms whether student access survives graduation, so the deadline
 is real and unquantified. Worth asking Naropa alongside the token-cap question.
 
+### The BOARD side is now built and waiting (2026-11-05)
+
+Syllabi had zero presence on the dashboard — verified before the change: 0
+mentions in index.html, no field on the course object, no row on any of the six
+semesters. So even once a PDF reaches Drive it would have sat there invisible.
+
+`dashboard/syllabi.json` (optional, keyed on `canvas_id`), `loadSyllabi()` +
+`syllabusLink()` rendering a "📄 Syllabus" link on the course card, and
+`publish-syllabi.sh` now exist. See fact 24. The contract file itself does NOT
+exist and nothing was fabricated to create it — the blocker below is unchanged,
+and the board renders byte-identically until a real link arrives.
+
 **The handoff is already built.** `_Records/Syllabi still to retrieve from
 Simple Syllabus.html` lists 29 courses, each naming its slot path
 (`<course>/_Syllabus/Simple Syllabus.pdf`). Drop a PDF there and run

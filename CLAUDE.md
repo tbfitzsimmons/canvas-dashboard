@@ -509,6 +509,51 @@ custom domain, preserving the `#t=` hash. Code at top of `<script>` in index.htm
    here — Brooks added it via GitHub's web editor. Any future change to a
    workflow file needs the same route, or the scope granted.
 
+24. **Syllabi: the consumer is built and DORMANT (2026-11-05).** Syllabi are what
+   Jennifer named, unprompted, as what licensure needs ("licensure would only
+   need transcripts and syllabi") and they had **zero presence on the board** —
+   measured before the change: 0 matches for `syllab` in index.html, no field on
+   the course object, no item row on any of the six semesters.
+   A syllabus is NOT a weekly task, so it is NOT an item row. It is a property of
+   the COURSE and renders on the course card (`.col-head`), beside the code and
+   progress, exactly where `canvas_url` / `zoom_url` set the precedent.
+
+   Third optional contract, sibling of video-notes.json / reading-notes.json:
+   ```
+   dashboard/syllabi.json
+   { "syllabi": { "<canvas_course_id>": { "url": "https://…" } } }
+   ```
+   Keyed on `course.canvas_id` (bare integer), NOT course code. A code is a
+   section label that recurs across terms; it is unique on today's six boards
+   only incidentally (measured 2026-11-05: 30 courses, 30 distinct codes, and
+   30/30 carry an integer `canvas_id`). The id is unique by construction.
+
+   `loadSyllabi()` + `syllabusLink(course)` in index.html. Absent / empty /
+   malformed / non-https → the board renders **byte-identically** to before
+   (verified in a real browser: SHA-256 of `#root` innerHTML matched the
+   unmodified board across all 7 states — week view, all-weeks, and all five
+   archives — with the file 404ing; and *changed* in exactly the 3 states that
+   have a matching course once a contract was injected, so the comparison can
+   fail).
+   It renders on ARCHIVED boards too, deliberately **not** gated on
+   `isReadOnlySemester()`: a syllabus link is a LINK, not a control, and a past
+   course's syllabus is precisely what a licensure board asks for. Still TITLE
+   AND LINK ONLY — a URL into authenticated Drive, never syllabus text.
+   The header is itself a click target, so the anchor carries
+   `event.stopPropagation()` or opening a syllabus also folds the column.
+
+   Publisher: **`./publish-syllabi.sh`**, modelled on publish-reading-notes.sh,
+   carrying the same guards BY COPY (key shape, https-only, shrink guard with
+   `ALLOW_SHRINK=1`, the fact-17 401/404 Drive existence probe, a coverage
+   report, exit 0 when the contract is absent). Every guard was proven able to
+   FAIL before being trusted.
+
+   ⚠️ **It is dormant and will stay dormant until the Simple Syllabus blocker in
+   BACKLOG item 1 is cleared.** `syllabi.json` does not exist, which is the
+   normal case: Naropa's real syllabi live in an external LTI tool no Canvas API
+   reaches, so they arrive by hand. Nothing was invented to fill the file
+   (fact 17). The board side is ready the moment one PDF lands in Drive.
+
 ## CURRENT STATE (2026-08-26) — read this before assuming
 
 - Semester: **Fall 2026**, 5 courses, ~211 items. Summer 2026 archived and
