@@ -560,7 +560,18 @@ custom domain, preserving the `#t=` hash. Code at top of `<script>` in index.htm
   browsable via the dashboard's semester dropdown.
 - Course dropped mid-term: CMHC-609E-LB (confirmed by Brooks; the roster-change
   notice is expected, not a bug).
-- Canvas token expires **2026-11-09**. Renewal ritual: create token → copy the
+- Canvas token: **do not trust any date written down, including this one.**
+  `extend_tokens()` renews the token IN PLACE every sync and nothing writes the
+  new expiry back, so every recorded `token_expires` goes stale by design.
+  Read the live value instead:
+      GET /api/v1/users/self/user_generated_tokens  → expires_at
+  (Last read 2026-11-05: both tokens 2026-12-01. config.json said 2026-11-09 and
+  the archive's said 2026-11-14 — both wrong, both harmless, because health.yml
+  reads runway from Canvas rather than from the file.)
+  This is fact 5's lesson one turn further on: a date copied once and then moved
+  silently by automation is no better than the estimate fact 5 banned.
+- Legacy renewal ritual, only if in-place renewal ever stops working:
+  create token → copy the
   ON-SCREEN expiry into config.json → immediately calendar the NEXT renewal from
   that date. Never estimate the expiry (see fact 5).
 - Nightly KV backups: live, cron `0 9 * * *` UTC in the Cloudflare portal.
