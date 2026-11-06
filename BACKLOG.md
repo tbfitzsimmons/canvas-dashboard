@@ -11,7 +11,7 @@ survives graduation; Canvas does not.
 
 ---
 
-## 1. Syllabi, grades, rubrics — ⚠️ PARTLY DONE: 24 syllabi UNREACHABLE by API
+## 1. Syllabi, grades, rubrics — ✅ DONE 2026-11-05
 
 **Archive session completed the API-reachable work 2026-11-01. Gate: 28 PASS,
 1 intended WARN. What remains cannot be solved with code — see below.**
@@ -129,6 +129,46 @@ score of 0.0 almost certainly means nothing was graded in Canvas.
   directories. **A filter that silently excludes real data looks exactly like
   data that is not there.** It also means earlier file counts in this project
   (4,272 / 6.70 GB) were undercounts; the real figures are 4,349 / 6.71 GB.
+
+### CLOSED 2026-11-05 — 27 of 29 syllabi captured and live on the board
+
+The blocker described below was real and is now solved. Keeping the history
+because the route matters more than the result.
+
+```
+syllabi captured   27 of 29, code AND term verified inside each PDF
+on the board       27 of 30 course cards show 📄 Syllabus, all six semesters
+archive gate       32 PASS · 0 FAIL · 0 WARN · 0 UNTRUSTED
+the 3 without      NGSO-SP25 (orientation shell, never a course)
+                   REL-651-A (Simple Syllabus: "this document has been deleted")
+                   CMHC-520E (no Simple Syllabus tab at all)
+                   — all three CHECKED AND ABSENT AT SOURCE, not failures
+```
+
+**What worked, after two routes that did not.** A manual Claude-in-Chrome run
+got 12 of 35 before Chrome's own print dialog froze the automation. The answer
+was a HEADED Playwright run (`capture_simple_syllabus.py` in the archive repo)
+driving Canvas's **sessionless LTI launch** — `GET /courses/:id/external_tools/
+sessionless_launch?id=<tool>` returns a URL performing a real signed launch —
+then calling Simple Syllabus's own export endpoint (`doc-pdf-generate →
+doc-pdf/<slug>`) rather than the Download menu. Headless stalls; headed works.
+
+I was confidently WRONG about this and it nearly cost the route: I argued an API
+bearer token could not produce an LTI 1.3 launch and told the archive session to
+stand down. The sessionless-launch endpoint exists, I had queried /external_tools
+earlier and failed to connect the two, and the archive session corrected me.
+Reasoning from how a protocol works in general is not a substitute for checking
+what the vendor exposes.
+
+**Safety enforced in code, not by instruction:** network-layer aborts on
+`acknowledge`, `doc-progress`, `doc-interaction`, `doc-add-view` and
+`doc-component-read-add`; `window.print` disabled; no scrolling. During the
+Chrome attempt one syllabus flipped to "Thank you for reading the syllabus" —
+inferred (from the blocked calls, not proven) to be the page registering reading
+on scroll rather than a misclick.
+
+**Contract:** `dashboard/syllabi.json`, keyed on the INTEGER Canvas course id,
+published by `./publish-syllabi.sh`. 27 entries, all resolving.
 
 ## 2. Re-point archived board links at Drive — ✅ DONE 2026-11-01
 
