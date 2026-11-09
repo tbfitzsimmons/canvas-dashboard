@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-02T14:43:02.762002+00:00",
+  "generated_at": "2026-11-09T15:06:18.344925+00:00",
   "semester": {
     "name": "Fall 2026",
     "start_date": "2026-08-24",
@@ -1682,7 +1682,7 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false,
+      "submitted": true,
       "canvas_target": ""
     },
     {
@@ -1835,7 +1835,7 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false,
+      "submitted": true,
       "canvas_target": ""
     },
     {
@@ -1854,6 +1854,23 @@
       "summary": "Please review the attached PowerPoint, which provides an overview of what to expect during both days of the in-person intensive: Monday, October 19, 2026, from 9:00 a.m. to 5:30…",
       "submitted": false,
       "canvas_target": "page:9042:overview-of-the-in-person-intensive"
+    },
+    {
+      "week": 9,
+      "courseId": "course3",
+      "type": "video",
+      "title": "Module 9 - Lecture - Passcode: F@Afhk^1",
+      "detail": "",
+      "due": "—",
+      "due_date": null,
+      "link": "https://naropa.instructure.com/api/v1/courses/9492/module_item_redirect/443847",
+      "points": null,
+      "canvas_id": "module_item:443847",
+      "source": "module_item",
+      "is_overview": false,
+      "summary": "",
+      "submitted": false,
+      "canvas_target": "external:https://naropa.zoom.us/rec/share/v1BMrI7n6jZBLQCO2haBgzliwY8DQQiSoYsNhPC4E6Yd_oJr95kOt7s_LkL2rwLg.HlqA0kSlmUHzFOSR"
     },
     {
       "week": 10,
@@ -1954,7 +1971,7 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false,
+      "submitted": true,
       "canvas_target": ""
     },
     {
@@ -2022,7 +2039,7 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false,
+      "submitted": true,
       "canvas_target": ""
     },
     {
@@ -2175,7 +2192,7 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false,
+      "submitted": true,
       "canvas_target": ""
     },
     {
@@ -4119,7 +4136,7 @@
   ],
   "totals": {
     "reading": 134,
-    "video": 37,
+    "video": 38,
     "discussion": 11,
     "paper": 5,
     "assignment": 50,
@@ -4128,7 +4145,7 @@
     "lecture": 1
   },
   "coverage": {
-    "verified_at": "2026-11-02T14:43:02.759752+00:00",
+    "verified_at": "2026-11-09T15:06:18.342778+00:00",
     "assignments": {
       "total": 43,
       "captured": 43
@@ -4138,8 +4155,8 @@
       "captured": 11
     },
     "module_items": {
-      "total": 112,
-      "captured": 111
+      "total": 113,
+      "captured": 112
     },
     "unrepresented": [
       "CMHC-520E: Module 3 Readings, Viewings, and Materials"
@@ -4151,7 +4168,7 @@
       "by_reason": {
         "prose fragment": 3
       },
-      "items_checked": 238
+      "items_checked": 239
     }
   },
   "other_terms": [],
