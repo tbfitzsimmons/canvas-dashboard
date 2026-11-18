@@ -1492,6 +1492,27 @@ def fetch_course_items(canvas: Canvas, course: Course, cfg: dict) -> list[Item]:
     return items
 
 
+# Courses whose Pages index could not be read, so the orphan-page check below
+# could not run. Keyed course.code -> HTTP status. Reported once per sync by
+# report_pages_index_blindness() rather than 31 times inline.
+_PAGES_INDEX_BLIND: dict[str, object] = {}
+
+
+def report_pages_index_blindness() -> None:
+    """Announce that the orphan-page coverage check never actually ran."""
+    if not _PAGES_INDEX_BLIND:
+        return
+    n = len(_PAGES_INDEX_BLIND)
+    statuses = sorted({str(v) for v in _PAGES_INDEX_BLIND.values()})
+    print(
+        f"  ⚠  orphan-page check UNAVAILABLE for {n} course(s) "
+        f"(/pages returned {', '.join(statuses)}). Module traversal is the only "
+        f"page source, so a published page outside every module is invisible to "
+        f"this sync and will NOT be flagged. Embedded media on such pages was the "
+        f"cause of the 2026-11 archive gap."
+    )
+
+
 def _coverage_check(
     canvas: Canvas,
     course: Course,
@@ -1531,9 +1552,22 @@ def _coverage_check(
             f"(shown in Undated section): {titles}{extra}"
         )
 
-    # Check for Canvas pages not referenced by any module
+    # Check for Canvas pages not referenced by any module.
+    #
+    # This instance has the Pages index DISABLED: /courses/:id/pages returns 404
+    # "That page has been disabled for this course" for every course. The old
+    # code swallowed that with `except requests.HTTPError: pass`, so this check
+    # reported clean coverage on every run — not because no pages were orphaned,
+    # but because it never saw a page at all. A check that cannot fail is not a
+    # check. It now reports its own blindness instead of passing silently.
     try:
         all_pages = list(canvas.paginate(f"/courses/{cid}/pages", {"per_page": 50}))
+    except requests.HTTPError as exc:
+        status = getattr(getattr(exc, "response", None), "status_code", None)
+        _PAGES_INDEX_BLIND[course.code] = status or "error"
+        all_pages = None
+
+    if all_pages is not None:
         orphan_pages = [
             p for p in all_pages
             if p.get("url") and p["url"] not in seen_module_page_urls
@@ -1546,8 +1580,6 @@ def _coverage_check(
                 f"  ⚠  {course.code}: {len(orphan_pages)} published page(s) not in any module "
                 f"(may be missed): {titles}{extra}"
             )
-    except requests.HTTPError:
-        pass
 
     for line in lines:
         print(line)
@@ -1839,6 +1871,11 @@ def verify_coverage(canvas: Canvas, courses: list[Course], items: list[Item]) ->
     else:
         print(f"\n✓ COVERAGE VERIFIED: {asn_hit}/{asn_total} assignments, "
               f"{dis_hit}/{dis_total} discussions — every graded Canvas item is on the board")
+
+    # Qualify the line above: "verified" covers graded items reachable through
+    # module traversal. If the Pages index was unreadable, pages outside every
+    # module were never enumerated, so this is not a clean bill of health.
+    report_pages_index_blindness()
 
     return {
         "verified_at": datetime.now(timezone.utc).isoformat(),

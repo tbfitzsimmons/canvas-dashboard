@@ -554,6 +554,41 @@ custom domain, preserving the `#t=` hash. Code at top of `<script>` in index.htm
    reaches, so they arrive by hand. Nothing was invented to fill the file
    (fact 17). The board side is ready the moment one PDF lands in Drive.
 
+25. **The Pages index is DISABLED instance-wide, and the orphan-page coverage
+   check was silently blind because of it (2026-11-17).**
+   `GET /api/v1/courses/:id/pages` returns **404 "That page has been disabled for
+   this course"** on every course on this Canvas. Not some courses — measured on
+   all 31.
+
+   Two call sites depended on it and both swallowed the 404:
+   - `_coverage_check()` — listed all pages to warn about published pages not in
+     any module. With `except requests.HTTPError: pass`, it reported clean
+     coverage on **every run since it was written**, not because nothing was
+     orphaned but because it never saw a page. **A check that cannot fail is not
+     a check** (same lesson as fact 22's token scopes). It now records the status
+     per course and `report_pages_index_blindness()` prints one warning directly
+     after the `✓ COVERAGE VERIFIED` line, so that claim can never appear
+     unqualified. Proven able to fail AND able to stay silent AND still able to
+     flag a real orphan when the index works.
+   - the Zoom-URL page sweep (`_extract_zoom_url_from_html` fallback) — the
+     "bounded sweep of the rest" is likewise dead code on this instance.
+
+   **Module items are the only working page-discovery path**
+   (`type == "Page"` → `page_url` → `fetch_page_body`). The archive's own
+   `discover.py` already did it that way. Consequence that actually bit us: a
+   published page outside every module is invisible to this sync, and embedded
+   media parked on such pages is how ~148 media objects went unarchived.
+
+26. **Canvas's files-API `size` field is UNRELIABLE for media; use a Range probe
+   (2026-11-17).** Measured on 58 downloads: `size` was wrong on **21 of them**,
+   understating by up to **10,694×** (`Social Justice Counseling Lecture.mp4`:
+   `size: 11,367`, actual 121,555,405 bytes). Summing `api_size` predicts
+   0.83 GiB for a pull that is really 1.31 GiB.
+   The trap is not the bad estimate — it is that **verifying a download against
+   `api_size` condemns complete files as truncated.** Get the true size from
+   `Content-Range` on a 1-byte `Range: bytes=0-0` request, and judge truncation
+   against the response's own `Content-Length`, never the API field.
+
 ## CURRENT STATE (2026-08-26) — read this before assuming
 
 - Semester: **Fall 2026**, 5 courses, ~211 items. Summer 2026 archived and
