@@ -640,6 +640,59 @@ custom domain, preserving the `#t=` hash. Code at top of `<script>` in index.htm
    on PAST boards and are blocked on the archive adopting the 58 recovered media
    files (see `~/Documents/Naropa Archive Media/HANDOFF-TO-ARCHIVE.md`).
 
+28. **FREEZE: the platform has an end, and ending is not failing (2026-11-19).**
+   Canvas access ends ~May 2027. With no handling, that day turns a working
+   board into a nuisance generator: sync.yml fails every Monday, health.yml
+   every Tuesday, the UI claims "the sync is failing" and "token expired", and
+   GitHub emails about it forever. All false — by then the links point at Drive.
+   The end state is FROZEN: stop syncing, stop alerting, keep serving.
+
+   `sync.py --freeze` / `--unfreeze`, or `"frozen": true` in config.json. Plus
+   an automatic path, and **the date is the entire design**:
+   - a 401 **before** `access_ends` → the token died and the archive still needs
+     capturing. KEEP FAILING LOUDLY.
+   - a 401 **on or after** `access_ends` → the expected end. Freeze, exit 0.
+
+   The same signal means opposite things either side of one date, so the date is
+   not optional. Only an explicit 401/403 ever freezes; a timeout, DNS failure
+   or 500 falls through to the normal error path, and an unparseable
+   `access_ends` falls back to NOT freezing. Exiting 0 when frozen is the point:
+   a non-zero exit is what generates the weekly email.
+
+   **`health_check.py` — the health logic is no longer inside health.yml.**
+   Workflow files need the `workflow` PAT scope, which this project's token
+   does NOT have (confirmed again 2026-11-19: `remote rejected … without
+   workflow scope`). Every edit to an inline check had to be pasted through
+   GitHub's web editor by hand, which is exactly why those checks went
+   un-updated. The logic is now a pushable repo script; `health.yml` becomes one
+   line that calls it. ⚠️ The new workflow is committed as
+   **`ops/health.yml.proposed`** and must be pasted in by a human — until then
+   `health_check.py` is present but UNUSED and the old inline checks still run.
+
+   A frozen board gets integrity checks only. Freezing does **not** excuse a
+   broken board: frozen + zero items still fails. Verified against fixtures —
+   a 400-day-old frozen board with an expired token and 0/43 coverage exits 0,
+   while a frozen EMPTY board exits 1.
+
+   **The countdown is the only check here that fires BEFORE the damage.** Every
+   other one reports what already broke; nothing can be re-fetched after access
+   ends, so a warning that arrives then is worthless. Warns from 90 days out,
+   FAILS from 30, and carries the final-capture checklist in the failure text.
+
+   **`token_expires_live` — publish the MEASURED expiry, not the typed one.**
+   config.json's `token_expires` is hand-typed and `extend_tokens()` silently
+   outruns it (fact 22). On 2026-11-19 the string said 2026-12-01 while Canvas
+   said 2026-12-11 — the deployed check was ONE Tuesday from emailing a false
+   alarm about a healthy token. `extend_tokens()` now re-reads after its PUTs
+   and publishes the minimum future expiry across live tokens. The string was
+   corrected as a stopgap because the deployed health.yml still reads it.
+
+   UI: `renderFrozenBanner()`, and all three live-sync warnings (token, very-
+   stale, soft-stale) gated on `!d.frozen`. Verified in a real browser BOTH
+   ways on the same 400-day-old fixture — frozen shows the banner and no
+   warnings, not-frozen shows both warnings and no banner — so the suppression
+   is conditional, not removal.
+
 ## CURRENT STATE (2026-08-26) — read this before assuming
 
 - Semester: **Fall 2026**, 5 courses, ~211 items. Summer 2026 archived and
