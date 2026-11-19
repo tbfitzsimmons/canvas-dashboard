@@ -589,6 +589,57 @@ custom domain, preserving the `#t=` hash. Code at top of `<script>` in index.htm
    `Content-Range` on a 1-byte `Range: bytes=0-0` request, and judge truncation
    against the response's own `Content-Length`, never the API field.
 
+27. **Archived boards are DISCOVERED, not listed; and `external:` rows get a
+   re-point of their own (2026-11-19).**
+
+   `build_archive_urls.py` iterated a hardcoded
+   `SEMESTER_ORDER = [spring-2025 … summer-2026]`. At the Fall 2026 rollover
+   `fall-2026.json` would have been written, **never looked at**, and its ~200
+   rows left with no `archive_url` — while the report simply did not mention the
+   board. A silent omission reads exactly like a clean run (fact 25's lesson,
+   second occurrence). Boards now come from `discover_boards()`: the union of
+   `archive/index.json` (authoritative, written by sync at archive time) and the
+   directory listing, with anything unindexed processed **and named**, never
+   dropped. `SEMESTER_ORDER` survives as display order only.
+
+   **`repoint_external_links.py`** is the sibling tool for the one case
+   `build_archive_urls.py` rightly refuses. `external:` targets get
+   `external_url_not_in_drive` because an off-Canvas URL genuinely has no Drive
+   copy — writing one into `archive_url` would render a YouTube video under a
+   "📁 Drive copy" label. But those rows still die: their `link` is a
+   `module_item_redirect`, a wrapper whose only job is to bounce to an external
+   address, and the destination was captured in `canvas_target` at sync time.
+   So replace the wrapper with what it wrapped; a redirect carries no content.
+   The original is kept in `canvas_link`, which makes it reversible and the run
+   idempotent. 72 rows re-pointed; durability 86.7% → 88.8%.
+
+   Two things that tool must keep doing:
+   - **`ACCOUNT_TIED` matches as a SUBSTRING of the host.** It first read
+     `naropa.sharepoint.com`, which does NOT match `naropa-my.sharepoint.com` —
+     the hyphen defeats it — and one row was re-pointed at a URL that dies with
+     her account anyway. Now bare `naropa` and bare `sharepoint.com`. Caught by
+     simulating the rollover, NOT by the control set, which only tried
+     `naropa.zoom.us`. A control that exercises one variant of a pattern does
+     not test the pattern.
+   - **It SELF-HEALS.** A row an earlier run re-pointed, which the current rules
+     would refuse, is restored to its Canvas wrapper and reported. Tightening a
+     rule is useless if its past damage stays on the board.
+
+   ⚠️ **`archive_url` is NOT durability on its own.** Measured 2026-11-19 across
+   all six boards: 3,278 items, 88.8% durable, **361 still at risk** when access
+   ends. Of those, 90 point at hosts tied to her Naropa/Zoom/SharePoint account,
+   which die WITH Canvas and which the 92.4% coverage figure counted as safe.
+   Count account-tied hosts as AT RISK, not as external.
+
+   **Rollover readiness, measured by simulation (board copied to a temp dir with
+   its own index.json, tool run `--dry-run` against it):** Fall 2026 would map
+   156 of 183 Canvas links (85.2%) today. The 27 misses are 12 `external:`
+   (3 durable, the rest account-tied) and 15 not-yet-captured — the semester is
+   still live. **The archive must complete a final Fall 2026 sweep before access
+   ends**, or those 15 become permanent holes. 70 `media_embed` misses exist only
+   on PAST boards and are blocked on the archive adopting the 58 recovered media
+   files (see `~/Documents/Naropa Archive Media/HANDOFF-TO-ARCHIVE.md`).
+
 ## CURRENT STATE (2026-08-26) — read this before assuming
 
 - Semester: **Fall 2026**, 5 courses, ~211 items. Summer 2026 archived and

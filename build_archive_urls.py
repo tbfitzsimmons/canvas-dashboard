@@ -83,12 +83,58 @@ from __future__ import annotations
 
 import argparse
 import collections
+import glob
 import json
 import os
 import re
 import sys
 
+# Display order only. This used to be the list of boards the script PROCESSED,
+# which meant a newly archived semester was skipped without a word: at the Fall
+# 2026 rollover, `fall-2026.json` would have been written to disk, never looked
+# at, and its ~200 rows left with no archive_url, while the report simply did
+# not mention it. A silent omission reads exactly like a clean run. Boards are
+# now DISCOVERED (index.json, then the directory) and anything unrecognised is
+# processed and named, not dropped.
 SEMESTER_ORDER = ["spring-2025", "summer-2025", "fall-2025", "spring-2026", "summer-2026"]
+
+
+def discover_boards(board_dir: str) -> list[str]:
+    """Every board slug present, ordered: known semesters first, then the rest.
+
+    Sources, unioned so no board can hide: archive/index.json (authoritative,
+    written by sync.py when a semester is archived) and the directory listing
+    (catches a board written but not yet indexed).
+    """
+    slugs: list[str] = []
+
+    idx_path = os.path.join(board_dir, "index.json")
+    if os.path.exists(idx_path):
+        try:
+            with open(idx_path, encoding="utf-8") as fh:
+                idx = json.load(fh)
+            for e in (idx if isinstance(idx, list) else idx.get("archives") or []):
+                sl = e.get("slug") if isinstance(e, dict) else None
+                if sl and sl not in slugs:
+                    slugs.append(sl)
+        except (OSError, ValueError) as exc:
+            print(f"  ⚠  archive/index.json unreadable ({exc}); falling back to the "
+                  f"directory listing")
+
+    on_disk = sorted(os.path.basename(p)[:-5] for p in glob.glob(os.path.join(board_dir, "*.json"))
+                     if os.path.basename(p) != "index.json")
+    unindexed = [s for s in on_disk if s not in slugs]
+    if unindexed:
+        print(f"  ⚠  board file(s) present but not in index.json: {', '.join(unindexed)} "
+              f"— processing anyway")
+        slugs += unindexed
+
+    missing = [s for s in slugs if not os.path.exists(os.path.join(board_dir, f"{s}.json"))]
+    if missing:
+        print(f"  ⚠  index.json lists board(s) with no file: {', '.join(missing)}")
+
+    known = [s for s in SEMESTER_ORDER if s in slugs]
+    return known + [s for s in slugs if s not in known]
 
 CANVAS_HOST = re.compile(r"naropa\.instructure\.com", re.I)
 MEDIA_EMBED = re.compile(r"/(media_objects_iframe|media_attachments_iframe)/", re.I)
@@ -327,7 +373,7 @@ def main():
     rules = collections.Counter()
     per_sem = []
 
-    for slug in SEMESTER_ORDER:
+    for slug in discover_boards(args.board_dir):
         path = os.path.join(args.board_dir, f"{slug}.json")
         if not os.path.exists(path):
             print(f"  (skip {slug}: no board file)")
