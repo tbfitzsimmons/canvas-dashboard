@@ -2274,14 +2274,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/7981/module_item_redirect/362182",
+      "link": "https://www.youtube.com/watch?v=3ZIewKnZdeE",
       "points": null,
       "canvas_id": "module_item:362182",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://www.youtube.com/watch?v=3ZIewKnZdeE"
+      "canvas_target": "external:https://www.youtube.com/watch?v=3ZIewKnZdeE",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/7981/module_item_redirect/362182"
     },
     {
       "week": 7,
@@ -3786,14 +3787,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/7981/module_item_redirect/346078",
+      "link": "https://www.youtube.com/watch?v=uk4Tht5bL0w",
       "points": null,
       "canvas_id": "module_item:346078",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://www.youtube.com/watch?v=uk4Tht5bL0w"
+      "canvas_target": "external:https://www.youtube.com/watch?v=uk4Tht5bL0w",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/7981/module_item_redirect/346078"
     },
     {
       "week": 13,
@@ -3803,14 +3805,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/7981/module_item_redirect/346079",
+      "link": "https://www.youtube.com/watch?v=pC4utnaGnYY",
       "points": null,
       "canvas_id": "module_item:346079",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://www.youtube.com/watch?v=pC4utnaGnYY"
+      "canvas_target": "external:https://www.youtube.com/watch?v=pC4utnaGnYY",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/7981/module_item_redirect/346079"
     },
     {
       "week": 13,
@@ -4054,14 +4057,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/7981/module_item_redirect/345125",
+      "link": "https://www.youtube.com/c/agpa01/videos",
       "points": null,
       "canvas_id": "module_item:345125",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://www.youtube.com/c/agpa01/videos"
+      "canvas_target": "external:https://www.youtube.com/c/agpa01/videos",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/7981/module_item_redirect/345125"
     },
     {
       "week": 0,
@@ -4071,14 +4075,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/7981/module_item_redirect/345128",
+      "link": "https://owl.purdue.edu/owl/research_and_citation/apa_style/apa_formatting_and_style_guide/index.html",
       "points": null,
       "canvas_id": "module_item:345128",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://owl.purdue.edu/owl/research_and_citation/apa_style/apa_formatting_and_style_guide/index.html"
+      "canvas_target": "external:https://owl.purdue.edu/owl/research_and_citation/apa_style/apa_formatting_and_style_guide/index.html",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/7981/module_item_redirect/345128"
     },
     {
       "week": 0,

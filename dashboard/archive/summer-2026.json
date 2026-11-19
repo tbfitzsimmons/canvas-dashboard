@@ -4774,14 +4774,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/8868/module_item_redirect/404751",
+      "link": "https://www.counseling.org/knowledge-center/mental-health-resources/resources-for-counselors-and-clients",
       "points": null,
       "canvas_id": "module_item:404751",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://www.counseling.org/knowledge-center/mental-health-resources/resources-for-counselors-and-clients"
+      "canvas_target": "external:https://www.counseling.org/knowledge-center/mental-health-resources/resources-for-counselors-and-clients",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/8868/module_item_redirect/404751"
     },
     {
       "week": 7,
@@ -4808,14 +4809,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/8868/module_item_redirect/404753",
+      "link": "https://namicobb.org/wp-content/uploads/sites/45/2019/07/Crisis-Guide-Infographics.pdf",
       "points": null,
       "canvas_id": "module_item:404753",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://namicobb.org/wp-content/uploads/sites/45/2019/07/Crisis-Guide-Infographics.pdf"
+      "canvas_target": "external:https://namicobb.org/wp-content/uploads/sites/45/2019/07/Crisis-Guide-Infographics.pdf",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/8868/module_item_redirect/404753"
     },
     {
       "week": 7,

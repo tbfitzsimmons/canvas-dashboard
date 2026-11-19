@@ -630,14 +630,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/7617/module_item_redirect/324749",
+      "link": "https://www.youtube.com/watch?v=7VUlKP4LDyQ",
       "points": null,
       "canvas_id": "module_item:324749",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://www.youtube.com/watch?v=7VUlKP4LDyQ"
+      "canvas_target": "external:https://www.youtube.com/watch?v=7VUlKP4LDyQ",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/7617/module_item_redirect/324749"
     },
     {
       "week": 2,
@@ -647,14 +648,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/7617/module_item_redirect/324752",
+      "link": "https://www.youtube.com/watch?v=uhmpi3yLeGg",
       "points": null,
       "canvas_id": "module_item:324752",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://www.youtube.com/watch?v=uhmpi3yLeGg"
+      "canvas_target": "external:https://www.youtube.com/watch?v=uhmpi3yLeGg",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/7617/module_item_redirect/324752"
     },
     {
       "week": 2,
@@ -664,14 +666,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/7617/module_item_redirect/325328",
+      "link": "https://www.youtube.com/watch?v=3vKLU5_Hgco",
       "points": null,
       "canvas_id": "module_item:325328",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://www.youtube.com/watch?v=3vKLU5_Hgco"
+      "canvas_target": "external:https://www.youtube.com/watch?v=3vKLU5_Hgco",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/7617/module_item_redirect/325328"
     },
     {
       "week": 2,
@@ -1129,14 +1132,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/7617/module_item_redirect/324754",
+      "link": "https://www.youtube.com/watch?v=icD3l5bhhKY",
       "points": null,
       "canvas_id": "module_item:324754",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://www.youtube.com/watch?v=icD3l5bhhKY"
+      "canvas_target": "external:https://www.youtube.com/watch?v=icD3l5bhhKY",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/7617/module_item_redirect/324754"
     },
     {
       "week": 3,
@@ -1951,14 +1955,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/7617/module_item_redirect/338142",
+      "link": "https://www.youtube.com/watch?v=07nOScAHnXI",
       "points": null,
       "canvas_id": "module_item:338142",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://www.youtube.com/watch?v=07nOScAHnXI"
+      "canvas_target": "external:https://www.youtube.com/watch?v=07nOScAHnXI",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/7617/module_item_redirect/338142"
     },
     {
       "week": 4,
@@ -2022,14 +2027,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/7617/module_item_redirect/325330",
+      "link": "https://www.youtube.com/watch?v=raDfR_Ztyyo",
       "points": null,
       "canvas_id": "module_item:325330",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://www.youtube.com/watch?v=raDfR_Ztyyo"
+      "canvas_target": "external:https://www.youtube.com/watch?v=raDfR_Ztyyo",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/7617/module_item_redirect/325330"
     },
     {
       "week": 4,
@@ -2057,14 +2063,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/7617/module_item_redirect/338173",
+      "link": "https://civilrights.org/blog/americas-war-on-drugs-50-years-later/",
       "points": null,
       "canvas_id": "module_item:338173",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://civilrights.org/blog/americas-war-on-drugs-50-years-later/"
+      "canvas_target": "external:https://civilrights.org/blog/americas-war-on-drugs-50-years-later/",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/7617/module_item_redirect/338173"
     },
     {
       "week": 4,
@@ -2713,14 +2720,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/7617/module_item_redirect/337008",
+      "link": "https://youtu.be/nBS4XiGAMeo",
       "points": null,
       "canvas_id": "module_item:337008",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://youtu.be/nBS4XiGAMeo"
+      "canvas_target": "external:https://youtu.be/nBS4XiGAMeo",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/7617/module_item_redirect/337008"
     },
     {
       "week": 5,
@@ -2730,14 +2738,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/7617/module_item_redirect/324763",
+      "link": "https://www.youtube.com/watch?v=xGHxVX9mwYI",
       "points": null,
       "canvas_id": "module_item:324763",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://www.youtube.com/watch?v=xGHxVX9mwYI"
+      "canvas_target": "external:https://www.youtube.com/watch?v=xGHxVX9mwYI",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/7617/module_item_redirect/324763"
     },
     {
       "week": 5,
@@ -2747,14 +2756,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/7617/module_item_redirect/324762",
+      "link": "https://www.youtube.com/watch?v=AjuwOf1_63g",
       "points": null,
       "canvas_id": "module_item:324762",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://www.youtube.com/watch?v=AjuwOf1_63g"
+      "canvas_target": "external:https://www.youtube.com/watch?v=AjuwOf1_63g",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/7617/module_item_redirect/324762"
     },
     {
       "week": 5,
@@ -4089,14 +4099,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/7617/module_item_redirect/338203",
+      "link": "https://www.youtube.com/watch?v=PQzrx7JmUkM",
       "points": null,
       "canvas_id": "module_item:338203",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://www.youtube.com/watch?v=PQzrx7JmUkM"
+      "canvas_target": "external:https://www.youtube.com/watch?v=PQzrx7JmUkM",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/7617/module_item_redirect/338203"
     },
     {
       "week": 7,
@@ -4141,14 +4152,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/7617/module_item_redirect/338199",
+      "link": "https://www.youtube.com/watch?v=67I6g1I7Zao",
       "points": null,
       "canvas_id": "module_item:338199",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://www.youtube.com/watch?v=67I6g1I7Zao"
+      "canvas_target": "external:https://www.youtube.com/watch?v=67I6g1I7Zao",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/7617/module_item_redirect/338199"
     },
     {
       "week": 7,
@@ -5453,14 +5465,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/7617/module_item_redirect/324787",
+      "link": "https://www.samhsa.gov/find-help/harm-reduction",
       "points": null,
       "canvas_id": "module_item:324787",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://www.samhsa.gov/find-help/harm-reduction"
+      "canvas_target": "external:https://www.samhsa.gov/find-help/harm-reduction",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/7617/module_item_redirect/324787"
     },
     {
       "week": 9,
@@ -5505,14 +5518,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/7617/module_item_redirect/324788",
+      "link": "https://www.fda.gov/drugs/information-drug-class/information-about-medication-assisted-treatment-mat",
       "points": null,
       "canvas_id": "module_item:324788",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://www.fda.gov/drugs/information-drug-class/information-about-medication-assisted-treatment-mat"
+      "canvas_target": "external:https://www.fda.gov/drugs/information-drug-class/information-about-medication-assisted-treatment-mat",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/7617/module_item_redirect/324788"
     },
     {
       "week": 9,
@@ -5540,14 +5554,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/7617/module_item_redirect/325327",
+      "link": "https://www.youtube.com/watch?v=qJ-qX3yrxC0",
       "points": null,
       "canvas_id": "module_item:325327",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://www.youtube.com/watch?v=qJ-qX3yrxC0"
+      "canvas_target": "external:https://www.youtube.com/watch?v=qJ-qX3yrxC0",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/7617/module_item_redirect/325327"
     },
     {
       "week": 9,
@@ -6131,14 +6146,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/7617/module_item_redirect/324795",
+      "link": "https://www.youtube.com/watch?v=PY9DcIMGxMs",
       "points": null,
       "canvas_id": "module_item:324795",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://www.youtube.com/watch?v=PY9DcIMGxMs"
+      "canvas_target": "external:https://www.youtube.com/watch?v=PY9DcIMGxMs",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/7617/module_item_redirect/324795"
     },
     {
       "week": 11,
@@ -6148,14 +6164,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/7617/module_item_redirect/324794",
+      "link": "https://www.youtube.com/watch?v=br8-qebjIgs",
       "points": null,
       "canvas_id": "module_item:324794",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://www.youtube.com/watch?v=br8-qebjIgs"
+      "canvas_target": "external:https://www.youtube.com/watch?v=br8-qebjIgs",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/7617/module_item_redirect/324794"
     },
     {
       "week": 11,
@@ -6573,14 +6590,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/7617/module_item_redirect/324800",
+      "link": "https://www.youtube.com/watch?v=kC7dJQt5BBw",
       "points": null,
       "canvas_id": "module_item:324800",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://www.youtube.com/watch?v=kC7dJQt5BBw"
+      "canvas_target": "external:https://www.youtube.com/watch?v=kC7dJQt5BBw",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/7617/module_item_redirect/324800"
     },
     {
       "week": 12,

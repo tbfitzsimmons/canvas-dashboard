@@ -2012,14 +2012,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/7208/module_item_redirect/306896",
+      "link": "https://www.youtube.com/watch?v=AyQdeYjXUhE",
       "points": null,
       "canvas_id": "module_item:306896",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://www.youtube.com/watch?v=AyQdeYjXUhE"
+      "canvas_target": "external:https://www.youtube.com/watch?v=AyQdeYjXUhE",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/7208/module_item_redirect/306896"
     },
     {
       "week": 4,
@@ -2675,14 +2676,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/7208/module_item_redirect/306902",
+      "link": "https://www.counseling.org/resources/ethics",
       "points": null,
       "canvas_id": "module_item:306902",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://www.counseling.org/resources/ethics"
+      "canvas_target": "external:https://www.counseling.org/resources/ethics",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/7208/module_item_redirect/306902"
     },
     {
       "week": 5,
@@ -2692,14 +2694,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/7208/module_item_redirect/306904",
+      "link": "https://youtu.be/wiCbbquvNNw?feature=shared",
       "points": null,
       "canvas_id": "module_item:306904",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://youtu.be/wiCbbquvNNw?feature=shared"
+      "canvas_target": "external:https://youtu.be/wiCbbquvNNw?feature=shared",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/7208/module_item_redirect/306904"
     },
     {
       "week": 5,
@@ -2726,14 +2729,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/7208/module_item_redirect/306903",
+      "link": "https://www.das.nh.gov/wellness/docs/percieved%20stress%20scale.pdf",
       "points": null,
       "canvas_id": "module_item:306903",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://www.das.nh.gov/wellness/docs/percieved%20stress%20scale.pdf"
+      "canvas_target": "external:https://www.das.nh.gov/wellness/docs/percieved%20stress%20scale.pdf",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/7208/module_item_redirect/306903"
     },
     {
       "week": 5,
@@ -4525,14 +4529,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/7208/module_item_redirect/306914",
+      "link": "https://libres.uncg.edu/ir/uncg/f/J_Myers_Wellness_2008.pdf",
       "points": null,
       "canvas_id": "module_item:306914",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://libres.uncg.edu/ir/uncg/f/J_Myers_Wellness_2008.pdf"
+      "canvas_target": "external:https://libres.uncg.edu/ir/uncg/f/J_Myers_Wellness_2008.pdf",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/7208/module_item_redirect/306914"
     },
     {
       "week": 9,
@@ -4578,14 +4583,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/7208/module_item_redirect/306913",
+      "link": "https://www.csi-net.org/group/wellness",
       "points": null,
       "canvas_id": "module_item:306913",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://www.csi-net.org/group/wellness"
+      "canvas_target": "external:https://www.csi-net.org/group/wellness",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/7208/module_item_redirect/306913"
     },
     {
       "week": 9,
@@ -5356,14 +5362,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/7208/module_item_redirect/306924",
+      "link": "https://www.counseling.org/publications/counseling-today-magazine/article-archive/article/legacy/assessment-diagnosis-and-treatment-planning-a-map-for-the-journey-ahead",
       "points": null,
       "canvas_id": "module_item:306924",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://www.counseling.org/publications/counseling-today-magazine/article-archive/article/legacy/assessment-diagnosis-and-treatment-planning-a-map-for-the-journey-ahead"
+      "canvas_target": "external:https://www.counseling.org/publications/counseling-today-magazine/article-archive/article/legacy/assessment-diagnosis-and-treatment-planning-a-map-for-the-journey-ahead",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/7208/module_item_redirect/306924"
     },
     {
       "week": 12,
@@ -5586,14 +5593,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/7208/module_item_redirect/306921",
+      "link": "https://youtu.be/LiBQLnnPQD8?feature=shared",
       "points": null,
       "canvas_id": "module_item:306921",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://youtu.be/LiBQLnnPQD8?feature=shared"
+      "canvas_target": "external:https://youtu.be/LiBQLnnPQD8?feature=shared",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/7208/module_item_redirect/306921"
     },
     {
       "week": 13,

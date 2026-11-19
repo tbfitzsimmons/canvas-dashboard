@@ -936,14 +936,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/364378",
+      "link": "https://grief.com/",
       "points": null,
       "canvas_id": "module_item:364378",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://grief.com/"
+      "canvas_target": "external:https://grief.com/",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/364378"
     },
     {
       "week": 1,
@@ -953,14 +954,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/364381",
+      "link": "https://allianceforcareathome.org/patients-families/doula-grief-support/",
       "points": null,
       "canvas_id": "module_item:364381",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://allianceforcareathome.org/patients-families/doula-grief-support/"
+      "canvas_target": "external:https://allianceforcareathome.org/patients-families/doula-grief-support/",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/364381"
     },
     {
       "week": 1,
@@ -970,14 +972,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/364379",
+      "link": "https://maryfrancesoconnor.org/grief-resources",
       "points": null,
       "canvas_id": "module_item:364379",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://maryfrancesoconnor.org/grief-resources"
+      "canvas_target": "external:https://maryfrancesoconnor.org/grief-resources",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/364379"
     },
     {
       "week": 1,
@@ -1023,14 +1026,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/364377",
+      "link": "https://speakinggrief.org/",
       "points": null,
       "canvas_id": "module_item:364377",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://speakinggrief.org/"
+      "canvas_target": "external:https://speakinggrief.org/",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/364377"
     },
     {
       "week": 1,
@@ -1660,14 +1664,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/390549",
+      "link": "https://paintedprayerbook.com/2014/02/10/a-blessing-for-the-brokenhearted/",
       "points": null,
       "canvas_id": "module_item:390549",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://paintedprayerbook.com/2014/02/10/a-blessing-for-the-brokenhearted/"
+      "canvas_target": "external:https://paintedprayerbook.com/2014/02/10/a-blessing-for-the-brokenhearted/",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/390549"
     },
     {
       "week": 2,
@@ -1729,14 +1734,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/364387",
+      "link": "https://www.compass-uk.org/wp-content/uploads/2023/05/Bereavement_The-four-models-of-grief.pdf",
       "points": null,
       "canvas_id": "module_item:364387",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://www.compass-uk.org/wp-content/uploads/2023/05/Bereavement_The-four-models-of-grief.pdf"
+      "canvas_target": "external:https://www.compass-uk.org/wp-content/uploads/2023/05/Bereavement_The-four-models-of-grief.pdf",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/364387"
     },
     {
       "week": 2,
@@ -2218,14 +2224,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/8683/module_item_redirect/381812",
+      "link": "https://www.youtube.com/watch?v=-H3OBy0LBfY",
       "points": null,
       "canvas_id": "module_item:381812",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://www.youtube.com/watch?v=-H3OBy0LBfY"
+      "canvas_target": "external:https://www.youtube.com/watch?v=-H3OBy0LBfY",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/8683/module_item_redirect/381812"
     },
     {
       "week": 3,
@@ -2343,14 +2350,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/364391",
+      "link": "https://www.youtube.com/watch?v=icT078sea0U",
       "points": null,
       "canvas_id": "module_item:364391",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://www.youtube.com/watch?v=icT078sea0U"
+      "canvas_target": "external:https://www.youtube.com/watch?v=icT078sea0U",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/364391"
     },
     {
       "week": 3,
@@ -3099,14 +3107,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/8683/module_item_redirect/381821",
+      "link": "https://www.ted.com/talks/thema_bryant_why_we_need_to_decolonize_psychology",
       "points": null,
       "canvas_id": "module_item:381821",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://www.ted.com/talks/thema_bryant_why_we_need_to_decolonize_psychology"
+      "canvas_target": "external:https://www.ted.com/talks/thema_bryant_why_we_need_to_decolonize_psychology",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/8683/module_item_redirect/381821"
     },
     {
       "week": 4,
@@ -3239,14 +3248,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/364396",
+      "link": "https://onbeing.org/programs/pauline-boss-navigating-loss-without-closure/",
       "points": null,
       "canvas_id": "module_item:364396",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://onbeing.org/programs/pauline-boss-navigating-loss-without-closure/"
+      "canvas_target": "external:https://onbeing.org/programs/pauline-boss-navigating-loss-without-closure/",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/364396"
     },
     {
       "week": 4,
@@ -3982,14 +3992,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/391834",
+      "link": "https://www.dailygood.org/story/2214/drinking-the-tears-of-the-world-grief-as-deep-activism-francis-weller/?sso_checked=1",
       "points": null,
       "canvas_id": "module_item:391834",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://www.dailygood.org/story/2214/drinking-the-tears-of-the-world-grief-as-deep-activism-francis-weller/?sso_checked=1"
+      "canvas_target": "external:https://www.dailygood.org/story/2214/drinking-the-tears-of-the-world-grief-as-deep-activism-francis-weller/?sso_checked=1",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/391834"
     },
     {
       "week": 5,
@@ -4017,14 +4028,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/391169",
+      "link": "https://www.youtube.com/watch?v=vRIqTMInPJk",
       "points": null,
       "canvas_id": "module_item:391169",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://www.youtube.com/watch?v=vRIqTMInPJk"
+      "canvas_target": "external:https://www.youtube.com/watch?v=vRIqTMInPJk",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/391169"
     },
     {
       "week": 5,
@@ -4562,14 +4574,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/391173",
+      "link": "https://www.youtube.com/watch?v=y5k92zz_nYM",
       "points": null,
       "canvas_id": "module_item:391173",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://www.youtube.com/watch?v=y5k92zz_nYM"
+      "canvas_target": "external:https://www.youtube.com/watch?v=y5k92zz_nYM",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/391173"
     },
     {
       "week": 6,
@@ -4597,14 +4610,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/391174",
+      "link": "https://www.youtube.com/watch?v=LG7uzUUnWWg",
       "points": null,
       "canvas_id": "module_item:391174",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://www.youtube.com/watch?v=LG7uzUUnWWg"
+      "canvas_target": "external:https://www.youtube.com/watch?v=LG7uzUUnWWg",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/391174"
     },
     {
       "week": 6,
@@ -5257,14 +5271,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/364401",
+      "link": "https://www.youtube.com/watch?v=nYZHcKA4UR4",
       "points": null,
       "canvas_id": "module_item:364401",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://www.youtube.com/watch?v=nYZHcKA4UR4"
+      "canvas_target": "external:https://www.youtube.com/watch?v=nYZHcKA4UR4",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/364401"
     },
     {
       "week": 7,
@@ -5346,14 +5361,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/364402",
+      "link": "https://youtu.be/6QeTgvx9R94?si=o-6rggMcG76PpYE1",
       "points": null,
       "canvas_id": "module_item:364402",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://youtu.be/6QeTgvx9R94?si=o-6rggMcG76PpYE1"
+      "canvas_target": "external:https://youtu.be/6QeTgvx9R94?si=o-6rggMcG76PpYE1",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/364402"
     },
     {
       "week": 7,
@@ -5839,14 +5855,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/364411",
+      "link": "https://www.transitionslifecare.org/wp-content/uploads/2019/10/AdultIntakeForm-1.30.18.pdf",
       "points": null,
       "canvas_id": "module_item:364411",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://www.transitionslifecare.org/wp-content/uploads/2019/10/AdultIntakeForm-1.30.18.pdf"
+      "canvas_target": "external:https://www.transitionslifecare.org/wp-content/uploads/2019/10/AdultIntakeForm-1.30.18.pdf",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/364411"
     },
     {
       "week": 8,
@@ -5856,14 +5873,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/364412",
+      "link": "https://www.hospicechesapeake.org/wp-content/uploads/2018/03/CLC-Adult-Intake.pdf",
       "points": null,
       "canvas_id": "module_item:364412",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://www.hospicechesapeake.org/wp-content/uploads/2018/03/CLC-Adult-Intake.pdf"
+      "canvas_target": "external:https://www.hospicechesapeake.org/wp-content/uploads/2018/03/CLC-Adult-Intake.pdf",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/364412"
     },
     {
       "week": 8,
@@ -6256,14 +6274,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/8683/module_item_redirect/381878",
+      "link": "https://www.youtube.com/watch?v=i4aaNfLu2_A",
       "points": null,
       "canvas_id": "module_item:381878",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://www.youtube.com/watch?v=i4aaNfLu2_A"
+      "canvas_target": "external:https://www.youtube.com/watch?v=i4aaNfLu2_A",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/8683/module_item_redirect/381878"
     },
     {
       "week": 9,
@@ -6431,14 +6450,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/364417",
+      "link": "https://www.youtube.com/watch?v=l2zLCCRT-nE",
       "points": null,
       "canvas_id": "module_item:364417",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://www.youtube.com/watch?v=l2zLCCRT-nE"
+      "canvas_target": "external:https://www.youtube.com/watch?v=l2zLCCRT-nE",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/364417"
     },
     {
       "week": 9,
@@ -6448,14 +6468,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/364422",
+      "link": "https://www.eventbrite.com/cc/ekrf-twice-monthly-death-cafes-1749529",
       "points": null,
       "canvas_id": "module_item:364422",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://www.eventbrite.com/cc/ekrf-twice-monthly-death-cafes-1749529"
+      "canvas_target": "external:https://www.eventbrite.com/cc/ekrf-twice-monthly-death-cafes-1749529",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/364422"
     },
     {
       "week": 9,
@@ -6465,14 +6486,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/364420",
+      "link": "https://thisjungianlife.com/episode-217-death/",
       "points": null,
       "canvas_id": "module_item:364420",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://thisjungianlife.com/episode-217-death/"
+      "canvas_target": "external:https://thisjungianlife.com/episode-217-death/",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/364420"
     },
     {
       "week": 9,
@@ -6482,14 +6504,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/364442",
+      "link": "https://www.youtube.com/watch?v=QmZHLvq-gDg",
       "points": null,
       "canvas_id": "module_item:364442",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://www.youtube.com/watch?v=QmZHLvq-gDg"
+      "canvas_target": "external:https://www.youtube.com/watch?v=QmZHLvq-gDg",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/364442"
     },
     {
       "week": 9,
@@ -6535,14 +6558,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/364421",
+      "link": "https://med.virginia.edu/perceptual-studies/",
       "points": null,
       "canvas_id": "module_item:364421",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://med.virginia.edu/perceptual-studies/"
+      "canvas_target": "external:https://med.virginia.edu/perceptual-studies/",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/364421"
     },
     {
       "week": 9,
@@ -6552,14 +6576,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/364419",
+      "link": "https://www.pewresearch.org/religion/2021/11/23/views-on-the-afterlife/",
       "points": null,
       "canvas_id": "module_item:364419",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://www.pewresearch.org/religion/2021/11/23/views-on-the-afterlife/"
+      "canvas_target": "external:https://www.pewresearch.org/religion/2021/11/23/views-on-the-afterlife/",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/364419"
     },
     {
       "week": 9,
@@ -6885,14 +6910,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/394355",
+      "link": "https://www.youtube.com/watch?v=TkJGhQANjZo",
       "points": null,
       "canvas_id": "module_item:394355",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://www.youtube.com/watch?v=TkJGhQANjZo"
+      "canvas_target": "external:https://www.youtube.com/watch?v=TkJGhQANjZo",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/394355"
     },
     {
       "week": 10,
@@ -6902,14 +6928,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/394354",
+      "link": "https://www.youtube.com/watch?v=DQq0ntQ4ikk",
       "points": null,
       "canvas_id": "module_item:394354",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://www.youtube.com/watch?v=DQq0ntQ4ikk"
+      "canvas_target": "external:https://www.youtube.com/watch?v=DQq0ntQ4ikk",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/394354"
     },
     {
       "week": 10,
@@ -6919,14 +6946,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/8539/module_item_redirect/397218",
+      "link": "https://naropa-my.sharepoint.com/:v:/g/personal/robert_karyadeva_naropa_edu/IQDEjzjUI2YPRYuyCCSkjSdwAQJmz_mNjzo68iMb7OiW9-I?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=DzH9dN",
       "points": null,
       "canvas_id": "module_item:397218",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://naropa-my.sharepoint.com/:v:/g/personal/robert_karyadeva_naropa_edu/IQDEjzjUI2YPRYuyCCSkjSdwAQJmz_mNjzo68iMb7OiW9-I?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=DzH9dN"
+      "canvas_target": "external:https://naropa-my.sharepoint.com/:v:/g/personal/robert_karyadeva_naropa_edu/IQDEjzjUI2YPRYuyCCSkjSdwAQJmz_mNjzo68iMb7OiW9-I?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=DzH9dN",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/8539/module_item_redirect/397218"
     },
     {
       "week": 10,
@@ -7544,14 +7572,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/8683/module_item_redirect/381915",
+      "link": "https://www.counseling.org/resources/research-reports/artificial-intelligence-counseling/recommendations-for-client-use-and-caution-of-artificial-intelligence#",
       "points": null,
       "canvas_id": "module_item:381915",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://www.counseling.org/resources/research-reports/artificial-intelligence-counseling/recommendations-for-client-use-and-caution-of-artificial-intelligence#"
+      "canvas_target": "external:https://www.counseling.org/resources/research-reports/artificial-intelligence-counseling/recommendations-for-client-use-and-caution-of-artificial-intelligence#",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/8683/module_item_redirect/381915"
     },
     {
       "week": 14,
@@ -7561,14 +7590,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/8683/module_item_redirect/381914",
+      "link": "https://www.youtube.com/watch?v=fum4nK2zqxI",
       "points": null,
       "canvas_id": "module_item:381914",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://www.youtube.com/watch?v=fum4nK2zqxI"
+      "canvas_target": "external:https://www.youtube.com/watch?v=fum4nK2zqxI",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/8683/module_item_redirect/381914"
     },
     {
       "week": 14,
@@ -7650,14 +7680,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/364425",
+      "link": "https://onbeing.org/programs/gregory-orr-shaping-grief-with-language/",
       "points": null,
       "canvas_id": "module_item:364425",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://onbeing.org/programs/gregory-orr-shaping-grief-with-language/"
+      "canvas_target": "external:https://onbeing.org/programs/gregory-orr-shaping-grief-with-language/",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/364425"
     },
     {
       "week": 14,
@@ -7667,14 +7698,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/364426",
+      "link": "https://onbeing.org/programs/sharon-salzberg-the-healing-is-in-the-return/",
       "points": null,
       "canvas_id": "module_item:364426",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://onbeing.org/programs/sharon-salzberg-the-healing-is-in-the-return/"
+      "canvas_target": "external:https://onbeing.org/programs/sharon-salzberg-the-healing-is-in-the-return/",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/364426"
     },
     {
       "week": 14,
@@ -7756,14 +7788,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/8683/module_item_redirect/401562",
+      "link": "https://www.youtube.com/watch?v=P24PNmzplro",
       "points": null,
       "canvas_id": "module_item:401562",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://www.youtube.com/watch?v=P24PNmzplro"
+      "canvas_target": "external:https://www.youtube.com/watch?v=P24PNmzplro",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/8683/module_item_redirect/401562"
     },
     {
       "week": 15,
@@ -7773,14 +7806,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/8683/module_item_redirect/401563",
+      "link": "https://motivohealth.com/therapist-clinical-supervision",
       "points": null,
       "canvas_id": "module_item:401563",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://motivohealth.com/therapist-clinical-supervision"
+      "canvas_target": "external:https://motivohealth.com/therapist-clinical-supervision",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/8683/module_item_redirect/401563"
     },
     {
       "week": 15,
@@ -7826,14 +7860,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/394360",
+      "link": "https://www.dougy.org/",
       "points": null,
       "canvas_id": "module_item:394360",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://www.dougy.org/"
+      "canvas_target": "external:https://www.dougy.org/",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/394360"
     },
     {
       "week": 15,
@@ -7843,14 +7878,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/394363",
+      "link": "https://grievingstudents.org/gssi/",
       "points": null,
       "canvas_id": "module_item:394363",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://grievingstudents.org/gssi/"
+      "canvas_target": "external:https://grievingstudents.org/gssi/",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/394363"
     },
     {
       "week": 15,
@@ -7860,14 +7896,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/394359",
+      "link": "https://judishouse.org/",
       "points": null,
       "canvas_id": "module_item:394359",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://judishouse.org/"
+      "canvas_target": "external:https://judishouse.org/",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/394359"
     },
     {
       "week": 15,
@@ -7877,14 +7914,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/394361",
+      "link": "https://hopva.org/kids-grief-and-healing/",
       "points": null,
       "canvas_id": "module_item:394361",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://hopva.org/kids-grief-and-healing/"
+      "canvas_target": "external:https://hopva.org/kids-grief-and-healing/",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/394361"
     },
     {
       "week": 15,
@@ -7894,14 +7932,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/394362",
+      "link": "https://nacg.org/",
       "points": null,
       "canvas_id": "module_item:394362",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://nacg.org/"
+      "canvas_target": "external:https://nacg.org/",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/8434/module_item_redirect/394362"
     },
     {
       "week": 15,
@@ -8019,14 +8058,15 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa.instructure.com/api/v1/courses/8683/module_item_redirect/402528",
+      "link": "https://www.youtube.com/watch?v=0cx6PPH8WII",
       "points": null,
       "canvas_id": "module_item:402528",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://www.youtube.com/watch?v=0cx6PPH8WII"
+      "canvas_target": "external:https://www.youtube.com/watch?v=0cx6PPH8WII",
+      "canvas_link": "https://naropa.instructure.com/api/v1/courses/8683/module_item_redirect/402528"
     },
     {
       "week": 16,
