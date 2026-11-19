@@ -7,15 +7,22 @@
     "weeks": 12,
     "canvas_term_name": "Summer 2026 Semester"
   },
-  "excluded_course_ids": [5334, 5337],
+  "excluded_course_ids": [
+    5334,
+    5337
+  ],
   "included_course_ids": null,
   "token_expires": "2026-09-05",
+  "frozen": false,
+  "access_ends": "2027-05-15",
   "_notes": {
     "token_expires": "ISO date (YYYY-MM-DD) when the Canvas token expires. The dashboard shows a banner if this is within 14 days or in the past. Update this when you regenerate the token.",
     "canvas_token": "On GitHub Actions, comes from the CANVAS_TOKEN secret — leave this placeholder. For local runs, paste your token here (config.json is gitignored).",
     "canvas_term_name": "Must exactly match the term name Canvas returns. View /api/v1/courses?include[]=term to verify.",
     "excluded_course_ids": "Canvas course IDs to skip — e.g. Student Center pseudo-courses that show up as enrolled but aren't real classes.",
     "included_course_ids": "If set (e.g. [8851, 8868, 8857, 8897, 8908]), ONLY these courses are synced. Use this if term filtering isn't enough.",
-    "start_date": "The MONDAY of Week 1. Used to compute which week each due date falls into."
+    "start_date": "The MONDAY of Week 1. Used to compute which week each due date falls into.",
+    "frozen": "true = this board is a completed archive. sync.py exits 0 immediately without touching Canvas, and health_check.py runs integrity checks only. Set it with `sync.py --freeze`, clear it with `sync.py --unfreeze`.",
+    "access_ends": "ISO date Naropa withdraws Canvas access (~graduation). A 401 ON OR AFTER this date auto-freezes the board; a 401 BEFORE it keeps failing loudly, because then it is a dead token and the archive still needs capturing. health_check.py warns from 90 days out and fails from 30."
   }
 }

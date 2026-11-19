@@ -1894,6 +1894,7 @@ def write_data(courses: list[Course], items: list[Item], cfg: dict,
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "semester": cfg["semester"],
         "token_expires": cfg.get("token_expires"),
+        "token_expires_live": TOKEN_EXPIRES_LIVE,
         "courses": [course_dict(c) for c in courses],
         "items": [asdict(i) for i in items],
         "totals": summarize(items),
@@ -1903,6 +1904,8 @@ def write_data(courses: list[Course], items: list[Item], cfg: dict,
         "rollover": rollover,
         "roster_change": roster_change,
         "archives": _archive_index(),
+        "frozen": bool(cfg.get("frozen")),
+        "access_ends": cfg.get("access_ends") or ACCESS_ENDS_DEFAULT,
     }
     DATA_PATH.parent.mkdir(parents=True, exist_ok=True)
     tmp = DATA_PATH.with_suffix(".json.tmp")
@@ -2158,8 +2161,21 @@ TOKEN_RENEW_BELOW_DAYS = 20      # extend once under this many days remain
 TOKEN_RENEW_TO_DAYS    = 29      # never 30: Canvas rejects >30 and clocks drift
 
 
+# The REAL expiry, read from Canvas, as opposed to config.json's token_expires,
+# which is a hand-typed string that extend_tokens() then silently moves. On
+# 2026-11-19 the config said 2026-12-01 while Canvas said 2026-12-11 — a health
+# check reading the string was one day from emailing a false alarm about a
+# perfectly healthy token. Published as token_expires_live for that check to use.
+# Conservative by construction: the MINIMUM across tokens whose expiry is still
+# in the future. extend_tokens() lifts every live token under
+# TOKEN_RENEW_BELOW_DAYS up to TOKEN_RENEW_TO_DAYS, so after a successful run
+# this is a safe lower bound on the runway of whichever token is authenticating.
+TOKEN_EXPIRES_LIVE: str | None = None
+
+
 def extend_tokens(canvas: Canvas, cfg: dict) -> None:
     """Push every live user-generated token's expiry forward. Never raises."""
+    global TOKEN_EXPIRES_LIVE
     try:
         r = canvas.session.get(f"{canvas.base}/api/v1/users/self/user_generated_tokens",
                                timeout=30)
@@ -2197,6 +2213,137 @@ def extend_tokens(canvas: Canvas, cfg: dict) -> None:
         except Exception as e:
             print(f"  ⚠ token renewal failed for {t.get('purpose')!r}: {e}")
 
+    # Re-read: the PUTs above moved the expiries, so anything computed before
+    # them is already out of date.
+    try:
+        r2 = canvas.session.get(f"{canvas.base}/api/v1/users/self/user_generated_tokens",
+                                timeout=30)
+        live = r2.json() if r2.status_code == 200 else tokens
+    except Exception:
+        live = tokens
+    future = []
+    for t in live:
+        exp = parse_iso(t.get("expires_at"))
+        if exp and (exp - now).days >= 0:
+            future.append(exp)
+    if future:
+        TOKEN_EXPIRES_LIVE = min(future).date().isoformat()
+        cfg_str = cfg.get("token_expires")
+        print(f"  🔑 live token runway: {TOKEN_EXPIRES_LIVE} "
+              f"({(min(future) - now).days}d)"
+              + (f"   [config.json says {cfg_str} — stale]"
+                 if cfg_str and cfg_str != TOKEN_EXPIRES_LIVE else ""))
+    else:
+        print("  ⚠ no live token with a future expiry — a human must make a new one")
+
+
+
+# ── end of life ───────────────────────────────────────────────────────────────
+#
+# Naropa withdraws Canvas access after graduation (~May 2027). On that day every
+# Canvas call starts returning 401, and without this the platform degrades into a
+# nuisance: sync.yml fails every Monday, health.yml fails every Tuesday, and
+# GitHub emails the owner about it forever. The board itself is still perfectly
+# good — by then its links point at Google Drive — so the correct end state is
+# not "broken", it is FROZEN: stop syncing, stop alerting, keep serving.
+#
+# Two ways in, deliberately:
+#   explicit  — `sync.py --freeze`, or "frozen": true in config.json. Authoritative.
+#   automatic — a 401/403 from Canvas ON OR AFTER config's `access_ends` date.
+#
+# The date guard is the whole point of the automatic path. A 401 BEFORE
+# graduation is a real emergency (the token died and the archive still needs
+# capturing), and must keep failing loudly. A 401 after graduation is simply the
+# expected end. The same signal means opposite things on either side of a date,
+# so the date is not optional.
+#
+# Transient failures never freeze: only an explicit 401/403 does. A timeout, a
+# DNS failure or a 500 falls through to the normal error path.
+
+ACCESS_ENDS_DEFAULT = "2027-05-15"   # ~graduation; override in config.json
+
+
+def _access_ended(cfg: dict) -> tuple[bool, str]:
+    raw = (cfg.get("access_ends") or ACCESS_ENDS_DEFAULT).strip()
+    try:
+        d = datetime.fromisoformat(raw).date()
+    except ValueError:
+        print(f"  ⚠  config access_ends={raw!r} is not an ISO date; using "
+              f"{ACCESS_ENDS_DEFAULT}")
+        d = datetime.fromisoformat(ACCESS_ENDS_DEFAULT).date()
+    return datetime.now(LOCAL_TZ).date() >= d, raw
+
+
+def freeze_state(cfg: dict, canvas: "Canvas") -> tuple[bool, str]:
+    """(frozen, reason). Only an explicit flag or a post-graduation 401 freezes."""
+    if cfg.get("frozen"):
+        return True, "config.json has \"frozen\": true"
+
+    try:
+        r = canvas.session.get(f"{canvas.base}/api/v1/users/self", timeout=20)
+    except Exception as exc:                      # transient: never freeze on this
+        print(f"  ⚠  access probe failed ({type(exc).__name__}); continuing")
+        return False, ""
+
+    if r.status_code in (401, 403):
+        ended, when = _access_ended(cfg)
+        if ended:
+            return True, f"Canvas returned {r.status_code} on or after access_ends={when}"
+        print(f"  ⚠  Canvas returned {r.status_code}, but access_ends={when} has NOT "
+              f"passed — this is a live token problem, not the end of access.")
+        return False, ""
+    return False, ""
+
+
+def announce_frozen(reason: str) -> None:
+    print("\n" + "=" * 72)
+    print("  FROZEN — this board is a completed archive; no sync was attempted.")
+    print("=" * 72)
+    print(f"  reason: {reason}")
+    print("  Canvas access has ended. data.json and dashboard/archive/ are left")
+    print("  exactly as they are; their links point at Google Drive, which")
+    print("  outlives Canvas.")
+    print("\n  Exiting 0 ON PURPOSE. A non-zero exit here would make GitHub email")
+    print("  a failure notice every week for a board that is working correctly.")
+    print("  To resume (e.g. Naropa restores access): sync.py --unfreeze")
+    print("=" * 72)
+
+
+def mark_board_frozen(frozen: bool, reason: str = "") -> None:
+    """Patch ONLY the freeze fields of data.json, so the UI can render a banner.
+
+    Deliberately does not go through write_data(): there is no fresh Canvas data
+    to write, and regenerating the board from nothing would destroy it.
+    """
+    if not DATA_PATH.exists():
+        print(f"  ⚠  {DATA_PATH} absent; nothing to mark")
+        return
+    with DATA_PATH.open() as f:
+        payload = json.load(f)
+    if frozen:
+        payload["frozen"] = True
+        payload["frozen_at"] = datetime.now(timezone.utc).isoformat()
+        payload["frozen_reason"] = reason
+    else:
+        for k in ("frozen", "frozen_at", "frozen_reason"):
+            payload.pop(k, None)
+    tmp = DATA_PATH.with_suffix(".json.tmp")
+    with tmp.open("w") as f:
+        json.dump(payload, f, indent=2, ensure_ascii=False)
+    tmp.replace(DATA_PATH)
+    print(f"  ✓ data.json marked frozen={frozen}")
+
+
+def set_config_frozen(frozen: bool) -> None:
+    with CONFIG_PATH.open() as f:
+        cfg = json.load(f)
+    cfg["frozen"] = frozen
+    tmp = CONFIG_PATH.with_suffix(".json.tmp")
+    with tmp.open("w") as f:
+        json.dump(cfg, f, indent=2, ensure_ascii=False)
+    tmp.replace(CONFIG_PATH)
+    print(f"  ✓ config.json frozen={frozen}")
+
 
 def main() -> int:
     ap = argparse.ArgumentParser(description="Canvas → dashboard/data.json")
@@ -2206,12 +2353,31 @@ def main() -> int:
                          'dashboard/archive/, never data.json.')
     ap.add_argument("--list-terms", action="store_true",
                     help="List every term Canvas knows about, then exit.")
+    ap.add_argument("--freeze", action="store_true",
+                    help="Mark the board a completed archive: stop syncing and stop "
+                         "alerting, keep serving. Use after Canvas access ends.")
+    ap.add_argument("--unfreeze", action="store_true",
+                    help="Resume syncing (e.g. Naropa restored access).")
     args = ap.parse_args()
+
+    if args.freeze or args.unfreeze:
+        set_config_frozen(bool(args.freeze))
+        mark_board_frozen(bool(args.freeze),
+                          "set by hand with sync.py --freeze" if args.freeze else "")
+        return 0
 
     cfg = load_config()
     token = get_token(cfg)
     base_url = cfg["canvas_url"]
     canvas = Canvas(base_url, token)
+
+    # Before anything else: has access ended? Renewing a token against a Canvas
+    # that no longer answers, then failing, is the behaviour this prevents.
+    frozen, why = freeze_state(cfg, canvas)
+    if frozen:
+        announce_frozen(why)
+        mark_board_frozen(True, why)
+        return 0
 
     # Keep the token alive before doing anything else. If this is the run that
     # would otherwise have been the last one, renewing first is what saves it.

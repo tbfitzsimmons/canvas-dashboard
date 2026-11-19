@@ -1,0 +1,31 @@
+name: Dashboard Health Check
+
+# Deliberately SEPARATE from sync.yml. The dangerous failure here is silent:
+# when the Canvas token dies, the site keeps serving the last good data.json
+# and looks completely normal. That went unnoticed for three weeks in July 2026.
+# A check that lives inside the sync cannot report that the sync stopped running,
+# so this one runs on its own schedule and fails loudly. GitHub emails the repo
+# owner on a failed workflow run, which is the alert.
+#
+# The checks themselves live in health_check.py, NOT inline here. Workflow files
+# need the `workflow` PAT scope to push, which this project's token lacks, so
+# every edit to an inline check had to be pasted through GitHub's web editor by
+# hand — which is precisely why the checks went un-updated. As a repo script the
+# logic is pushable like anything else and this file can stay still.
+
+on:
+  schedule:
+    - cron: '0 16 * * 2'      # Tuesdays 16:00 UTC — the morning after the Monday sync
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v5
+
+      - name: Run health checks
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 health_check.py

@@ -71,6 +71,12 @@
     padding: 10px 14px; border-radius: 8px; margin-bottom: 16px;
     font-size: 13px; line-height: 1.4;
   }
+    .frozen-banner { background: #eef2f7; border: 1px solid #c3cfdd; color: #2f3e4f;
+      padding: .7rem .9rem; border-radius: 6px; margin: 0 0 .8rem; font-size: .92rem;
+      line-height: 1.45; }
+    @media (prefers-color-scheme: dark) {
+      .frozen-banner { background: #1e2733; border-color: #33425a; color: #c7d4e2; }
+    }
   .token-warn.expired { background: #FEE2E2; border-color: #DC2626; color: #7F1D1D; }
   .token-warn a { color: inherit; text-decoration: underline; }
 
@@ -1676,6 +1682,21 @@ function renderRosterChange(rc) {
   return `<div class="token-warn">📋 Course list changed (${rc.courses_before} → ${rc.courses_after}) — ${bits.join(' · ')}. If that wasn't intentional, check your Canvas enrollment.</div>`;
 }
 
+function renderFrozenBanner(d) {
+  // After graduation Canvas access ends and this board stops updating ON PURPOSE.
+  // Without this, the UI reports its own healthy end state as two failures: the
+  // token warning says "expired" and the staleness banner says "the sync is
+  // failing". Both are false, and both are what a reader would act on.
+  if (!d || !d.frozen) return '';
+  const when = d.frozen_at ? new Date(d.frozen_at) : null;
+  const nice = when && !isNaN(when)
+    ? when.toLocaleDateString(undefined, { month: 'long', year: 'numeric' })
+    : null;
+  return `<div class="frozen-banner">📘 <strong>Completed archive.</strong> Canvas access
+    ended${nice ? ' ' + nice : ''}, so this board no longer updates — that is expected, not a
+    fault. Every link points at Google Drive, which outlives Canvas.</div>`;
+}
+
 function renderTokenWarning(expiresStr) {
   if (!expiresStr) return '';
   const exp = new Date(expiresStr + 'T00:00:00');
@@ -1699,8 +1720,9 @@ function render() {
   const veryStale = staleHrs > 24 * 5; // the sync is broken, not just late
 
   root.innerHTML = `
-    ${renderTokenWarning(d.token_expires)}
-    ${veryStale ? `<div class="token-warn expired">⚠ <strong>This board stopped updating ${Math.floor(staleHrs/24)} days ago.</strong> The Monday sync is failing — most often an expired Canvas token. New assignments will NOT appear until it's fixed. <a href="https://github.com/${repoSlug()}/actions/workflows/sync.yml" target="_blank">Check the sync log ↗</a></div>` : ''}
+    ${renderFrozenBanner(d)}
+    ${d.frozen ? '' : renderTokenWarning(d.token_expires_live || d.token_expires)}
+    ${(!d.frozen && veryStale) ? `<div class="token-warn expired">⚠ <strong>This board stopped updating ${Math.floor(staleHrs/24)} days ago.</strong> The Monday sync is failing — most often an expired Canvas token. New assignments will NOT appear until it's fixed. <a href="https://github.com/${repoSlug()}/actions/workflows/sync.yml" target="_blank">Check the sync log ↗</a></div>` : ''}
     ${renderCoverageBanner(d.coverage)}
     ${studyNotesLine()}
     ${renderRosterChange(d.roster_change)}
@@ -1711,7 +1733,7 @@ function render() {
       </h1>
       <div class="sub">
         Last refreshed: <strong>${generated}</strong>
-        ${stale ? '&nbsp;<span class="stale-warn">⚠ data is more than 2 days old</span>' : ''}
+        ${(stale && !d.frozen) ? '&nbsp;<span class="stale-warn">⚠ data is more than 2 days old</span>' : ''}
         <button id="refresh-btn" class="refresh-btn" onclick="triggerRefresh()">↻ Refresh now</button>
       </div>
       ${SYNC_TOKEN

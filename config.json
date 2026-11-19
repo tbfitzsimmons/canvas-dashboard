@@ -11,8 +11,10 @@
     5337
   ],
   "included_course_ids": null,
-  "token_expires": "2026-12-01",
+  "token_expires": "2026-12-11",
   "instructor_overrides": {
     "CNST-770E": "Jenna Noah"
-  }
+  },
+  "frozen": false,
+  "access_ends": "2027-05-15"
 }
