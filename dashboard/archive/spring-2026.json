@@ -6946,15 +6946,14 @@
       "detail": "",
       "due": "—",
       "due_date": null,
-      "link": "https://naropa-my.sharepoint.com/:v:/g/personal/robert_karyadeva_naropa_edu/IQDEjzjUI2YPRYuyCCSkjSdwAQJmz_mNjzo68iMb7OiW9-I?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=DzH9dN",
+      "link": "https://naropa.instructure.com/api/v1/courses/8539/module_item_redirect/397218",
       "points": null,
       "canvas_id": "module_item:397218",
       "source": "module_item",
       "is_overview": false,
       "summary": "",
       "submitted": false,
-      "canvas_target": "external:https://naropa-my.sharepoint.com/:v:/g/personal/robert_karyadeva_naropa_edu/IQDEjzjUI2YPRYuyCCSkjSdwAQJmz_mNjzo68iMb7OiW9-I?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=DzH9dN",
-      "canvas_link": "https://naropa.instructure.com/api/v1/courses/8539/module_item_redirect/397218"
+      "canvas_target": "external:https://naropa-my.sharepoint.com/:v:/g/personal/robert_karyadeva_naropa_edu/IQDEjzjUI2YPRYuyCCSkjSdwAQJmz_mNjzo68iMb7OiW9-I?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=DzH9dN"
     },
     {
       "week": 10,

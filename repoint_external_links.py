@@ -51,9 +51,16 @@ from urllib.parse import urlparse
 # Hosts that stop answering for her when Naropa de-provisions the account. A
 # link to one of these is NOT durable, so replacing a Canvas wrapper with one
 # buys nothing.
+# Matched as a SUBSTRING of the host, so each entry must be chosen to survive
+# subdomain variation. An earlier version listed "naropa.sharepoint.com", which
+# silently failed to match "naropa-my.sharepoint.com" — the hyphen defeated it —
+# and one row was re-pointed at a SharePoint URL that dies with her account.
+# Hence "naropa" bare (catches naropa.edu, my.naropa.edu, naropa-my.*,
+# naropa.zoom.us) and "sharepoint.com" bare (any SharePoint tenant is
+# institution-hosted, not hers).
 ACCOUNT_TIED = (
-    "zoom.us", "naropa.edu", "simplesyllabus.com", "panopto",
-    "naropa.sharepoint.com", "supervisionassist.com",
+    "zoom.us", "naropa", "sharepoint.com", "simplesyllabus.com",
+    "panopto", "supervisionassist.com",
 )
 CANVAS_HOST = re.compile(r"\binstructure\.com\b", re.I)
 EXTERNAL_PREFIX = "external:"
@@ -107,6 +114,15 @@ def run_control() -> bool:
                          "source": "module_item"}, "target_not_https"),
         ("account-tied target", {"link": WRAP, "canvas_target": "external:https://naropa.zoom.us/rec/x",
                                  "source": "module_item"}, "target_account_tied"),
+        # Regression cases: these hosts defeated the first version of the matcher.
+        ("naropa-my sharepoint", {"link": WRAP,
+                                  "canvas_target": "external:https://naropa-my.sharepoint.com/x",
+                                  "source": "module_item"}, "target_account_tied"),
+        ("any sharepoint tenant", {"link": WRAP,
+                                   "canvas_target": "external:https://other.sharepoint.com/x",
+                                   "source": "module_item"}, "target_account_tied"),
+        ("my.naropa.edu", {"link": WRAP, "canvas_target": "external:https://my.naropa.edu/portal",
+                           "source": "module_item"}, "target_account_tied"),
         ("page_child container", {"link": WRAP, "canvas_target": f"external:{REAL}",
                                   "source": "page_child"}, "page_child_target_is_container"),
         ("no external target", {"link": WRAP, "canvas_target": "page:7208:week-1",
@@ -154,6 +170,7 @@ def main() -> int:
     hosts = collections.Counter()
     per_board = {}
     regressions = []
+    healed = []
     writes = {}
 
     for p in boards:
@@ -165,8 +182,20 @@ def main() -> int:
             url, reason = classify(it)
             reasons[reason] += 1
 
-            # Regression guard: a row an earlier run re-pointed must still resolve.
+            # Self-heal: a row an earlier run re-pointed, which this run would
+            # now REFUSE, was re-pointed in error. Put the original wrapper
+            # back rather than leaving a bad link in place. This is what makes
+            # the script safe to tighten: fixing a rule also repairs its damage.
             if it.get("canvas_link") and reason not in ("repoint", "already_repointed"):
+                healed.append((os.path.basename(p), it.get("title", "?")[:46], reason))
+                if a.apply:
+                    it["link"] = it.pop("canvas_link")
+                continue
+
+            # Regression guard: a row re-pointed earlier whose target vanished
+            # from canvas_target entirely — distinct from the above, and not
+            # self-healable, because there is nothing to fall back to.
+            if it.get("canvas_link") and not (it.get("canvas_target") or ""):
                 regressions.append((os.path.basename(p), it.get("title", "?")[:46], reason))
 
             if reason == "already_repointed":
@@ -178,7 +207,7 @@ def main() -> int:
                     it.setdefault("canvas_link", it["link"])
                     it["link"] = url
         per_board[os.path.basename(p)[:-5]] = (len(items), changed, already)
-        if a.apply and changed:
+        if a.apply and (changed or any(h[0] == os.path.basename(p) for h in healed)):
             writes[p] = d
 
     print("\nPER SEMESTER")
@@ -197,6 +226,12 @@ def main() -> int:
     for r, c in reasons.most_common():
         print(f"  {c:5}  {r}")
 
+    if healed:
+        print(f"\nSELF-HEALED — {len(healed)} row(s) re-pointed in error by an earlier "
+              f"run, original Canvas link restored:")
+        for b, t, r in healed[:10]:
+            print(f"     [{b}] {t} -> {r}")
+
     if regressions:
         print(f"\nREGRESSION GUARD — {len(regressions)} row(s) re-pointed by an earlier run "
               f"no longer resolve:")
@@ -214,7 +249,8 @@ def main() -> int:
         with open(tmp, "w", encoding="utf-8") as fh:
             json.dump(d, fh, indent=2, ensure_ascii=False)
         os.replace(tmp, p)
-    print(f"\nWROTE {len(writes)} board file(s); {tot_c} row(s) re-pointed.")
+    print(f"\nWROTE {len(writes)} board file(s); {tot_c} row(s) re-pointed, "
+          f"{len(healed)} healed.")
     return 0
 
 
