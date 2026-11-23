@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-19T17:04:28.853876+00:00",
+  "generated_at": "2026-11-23T17:19:26.815418+00:00",
   "semester": {
     "name": "Fall 2026",
     "start_date": "2026-08-24",
@@ -7,7 +7,7 @@
     "canvas_term_name": "Fall 2026 Semester"
   },
   "token_expires": "2026-12-11",
-  "token_expires_live": "2026-12-11",
+  "token_expires_live": "2026-12-22",
   "courses": [
     {
       "id": "course1",
@@ -2147,6 +2147,23 @@
     },
     {
       "week": 11,
+      "courseId": "course3",
+      "type": "video",
+      "title": "Module 11 - Lecture - Passcode: H4*i1iMR",
+      "detail": "",
+      "due": "—",
+      "due_date": null,
+      "link": "https://naropa.instructure.com/api/v1/courses/9492/module_item_redirect/447528",
+      "points": null,
+      "canvas_id": "module_item:447528",
+      "source": "module_item",
+      "is_overview": false,
+      "summary": "",
+      "submitted": false,
+      "canvas_target": "external:https://naropa.zoom.us/rec/share/zj_WkIQYC0A3HpDmaVMG1rx0pyQ7DpXIQdz1JUyQ3y9d9X0oCA_XEj51jkezHhpX.ROu49BYAMAG2NZE6"
+    },
+    {
+      "week": 11,
       "courseId": "course4",
       "type": "reading",
       "title": "Cultural Reflexivity and Liberation Therapy with Nicole Xenos",
@@ -2261,7 +2278,7 @@
       "source": "assignment",
       "is_overview": false,
       "summary": "",
-      "submitted": false,
+      "submitted": true,
       "canvas_target": ""
     },
     {
@@ -4511,7 +4528,7 @@
   ],
   "totals": {
     "reading": 148,
-    "video": 46,
+    "video": 47,
     "discussion": 11,
     "paper": 6,
     "assignment": 49,
@@ -4520,7 +4537,7 @@
     "lecture": 1
   },
   "coverage": {
-    "verified_at": "2026-11-19T17:04:28.852219+00:00",
+    "verified_at": "2026-11-23T17:19:26.812916+00:00",
     "assignments": {
       "total": 43,
       "captured": 43
@@ -4530,8 +4547,8 @@
       "captured": 11
     },
     "module_items": {
-      "total": 129,
-      "captured": 128
+      "total": 130,
+      "captured": 129
     },
     "unrepresented": [
       "CMHC-520E: Module 3 Readings, Viewings, and Materials"
@@ -4543,7 +4560,7 @@
       "by_reason": {
         "prose fragment": 3
       },
-      "items_checked": 261
+      "items_checked": 262
     }
   },
   "other_terms": [],
