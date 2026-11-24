@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-23T17:19:26.815418+00:00",
+  "generated_at": "2026-11-24T15:02:53.622663+00:00",
   "semester": {
     "name": "Fall 2026",
     "start_date": "2026-08-24",
@@ -4537,7 +4537,7 @@
     "lecture": 1
   },
   "coverage": {
-    "verified_at": "2026-11-23T17:19:26.812916+00:00",
+    "verified_at": "2026-11-24T15:02:53.620120+00:00",
     "assignments": {
       "total": 43,
       "captured": 43
