@@ -138,6 +138,23 @@ def discover_boards(board_dir: str) -> list[str]:
 
 CANVAS_HOST = re.compile(r"naropa\.instructure\.com", re.I)
 MEDIA_EMBED = re.compile(r"/(media_objects_iframe|media_attachments_iframe)/", re.I)
+# Statuses seen as of 2026-11-25: manifest "archived", assignment/discussion
+# "done", discussion "prompt_only". Anything else still resolves if it has a
+# path; it is only reported, so a new archive vocabulary cannot silently break
+# the board — nor silently pass unnoticed.
+KNOWN_STATUSES = {None, "archived", "done", "prompt_only"}
+UNFAMILIAR_STATUSES: "collections.Counter[str]" = collections.Counter()
+
+MEDIA_ATTACH_RE = re.compile(r"/media_attachments_iframe/(\d+)", re.I)
+MEDIA_OBJECT_RE = re.compile(r"/media_objects_iframe/(m-[A-Za-z0-9]+)", re.I)
+MODULE_ITEM_RE = re.compile(r"/courses/(\d+)/modules/items/(\d+)", re.I)
+
+
+def _course_from_target(it) -> str:
+    """Course id out of canvas_target ("page:7235:slug" -> "7235"). Media embed
+    URLs carry no course, and the file key needs one."""
+    parts = (it.get("canvas_target") or "").split(":")
+    return parts[1] if len(parts) >= 3 and parts[1].isdigit() else ""
 MODULE_REDIRECT = re.compile(r"/modules/items/\d+|/module_item_redirect/\d+", re.I)
 
 # Direct-resource link shapes. Order is irrelevant (they are mutually exclusive)
@@ -172,6 +189,11 @@ def load_tables(archive_root: str):
         "page": manifest.get("pages", {}),
         "assignment": rd("assignment_pages.json"),
         "discussion": rd("discussions.json"),
+        # Added 2026-11-25 for media the archive recovered after the first pass.
+        # Absent until the archive writes them; an empty table simply refuses,
+        # which is the correct behaviour before the upload lands.
+        "media": manifest.get("media", {}),              # bare Kaltura "m-…" id
+        "module_item": manifest.get("module_items", {}),  # "<course>:<item id>"
     }
     drive = rd("drive_index.json").get("files", {})
     return tables, drive
@@ -185,9 +207,25 @@ def resolve(tables, drive, kind, key):
     entry = table.get(key)
     if not isinstance(entry, dict):
         return None, f"{kind}_not_in_archive"
-    # Canvas refused these to her outright; the captured HTML is a stub.
-    if entry.get("status") == "gap":
+    # "gap" meant Canvas refused the topic to her. The archive established
+    # (2026-11-25) that it only ever meant the REPLIES were refused: the topic
+    # and its prompt were archived inside the page HTML all along, and those
+    # records are now "prompt_only". A prompt-only discussion is a perfectly
+    # good artifact — it is the assignment she was given — so it resolves.
+    # Replies stay absent, which is both Canvas's answer and Jennifer's ruling.
+    #
+    # Resolvability is decided by HAVING A PATH, not by a status string. A first
+    # attempt at this gated on an allow-list of statuses and immediately dropped
+    # 296 working rows, because assignment_pages and discussions both use "done"
+    # and the list did not know it. The archive owns these vocabularies and may
+    # extend them; the dashboard must not break when it does. So: refuse only
+    # the one status that is known to mean "no artifact exists", report anything
+    # unfamiliar, and let the no-path check below handle the rest.
+    status = entry.get("status")
+    if status == "gap":
         return None, "discussion_gap_unavailable"
+    if status not in KNOWN_STATUSES:
+        UNFAMILIAR_STATUSES[f"{kind}:{status}"] += 1
     path = entry.get("path")
     if not path:
         return None, f"{kind}_no_path"
@@ -241,9 +279,49 @@ def plan_row(it, tables, drive):
     if not link or not CANVAS_HOST.search(link):
         return None, None, "not_a_canvas_link"
 
-    # Refused on purpose: the item IS the media, and the media is in no Drive.
+    # Media embeds. This used to be a flat refusal — "the item IS the media, and
+    # the media is in no Drive" — which was true until 2026-11-24, when the 40
+    # Kaltura objects and 58 page-embedded files were recovered and archived.
+    # A refusal that was a fact about the world became a refusal that hid one,
+    # so it now RESOLVES and only refuses when the lookup genuinely fails.
+    #
+    # Two shapes, measured across all 70 such rows on the board:
+    #   /media_attachments_iframe/<canvas file id>   (23) -> files table
+    #   /media_objects_iframe/<m-kaltura id>         (37) -> media table
+    # Neither URL carries a course id, so the file key takes its course from
+    # canvas_target, which on every one of these is "page:<course>:<slug>".
+    m = MEDIA_ATTACH_RE.search(link)
+    if m:
+        course = _course_from_target(it)
+        if not course:
+            return None, None, "media_attachment_no_course"
+        url, why = resolve(tables, drive, "file", f"{course}:{m.group(1)}")
+        if url:
+            return url, "exact", "link:media_attachment"
+        return None, None, why or "media_attachment_not_in_archive"
+
+    m = MEDIA_OBJECT_RE.search(link)
+    if m:
+        # Kaltura ids are globally unique; the same object is embedded in more
+        # than one course, so the key carries no course prefix.
+        url, why = resolve(tables, drive, "media", m.group(1))
+        if url:
+            return url, "exact", "link:media_object"
+        return None, None, why or "media_object_not_in_archive"
+
     if MEDIA_EMBED.search(link):
-        return None, None, "media_embed_no_drive_equivalent"
+        # A media embed whose handle we could not parse at all.
+        return None, None, "media_embed_unparsed"
+
+    # Canvas Studio lectures arrive as ExternalTool module items: the item id is
+    # the only stable handle, since these rows carry no canvas_target and
+    # /api/v1/courses/:id/modules/items/<id> 404s for them.
+    m = MODULE_ITEM_RE.search(link)
+    if m:
+        url, why = resolve(tables, drive, "module_item", f"{m.group(1)}:{m.group(2)}")
+        if url:
+            return url, "exact", "link:module_item"
+        # Not fatal: fall through, the ordinary rules may still match.
 
     # 1. The row's own link names a specific resource. Most precise signal there
     #    is — prefer it over canvas_target, which for a page_child names only
@@ -347,6 +425,57 @@ def run_control(tables, drive):
 
 # ── main ───────────────────────────────────────────────────────────────────────
 
+
+def run_synthetic_control() -> bool:
+    """Prove the media / module-item / prompt_only rules can MAP, not just refuse.
+
+    The live control runs against the real archive, which cannot exercise these
+    until the archive session's upload lands — so a rule could sit here for days
+    looking fine while being incapable of ever succeeding. These cases use a
+    hand-built archive in exactly the shape the archive session committed to
+    emitting, so both directions are proven on every run.
+    """
+    B = "https://naropa.instructure.com"
+    tables = {
+        "file": {"7235:1033337": {"status": "archived", "path": "P/vid.mp4"}},
+        "page": {}, "assignment": {},
+        "discussion": {"7208:80089": {"status": "prompt_only", "path": "P/disc.html"},
+                       "7208:99999": {"status": "gap", "path": "P/stub.html"}},
+        "media": {"m-REAL": {"status": "archived", "path": "P/kal.m4a"}},
+        "module_item": {"7617:338198": {"status": "archived", "path": "P/mi.mp4"}},
+    }
+    drive = {p_: {"webViewLink": f"https://drive.google.com/file/d/ID{i}/view"}
+             for i, p_ in enumerate(["P/vid.mp4", "P/disc.html", "P/kal.m4a",
+                                     "P/mi.mp4", "P/stub.html"])}
+    cases = [
+        ("media attachment maps", {"link": f"{B}/media_attachments_iframe/1033337",
+         "canvas_target": "page:7235:m1", "source": "page_child"}, "link:media_attachment"),
+        ("media attachment absent", {"link": f"{B}/media_attachments_iframe/999",
+         "canvas_target": "page:7235:m1", "source": "page_child"}, "file_not_in_archive"),
+        ("media attachment no course", {"link": f"{B}/media_attachments_iframe/1033337",
+         "canvas_target": "", "source": "page_child"}, "media_attachment_no_course"),
+        ("kaltura maps", {"link": f"{B}/media_objects_iframe/m-REAL?type=video",
+         "canvas_target": "page:7235:x", "source": "page_child"}, "link:media_object"),
+        ("kaltura absent", {"link": f"{B}/media_objects_iframe/m-NOPE",
+         "canvas_target": "page:7235:x", "source": "page_child"}, "media_not_in_archive"),
+        ("studio module item maps", {"link": f"{B}/courses/7617/modules/items/338198",
+         "canvas_target": "", "source": "module_item"}, "link:module_item"),
+        ("prompt_only maps", {"link": f"{B}/courses/7208/discussion_topics/80089",
+         "canvas_target": "", "source": "discussion"}, "link:discussion"),
+        ("true gap refused", {"link": f"{B}/courses/7208/discussion_topics/99999",
+         "canvas_target": "", "source": "discussion"}, "discussion_gap_unavailable"),
+    ]
+    ok = True
+    for name, item, expect in cases:
+        _url, _tier, cat = plan_row(item, tables, drive)
+        good = cat == expect
+        ok &= good
+        print(f"  [{'ok ' if good else 'FAIL'}] {name:26} expect={expect:28} got={cat}")
+    print("  synthetic control passed: media, module-item and prompt_only rules can "
+          "MAP and REFUSE." if ok else "  SYNTHETIC CONTROL FAILED — not writing boards.")
+    return ok
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -366,6 +495,8 @@ def main():
           + f", drive_index={len(drive)}\n")
 
     run_control(tables, drive)
+    if not run_synthetic_control():
+        sys.exit(2)
 
     grand = collections.Counter()
     misses = collections.Counter()
@@ -449,6 +580,12 @@ def main():
     print("\nWINNING RULE")
     for rule, n in rules.most_common():
         print(f"  {n:5}  {rule}")
+
+    if UNFAMILIAR_STATUSES:
+        print("\nUNFAMILIAR STATUSES (resolved anyway — reported so a new archive "
+              "vocabulary cannot pass unnoticed)")
+        for k, v in UNFAMILIAR_STATUSES.most_common():
+            print(f"  {v:5}  {k}")
 
     print("\nCOULD NOT MAP")
     total_miss = sum(misses.values())
